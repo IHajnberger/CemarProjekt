@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Panel Serwisanta</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #dca31a;
+            --primary-yellow-hover: #b88510;
+            --light-bg: #f5f6f8;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h3, h4, .uk-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .cemar-navbar {
+            background-color: #ffffff;
+            border-bottom: 3px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .nav-lang-bar {
+            background-color: #2a2a2a;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+            .nav-lang-bar a {
+                color: #aaa;
+                transition: color 0.2s;
+            }
+
+                .nav-lang-bar a:hover, .nav-lang-bar a.active {
+                    color: var(--primary-yellow);
+                }
+
+        .cemar-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eaeaea;
+        }
+
+        .yellow-accent-bar {
+            height: 6px;
+            background: var(--primary-yellow);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
+
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
+            }
+
+        .cemar-table th {
+            background-color: #2a2a2a;
+            color: #fff !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">CEMAR</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-danger uk-button-small" style="border-radius: 4px;">Wyloguj</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top">
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <span uk-icon="icon: settings; ratio: 2.5" class="uk-text-warning"></span>
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Panel Diagnostyczny Serwisanta</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">Inżynier placeholder • staff@placeholder.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cemar-card">
+            <div class="uk-padding">
+                <div class="uk-grid-small uk-margin-medium-bottom" uk-grid>
+                    <div class="uk-width-expand@s">
+                        <label class="uk-form-label">Wyszukaj numer maszyny:</label>
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon" uk-icon="icon: search"></span>
+                            <input class="uk-input" type="text" placeholder="wprowadź numer placeholder (np. E59008)">
+                        </div>
+                    </div>
+                    <div class="uk-width-auto@s uk-flex uk-flex-bottom">
+                        <button class="uk-button cemar-btn-primary">Szukaj</button>
+                    </div>
+                </div>
+
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Baza Urządzeń Klientów</h4>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider cemar-table">
+                        <thead>
+                            <tr>
+                                <th class="uk-text-center" style="width: 220px;">Status maszyny</th>
+                                <th>Numer maszyny & Typ</th>
+                                <th>Użytkownik (klient)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="uk-text-center">
+                                    <span class="uk-label" style="background-color: #10b981; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 11px; display: inline-block; min-width: 140px; text-align: center;">Sprawna</span>
+                                </td>
+                                <td>
+                                    <ul uk-accordion="collapsible: true">
+                                        <li>
+                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#">
+                                                <span uk-icon="chevron-down" class="uk-margin-small-right"></span> E59008
+                                            </a>
+                                            <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
+                                                <p class="uk-text-meta uk-margin-remove">Typ: Koparka Gąsienicowa C-90</p>
+                                                <hr class="uk-margin-small">
+                                                <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('E59008', 'Koparka Gąsienicowa C-90')">
+                                                    Przejdź do karty maszyny
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>Budimex SA (Jan Kowalski)</td>
+                            </tr>
+                            <tr>
+                                <td class="uk-text-center">
+                                    <span class="uk-label" style="background-color: #f59e0b; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 11px; display: inline-block; min-width: 140px; text-align: center;">Wymaga przeglądu</span>
+                                </td>
+                                <td>
+                                    <ul uk-accordion="collapsible: true">
+                                        <li>
+                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#">
+                                                <span uk-icon="chevron-down" class="uk-margin-small-right"></span> E62441
+                                            </a>
+                                            <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
+                                                <p class="uk-text-meta uk-margin-remove">Typ: Ładowarka Kołowa L-34</p>
+                                                <hr class="uk-margin-small">
+                                                <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('E62441', 'Ładowarka Kołowa L-34')">
+                                                    Przejdź do karty maszyny
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>Strabag Sp. z o.o. (Marek Nowak)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        function goToDiagnostics(num, type) {
+            window.location.href = `staff-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
+        }
+        function showPlaceholder(title) {
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+    </script>
+</body>
+</html>

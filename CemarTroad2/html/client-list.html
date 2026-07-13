@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Panel Klienta</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #dca31a;
+            --primary-yellow-hover: #b88510;
+            --light-bg: #f5f6f8;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h3, h4, .uk-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .cemar-navbar {
+            background-color: #ffffff;
+            border-bottom: 3px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .nav-lang-bar {
+            background-color: #2a2a2a;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+            .nav-lang-bar a {
+                color: #aaa;
+                transition: color 0.2s;
+            }
+
+                .nav-lang-bar a:hover, .nav-lang-bar a.active {
+                    color: var(--primary-yellow);
+                }
+
+        .cemar-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eaeaea;
+        }
+
+        .yellow-accent-bar {
+            height: 6px;
+            background: var(--primary-yellow);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
+
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
+            }
+
+        .cemar-table th {
+            background-color: #2a2a2a;
+            color: #fff !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pasek językowy -->
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">CEMAR</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-danger uk-button-small" style="border-radius: 4px;">Wyloguj</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top">
+        <div class="cemar-card uk-margin-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <span uk-icon="icon: receiver; ratio: 2.5" class="uk-text-warning"></span>
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Dzień dobry, Klient placeholder</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">nazwa firmy placeholder • client@placeholder.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cemar-card">
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Twoje aktywne maszyny</h4>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider uk-table-hover cemar-table">
+                        <thead>
+                            <tr>
+                                <th>Data Dodania</th>
+                                <th>Numer Maszyny</th>
+                                <th>Typ Maszyny</th>
+                                <th class="uk-text-center">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12.04.2026</td>
+                                <td><span class="uk-text-bold">E59008</span></td>
+                                <td>Koparka Gąsienicowa C-90</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small uk-margin-small-right" onclick="goToDetails('E59008', 'Koparka Gąsienicowa C-90')">Szczegóły</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToReport('E59008', 'Koparka Gąsienicowa C-90')">Raport</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>28.05.2026</td>
+                                <td><span class="uk-text-bold">E62441</span></td>
+                                <td>Ładowarka Kołowa L-34</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small uk-margin-small-right" onclick="goToDetails('E62441', 'Ładowarka Kołowa L-34')">Szczegóły</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToReport('E62441', 'Ładowarka Kołowa L-34')">Raport</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        function goToDetails(num, type) {
+            window.location.href = `client-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
+        }
+        function goToReport(num, type) {
+            window.location.href = `client-report.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
+        }
+        function showPlaceholder(title) {
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+    </script>
+</body>
+</html>

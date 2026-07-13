@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CemarTroad2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdad4839240bd4257d8d2d22a46701067ec2dd4d")]
 [assembly: System.Reflection.AssemblyProductAttribute("CemarTroad2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CemarTroad2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
