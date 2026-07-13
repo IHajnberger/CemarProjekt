@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "CemarTroad2/1.0.0": {
+        "runtime": {
+          "CemarTroad2.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CemarTroad2/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
