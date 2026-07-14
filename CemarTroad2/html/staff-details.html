@@ -147,170 +147,177 @@
         </div>
     </div>
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
-        <div class="uk-navbar-left uk-margin-left">
-            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
-        </div>
-        <div class="uk-navbar-right uk-margin-right">
-            <ul class="uk-navbar-nav">
-                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
-                <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
-                <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
-                <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
-            </ul>
-            <div class="uk-navbar-item">
-               <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+        <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+            <div class="uk-navbar-left uk-margin-left">
+                <div class="cemar-decor-blocks">
+                    <span class="decor-1"></span>
+                    <span class="decor-2"></span>
+                    <span class="decor-3"></span>
+                    <span class="decor-4"></span>
+                </div>
+                <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
             </div>
-        </div>
-    </nav>
+            <div class="uk-navbar-right uk-margin-right">
+                <ul class="uk-navbar-nav">
+                    <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                    <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                    <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                    <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                    <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+                </ul>
+                <div class="uk-navbar-item">
+                    <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+                </div>
+            </div>
+        </nav>
 
-    <div class="uk-container uk-margin-large-top">
-        <button class="uk-button cemar-btn-secondary uk-margin-medium-bottom" onclick="window.location.href='staff-list.html'">
-            <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
-        </button>
+        <div class="uk-container uk-margin-large-top">
+            <button class="uk-button cemar-btn-secondary uk-margin-medium-bottom" onclick="window.location.href='staff-list.html'">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
+            </button>
 
-        <div class="cemar-card uk-margin-medium-bottom">
-            <div class="yellow-accent-bar"></div>
-            <div class="uk-padding">
-                <div class="uk-grid-medium" uk-grid>
-                    <div class="uk-width-expand@m">
-                        <span class="uk-label uk-label-warning uk-margin-small-bottom">Karta Maszyny</span>
-                        <h2 class="uk-margin-remove-top uk-text-bold" id="p5-machine-number">434</h2>
-                        <p class="uk-text-large uk-text-muted uk-margin-remove-top" id="p5-machine-type">City</p>
-                    </div>
-                    <div class="uk-width-1-3@m">
-                        <div class="uk-card uk-card-default uk-card-body uk-padding-small" style="border-radius: 6px;">
-                            <span class="uk-text-meta">Użytkownik przypisany:</span>
-                            <p class="uk-text-bold uk-margin-remove" id="p5-assigned-user">Jan Kowalski (Operator)</p>
+            <div class="cemar-card uk-margin-medium-bottom">
+                <div class="yellow-accent-bar"></div>
+                <div class="uk-padding">
+                    <div class="uk-grid-medium" uk-grid>
+                        <div class="uk-width-expand@m">
+                            <span class="uk-label uk-label-warning uk-margin-small-bottom">Karta Maszyny</span>
+                            <h2 class="uk-margin-remove-top uk-text-bold" id="p5-machine-number">434</h2>
+                            <p class="uk-text-large uk-text-muted uk-margin-remove-top" id="p5-machine-type">City</p>
                         </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="uk-child-width-1-3@m uk-grid-medium uk-margin-top" uk-grid>
-                    <div>
-                        <span class="uk-text-meta">Ostatni serwis</span>
-                        <p class="uk-text-bold" id="p5-last-service">04.05.2026</p>
-                    </div>
-                    <div>
-                        <span class="uk-text-meta">Przepracowane godziny (Razem)</span>
-                        <p class="uk-text-bold uk-text-warning" id="p5-total-hours">1 245 mth</p>
-                    </div>
-                    <div>
-                        <span class="uk-text-meta">Godziny do następnego serwisu</span>
-                        <p class="uk-text-bold uk-text-danger" id="p5-remaining-hours">255 mth</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="cemar-card uk-margin-medium-bottom">
-            <ul uk-accordion>
-                <li>
-                    <a class="uk-accordion-title uk-padding-small uk-text-bold" href="#" style="font-size: 15px;">
-                        <span uk-icon="icon: filter" class="uk-margin-small-right"></span> Filtrowanie logów maszyny
-                    </a>
-                    <div class="uk-accordion-content uk-padding uk-padding-remove-top">
-                        <div class="uk-flex uk-flex-wrap" style="gap: 24px;">
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="serwis" checked onchange="filterMachineLogs()"> Serwis</label>
-                            </div>
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="zgloszenie" checked onchange="filterMachineLogs()"> Zgłoszenie serwisowe</label>
-                            </div>
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="odpalenie" checked onchange="filterMachineLogs()"> Odpalenie referencyjne</label>
-                            </div>
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="blad" checked onchange="filterMachineLogs()"> Kod błędu (Error code)</label>
+                        <div class="uk-width-1-3@m">
+                            <div class="uk-card uk-card-default uk-card-body uk-padding-small" style="border-radius: 6px;">
+                                <span class="uk-text-meta">Użytkownik przypisany:</span>
+                                <p class="uk-text-bold uk-margin-remove" id="p5-assigned-user">Jan Kowalski (Operator)</p>
                             </div>
                         </div>
                     </div>
-                </li>
-            </ul>
-        </div>
 
-        <div class="cemar-card">
-            <div class="uk-padding">
-                <h4 class="uk-text-bold uk-margin-medium-bottom">Pełne logi operacyjne maszyny</h4>
-                <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-hover uk-table-divider cemar-table">
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Typ zdarzenia</th>
-                                <th>Użytkownik</th>
-                                <th>Czas całkowity działania</th>
-                                <th>Czas od serwisu</th>
-                            </tr>
-                        </thead>
-                        <tbody id="p5-logs-tbody">
-                            <tr class="log-row" data-type="blad">
-                                <td>10.07.2026 14:22</td>
-                                <td><span class="uk-label uk-label-danger">Error Code</span></td>
-                                <td>Jan Kowalski</td>
-                                <td>1 245 mth</td>
-                                <td>82 mth</td>
-                            </tr>
-                            <tr class="log-row" data-type="odpalenie">
-                                <td>09.07.2026 08:15</td>
-                                <td><span class="uk-label uk-label-success">Odpalenie referencyjne</span></td>
-                                <td>Jan Kowalski</td>
-                                <td>1 237 mth</td>
-                                <td>74 mth</td>
-                            </tr>
-                            <tr class="log-row" data-type="serwis">
-                                <td>05.07.2026 12:00</td>
-                                <td><span class="uk-label uk-label-warning">Serwis okresowy</span></td>
-                                <td>Piotr Nowak (Serwisant)</td>
-                                <td>1 163 mth</td>
-                                <td>0 mth</td>
-                            </tr>
-                            <tr class="log-row" data-type="zgloszenie">
-                                <td>01.07.2026 10:00</td>
-                                <td><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span></td>
-                                <td>Jan Kowalski</td>
-                                <td>1 100 mth</td>
-                                <td>19 mth</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <hr>
+
+                    <div class="uk-child-width-1-3@m uk-grid-medium uk-margin-top" uk-grid>
+                        <div>
+                            <span class="uk-text-meta">Ostatni serwis</span>
+                            <p class="uk-text-bold" id="p5-last-service">04.05.2026</p>
+                        </div>
+                        <div>
+                            <span class="uk-text-meta">Przepracowane godziny (Razem)</span>
+                            <p class="uk-text-bold uk-text-warning" id="p5-total-hours">1 245 mth</p>
+                        </div>
+                        <div>
+                            <span class="uk-text-meta">Godziny do następnego serwisu</span>
+                            <p class="uk-text-bold uk-text-danger" id="p5-remaining-hours">255 mth</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cemar-card uk-margin-medium-bottom">
+                <ul uk-accordion>
+                    <li>
+                        <a class="uk-accordion-title uk-padding-small uk-text-bold" href="#" style="font-size: 15px;">
+                            <span uk-icon="icon: filter" class="uk-margin-small-right"></span> Filtrowanie logów maszyny
+                        </a>
+                        <div class="uk-accordion-content uk-padding uk-padding-remove-top">
+                            <div class="uk-flex uk-flex-wrap" style="gap: 24px;">
+                                <div>
+                                    <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="serwis" checked onchange="filterMachineLogs()"> Serwis</label>
+                                </div>
+                                <div>
+                                    <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="zgloszenie" checked onchange="filterMachineLogs()"> Zgłoszenie serwisowe</label>
+                                </div>
+                                <div>
+                                    <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="odpalenie" checked onchange="filterMachineLogs()"> Odpalenie referencyjne</label>
+                                </div>
+                                <div>
+                                    <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="blad" checked onchange="filterMachineLogs()"> Kod błędu (Error code)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cemar-card">
+                <div class="uk-padding">
+                    <h4 class="uk-text-bold uk-margin-medium-bottom">Pełne logi operacyjne maszyny</h4>
+                    <div class="uk-overflow-auto">
+                        <table class="uk-table uk-table-hover uk-table-divider cemar-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Typ zdarzenia</th>
+                                    <th>Użytkownik</th>
+                                    <th>Czas całkowity działania</th>
+                                    <th>Czas od serwisu</th>
+                                </tr>
+                            </thead>
+                            <tbody id="p5-logs-tbody">
+                                <tr class="log-row" data-type="blad">
+                                    <td>10.07.2026 14:22</td>
+                                    <td><span class="uk-label uk-label-danger">Error Code</span></td>
+                                    <td>Jan Kowalski</td>
+                                    <td>1 245 mth</td>
+                                    <td>82 mth</td>
+                                </tr>
+                                <tr class="log-row" data-type="odpalenie">
+                                    <td>09.07.2026 08:15</td>
+                                    <td><span class="uk-label uk-label-success">Odpalenie referencyjne</span></td>
+                                    <td>Jan Kowalski</td>
+                                    <td>1 237 mth</td>
+                                    <td>74 mth</td>
+                                </tr>
+                                <tr class="log-row" data-type="serwis">
+                                    <td>05.07.2026 12:00</td>
+                                    <td><span class="uk-label uk-label-warning">Serwis okresowy</span></td>
+                                    <td>Piotr Nowak (Serwisant)</td>
+                                    <td>1 163 mth</td>
+                                    <td>0 mth</td>
+                                </tr>
+                                <tr class="log-row" data-type="zgloszenie">
+                                    <td>01.07.2026 10:00</td>
+                                    <td><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span></td>
+                                    <td>Jan Kowalski</td>
+                                    <td>1 100 mth</td>
+                                    <td>19 mth</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const machineId = urlParams.get('id') || '521';
-        const machineType = urlParams.get('type') || 'City';
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const machineId = urlParams.get('id') || '521';
+            const machineType = urlParams.get('type') || 'City';
 
-        document.getElementById('p5-machine-number').innerText = machineId;
-        document.getElementById('p5-machine-type').innerText = machineType;
+            document.getElementById('p5-machine-number').innerText = machineId;
+            document.getElementById('p5-machine-type').innerText = machineType;
 
-        if (machineId === 'E62441') {
-        document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
-        document.getElementById('p5-last-service').innerText = "12.03.2026";
-        document.getElementById('p5-total-hours').innerText = "890 mth";
-        document.getElementById('p5-remaining-hours').innerText = "110 mth";
-        }
+            if (machineId === 'E62441') {
+            document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
+            document.getElementById('p5-last-service').innerText = "12.03.2026";
+            document.getElementById('p5-total-hours').innerText = "890 mth";
+            document.getElementById('p5-remaining-hours').innerText = "110 mth";
+            }
 
-        function filterMachineLogs() {
-        const checkboxes = document.querySelectorAll('.log-filter-cb');
-        const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-        const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
-        rows.forEach(row => {
-        const rowType = row.getAttribute('data-type');
-        row.style.display = activeFilters.includes(rowType) ? '' : 'none';
-        });
-        }
-        function showPlaceholder(title) {
-        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
-        }
-    </script>
+            function filterMachineLogs() {
+            const checkboxes = document.querySelectorAll('.log-filter-cb');
+            const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+            const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+            rows.forEach(row => {
+            const rowType = row.getAttribute('data-type');
+            row.style.display = activeFilters.includes(rowType) ? '' : 'none';
+            });
+            }
+            function showPlaceholder(title) {
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+            }
+        </script>
 </body>
 </html>
