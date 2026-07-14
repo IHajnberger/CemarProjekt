@@ -129,7 +129,15 @@
         .decor-4 {
             background-color: #f6c365;
         }
+        .nav-lang-bar--fixed {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
     </style>
+
 </head>
 <body>
 
@@ -253,8 +261,9 @@
             </div>
         </div>
     </div>
+
     <!-- Dolny pas -->
-    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
             <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
                 <a href="#" class="uk-margin-right">Privacy policy</a>
@@ -262,6 +271,7 @@
             </div>
         </div>
     </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>

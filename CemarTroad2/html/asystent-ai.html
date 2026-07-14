@@ -279,6 +279,13 @@
                 opacity: 1;
             }
         }
+        .nav-lang-bar--fixed {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -423,8 +430,9 @@
             </div>
         </div>
     </div>
+
     <!-- Dolny pas -->
-    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
             <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
                 <a href="#" class="uk-margin-right">Privacy policy</a>
@@ -432,6 +440,7 @@
             </div>
         </div>
     </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
@@ -474,11 +483,11 @@
             const userRow = document.createElement('div');
             userRow.className = 'ai-msg-row user';
             userRow.innerHTML = `
-            <div>
-            <div class="ai-bubble"></div>
-            <div class="ai-msg-meta uk-text-right">Ty · ${currentTime()}</div>
-            </div>
-            <div class="ai-avatar user">TY</div>`;
+                <div>
+                <div class="ai-bubble"></div>
+                <div class="ai-msg-meta uk-text-right">Ty · ${currentTime()}</div>
+                </div>
+                <div class="ai-avatar user">TY</div>`;
             userRow.querySelector('.ai-bubble').innerText = text;
             scrollEl.appendChild(userRow);
 
@@ -489,10 +498,10 @@
             typingRow.className = 'ai-msg-row bot';
             typingRow.id = 'ai-typing-row';
             typingRow.innerHTML = `
-            <div class="ai-avatar bot">AI</div>
-            <div>
-            <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
-            </div>`;
+                <div class="ai-avatar bot">AI</div>
+                <div>
+                <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
+                </div>`;
             scrollEl.appendChild(typingRow);
             scrollAiChatToBottom();
 
@@ -503,11 +512,11 @@
                 const botRow = document.createElement('div');
                 botRow.className = 'ai-msg-row bot';
                 botRow.innerHTML = `
-            <div class="ai-avatar bot">AI</div>
-            <div>
-            <div class="ai-bubble"></div>
-            <div class="ai-msg-meta">Asystent AI · ${currentTime()}</div>
-            </div>`;
+                <div class="ai-avatar bot">AI</div>
+                <div>
+                <div class="ai-bubble"></div>
+                <div class="ai-msg-meta">Asystent AI · ${currentTime()}</div>
+                </div>`;
                 botRow.querySelector('.ai-bubble').innerText = 'To jest odpowiedź demonstracyjna. Podłącz backend Asystenta AI, aby otrzymywać rzeczywiste odpowiedzi na podstawie danych maszyn i logów serwisowych.';
                 scrollEl.appendChild(botRow);
                 scrollAiChatToBottom();

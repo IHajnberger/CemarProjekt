@@ -50,6 +50,13 @@
                 .nav-lang-bar a:hover, .nav-lang-bar a.active {
                     color: var(--primary-yellow);
                 }
+        .nav-lang-bar--fixed {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
 
         .cemar-card {
             background: #ffffff;
@@ -329,53 +336,63 @@
         </div>
     </div>
 
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="#" class="uk-margin-right">Privacy policy</a>
+                <a href="#" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
         function showPlaceholder(title) {
-        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
 
         function updateAccountHeader() {
-        const first = document.getElementById('acc-first-name').value.trim();
-        const last = document.getElementById('acc-last-name').value.trim();
-        document.getElementById('acc-fullname').innerText = (first + ' ' + last).trim() || 'Użytkownik';
-        const initials = ((first[0] || '') + (last[0] || '')).toUpperCase();
-        document.getElementById('acc-initials').innerText = initials || 'PN';
-        document.getElementById('acc-company').innerText = document.getElementById('acc-company-name').value.trim();
+            const first = document.getElementById('acc-first-name').value.trim();
+            const last = document.getElementById('acc-last-name').value.trim();
+            document.getElementById('acc-fullname').innerText = (first + ' ' + last).trim() || 'Użytkownik';
+            const initials = ((first[0] || '') + (last[0] || '')).toUpperCase();
+            document.getElementById('acc-initials').innerText = initials || 'PN';
+            document.getElementById('acc-company').innerText = document.getElementById('acc-company-name').value.trim();
         }
 
         function saveAccountProfile(e) {
-        e.preventDefault();
-        updateAccountHeader();
-        UIkit.notification({ message: 'Dane profilowe zostały zapisane.', status: 'success', pos: 'top-center', timeout: 2000 });
-        return false;
+            e.preventDefault();
+            updateAccountHeader();
+            UIkit.notification({ message: 'Dane profilowe zostały zapisane.', status: 'success', pos: 'top-center', timeout: 2000 });
+            return false;
         }
 
         function changeAccountPassword(e) {
-        e.preventDefault();
-        const newPass = document.getElementById('acc-pass-new').value;
-        const repeatPass = document.getElementById('acc-pass-repeat').value;
+            e.preventDefault();
+            const newPass = document.getElementById('acc-pass-new').value;
+            const repeatPass = document.getElementById('acc-pass-repeat').value;
 
-        if (!document.getElementById('acc-pass-current').value) {
-        UIkit.notification({ message: 'Podaj obecne hasło.', status: 'danger', pos: 'top-center', timeout: 2500 });
-        return false;
-        }
-        if (newPass.length < 8) {
-        UIkit.notification({ message: 'Nowe hasło musi mieć co najmniej 8 znaków.', status: 'danger', pos: 'top-center', timeout: 2500 });
-        return false;
-        }
-        if (newPass !== repeatPass) {
-        UIkit.notification({ message: 'Nowe hasła nie są identyczne.', status: 'danger', pos: 'top-center', timeout: 2500 });
-        return false;
-        }
+            if (!document.getElementById('acc-pass-current').value) {
+                UIkit.notification({ message: 'Podaj obecne hasło.', status: 'danger', pos: 'top-center', timeout: 2500 });
+                return false;
+            }
+            if (newPass.length < 8) {
+                UIkit.notification({ message: 'Nowe hasło musi mieć co najmniej 8 znaków.', status: 'danger', pos: 'top-center', timeout: 2500 });
+                return false;
+            }
+            if (newPass !== repeatPass) {
+                UIkit.notification({ message: 'Nowe hasła nie są identyczne.', status: 'danger', pos: 'top-center', timeout: 2500 });
+                return false;
+            }
 
-        document.getElementById('acc-pass-current').value = '';
-        document.getElementById('acc-pass-new').value = '';
-        document.getElementById('acc-pass-repeat').value = '';
-        UIkit.notification({ message: 'Hasło zostało zmienione.', status: 'success', pos: 'top-center', timeout: 2000 });
-        return false;
+            document.getElementById('acc-pass-current').value = '';
+            document.getElementById('acc-pass-new').value = '';
+            document.getElementById('acc-pass-repeat').value = '';
+            UIkit.notification({ message: 'Hasło zostało zmienione.', status: 'success', pos: 'top-center', timeout: 2000 });
+            return false;
         }
     </script>
 </body>
