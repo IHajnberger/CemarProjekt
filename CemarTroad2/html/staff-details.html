@@ -15,6 +15,10 @@
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
+        html {
+            background-color: var(--light-bg); /* Unikanie białej szczeliny na dole */
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--light-bg);
@@ -22,10 +26,11 @@
             min-height: 100vh;
         }
 
-        h3, h4, .uk-logo {
+        h2, h4, .uk-logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
         }
+
         .cemar-navbar {
             background-color: #f8f8f8 !important;
             border-bottom: 3px solid var(--primary-yellow);
@@ -49,7 +54,8 @@
                 .nav-lang-bar a:hover, .nav-lang-bar a.active {
                     color: var(--primary-yellow);
                 }
-        /* karta z danymi */
+
+        /* Karta z danymi - zoptymalizowana i zmniejszona */
         .cemar-card {
             background: #ffffff;
             border-radius: 12px;
@@ -57,25 +63,29 @@
             border: 1px solid #eaeaea;
         }
 
+        .cemar-card-compact .uk-padding {
+            padding: 16px 20px !important;
+        }
+
+        .cemar-card-compact h2 {
+            font-size: 1.45rem !important;
+            margin-bottom: 2px !important;
+        }
+
+        .cemar-card-compact p.uk-text-large {
+            font-size: 0.95rem !important;
+            margin-top: 0 !important;
+        }
+
+        .cemar-card-compact hr {
+            margin: 12px 0 !important;
+        }
+
         .yellow-accent-bar {
             height: 6px;
             background: var(--primary-yellow);
             border-radius: 12px 12px 0 0;
         }
-
-        .cemar-btn-primary {
-            background-color: var(--primary-yellow);
-            color: #fff;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-            .cemar-btn-primary:hover {
-                background-color: var(--primary-yellow-hover);
-                color: #fff;
-            }
 
         .cemar-btn-secondary {
             background-color: #fff;
@@ -98,7 +108,104 @@
             text-transform: uppercase;
             font-size: 12px;
         }
-        /* decor */
+
+        /* Nowe filtrowanie w formie kafelków/tagów */
+        .filter-pill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+            .filter-pill:hover {
+                border-color: #cbd5e1;
+                background-color: #f8fafc;
+                transform: translateY(-1px);
+            }
+
+            /* Aktywne stany filtrów */
+            .filter-pill.active[data-filter="serwis"] {
+                background-color: #fef3c7;
+                border-color: #f59e0b;
+                color: #b45309;
+            }
+
+            .filter-pill.active[data-filter="zgloszenie"] {
+                background-color: #dbeafe;
+                border-color: #3b82f6;
+                color: #1d4ed8;
+            }
+
+            .filter-pill.active[data-filter="odpalenie"] {
+                background-color: #d1fae5;
+                border-color: #10b981;
+                color: #065f46;
+            }
+
+            .filter-pill.active[data-filter="blad"] {
+                background-color: #fee2e2;
+                border-color: #ef4444;
+                color: #991b1b;
+            }
+
+            .filter-pill .pill-badge {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #f1f5f9;
+                font-size: 11px;
+                margin-left: 8px;
+                color: #4a5568;
+            }
+
+            .filter-pill.active .pill-badge {
+                background: rgba(255, 255, 255, 0.6);
+                color: inherit;
+            }
+
+        /* Ikona info przy typach zdarzeń */
+        .info-trigger-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            color: #64748b;
+            margin-left: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            vertical-align: middle;
+        }
+
+            .info-trigger-btn:hover {
+                background-color: var(--primary-yellow);
+                color: #fff;
+                transform: scale(1.1);
+            }
+
+        /* Dekoracyjne 4 prostokąty z pliku graficznego */
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
@@ -129,17 +236,17 @@
         .decor-4 {
             background-color: #f6c365;
         }
+
         .nav-lang-bar--fixed {
             position: fixed;
             left: 0;
-            bottom: 0;
+            bottom: -1px; /* Rozwiązanie problemu subpikselowej szczeliny */
             width: 100%;
             z-index: 1000;
         }
     </style>
 </head>
 <body>
-
 
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
@@ -149,7 +256,7 @@
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
             <div>
-                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+                <a href="#" class="uk-text-bold">Kontakt pomoc</a>
             </div>
         </div>
     </div>
@@ -163,7 +270,7 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
@@ -179,71 +286,68 @@
         </div>
     </nav>
 
-    <div class="uk-container uk-margin-large-top">
-        <button class="uk-button cemar-btn-secondary uk-margin-medium-bottom" onclick="window.location.href='staff-list.html'">
+    <!-- Zmniejszony margines górny i padding dolny -->
+    <div class="uk-container" style="margin-top: 20px; padding-bottom: 80px;">
+        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" onclick="window.location.href='staff-list.html'">
             <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
         </button>
 
-        <div class="cemar-card uk-margin-medium-bottom">
+        <!-- Zmieniona na mniejszą, bardziej kompaktową kartę maszyny -->
+        <div class="cemar-card cemar-card-compact uk-margin-medium-bottom">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
                 <div class="uk-grid-medium" uk-grid>
                     <div class="uk-width-expand@m">
-                        <span class="uk-label uk-label-warning uk-margin-small-bottom">Karta Maszyny</span>
+                        <span class="uk-label uk-label-warning uk-margin-small-bottom" style="font-size: 10px; padding: 2px 8px;">Karta Maszyny</span>
                         <h2 class="uk-margin-remove-top uk-text-bold" id="p5-machine-number">434</h2>
                         <p class="uk-text-large uk-text-muted uk-margin-remove-top" id="p5-machine-type">City</p>
                     </div>
                     <div class="uk-width-1-3@m">
-                        <div class="uk-card uk-card-default uk-card-body uk-padding-small" style="border-radius: 6px;">
-                            <span class="uk-text-meta">Użytkownik przypisany:</span>
-                            <p class="uk-text-bold uk-margin-remove" id="p5-assigned-user">Jan Kowalski (Operator)</p>
+                        <div class="uk-card uk-card-default uk-card-body uk-padding-small" style="border-radius: 6px; box-shadow: none; border: 1px solid #e5e7eb;">
+                            <span class="uk-text-meta" style="font-size: 10px;">Użytkownik przypisany:</span>
+                            <p class="uk-text-bold uk-margin-remove" id="p5-assigned-user" style="font-size: 13px;">Jan Kowalski (Operator)</p>
                         </div>
                     </div>
                 </div>
 
                 <hr>
 
-                <div class="uk-child-width-1-3@m uk-grid-medium uk-margin-top" uk-grid>
+                <div class="uk-child-width-1-3@m uk-grid-medium uk-margin-small-top" uk-grid>
                     <div>
-                        <span class="uk-text-meta">Ostatni serwis</span>
-                        <p class="uk-text-bold" id="p5-last-service">04.05.2026</p>
+                        <span class="uk-text-meta" style="font-size: 11px;">Ostatni serwis</span>
+                        <p class="uk-text-bold uk-margin-remove-top" id="p5-last-service" style="font-size: 15px;">04.05.2026</p>
                     </div>
                     <div>
-                        <span class="uk-text-meta">Przepracowane godziny (Razem)</span>
-                        <p class="uk-text-bold uk-text-warning" id="p5-total-hours">1 245 mth</p>
+                        <span class="uk-text-meta" style="font-size: 11px;">Przepracowane godziny (Razem)</span>
+                        <p class="uk-text-bold uk-text-warning uk-margin-remove-top" id="p5-total-hours" style="font-size: 15px;">1 245 mth</p>
                     </div>
                     <div>
-                        <span class="uk-text-meta">Godziny do następnego serwisu</span>
-                        <p class="uk-text-bold uk-text-danger" id="p5-remaining-hours">255 mth</p>
+                        <span class="uk-text-meta" style="font-size: 11px;">Godziny do następnego serwisu</span>
+                        <p class="uk-text-bold uk-text-danger uk-margin-remove-top" id="p5-remaining-hours" style="font-size: 15px;">255 mth</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="cemar-card uk-margin-medium-bottom">
-            <ul uk-accordion>
-                <li>
-                    <a class="uk-accordion-title uk-padding-small uk-text-bold" href="#" style="font-size: 15px;">
-                        <span uk-icon="icon: filter" class="uk-margin-small-right"></span> Filtrowanie logów maszyny
-                    </a>
-                    <div class="uk-accordion-content uk-padding uk-padding-remove-top">
-                        <div class="uk-flex uk-flex-wrap" style="gap: 24px;">
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="serwis" checked onchange="filterMachineLogs()"> Serwis</label>
-                            </div>
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="zgloszenie" checked onchange="filterMachineLogs()"> Zgłoszenie serwisowe</label>
-                            </div>
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="odpalenie" checked onchange="filterMachineLogs()"> Odpalenie referencyjne</label>
-                            </div>
-                            <div>
-                                <label class="uk-flex uk-flex-middle"><input class="uk-checkbox log-filter-cb uk-margin-small-right" type="checkbox" value="blad" checked onchange="filterMachineLogs()"> Kod błędu (Error code)</label>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+        <!-- Nowa sekcja nowoczesnego filtrowania w formie tagów -->
+        <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 13px; text-transform: uppercase; color: #666; letter-spacing: 0.5px;">Filtruj logi według typu zdarzenia:</h5>
+        <div class="filter-pill-container">
+            <div class="filter-pill active" data-filter="serwis" onclick="togglePillFilter('serwis')">
+                <span>Serwis</span>
+                <span class="pill-badge" id="badge-serwis">0</span>
+            </div>
+            <div class="filter-pill active" data-filter="zgloszenie" onclick="togglePillFilter('zgloszenie')">
+                <span>Zgłoszenia</span>
+                <span class="pill-badge" id="badge-zgloszenie">0</span>
+            </div>
+            <div class="filter-pill active" data-filter="odpalenie" onclick="togglePillFilter('odpalenie')">
+                <span>Odpalenia</span>
+                <span class="pill-badge" id="badge-odpalenie">0</span>
+            </div>
+            <div class="filter-pill active" data-filter="blad" onclick="togglePillFilter('blad')">
+                <span>Błędy (Error)</span>
+                <span class="pill-badge" id="badge-blad">0</span>
+            </div>
         </div>
 
         <div class="cemar-card">
@@ -263,28 +367,48 @@
                         <tbody id="p5-logs-tbody">
                             <tr class="log-row" data-type="blad">
                                 <td>10.07.2026 14:22</td>
-                                <td><span class="uk-label uk-label-danger">Error Code</span></td>
+                                <td>
+                                    <span class="uk-label uk-label-danger">Error Code</span>
+                                    <button class="info-trigger-btn" onclick="showLogDetails('Błąd krytyczny układu hydraulicznego (0x43)')" title="Szczegóły" uk-tooltip>
+                                        <span uk-icon="icon: info; ratio: 0.75"></span>
+                                    </button>
+                                </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 245 mth</td>
                                 <td>82 mth</td>
                             </tr>
                             <tr class="log-row" data-type="odpalenie">
                                 <td>09.07.2026 08:15</td>
-                                <td><span class="uk-label uk-label-success">Odpalenie referencyjne</span></td>
+                                <td>
+                                    <span class="uk-label uk-label-success">Odpalenie referencyjne</span>
+                                    <button class="info-trigger-btn" onclick="showLogDetails('Referencyjny rozruch pompy wtryskowej zakończony powodzeniem.')" title="Szczegóły" uk-tooltip>
+                                        <span uk-icon="icon: info; ratio: 0.75"></span>
+                                    </button>
+                                </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 237 mth</td>
                                 <td>74 mth</td>
                             </tr>
                             <tr class="log-row" data-type="serwis">
                                 <td>05.07.2026 12:00</td>
-                                <td><span class="uk-label uk-label-warning">Serwis</span></td>
+                                <td>
+                                    <span class="uk-label uk-label-warning">Serwis</span>
+                                    <button class="info-trigger-btn" onclick="showLogDetails('Okresowa wymiana filtrów, oleju oraz uszczelniaczy.')" title="Szczegóły" uk-tooltip>
+                                        <span uk-icon="icon: info; ratio: 0.75"></span>
+                                    </button>
+                                </td>
                                 <td>Piotr Nowak (Serwisant)</td>
                                 <td>1 163 mth</td>
                                 <td>0 mth</td>
                             </tr>
                             <tr class="log-row" data-type="zgloszenie">
                                 <td>01.07.2026 10:00</td>
-                                <td><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span></td>
+                                <td>
+                                    <span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
+                                    <button class="info-trigger-btn" onclick="showLogDetails('Zgłoszenie operatora: Spadek ciśnienia na zaworze głównym.')" title="Szczegóły" uk-tooltip>
+                                        <span uk-icon="icon: info; ratio: 0.75"></span>
+                                    </button>
+                                </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 100 mth</td>
                                 <td>19 mth</td>
@@ -295,6 +419,7 @@
             </div>
         </div>
     </div>
+
     <!-- Dolny pas -->
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
@@ -323,15 +448,78 @@
             document.getElementById('p5-remaining-hours').innerText = "110 mth";
         }
 
-        function filterMachineLogs() {
-            const checkboxes = document.querySelectorAll('.log-filter-cb');
-            const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+        // Tabela filtrów aktywnych (domyślnie wszystkie włączone na start)
+        const activeFilters = {
+            serwis: true,
+            zgloszenie: true,
+            odpalenie: true,
+            blad: true
+        };
+
+        window.onload = function () {
+            updateFilterBadges();
+            applyFilters();
+        }
+
+        // Obsługa przełączania kafelków filtrowania
+        function togglePillFilter(category) {
+            const pill = document.querySelector(`.filter-pill[data-filter="${category}"]`);
+
+            // Przełącz stan logiczny
+            activeFilters[category] = !activeFilters[category];
+
+            // Przełącz klasę aktywności w CSS
+            if (activeFilters[category]) {
+                pill.classList.add('active');
+            } else {
+                pill.classList.remove('active');
+            }
+
+            applyFilters();
+        }
+
+        // Filtrowanie wierszy logów na żywo
+        function applyFilters() {
             const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
             rows.forEach(row => {
                 const rowType = row.getAttribute('data-type');
-                row.style.display = activeFilters.includes(rowType) ? '' : 'none';
+                if (activeFilters[rowType]) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
             });
         }
+
+        // Dynamiczne wyliczenie ilości logów danego typu i przypisanie do badge
+        function updateFilterBadges() {
+            const counts = { serwis: 0, zgloszenie: 0, odpalenie: 0, blad: 0 };
+            const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+
+            rows.forEach(row => {
+                const type = row.getAttribute('data-type');
+                if (counts[type] !== undefined) {
+                    counts[type]++;
+                }
+            });
+
+            // Wpisanie wartości do badge'y
+            for (const [key, val] of Object.entries(counts)) {
+                const badge = document.getElementById(`badge-${key}`);
+                if (badge) badge.innerText = val;
+            }
+        }
+
+        // Akcja po kliknięciu ikony 'i' info
+        function showLogDetails(detailsText) {
+            UIkit.notification({
+                message: `<span uk-icon='info' class='uk-margin-small-right'></span> ${detailsText}`,
+                status: 'primary',
+                pos: 'top-center',
+                timeout: 3000
+            });
+        }
+
         function showPlaceholder(title) {
             UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
