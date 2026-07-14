@@ -1,7 +1,5 @@
 ﻿<!DOCTYPE html>
-<ht
-<!DOCTYPE html>
-ml lang="pl">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,7 +103,7 @@ ml lang="pl">
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
- 8          height: 90px;
+            8 height: 90px;
             border-radius: 0px;
             overflow: hidden;
             margin: 0 15px;
@@ -304,23 +302,23 @@ ml lang="pl">
         document.getElementById('p5-machine-type').innerText = machineType;
 
         if (machineId === 'E62441') {
-        document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
-        document.getElementById('p5-last-service').innerText = "12.03.2026";
-        document.getElementById('p5-total-hours').innerText = "890 mth";
-        document.getElementById('p5-remaining-hours').innerText = "110 mth";
+            document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
+            document.getElementById('p5-last-service').innerText = "12.03.2026";
+            document.getElementById('p5-total-hours').innerText = "890 mth";
+            document.getElementById('p5-remaining-hours').innerText = "110 mth";
         }
 
         function filterMachineLogs() {
-        const checkboxes = document.querySelectorAll('.log-filter-cb');
-        const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-        const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
-        rows.forEach(row => {
-        const rowType = row.getAttribute('data-type');
-        row.style.display = activeFilters.includes(rowType) ? '' : 'none';
-        });
+            const checkboxes = document.querySelectorAll('.log-filter-cb');
+            const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+            const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+            rows.forEach(row => {
+                const rowType = row.getAttribute('data-type');
+                row.style.display = activeFilters.includes(rowType) ? '' : 'none';
+            });
         }
         function showPlaceholder(title) {
-        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
     </script>
 </body>
