@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-ml lang="pl">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,7 @@ ml lang="pl">
                 .nav-lang-bar a:hover, .nav-lang-bar a.active {
                     color: var(--primary-yellow);
                 }
-        /* karta z danymi */
+
         .cemar-card {
             background: #ffffff;
             border-radius: 12px;
@@ -92,18 +92,10 @@ ml lang="pl">
                 color: #111;
             }
 
-        .cemar-table th {
-            background-color: #2a2a2a;
-            color: #fff !important;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-        /* decor */
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
-            8 height: 90px;
+            height: 90px;
             border-radius: 0px;
             overflow: hidden;
             margin: 0 15px;
@@ -130,7 +122,402 @@ ml lang="pl">
         .decor-4 {
             background-color: #f6c365;
         }
+
+        /* --- Asystent AI --- */
+        .ai-shell {
+            height: calc(100vh - 90px - 32px - 60px);
+            min-height: 520px;
+        }
+
+        .ai-chat-scroll {
+            overflow-y: auto;
+            flex: 1 1 auto;
+        }
+
+        .ai-msg-row {
+            display: flex;
+            margin-bottom: 18px;
+        }
+
+            .ai-msg-row.user {
+                justify-content: flex-end;
+            }
+
+        .ai-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #fff;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+        }
+
+            .ai-avatar.bot {
+                background-color: var(--primary-yellow);
+            }
+
+            .ai-avatar.user {
+                background-color: #2a2a2a;
+                margin-left: 12px;
+                order: 2;
+            }
+
+        .ai-bubble {
+            max-width: 72%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        .ai-msg-row.bot .ai-bubble {
+            background-color: #f5f6f8;
+            border: 1px solid #eaeaea;
+            border-top-left-radius: 2px;
+            margin-left: 12px;
+        }
+
+        .ai-msg-row.user .ai-bubble {
+            background-color: #2a2a2a;
+            color: #fff;
+            border-top-right-radius: 2px;
+        }
+
+        .ai-msg-meta {
+            font-size: 11px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .ai-input-bar {
+            border-top: 1px solid #eaeaea;
+            padding-top: 16px;
+        }
+
+            .ai-input-bar textarea {
+                resize: none;
+                border-radius: 8px;
+            }
+
+        .ai-suggest-item {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+            background: #fff;
+            color: #333;
+            font-size: 13px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+            .ai-suggest-item:hover {
+                border-color: var(--primary-yellow);
+                background-color: #fffaf0;
+            }
+
+        .ai-recent-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 9px 4px;
+            font-size: 13px;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+            .ai-recent-item:hover {
+                color: var(--primary-yellow-hover);
+            }
+
+            .ai-recent-item:last-child {
+                border-bottom: none;
+            }
+
+        .ai-side-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .ai-typing span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #bbb;
+            margin-right: 3px;
+            animation: ai-blink 1.2s infinite;
+        }
+
+            .ai-typing span:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+
+            .ai-typing span:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+
+        @keyframes ai-blink {
+            0%, 80%, 100% {
+                opacity: 0.3;
+            }
+
+            40% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    </body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="#" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="ai-assistant.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-medium-bottom uk-flex-wrap" style="gap: 12px;">
+            <div>
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Wsparcie techniczne</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Asystent AI</h2>
+            </div>
+            <button class="uk-button cemar-btn-secondary" onclick="window.location.href='staff-list.html'">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
+            </button>
+        </div>
+
+        <div class="uk-grid-medium ai-shell" uk-grid>
+            <!-- Kolumna czatu -->
+            <div class="uk-width-expand@m uk-flex uk-flex-column" style="height:100%;">
+                <div class="cemar-card uk-flex uk-flex-column" style="height:100%;">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding uk-flex uk-flex-column" style="height:100%; min-height:0;">
+
+                        <div class="ai-chat-scroll uk-margin-medium-bottom" id="ai-chat-scroll">
+                            <div class="ai-msg-row bot">
+                                <div class="ai-avatar bot">AI</div>
+                                <div>
+                                    <div class="ai-bubble">
+                                        Dzień dobry! Jestem Asystentem AI CEMAR. Mogę pomóc w diagnostyce maszyn, interpretacji kodów błędów oraz przypomnieć terminy serwisowe. W czym mogę pomóc?
+                                    </div>
+                                    <div class="ai-msg-meta">Asystent AI · 09:12</div>
+                                </div>
+                            </div>
+
+                            <div class="ai-msg-row user">
+                                <div>
+                                    <div class="ai-bubble">Jakie jest znaczenie ostatniego kodu błędu na maszynie nr 434?</div>
+                                    <div class="ai-msg-meta uk-text-right">Ty · 09:13</div>
+                                </div>
+                                <div class="ai-avatar user">TY</div>
+                            </div>
+
+                            <div class="ai-msg-row bot">
+                                <div class="ai-avatar bot">AI</div>
+                                <div>
+                                    <div class="ai-bubble">
+                                        Maszyna nr 434 (City) zgłosiła kod błędu 10.07.2026 o 14:22, po 82 mth od ostatniego serwisu. Zalecam sprawdzenie czujnika pozycji referencyjnej oraz przegląd zgodnie z instrukcją serwisową. Czy chcesz, abym przygotował listę czynności kontrolnych?
+                                    </div>
+                                    <div class="ai-msg-meta">Asystent AI · 09:13</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ai-input-bar">
+                            <form class="uk-flex uk-flex-middle" style="gap: 10px;" onsubmit="return sendAiMessage(event)">
+                                <textarea id="ai-input" class="uk-textarea" rows="1" placeholder="Napisz wiadomość do Asystenta AI..." onkeydown="handleAiKeydown(event)"></textarea>
+                                <button type="submit" class="uk-button cemar-btn-primary uk-flex-none">
+                                    Wyślij <span uk-icon="icon: forward; ratio: 0.9" class="uk-margin-small-left"></span>
+                                </button>
+                            </form>
+                            <p class="uk-text-meta uk-margin-small-top uk-margin-remove-bottom" style="font-size: 11px;">Asystent AI może popełniać błędy. Zweryfikuj krytyczne informacje serwisowe.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel boczny -->
+            <div class="uk-width-1-3@m">
+                <div class="cemar-card uk-margin-medium-bottom">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="ai-side-label">Sugerowane pytania</p>
+                        <button type="button" class="ai-suggest-item" onclick="fillAiInput('Jakie maszyny wymagają serwisu w tym tygodniu?')">Jakie maszyny wymagają serwisu w tym tygodniu?</button>
+                        <button type="button" class="ai-suggest-item" onclick="fillAiInput('Wyjaśnij kod błędu E-204')">Wyjaśnij kod błędu E-204</button>
+                        <button type="button" class="ai-suggest-item" onclick="fillAiInput('Pokaż historię serwisową maszyny nr 434')">Pokaż historię serwisową maszyny nr 434</button>
+                        <button type="button" class="ai-suggest-item" onclick="fillAiInput('Jak zresetować licznik godzin po serwisie?')">Jak zresetować licznik godzin po serwisie?</button>
+                    </div>
+                </div>
+
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="ai-side-label">Ostatnie rozmowy</p>
+                        <div id="ai-recent-list">
+                            <div class="ai-recent-item" onclick="loadAiRecent(this)">
+                                <span uk-icon="icon: comment; ratio: 0.8"></span>
+                                <span>Diagnostyka maszyny nr 434 — kod błędu</span>
+                            </div>
+                            <div class="ai-recent-item" onclick="loadAiRecent(this)">
+                                <span uk-icon="icon: comment; ratio: 0.8"></span>
+                                <span>Terminy serwisowe — lipiec 2026</span>
+                            </div>
+                            <div class="ai-recent-item" onclick="loadAiRecent(this)">
+                                <span uk-icon="icon: comment; ratio: 0.8"></span>
+                                <span>Instrukcja wymiany filtra — City</span>
+                            </div>
+                            <div class="ai-recent-item" onclick="loadAiRecent(this)">
+                                <span uk-icon="icon: comment; ratio: 0.8"></span>
+                                <span>Interpretacja logów odpalenia referencyjnego</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        function showPlaceholder(title) {
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+
+        function fillAiInput(text) {
+        const input = document.getElementById('ai-input');
+        input.value = text;
+        input.focus();
+        }
+
+        function handleAiKeydown(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendAiMessage(e);
+        }
+        }
+
+        function scrollAiChatToBottom() {
+        const scrollEl = document.getElementById('ai-chat-scroll');
+        scrollEl.scrollTop = scrollEl.scrollHeight;
+        }
+
+        function currentTime() {
+        const d = new Date();
+        return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+        }
+
+        function sendAiMessage(e) {
+        if (e) e.preventDefault();
+        const input = document.getElementById('ai-input');
+        const text = input.value.trim();
+        if (!text) return false;
+
+        const scrollEl = document.getElementById('ai-chat-scroll');
+
+        const userRow = document.createElement('div');
+        userRow.className = 'ai-msg-row user';
+        userRow.innerHTML = `
+        <div>
+        <div class="ai-bubble"></div>
+        <div class="ai-msg-meta uk-text-right">Ty · ${currentTime()}</div>
+        </div>
+        <div class="ai-avatar user">TY</div>`;
+        userRow.querySelector('.ai-bubble').innerText = text;
+        scrollEl.appendChild(userRow);
+
+        input.value = '';
+        scrollAiChatToBottom();
+
+        const typingRow = document.createElement('div');
+        typingRow.className = 'ai-msg-row bot';
+        typingRow.id = 'ai-typing-row';
+        typingRow.innerHTML = `
+        <div class="ai-avatar bot">AI</div>
+        <div>
+        <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
+        </div>`;
+        scrollEl.appendChild(typingRow);
+        scrollAiChatToBottom();
+
+        setTimeout(() => {
+        const row = document.getElementById('ai-typing-row');
+        if (row) row.remove();
+
+        const botRow = document.createElement('div');
+        botRow.className = 'ai-msg-row bot';
+        botRow.innerHTML = `
+        <div class="ai-avatar bot">AI</div>
+        <div>
+        <div class="ai-bubble"></div>
+        <div class="ai-msg-meta">Asystent AI · ${currentTime()}</div>
+        </div>`;
+        botRow.querySelector('.ai-bubble').innerText = 'To jest odpowiedź demonstracyjna. Podłącz backend Asystenta AI, aby otrzymywać rzeczywiste odpowiedzi na podstawie danych maszyn i logów serwisowych.';
+        scrollEl.appendChild(botRow);
+        scrollAiChatToBottom();
+        }, 900);
+
+        return false;
+        }
+
+        function loadAiRecent(el) {
+        UIkit.notification({
+        message: 'Wczytywanie rozmowy: ' + el.innerText.trim(),
+        status: 'warning',
+        pos: 'top-center',
+        timeout: 1800
+        });
+        }
+
+        scrollAiChatToBottom();
+    </script>
+</body>
+</html>
