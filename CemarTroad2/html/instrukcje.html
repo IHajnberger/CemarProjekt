@@ -50,7 +50,7 @@
                 .nav-lang-bar a:hover, .nav-lang-bar a.active {
                     color: var(--primary-yellow);
                 }
-        /* karta z danymi */
+
         .cemar-card {
             background: #ffffff;
             border-radius: 12px;
@@ -92,14 +92,6 @@
                 color: #111;
             }
 
-        .cemar-table th {
-            background-color: #2a2a2a;
-            color: #fff !important;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-        /* decor */
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
@@ -130,6 +122,7 @@
         .decor-4 {
             background-color: #f6c365;
         }
+
         .nav-lang-bar--fixed {
             position: fixed;
             left: 0;
@@ -137,10 +130,87 @@
             width: 100%;
             z-index: 1000;
         }
+
+        /* --- Instrukcje --- */
+        .instr-cat-pill {
+            display: inline-block;
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #555;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 0 8px 8px 0;
+        }
+
+            .instr-cat-pill:hover {
+                border-color: var(--primary-yellow);
+                color: var(--primary-yellow-hover);
+            }
+
+            .instr-cat-pill.active {
+                background-color: var(--primary-yellow);
+                border-color: var(--primary-yellow);
+                color: #fff;
+            }
+
+        .instr-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+        }
+
+            .instr-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+            }
+
+        .instr-icon-wrap {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background-color: #fdf3e0;
+            color: var(--primary-yellow-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .instr-format-badge {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            color: #777;
+        }
+
+        .instr-empty-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-color: #fdf3e0;
+            color: var(--primary-yellow-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .instr-search-input {
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
-
 
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
@@ -164,7 +234,7 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
@@ -179,7 +249,196 @@
             </div>
         </div>
     </nav>
-    <!-- Dolny pas -->
+
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-medium-bottom uk-flex-wrap" style="gap: 12px;">
+            <div>
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Baza wiedzy</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Instrukcje</h2>
+            </div>
+            <button class="uk-button cemar-btn-secondary" onclick="window.location.href='staff-list.html'">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+            </button>
+        </div>
+
+        <!-- Wyszukiwarka i kategorie -->
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-margin-medium-bottom">
+                    <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: search"></span>
+                        <input class="uk-input instr-search-input uk-width-1-1" id="instr-search" type="text" placeholder="Szukaj instrukcji, np. „wymiana filtra”, „City”, „error”…" oninput="filterInstructions()">
+                    </div>
+                </div>
+                <div id="instr-categories">
+                    <span class="instr-cat-pill active" data-cat="wszystkie" onclick="setInstrCategory(this)">Wszystkie</span>
+                    <span class="instr-cat-pill" data-cat="obsluga" onclick="setInstrCategory(this)">Obsługa maszyny</span>
+                    <span class="instr-cat-pill" data-cat="serwis" onclick="setInstrCategory(this)">Serwis i konserwacja</span>
+                    <span class="instr-cat-pill" data-cat="bezpieczenstwo" onclick="setInstrCategory(this)">Bezpieczeństwo</span>
+                    <span class="instr-cat-pill" data-cat="bledy" onclick="setInstrCategory(this)">Kody błędów</span>
+                    <span class="instr-cat-pill" data-cat="instalacja" onclick="setInstrCategory(this)">Instalacja</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Siatka instrukcji (placeholdery) -->
+        <div class="uk-grid-medium uk-child-width-1-3@m uk-child-width-1-2@s" id="instr-grid" uk-grid uk-height-match="target: > div > .instr-card">
+            <!-- Karta 1 -->
+            <div class="instr-item" data-cat="obsluga" data-title="instrukcja obsługi maszyny city">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: file-text; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Instrukcja obsługi — maszyna City</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Podstawowa obsługa, panel sterowania, uruchamianie i zatrzymywanie maszyny.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 12.2025</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Instrukcja obsługi — maszyna City')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 2 -->
+            <div class="instr-item" data-cat="serwis" data-title="przegląd okresowy i konserwacja">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: cog; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Przegląd okresowy i konserwacja</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Harmonogram serwisowy, lista czynności kontrolnych, zalecane materiały eksploatacyjne.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 03.2026</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Przegląd okresowy i konserwacja')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 3 -->
+            <div class="instr-item" data-cat="bledy" data-title="katalog kodów błędów">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: warning; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Katalog kodów błędów</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Pełna lista kodów błędów wraz z opisem przyczyn i zalecanymi działaniami.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 06.2026</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Katalog kodów błędów')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 4 -->
+            <div class="instr-item" data-cat="bezpieczenstwo" data-title="zasady bezpieczeństwa pracy">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: shield; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Zasady bezpieczeństwa pracy</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Wymagane środki ochrony osobistej, procedury awaryjnego zatrzymania, strefy zagrożenia.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 01.2026</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Zasady bezpieczeństwa pracy')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 5 -->
+            <div class="instr-item" data-cat="instalacja" data-title="instrukcja instalacji i pierwszego uruchomienia">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: settings; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Instalacja i pierwsze uruchomienie</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Wymagania instalacyjne, podłączenie zasilania, konfiguracja wstępna i odpalenie referencyjne.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 09.2025</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Instalacja i pierwsze uruchomienie')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 6 -->
+            <div class="instr-item" data-cat="obsluga" data-title="skrócona instrukcja dla operatora">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: album; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">VIDEO</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Skrócona instrukcja dla operatora</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Materiał wideo pokazujący codzienną obsługę maszyny krok po kroku.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 05.2026</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Skrócona instrukcja dla operatora')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 7 -->
+            <div class="instr-item" data-cat="serwis" data-title="wymiana części zamiennych">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: wrench; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Wymiana części zamiennych</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Instrukcje krok po kroku dla najczęściej wymienianych podzespołów.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 02.2026</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Wymiana części zamiennych')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 8 -->
+            <div class="instr-item" data-cat="bezpieczenstwo" data-title="karta charakterystyki środków czyszczących">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: bolt; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Karta charakterystyki środków czyszczących</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Informacje o bezpiecznym stosowaniu i przechowywaniu środków chemicznych.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 11.2025</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Karta charakterystyki środków czyszczących')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karta 9 -->
+            <div class="instr-item" data-cat="instalacja" data-title="wymagania sieciowe i integracja z systemem">
+                <div class="instr-card uk-padding uk-flex uk-flex-column">
+                    <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
+                        <div class="instr-icon-wrap"><span uk-icon="icon: database; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge">PDF</span>
+                    </div>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Wymagania sieciowe i integracja z systemem</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Konfiguracja połączenia maszyny z systemem CEMAR i monitoringiem zdalnym.</p>
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
+                        <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 04.2026</span>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Wymagania sieciowe i integracja z systemem')">Otwórz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stan pusty (ukryty domyślnie) -->
+        <div class="cemar-card uk-margin-medium-top uk-padding uk-text-center" id="instr-empty-state" hidden>
+            <div class="instr-empty-icon uk-margin-small-bottom">
+                <span uk-icon="icon: search; ratio: 1.6"></span>
+            </div>
+            <h4 class="uk-margin-remove-bottom">Brak wyników</h4>
+            <p class="uk-text-meta">Nie znaleziono instrukcji pasujących do wybranych kryteriów.</p>
+        </div>
+    </div>
+
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
             <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
@@ -188,14 +447,40 @@
             </div>
         </div>
     </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
+        let instrActiveCategory = 'wszystkie';
 
         function showPlaceholder(title) {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Treść instrukcji w przygotowaniu.</p></div>`);
+        }
+
+        function setInstrCategory(el) {
+        document.querySelectorAll('.instr-cat-pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        instrActiveCategory = el.getAttribute('data-cat');
+        filterInstructions();
+        }
+
+        function filterInstructions() {
+        const query = document.getElementById('instr-search').value.trim().toLowerCase();
+        const items = document.querySelectorAll('.instr-item');
+        let visibleCount = 0;
+
+        items.forEach(item => {
+        const matchesCategory = instrActiveCategory === 'wszystkie' || item.getAttribute('data-cat') === instrActiveCategory;
+        const matchesQuery = !query || item.getAttribute('data-title').includes(query);
+        const visible = matchesCategory && matchesQuery;
+        item.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+        });
+
+        document.getElementById('instr-empty-state').hidden = visibleCount !== 0;
+        document.getElementById('instr-grid').style.display = visibleCount === 0 ? 'none' : '';
+        UIkit.update(document.getElementById('instr-grid'));
         }
     </script>
 </body>
