@@ -109,12 +109,15 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
+            <div>
+                <a href="#" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
         </div>
     </div>
 
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
-            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">CEMAR</a>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
@@ -140,7 +143,7 @@
                     </div>
                     <div class="uk-width-expand">
                         <h3 class="uk-margin-remove-bottom uk-text-bold">Panel Diagnostyczny Serwisanta</h3>
-                        <p class="uk-text-meta uk-margin-remove-top">Inżynier Anna Nowak • annanowak@gmail.com</p>
+                        <p class="uk-text-meta uk-margin-remove-top">Serwisant Anna Nowak • annanowak@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -192,7 +195,7 @@
                                         </li>
                                     </ul>
                                 </td>
-                                <td>Budimex SA (Jan Kowalski)</td>
+                                <td>Firma 1 (Jan Kowalski)</td>
                             </tr>
                             <tr>
                                 <td class="uk-text-center">
@@ -205,16 +208,16 @@
                                                 <span uk-icon="chevron-down" class="uk-margin-small-right"></span> 521
                                             </a>
                                             <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
-                                                <p class="uk-text-meta uk-margin-remove">Typ: city</p>
+                                                <p class="uk-text-meta uk-margin-remove">Typ: City</p>
                                                 <hr class="uk-margin-small">
-                                                <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('521', 'city')">
+                                                <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('521', 'City')">
                                                     Przejdź do karty maszyny
                                                 </button>
                                             </div>
                                         </li>
                                     </ul>
                                 </td>
-                                <td>Strabag Sp. z o.o. (Marek Nowak)</td>
+                                <td>Firma 2 (Marek Nowak)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -228,10 +231,10 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
         function goToDiagnostics(num, type) {
-            window.location.href = `staff-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
+        window.location.href = `staff-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
         }
         function showPlaceholder(title) {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
     </script>
 </body>

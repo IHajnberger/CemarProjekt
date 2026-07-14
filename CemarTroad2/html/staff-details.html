@@ -88,6 +88,7 @@
 </head>
 <body>
 
+
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -95,12 +96,14 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
+            <div>
+                <a href="#" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
         </div>
     </div>
-
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
-            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">CEMAR</a>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
@@ -245,23 +248,23 @@
         document.getElementById('p5-machine-type').innerText = machineType;
 
         if (machineId === 'E62441') {
-            document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
-            document.getElementById('p5-last-service').innerText = "12.03.2026";
-            document.getElementById('p5-total-hours').innerText = "890 mth";
-            document.getElementById('p5-remaining-hours').innerText = "110 mth";
+        document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
+        document.getElementById('p5-last-service').innerText = "12.03.2026";
+        document.getElementById('p5-total-hours').innerText = "890 mth";
+        document.getElementById('p5-remaining-hours').innerText = "110 mth";
         }
 
         function filterMachineLogs() {
-            const checkboxes = document.querySelectorAll('.log-filter-cb');
-            const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
-            const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
-            rows.forEach(row => {
-                const rowType = row.getAttribute('data-type');
-                row.style.display = activeFilters.includes(rowType) ? '' : 'none';
-            });
+        const checkboxes = document.querySelectorAll('.log-filter-cb');
+        const activeFilters = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+        const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+        rows.forEach(row => {
+        const rowType = row.getAttribute('data-type');
+        row.style.display = activeFilters.includes(rowType) ? '' : 'none';
+        });
         }
         function showPlaceholder(title) {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
     </script>
 </body>
