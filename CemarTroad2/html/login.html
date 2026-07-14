@@ -126,7 +126,7 @@
                 return;
             }
 
-            // Zapisujemy rolę w pamięci przeglądarki i przekierowujemy na odpowiednią stronę główną
+            // Wybór roli
             localStorage.setItem('userRole', selectedRole);
             if (selectedRole === 'client') {
                 window.location.href = 'client-list.html';
