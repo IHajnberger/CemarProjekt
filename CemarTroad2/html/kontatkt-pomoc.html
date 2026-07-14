@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Kontakt i Pomoc</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #dca31a;
+            --primary-yellow-hover: #b88510;
+            --light-bg: #f5f6f8;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h3, h4, .uk-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .cemar-navbar {
+            background-color: #f8f8f8 !important;
+            border-bottom: 3px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            height: 90px;
+        }
+
+        .nav-lang-bar {
+            background-color: #2a2a2a;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+            .nav-lang-bar a {
+                color: #aaa;
+                transition: color 0.2s;
+            }
+
+                .nav-lang-bar a:hover, .nav-lang-bar a.active {
+                    color: var(--primary-yellow);
+                }
+
+        .cemar-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eaeaea;
+        }
+
+        .yellow-accent-bar {
+            height: 6px;
+            background: var(--primary-yellow);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
+
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
+            }
+
+        .cemar-decor-blocks {
+            display: inline-flex;
+            width: 140px;
+            height: 90px;
+            border-radius: 0px;
+            overflow: hidden;
+            margin: 0 15px;
+            vertical-align: middle;
+        }
+
+            .cemar-decor-blocks span {
+                flex: 1;
+                height: 100%;
+            }
+
+        .decor-1 {
+            background-color: #dfa63b;
+        }
+
+        .decor-2 {
+            background-color: #be8525;
+        }
+
+        .decor-3 {
+            background-color: #ff9c00;
+        }
+
+        .decor-4 {
+            background-color: #f6c365;
+        }
+
+        .nav-lang-bar--fixed {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* --- Kontakt i Pomoc --- */
+        .contact-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background-color: #fdf3e0;
+            color: var(--primary-yellow-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-channel-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .contact-channel-row:last-child {
+                border-bottom: none;
+            }
+
+        .contact-channel-value {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+            .contact-channel-value a {
+                color: #333;
+            }
+
+                .contact-channel-value a:hover {
+                    color: var(--primary-yellow-hover);
+                }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+            .status-dot.online {
+                background-color: #32d296;
+            }
+
+        .uk-input, .uk-textarea, .uk-select {
+            border-radius: 6px;
+        }
+
+        .uk-form-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+            font-weight: 700;
+        }
+
+        .faq-section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            font-weight: 700;
+        }
+
+        .uk-accordion-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+            .uk-accordion-title::before {
+                color: var(--primary-yellow);
+            }
+
+        .emergency-card {
+            background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+            color: #fff;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="contact-help.html" class="uk-text-bold active">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-medium-bottom uk-flex-wrap" style="gap: 12px;">
+            <div>
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Wsparcie</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Kontakt i Pomoc</h2>
+            </div>
+            <button class="uk-button cemar-btn-secondary" onclick="window.location.href='staff-list.html'">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+            </button>
+        </div>
+
+        <div class="uk-grid-medium" uk-grid>
+
+            <!-- Lewa kolumna: kanały kontaktu -->
+            <div class="uk-width-1-2@m">
+
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="faq-section-title uk-margin-remove-top">Skontaktuj się z nami</p>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: receiver; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Infolinia serwisowa</span>
+                                <p class="contact-channel-value uk-margin-remove"><a href="tel:+48800123456">800 123 456</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: mail; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">E-mail wsparcia</span>
+                                <p class="contact-channel-value uk-margin-remove"><a href="mailto:pomoc@cemar.pl">pomoc@cemar.pl</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: comment; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Czat na żywo</span>
+                                <p class="contact-channel-value uk-margin-remove">
+                                    <span class="status-dot online"></span>Dostępny teraz
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: clock; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Godziny wsparcia</span>
+                                <p class="contact-channel-value uk-margin-remove">Pon–Pt, 7:00–18:00</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: location; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Siedziba firmy</span>
+                                <p class="contact-channel-value uk-margin-remove">ul. Przemysłowa 8, 58-200 Dzierżoniów</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Prawa kolumna: FAQ -->
+            <div class="uk-width-1-2@m">
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="faq-section-title uk-margin-remove-top">Najczęściej zadawane pytania</p>
+
+                        <ul uk-accordion="multiple: false">
+                            <li class="uk-open">
+                                <a class="uk-accordion-title" href="#">Jak zgłosić awarię maszyny?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Zaloguj się do systemu, otwórz kartę maszyny i wybierz opcję „Zgłoszenie serwisowe”, lub zadzwoń bezpośrednio na infolinię serwisową.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Gdzie znajdę historię serwisową mojej maszyny?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Na karcie danej maszyny w sekcji „Pełne logi operacyjne” — możesz filtrować logi według typu zdarzenia.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Jak zresetować hasło do konta?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Przejdź do sekcji „Konto”, następnie „Zmiana hasła”. Jeśli nie pamiętasz obecnego hasła, skontaktuj się z pomocą techniczną.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Co oznaczają kody błędów na maszynie?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Pełen opis kodów błędów znajdziesz w sekcji „Instrukcje” → „Katalog kodów błędów”, lub zapytaj Asystenta AI.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Jak długo czeka się na odpowiedź serwisu?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Standardowe zgłoszenia obsługujemy w ciągu 1 dnia roboczego. Awarie krytyczne zgłoszone na numer 800 999 888 obsługiwane są priorytetowo, 24/7.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="#" class="uk-margin-right">Privacy policy</a>
+                <a href="#" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        function showPlaceholder(title) {
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+
+        function submitContactForm(e) {
+        e.preventDefault();
+        UIkit.notification({
+        message: 'Twoje zgłoszenie zostało wysłane. Odpowiemy najszybciej jak to możliwe.',
+        status: 'success',
+        pos: 'top-center',
+        timeout: 2500
+        });
+        document.getElementById('cf-name').value = '';
+        document.getElementById('cf-email').value = '';
+        document.getElementById('cf-message').value = '';
+        document.getElementById('cf-topic').selectedIndex = 0;
+        return false;
+        }
+    </script>
+</body>
+</html>
