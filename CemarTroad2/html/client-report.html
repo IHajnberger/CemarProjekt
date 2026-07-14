@@ -130,6 +130,37 @@
         .decor-4 {
             background-color: #f6c365;
         }
+        /* decor */
+        .cemar-decor-blocks {
+            display: inline-flex;
+            width: 140px;
+            height: 80px;
+            border-radius: 0px;
+            overflow: hidden;
+            margin: 0 15px;
+            vertical-align: middle;
+        }
+
+            .cemar-decor-blocks span {
+                flex: 1;
+                height: 100%;
+            }
+
+        .decor-1 {
+            background-color: #dfa63b;
+        }
+
+        .decor-2 {
+            background-color: #be8525;
+        }
+
+        .decor-3 {
+            background-color: #ff9c00;
+        }
+
+        .decor-4 {
+            background-color: #f6c365;
+        }
     </style>
 </head>
 <body>
@@ -148,8 +179,15 @@
         </div>
     </div>
 
+    <!-- Główny Nagłówek -->
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
             <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
@@ -160,6 +198,7 @@
                 <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
                 <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
             </ul>
+
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
             </div>
