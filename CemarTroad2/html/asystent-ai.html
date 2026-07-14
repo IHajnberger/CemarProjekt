@@ -423,98 +423,106 @@
             </div>
         </div>
     </div>
-
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="#" class="uk-margin-right">Privacy policy</a>
+                <a href="#" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
         function showPlaceholder(title) {
-        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
 
         function fillAiInput(text) {
-        const input = document.getElementById('ai-input');
-        input.value = text;
-        input.focus();
+            const input = document.getElementById('ai-input');
+            input.value = text;
+            input.focus();
         }
 
         function handleAiKeydown(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendAiMessage(e);
-        }
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendAiMessage(e);
+            }
         }
 
         function scrollAiChatToBottom() {
-        const scrollEl = document.getElementById('ai-chat-scroll');
-        scrollEl.scrollTop = scrollEl.scrollHeight;
+            const scrollEl = document.getElementById('ai-chat-scroll');
+            scrollEl.scrollTop = scrollEl.scrollHeight;
         }
 
         function currentTime() {
-        const d = new Date();
-        return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+            const d = new Date();
+            return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
         }
 
         function sendAiMessage(e) {
-        if (e) e.preventDefault();
-        const input = document.getElementById('ai-input');
-        const text = input.value.trim();
-        if (!text) return false;
+            if (e) e.preventDefault();
+            const input = document.getElementById('ai-input');
+            const text = input.value.trim();
+            if (!text) return false;
 
-        const scrollEl = document.getElementById('ai-chat-scroll');
+            const scrollEl = document.getElementById('ai-chat-scroll');
 
-        const userRow = document.createElement('div');
-        userRow.className = 'ai-msg-row user';
-        userRow.innerHTML = `
-        <div>
-        <div class="ai-bubble"></div>
-        <div class="ai-msg-meta uk-text-right">Ty · ${currentTime()}</div>
-        </div>
-        <div class="ai-avatar user">TY</div>`;
-        userRow.querySelector('.ai-bubble').innerText = text;
-        scrollEl.appendChild(userRow);
+            const userRow = document.createElement('div');
+            userRow.className = 'ai-msg-row user';
+            userRow.innerHTML = `
+            <div>
+            <div class="ai-bubble"></div>
+            <div class="ai-msg-meta uk-text-right">Ty · ${currentTime()}</div>
+            </div>
+            <div class="ai-avatar user">TY</div>`;
+            userRow.querySelector('.ai-bubble').innerText = text;
+            scrollEl.appendChild(userRow);
 
-        input.value = '';
-        scrollAiChatToBottom();
+            input.value = '';
+            scrollAiChatToBottom();
 
-        const typingRow = document.createElement('div');
-        typingRow.className = 'ai-msg-row bot';
-        typingRow.id = 'ai-typing-row';
-        typingRow.innerHTML = `
-        <div class="ai-avatar bot">AI</div>
-        <div>
-        <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
-        </div>`;
-        scrollEl.appendChild(typingRow);
-        scrollAiChatToBottom();
+            const typingRow = document.createElement('div');
+            typingRow.className = 'ai-msg-row bot';
+            typingRow.id = 'ai-typing-row';
+            typingRow.innerHTML = `
+            <div class="ai-avatar bot">AI</div>
+            <div>
+            <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
+            </div>`;
+            scrollEl.appendChild(typingRow);
+            scrollAiChatToBottom();
 
-        setTimeout(() => {
-        const row = document.getElementById('ai-typing-row');
-        if (row) row.remove();
+            setTimeout(() => {
+                const row = document.getElementById('ai-typing-row');
+                if (row) row.remove();
 
-        const botRow = document.createElement('div');
-        botRow.className = 'ai-msg-row bot';
-        botRow.innerHTML = `
-        <div class="ai-avatar bot">AI</div>
-        <div>
-        <div class="ai-bubble"></div>
-        <div class="ai-msg-meta">Asystent AI · ${currentTime()}</div>
-        </div>`;
-        botRow.querySelector('.ai-bubble').innerText = 'To jest odpowiedź demonstracyjna. Podłącz backend Asystenta AI, aby otrzymywać rzeczywiste odpowiedzi na podstawie danych maszyn i logów serwisowych.';
-        scrollEl.appendChild(botRow);
-        scrollAiChatToBottom();
-        }, 900);
+                const botRow = document.createElement('div');
+                botRow.className = 'ai-msg-row bot';
+                botRow.innerHTML = `
+            <div class="ai-avatar bot">AI</div>
+            <div>
+            <div class="ai-bubble"></div>
+            <div class="ai-msg-meta">Asystent AI · ${currentTime()}</div>
+            </div>`;
+                botRow.querySelector('.ai-bubble').innerText = 'To jest odpowiedź demonstracyjna. Podłącz backend Asystenta AI, aby otrzymywać rzeczywiste odpowiedzi na podstawie danych maszyn i logów serwisowych.';
+                scrollEl.appendChild(botRow);
+                scrollAiChatToBottom();
+            }, 900);
 
-        return false;
+            return false;
         }
 
         function loadAiRecent(el) {
-        UIkit.notification({
-        message: 'Wczytywanie rozmowy: ' + el.innerText.trim(),
-        status: 'warning',
-        pos: 'top-center',
-        timeout: 1800
-        });
+            UIkit.notification({
+                message: 'Wczytywanie rozmowy: ' + el.innerText.trim(),
+                status: 'warning',
+                pos: 'top-center',
+                timeout: 1800
+            });
         }
 
         scrollAiChatToBottom();
