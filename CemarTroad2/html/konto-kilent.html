@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEMAR - KontoKlient</title>
+    <title>CEMAR - Moje Konto (Klient)</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@
                 .nav-lang-bar a:hover, .nav-lang-bar a.active {
                     color: var(--primary-yellow);
                 }
-        /* karta z danymi */
+
         .cemar-card {
             background: #ffffff;
             border-radius: 12px;
@@ -92,14 +92,6 @@
                 color: #111;
             }
 
-        .cemar-table th {
-            background-color: #2a2a2a;
-            color: #fff !important;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-        /* decor */
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
@@ -130,10 +122,50 @@
         .decor-4 {
             background-color: #f6c365;
         }
+
+        /* --- Konto --- */
+        .account-avatar {
+            width: 84px;
+            height: 84px;
+            border-radius: 12px;
+            background-color: #2a2a2a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .account-role-badge {
+            background-color: #eef4ff;
+            color: #2f6fd6;
+        }
+
+        .uk-input, .uk-select {
+            border-radius: 6px;
+        }
+
+        .uk-form-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+            font-weight: 700;
+        }
+
+        .account-section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
-
 
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
@@ -162,10 +194,10 @@
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
                 <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
-                <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
-                <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
-                <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+                <li><a href="konto-kilent.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Konto</a></li>
+                <li><a href="serwis.html">Serwis</a></li>
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html">Asystent AI</a></li>
             </ul>
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -173,14 +205,177 @@
         </div>
     </nav>
 
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-medium-bottom uk-flex-wrap" style="gap: 12px;">
+            <div>
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Moje konto</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+            </div>
+            <button class="uk-button cemar-btn-secondary" onclick="window.location.href='client-list.html'">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+            </button>
+        </div>
+
+        <div class="uk-grid-medium" uk-grid>
+            <div class="uk-width-expand@m">
+
+                <!-- Dane profilowe -->
+                <div class="cemar-card uk-margin-medium-bottom">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                            <div class="account-avatar" id="acc-initials">AK</div>
+                            <div>
+                                <span class="uk-label account-role-badge uk-margin-small-bottom">Klient</span>
+                                <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Anna Kowalczyk</h3>
+                                <p class="uk-text-meta uk-margin-remove-top" id="acc-company">Zakłady Piekarnicze "Kowalczyk" Sp. z o.o.</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                    <input class="uk-input" id="acc-first-name" type="text" value="Anna">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                    <input class="uk-input" id="acc-last-name" type="text" value="Kowalczyk">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                    <input class="uk-input" id="acc-email" type="email" value="a.kowalczyk@piekarnia-kowalczyk.pl">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                    <input class="uk-input" id="acc-phone" type="tel" value="+48 601 234 567">
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <label class="uk-form-label" for="acc-company-name">Nazwa firmy</label>
+                                    <input class="uk-input" id="acc-company-name" type="text" value="Zakłady Piekarnicze &quot;Kowalczyk&quot; Sp. z o.o.">
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <label class="uk-form-label" for="acc-address">Adres</label>
+                                    <input class="uk-input" id="acc-address" type="text" value="ul. Piekarska 12, 58-260 Bielawa">
+                                </div>
+                            </div>
+                            <div class="uk-margin-medium-top uk-text-right">
+                                <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Zmiana hasła -->
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <h4 class="uk-margin-remove-top">Zmiana hasła</h4>
+                        <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe hasło do swojego konta.</p>
+
+                        <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-1">
+                                    <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                    <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                    <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                    <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div class="uk-margin-medium-top uk-text-right">
+                                <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Panel boczny -->
+            <div class="uk-width-1-3@m">
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="account-section-title uk-margin-remove-top">Podsumowanie konta</p>
+                        <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                <span class="uk-text-muted">Typ konta</span>
+                                <span class="uk-text-bold">Klient</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                <span class="uk-text-muted">Numer klienta</span>
+                                <span class="uk-text-bold">KL-00842</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                <span class="uk-text-muted">Przypisane maszyny</span>
+                                <span class="uk-text-bold">6</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between">
+                                <span class="uk-text-muted">Konto od</span>
+                                <span class="uk-text-bold">03.2022</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-
         function showPlaceholder(title) {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+
+        function updateAccountHeader() {
+        const first = document.getElementById('acc-first-name').value.trim();
+        const last = document.getElementById('acc-last-name').value.trim();
+        document.getElementById('acc-fullname').innerText = (first + ' ' + last).trim() || 'Użytkownik';
+        const initials = ((first[0] || '') + (last[0] || '')).toUpperCase();
+        document.getElementById('acc-initials').innerText = initials || 'AK';
+        document.getElementById('acc-company').innerText = document.getElementById('acc-company-name').value.trim();
+        }
+
+        function saveAccountProfile(e) {
+        e.preventDefault();
+        updateAccountHeader();
+        UIkit.notification({ message: 'Dane profilowe zostały zapisane.', status: 'success', pos: 'top-center', timeout: 2000 });
+        return false;
+        }
+
+        function changeAccountPassword(e) {
+        e.preventDefault();
+        const newPass = document.getElementById('acc-pass-new').value;
+        const repeatPass = document.getElementById('acc-pass-repeat').value;
+
+        if (!document.getElementById('acc-pass-current').value) {
+        UIkit.notification({ message: 'Podaj obecne hasło.', status: 'danger', pos: 'top-center', timeout: 2500 });
+        return false;
+        }
+        if (newPass.length < 8) {
+        UIkit.notification({ message: 'Nowe hasło musi mieć co najmniej 8 znaków.', status: 'danger', pos: 'top-center', timeout: 2500 });
+        return false;
+        }
+        if (newPass !== repeatPass) {
+        UIkit.notification({ message: 'Nowe hasła nie są identyczne.', status: 'danger', pos: 'top-center', timeout: 2500 });
+        return false;
+        }
+
+        document.getElementById('acc-pass-current').value = '';
+        document.getElementById('acc-pass-new').value = '';
+        document.getElementById('acc-pass-repeat').value = '';
+        UIkit.notification({ message: 'Hasło zostało zmienione.', status: 'success', pos: 'top-center', timeout: 2000 });
+        return false;
         }
     </script>
 </body>
