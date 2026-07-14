@@ -146,134 +146,134 @@
         </div>
     </div>
 
+    <!-- Główny Nagłówek -->
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
-        <nav class="uk-navbar-container cemar-navbar" uk-navbar>
-            <div class="uk-navbar-left uk-margin-left">
-                <div class="cemar-decor-blocks">
-                    <span class="decor-1"></span>
-                    <span class="decor-2"></span>
-                    <span class="decor-3"></span>
-                    <span class="decor-4"></span>
-                </div>
-                <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
             </div>
-            <div class="uk-navbar-right uk-margin-right">
-                <ul class="uk-navbar-nav">
-                    <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                    <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
-                    <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
-                    <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
-                    <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
-                </ul>
-                <div class="uk-navbar-item">
-                    <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
-                </div>
+            <a class="uk-navbar-item uk-logo" href="client-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="#" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="uk-container uk-margin-large-top">
-            <div class="cemar-card uk-margin-medium-bottom">
-                <div class="yellow-accent-bar"></div>
-                <div class="uk-padding">
-                    <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                        <div class="uk-width-auto">
-                            <span uk-icon="icon: settings; ratio: 2.5" class="uk-text-warning"></span>
-                        </div>
-                        <div class="uk-width-expand">
-                            <h3 class="uk-margin-remove-bottom uk-text-bold">Panel Diagnostyczny Serwisanta</h3>
-                            <p class="uk-text-meta uk-margin-remove-top">Serwisant Anna Nowak • annanowak@gmail.com</p>
-                        </div>
+    <div class="uk-container uk-margin-large-top">
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <span uk-icon="icon: settings; ratio: 2.5" class="uk-text-warning"></span>
                     </div>
-                </div>
-            </div>
-
-            <div class="cemar-card">
-                <div class="uk-padding">
-                    <div class="uk-grid-small uk-margin-medium-bottom" uk-grid>
-                        <div class="uk-width-expand@s">
-                            <label class="uk-form-label">Wyszukaj numer maszyny:</label>
-                            <div class="uk-inline uk-width-1-1">
-                                <span class="uk-form-icon" uk-icon="icon: search"></span>
-                                <input class="uk-input" type="text" placeholder="wprowadź numer maszyny (np. 235)">
-                            </div>
-                        </div>
-                        <div class="uk-width-auto@s uk-flex uk-flex-bottom">
-                            <button class="uk-button cemar-btn-primary">Szukaj</button>
-                        </div>
-                    </div>
-
-                    <h4 class="uk-text-bold uk-margin-medium-bottom">Baza Urządzeń Klientów</h4>
-                    <div class="uk-overflow-auto">
-                        <table class="uk-table uk-table-divider cemar-table">
-                            <thead>
-                                <tr>
-                                    <th class="uk-text-center" style="width: 220px;">Status maszyny</th>
-                                    <th>Numer maszyny & Typ</th>
-                                    <th>Użytkownik (klient)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="uk-text-center">
-                                        <span class="uk-label" style="background-color: #10b981; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 11px; display: inline-block; min-width: 140px; text-align: center;">Sprawna</span>
-                                    </td>
-                                    <td>
-                                        <ul uk-accordion="collapsible: true">
-                                            <li>
-                                                <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#">
-                                                    <span uk-icon="chevron-down" class="uk-margin-small-right"></span> 167
-                                                </a>
-                                                <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
-                                                    <p class="uk-text-meta uk-margin-remove">Typ: T35</p>
-                                                    <hr class="uk-margin-small">
-                                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('167', 'T35')">
-                                                        Przejdź do karty maszyny
-                                                    </button>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>Firma 1 (Jan Kowalski)</td>
-                                </tr>
-                                <tr>
-                                    <td class="uk-text-center">
-                                        <span class="uk-label" style="background-color: #f59e0b; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 11px; display: inline-block; min-width: 140px; text-align: center;">Wymaga przeglądu</span>
-                                    </td>
-                                    <td>
-                                        <ul uk-accordion="collapsible: true">
-                                            <li>
-                                                <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#">
-                                                    <span uk-icon="chevron-down" class="uk-margin-small-right"></span> 521
-                                                </a>
-                                                <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
-                                                    <p class="uk-text-meta uk-margin-remove">Typ: City</p>
-                                                    <hr class="uk-margin-small">
-                                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('521', 'City')">
-                                                        Przejdź do karty maszyny
-                                                    </button>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>Firma 2 (Marek Nowak)</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Panel Diagnostyczny Serwisanta</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">Serwisant Anna Nowak • annanowak@gmail.com</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- UIkit JS -->
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
-        <script>
-            function goToDiagnostics(num, type) {
-            window.location.href = `staff-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
-            }
-            function showPlaceholder(title) {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
-            }
-        </script>
+        <div class="cemar-card">
+            <div class="uk-padding">
+                <div class="uk-grid-small uk-margin-medium-bottom" uk-grid>
+                    <div class="uk-width-expand@s">
+                        <label class="uk-form-label">Wyszukaj numer maszyny:</label>
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon" uk-icon="icon: search"></span>
+                            <input class="uk-input" type="text" placeholder="wprowadź numer maszyny (np. 235)">
+                        </div>
+                    </div>
+                    <div class="uk-width-auto@s uk-flex uk-flex-bottom">
+                        <button class="uk-button cemar-btn-primary">Szukaj</button>
+                    </div>
+                </div>
+
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Baza Urządzeń Klientów</h4>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider cemar-table">
+                        <thead>
+                            <tr>
+                                <th class="uk-text-center" style="width: 220px;">Status maszyny</th>
+                                <th>Numer maszyny & Typ</th>
+                                <th>Użytkownik (klient)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="uk-text-center">
+                                    <span class="uk-label" style="background-color: #10b981; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 11px; display: inline-block; min-width: 140px; text-align: center;">Sprawna</span>
+                                </td>
+                                <td>
+                                    <ul uk-accordion="collapsible: true">
+                                        <li>
+                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#">
+                                                <span uk-icon="chevron-down" class="uk-margin-small-right"></span> 167
+                                            </a>
+                                            <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
+                                                <p class="uk-text-meta uk-margin-remove">Typ: T35</p>
+                                                <hr class="uk-margin-small">
+                                                <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('167', 'T35')">
+                                                    Przejdź do karty maszyny
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>Firma 1 (Jan Kowalski)</td>
+                            </tr>
+                            <tr>
+                                <td class="uk-text-center">
+                                    <span class="uk-label" style="background-color: #f59e0b; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 11px; display: inline-block; min-width: 140px; text-align: center;">Wymaga przeglądu</span>
+                                </td>
+                                <td>
+                                    <ul uk-accordion="collapsible: true">
+                                        <li>
+                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#">
+                                                <span uk-icon="chevron-down" class="uk-margin-small-right"></span> 521
+                                            </a>
+                                            <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
+                                                <p class="uk-text-meta uk-margin-remove">Typ: City</p>
+                                                <hr class="uk-margin-small">
+                                                <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToDiagnostics('521', 'City')">
+                                                    Przejdź do karty maszyny
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>Firma 2 (Marek Nowak)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        function goToDiagnostics(num, type) {
+        window.location.href = `staff-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
+        }
+        function showPlaceholder(title) {
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+    </script>
 </body>
 </html>
