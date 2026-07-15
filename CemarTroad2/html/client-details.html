@@ -254,7 +254,7 @@
                     </ul>
                 </div>
 
-                <button class="uk-button cemar-btn-primary uk-width-1-1" onclick="showContact()">
+                <button class="uk-button cemar-btn-primary uk-width-1-1" href="zglos-serwis.html" onclick="showPlaceholder('Zgłoś potrzebę serwisu')">
                     Zgłoś potrzebę serwisu
                 </button>
             </div>
@@ -305,9 +305,6 @@
             });
         }
 
-        function showContact() {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">Kontakt Serwis</h2><p>Infolinia pilna: +48 123 456 789. Formularz zgłoszeniowy został aktywowany.</p></div>`);
-        }
         function showPlaceholder(title) {
             UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }

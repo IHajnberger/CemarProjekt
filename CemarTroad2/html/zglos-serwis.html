@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Zgłoś Serwis</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #dca31a;
+            --primary-yellow-hover: #b88510;
+            --light-bg: #f5f6f8;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        html {
+            background-color: var(--light-bg);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h2, h4, .uk-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .cemar-navbar {
+            background-color: #f8f8f8 !important;
+            border-bottom: 3px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            height: 90px;
+        }
+
+        .nav-lang-bar {
+            background-color: #2a2a2a;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+            .nav-lang-bar a {
+                color: #aaa;
+                transition: color 0.2s;
+            }
+
+                .nav-lang-bar a:hover, .nav-lang-bar a.active {
+                    color: var(--primary-yellow);
+                }
+
+        .cemar-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eaeaea;
+        }
+
+        .yellow-accent-bar {
+            height: 6px;
+            background: var(--primary-yellow);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
+            }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            border-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                border-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
+
+        .cemar-decor-blocks {
+            display: inline-flex;
+            width: 140px;
+            height: 90px;
+            border-radius: 0px;
+            overflow: hidden;
+            margin: 0 15px;
+            vertical-align: middle;
+        }
+
+            .cemar-decor-blocks span {
+                flex: 1;
+                height: 100%;
+            }
+
+        .decor-1 {
+            background-color: #dfa63b;
+        }
+
+        .decor-2 {
+            background-color: #be8525;
+        }
+
+        .decor-3 {
+            background-color: #ff9c00;
+        }
+
+        .decor-4 {
+            background-color: #f6c365;
+        }
+
+        .nav-lang-bar--fixed {
+            position: fixed;
+            left: 0;
+            bottom: -1px;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .uk-form-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #4a5568;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .uk-input, .uk-select, .uk-textarea {
+            border-radius: 6px;
+            border-color: #e2e8f0;
+        }
+
+            .uk-input:focus, .uk-select:focus, .uk-textarea:focus {
+                border-color: var(--primary-yellow);
+            }
+
+        .priority-pill-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .priority-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+            .priority-pill:hover {
+                border-color: #cbd5e1;
+                background-color: #f8fafc;
+            }
+
+            .priority-pill.active[data-priority="niski"] {
+                background-color: #d1fae5;
+                border-color: #10b981;
+                color: #065f46;
+            }
+
+            .priority-pill.active[data-priority="sredni"] {
+                background-color: #fef3c7;
+                border-color: #f59e0b;
+                color: #b45309;
+            }
+
+            .priority-pill.active[data-priority="wysoki"] {
+                background-color: #fee2e2;
+                border-color: #ef4444;
+                color: #991b1b;
+            }
+
+        /* Strefa przeciągnij i upuść dla zdjęć / wideo */
+        .media-dropzone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            background-color: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+            .media-dropzone:hover, .media-dropzone.drag-over {
+                border-color: var(--primary-yellow);
+                background-color: #fffbeb;
+            }
+
+            .media-dropzone .uk-icon {
+                color: #94a3b8;
+            }
+
+        .media-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .media-preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            aspect-ratio: 1 / 1;
+        }
+
+            .media-preview-item img, .media-preview-item video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .media-preview-item .media-remove-btn {
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                background: rgba(0,0,0,0.6);
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                border: none;
+            }
+
+            .media-preview-item .media-filename {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.55);
+                color: #fff;
+                font-size: 10px;
+                padding: 3px 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="zglos-serwis.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Serwis</a></li>
+                <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container" style="margin-top: 20px; padding-bottom: 80px; max-width: 900px;">
+        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" id="p7-back-btn" onclick="goBack()">
+            <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do karty maszyny
+        </button>
+
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <span class="uk-label uk-label-warning uk-margin-small-bottom" style="font-size: 10px; padding: 2px 8px;">Formularz</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Zgłoś serwis</h2>
+                <p class="uk-text-muted uk-margin-remove-top uk-margin-medium-bottom">Wypełnij poniższy formularz, aby zgłosić potrzebę serwisu maszyny. Możesz dołączyć zdjęcia lub nagrania wideo usterki.</p>
+
+                <hr>
+
+                <form id="p7-service-form" onsubmit="handleSubmit(event)">
+                    <div class="uk-grid-medium" uk-grid>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-machine-number">Numer maszyny</label>
+                            <input class="uk-input" id="p7-machine-number" type="text" required>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-machine-type">Typ maszyny</label>
+                            <input class="uk-input" id="p7-machine-type" type="text" required>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-reporter-name">Osoba zgłaszająca</label>
+                            <input class="uk-input" id="p7-reporter-name" type="text" placeholder="Imię i nazwisko" required>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-reporter-contact">Telefon lub e-mail kontaktowy</label>
+                            <input class="uk-input" id="p7-reporter-contact" type="text" required>
+                        </div>
+
+                        <div class="uk-width-1-1">
+                            <label class="uk-form-label">Priorytet zgłoszenia</label>
+                            <div class="priority-pill-container">
+                                <div class="priority-pill" data-priority="niski" onclick="setPriority('niski')">Niski</div>
+                                <div class="priority-pill" data-priority="sredni" onclick="setPriority('sredni')">Średni</div>
+                                <div class="priority-pill" data-priority="wysoki" onclick="setPriority('wysoki')">Wysoki</div>
+                            </div>
+                            <input type="hidden" id="p7-priority" value="sredni">
+                        </div>
+
+                        <div class="uk-width-1-1">
+                            <label class="uk-form-label" for="p7-description">Opis usterki / powód zgłoszenia</label>
+                            <textarea class="uk-textarea" id="p7-description" rows="5" placeholder="Opisz dokładnie na czym polega problem, kiedy się pojawił oraz w jakich okolicznościach." required></textarea>
+                        </div>
+
+                        <div class="uk-width-1-1">
+                            <label class="uk-form-label" for="p7-availability">Preferowany termin serwisu</label>
+                            <input class="uk-input" id="p7-availability" type="date">
+                        </div>
+
+                        <div class="uk-width-1-1">
+                            <label class="uk-form-label">Zdjęcia / wideo usterki (opcjonalnie)</label>
+                            <div class="media-dropzone" id="p7-dropzone" onclick="document.getElementById('p7-file-input').click()">
+                                <span uk-icon="icon: cloud-upload; ratio: 1.6"></span>
+                                <p class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold" style="font-size: 14px;">Kliknij, aby dodać pliki, lub przeciągnij je tutaj</p>
+                                <p class="uk-text-meta uk-margin-remove-top">Obsługiwane formaty: JPG, PNG, MP4, MOV — wiele plików naraz</p>
+                            </div>
+                            <input type="file" id="p7-file-input" accept="image/*,video/*" multiple style="display:none" onchange="handleFiles(this.files)">
+                            <div class="media-preview-grid" id="p7-media-preview"></div>
+                        </div>
+
+                        <div class="uk-width-1-1 uk-margin-medium-top">
+                            <button type="submit" class="uk-button cemar-btn-primary uk-width-1-1">
+                                <span uk-icon="icon: check; ratio: 0.9" class="uk-margin-small-right"></span> Wyślij zgłoszenie
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const machineId = urlParams.get('id') || '';
+        const machineType = urlParams.get('type') || '';
+
+        document.getElementById('p7-machine-number').value = machineId;
+        document.getElementById('p7-machine-type').value = machineType;
+
+        let selectedPriority = 'sredni';
+        let attachedFiles = [];
+
+        // Domyślnie ustawiony priorytet "Średni"
+        window.onload = function () {
+        setPriority('sredni');
+        };
+
+        function setPriority(priority) {
+        selectedPriority = priority;
+        document.getElementById('p7-priority').value = priority;
+        document.querySelectorAll('.priority-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.getAttribute('data-priority') === priority);
+        });
+        }
+
+        function goBack() {
+        window.location.href = `karta-diagnostyczna.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
+        }
+
+        // Obsługa przeciągnij i upuść
+        const dropzone = document.getElementById('p7-dropzone');
+        ['dragenter', 'dragover'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropzone.classList.add('drag-over');
+        });
+        });
+        ['dragleave', 'drop'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('drag-over');
+        });
+        });
+        dropzone.addEventListener('drop', (e) => {
+        handleFiles(e.dataTransfer.files);
+        });
+
+        function handleFiles(fileList) {
+        Array.from(fileList).forEach(file => {
+        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) return;
+        attachedFiles.push(file);
+        renderPreview(file);
+        });
+        }
+
+        function renderPreview(file) {
+        const grid = document.getElementById('p7-media-preview');
+        const item = document.createElement('div');
+        item.className = 'media-preview-item';
+
+        const url = URL.createObjectURL(file);
+        if (file.type.startsWith('image/')) {
+        item.innerHTML = `<img src="${url}" alt="${file.name}">`;
+        } else {
+        item.innerHTML = `<video src="${url}" muted></video>`;
+        }
+
+        const filenameTag = document.createElement('div');
+        filenameTag.className = 'media-filename';
+        filenameTag.innerText = file.name;
+        item.appendChild(filenameTag);
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'media-remove-btn';
+        removeBtn.innerHTML = '&times;';
+        removeBtn.onclick = () => {
+        attachedFiles = attachedFiles.filter(f => f !== file);
+        item.remove();
+        URL.revokeObjectURL(url);
+        };
+        item.appendChild(removeBtn);
+
+        grid.appendChild(item);
+        }
+
+        function handleSubmit(event) {
+        event.preventDefault();
+        // Miejsce na docelową wysyłkę formularza (np. do API serwisowego) wraz z attachedFiles
+        UIkit.notification({
+        message: `<span uk-icon='icon: check; ratio: 1' class='uk-margin-small-right'></span> Zgłoszenie serwisowe zostało przygotowane (${attachedFiles.length} zał.). Wysyłka do serwisu — funkcja w przygotowaniu.`,
+        status: 'success',
+        pos: 'top-center',
+        timeout: 4000
+        });
+        }
+
+        function showPlaceholder(title) {
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+    </script>
+</body>
+</html>
