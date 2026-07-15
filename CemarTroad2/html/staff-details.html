@@ -101,6 +101,20 @@
                 color: #111;
             }
 
+        .cemar-btn-outline-accent {
+            background-color: #fff;
+            color: #b45309;
+            border: 1px solid var(--primary-yellow);
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+            .cemar-btn-outline-accent:hover {
+                background-color: var(--primary-yellow);
+                color: #fff;
+            }
+
         .cemar-table th {
             background-color: #2a2a2a;
             color: #fff !important;
@@ -301,6 +315,9 @@
                         <span class="uk-label uk-label-warning uk-margin-small-bottom" style="font-size: 10px; padding: 2px 8px;">Karta Maszyny</span>
                         <h2 class="uk-margin-remove-top uk-text-bold" id="p5-machine-number">434</h2>
                         <p class="uk-text-large uk-text-muted uk-margin-remove-top" id="p5-machine-type">City</p>
+                        <button class="uk-button uk-button-small cemar-btn-outline-accent uk-margin-small-top" id="p5-telemetry-link" onclick="goToTelemetry()">
+                            <span uk-icon="icon: database; ratio: 0.9" class="uk-margin-small-right"></span> Logi telemetryczne (co 10s)
+                        </button>
                     </div>
                     <div class="uk-width-1-3@m">
                         <div class="uk-card uk-card-default uk-card-body uk-padding-small" style="border-radius: 6px; box-shadow: none; border: 1px solid #e5e7eb;">
@@ -442,86 +459,91 @@
         document.getElementById('p5-machine-type').innerText = machineType;
 
         if (machineId === 'E62441') {
-            document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
-            document.getElementById('p5-last-service').innerText = "12.03.2026";
-            document.getElementById('p5-total-hours').innerText = "890 mth";
-            document.getElementById('p5-remaining-hours').innerText = "110 mth";
+        document.getElementById('p5-assigned-user').innerText = "Marek Nowak (Operator)";
+        document.getElementById('p5-last-service').innerText = "12.03.2026";
+        document.getElementById('p5-total-hours').innerText = "890 mth";
+        document.getElementById('p5-remaining-hours').innerText = "110 mth";
+        }
+
+        // Przejście do podglądu logów telemetrycznych (surowe dane co 10s)
+        function goToTelemetry() {
+        window.location.href = `logi-telemetryczne.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
         }
 
         // Tabela filtrów aktywnych (domyślnie wszystkie włączone na start)
         const activeFilters = {
-            serwis: true,
-            zgloszenie: true,
-            odpalenie: true,
-            blad: true
+        serwis: true,
+        zgloszenie: true,
+        odpalenie: true,
+        blad: true
         };
 
         window.onload = function () {
-            updateFilterBadges();
-            applyFilters();
+        updateFilterBadges();
+        applyFilters();
         }
 
         // Obsługa przełączania kafelków filtrowania
         function togglePillFilter(category) {
-            const pill = document.querySelector(`.filter-pill[data-filter="${category}"]`);
+        const pill = document.querySelector(`.filter-pill[data-filter="${category}"]`);
 
-            // Przełącz stan logiczny
-            activeFilters[category] = !activeFilters[category];
+        // Przełącz stan logiczny
+        activeFilters[category] = !activeFilters[category];
 
-            // Przełącz klasę aktywności w CSS
-            if (activeFilters[category]) {
-                pill.classList.add('active');
-            } else {
-                pill.classList.remove('active');
-            }
+        // Przełącz klasę aktywności w CSS
+        if (activeFilters[category]) {
+        pill.classList.add('active');
+        } else {
+        pill.classList.remove('active');
+        }
 
-            applyFilters();
+        applyFilters();
         }
 
         // Filtrowanie wierszy logów na żywo
         function applyFilters() {
-            const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
-            rows.forEach(row => {
-                const rowType = row.getAttribute('data-type');
-                if (activeFilters[rowType]) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
+        const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+        rows.forEach(row => {
+        const rowType = row.getAttribute('data-type');
+        if (activeFilters[rowType]) {
+        row.style.display = '';
+        } else {
+        row.style.display = 'none';
+        }
+        });
         }
 
         // Dynamiczne wyliczenie ilości logów danego typu i przypisanie do badge
         function updateFilterBadges() {
-            const counts = { serwis: 0, zgloszenie: 0, odpalenie: 0, blad: 0 };
-            const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+        const counts = { serwis: 0, zgloszenie: 0, odpalenie: 0, blad: 0 };
+        const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
 
-            rows.forEach(row => {
-                const type = row.getAttribute('data-type');
-                if (counts[type] !== undefined) {
-                    counts[type]++;
-                }
-            });
+        rows.forEach(row => {
+        const type = row.getAttribute('data-type');
+        if (counts[type] !== undefined) {
+        counts[type]++;
+        }
+        });
 
-            // Wpisanie wartości do badge'y
-            for (const [key, val] of Object.entries(counts)) {
-                const badge = document.getElementById(`badge-${key}`);
-                if (badge) badge.innerText = val;
-            }
+        // Wpisanie wartości do badge'y
+        for (const [key, val] of Object.entries(counts)) {
+        const badge = document.getElementById(`badge-${key}`);
+        if (badge) badge.innerText = val;
+        }
         }
 
         // Akcja po kliknięciu ikony 'i' info
         function showLogDetails(detailsText) {
-            UIkit.notification({
-                message: `<span uk-icon='info' class='uk-margin-small-right'></span> ${detailsText}`,
-                status: 'primary',
-                pos: 'top-center',
-                timeout: 3000
-            });
+        UIkit.notification({
+        message: `<span uk-icon='info' class='uk-margin-small-right'></span> ${detailsText}`,
+        status: 'primary',
+        pos: 'top-center',
+        timeout: 3000
+        });
         }
 
         function showPlaceholder(title) {
-            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
     </script>
 </body>
