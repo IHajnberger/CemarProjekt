@@ -245,7 +245,7 @@
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
                 <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a id="nav-konto" href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
                 <li class="serwis"><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
                 <li><a href="instrukcje.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Instrukcje</a></li>
                 <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
@@ -502,10 +502,12 @@
 
             // Decydujemy o adresie powrotnym
             const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
+            const KontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
 
             // Dynamicznie aktualizujemy nawigację na stronie
             document.getElementById('nav-logo').href = homeUrl;
             document.getElementById('nav-home').href = homeUrl;
+            document.getElementById('nav-konto').href = KontoUrl;
 
             if (userRole == 'client') {
                 document.querySelector('.serwis').style.display = 'none';
