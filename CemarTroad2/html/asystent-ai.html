@@ -557,7 +557,34 @@
             document.getElementById('nav-home').href = homeUrl;
             document.getElementById('nav-konto').href = KontoUrl;
 
-            if (userRole == 'client') {
+            if (userRole =
+                // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
+                window.onload = function () {
+                    // Pobieramy rolę użytkownika (domyślnie 'client', jeśli brak zapisu)
+                    const userRole = localStorage.getItem('userRole') || 'client';
+
+                    // Decydujemy o adresie powrotnym
+                    const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
+                    const KontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
+
+                    // Dynamicznie aktualizujemy nawigację na stronie
+                    document.getElementById('nav-logo').href = homeUrl;
+                    document.getElementById('nav-home').href = homeUrl;
+                    document.getElementById('nav-konto').href = KontoUrl;
+
+                    if (userRole == 'client') {
+                        document.querySelector('.serwis').style.display = 'none';
+                    }
+
+                    const backBtn = document.getElementById('back-btn');
+                    if (backBtn) {
+                        backBtn.onclick = function () {
+                            window.location.href = homeUrl;
+                        };
+                    }
+
+                    scrollAiChatToBottom();
+                }= 'client') {
                 document.querySelector('.serwis').style.display = 'none';
             }
 

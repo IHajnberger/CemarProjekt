@@ -246,15 +246,16 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+            <!-- Dodany identyfikator nav-logo dla dynamicznego przypisywania linku w zależności od roli -->
+            <a id="nav-logo" class="uk-navbar-item uk-logo" href="#" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
-                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
-                <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
-                <li><a href="instrukcje.html">Instrukcje</a></li>
-                <li><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a id="nav-konto" href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li class="serwis"><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
             </ul>
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -268,8 +269,9 @@
                 <span class="uk-label uk-label-warning uk-margin-small-bottom">Wsparcie</span>
                 <h2 class="uk-margin-remove-top uk-text-bold">Kontakt i Pomoc</h2>
             </div>
-            <button class="uk-button cemar-btn-secondary" onclick="window.location.href='staff-list.html'">
-                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+            <!-- Dodany identyfikator back-btn do dynamicznego powrotu -->
+            <button id="back-btn" class="uk-button cemar-btn-secondary">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
             </button>
         </div>
 
@@ -399,6 +401,32 @@
         document.getElementById('cf-message').value = '';
         document.getElementById('cf-topic').selectedIndex = 0;
         return false;
+        }
+
+        // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
+        window.onload = function () {
+            // Pobieramy rolę użytkownika (domyślnie 'client', jeśli brak zapisu)
+            const userRole = localStorage.getItem('userRole') || 'client';
+
+            // Decydujemy o adresie powrotnym
+            const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
+            const KontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
+
+            // Dynamicznie aktualizujemy nawigację na stronie
+            document.getElementById('nav-logo').href = homeUrl;
+            document.getElementById('nav-home').href = homeUrl;
+            document.getElementById('nav-konto').href = KontoUrl;
+
+            if (userRole == 'client') {
+                document.querySelector('.serwis').style.display = 'none';
+            }
+
+            const backBtn = document.getElementById('back-btn');
+            if (backBtn) {
+                backBtn.onclick = function () {
+                    window.location.href = homeUrl;
+                };
+            }
         }
     </script>
 </body>
