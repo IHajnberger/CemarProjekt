@@ -409,10 +409,10 @@
                         <tbody id="p5-logs-tbody">
 
                             <!-- ERROR -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="blad" onclick="toggleLogDetails(this)">
                                 <td>10.07.2026 14:22</td>
                                 <td>
-                                    <span class="uk-label uk-label-danger">Error Code</span>
+                                    <span uk-icon="chevron-down" class="uk-label uk-label-danger">Error Code</span>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 245 mth</td>
@@ -447,10 +447,10 @@
                             </tr>
 
                             <!-- ODPALENIE -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="blad" onclick="toggleLogDetails(this)">
                                 <td>09.07.2026 08:15</td>
                                 <td>
-                                    <span class="uk-label uk-label-success">Odpalenie referencyjne</span>
+                                    <span uk-icon="chevron-down" class="uk-label uk-label-success">Odpalenie referencyjne</span>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 237 mth</td>
@@ -486,10 +486,10 @@
                             </tr>
 
                             <!-- SERWIS -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="blad" onclick="toggleLogDetails(this)">
                                 <td>05.07.2026 12:00</td>
                                 <td>
-                                    <span class="uk-label uk-label-warning">Serwis</span>
+                                    <span uk-icon="chevron-down" class="uk-label uk-label-warning">Serwis</span>
                                 </td>
                                 <td>Piotr Nowak (Serwisant)</td>
                                 <td>1 163 mth</td>
@@ -519,10 +519,10 @@
                             </tr>
 
                             <!-- ZGŁOSZENIE -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="blad" onclick="toggleLogDetails(this)">
                                 <td>01.07.2026 10:00</td>
                                 <td>
-                                    <span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
+                                    <span uk-icon="chevron-down" class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 100 mth</td>
@@ -627,17 +627,34 @@
         }
 
         // Filtrowanie wierszy logów na żywo
-        function applyFilters() {
-        const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
-        rows.forEach(row => {
-        const rowType = row.getAttribute('data-type');
+function applyFilters() {
+    const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+
+    rows.forEach(row => {
+        const rowType = row.dataset.type;
+        const detailsRow = row.nextElementSibling;
+
+        // If no data-type exists, show the row
+        if (!rowType) {
+            row.style.display = '';
+            return;
+        }
+
         if (activeFilters[rowType]) {
-        row.style.display = '';
+            row.style.display = '';
         } else {
-        row.style.display = 'none';
+            row.style.display = 'none';
+
+            // Hide expanded details row too
+            if (
+                detailsRow &&
+                detailsRow.classList.contains('log-details-row')
+            ) {
+                detailsRow.style.display = 'none';
+            }
         }
-        });
-        }
+    });
+}
 
         // Dynamiczne wyliczenie ilości logów danego typu i przypisanie do badge
         function updateFilterBadges() {
