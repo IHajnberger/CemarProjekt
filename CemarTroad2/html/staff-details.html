@@ -281,6 +281,26 @@
         .log-details-content p {
             margin-bottom: 15px;
         }
+
+        /* Animowany chevron przy rozwijaniu logów */
+        .chevron-icon {
+            display: inline-flex;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+            .chevron-icon svg {
+                transition: transform 0.25s ease;
+            }
+
+            .chevron-icon.rotated svg {
+                transform: rotate(180deg);
+            }
+
+        /* Przycisk przejścia do dedykowanej strony zdarzenia */
+        .goto-page-btn {
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -409,10 +429,10 @@
                         <tbody id="p5-logs-tbody">
 
                             <!-- ERROR -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="blad" data-ref="ERR-0x43" onclick="toggleLogDetails(this)">
                                 <td>10.07.2026 14:22</td>
                                 <td>
-                                    <span class="uk-label uk-label-danger">Error Code</span>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-danger">Error Code</span>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 245 mth</td>
@@ -447,10 +467,10 @@
                             </tr>
 
                             <!-- ODPALENIE -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="odpalenie" data-ref="ODP-2026-0709" onclick="toggleLogDetails(this)">
                                 <td>09.07.2026 08:15</td>
                                 <td>
-                                    <span class="uk-label uk-label-success">Odpalenie referencyjne</span>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-success">Odpalenie referencyjne</span>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 237 mth</td>
@@ -481,15 +501,19 @@
                                                 <strong>Obroty:</strong> 1 500 RPM
                                             </div>
                                         </div>
+
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'ODP-2026-0709')">
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do szczegółów odpalenia
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
 
                             <!-- SERWIS -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="serwis" data-ref="SRV-2026-0705" onclick="toggleLogDetails(this)">
                                 <td>05.07.2026 12:00</td>
                                 <td>
-                                    <span class="uk-label uk-label-warning">Serwis</span>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-warning">Serwis</span>
                                 </td>
                                 <td>Piotr Nowak (Serwisant)</td>
                                 <td>1 163 mth</td>
@@ -514,15 +538,21 @@
                                         </ul>
 
                                         <strong>Następny serwis:</strong> za 250 mth
+
+                                        <div>
+                                            <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('serwis', 'SRV-2026-0705')">
+                                                <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do karty serwisu
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
 
                             <!-- ZGŁOSZENIE -->
-                            <tr class="log-row" onclick="toggleLogDetails(this)">
+                            <tr class="log-row" data-type="zgloszenie" data-ref="SRV-2026-071" onclick="toggleLogDetails(this)">
                                 <td>01.07.2026 10:00</td>
                                 <td>
-                                    <span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 100 mth</td>
@@ -552,6 +582,10 @@
                                                 <strong>Czas reakcji:</strong> 4h
                                             </div>
                                         </div>
+
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('zgloszenie', 'SRV-2026-071')">
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do zgłoszenia
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -596,6 +630,20 @@
         window.location.href = `machine-logs.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
         }
 
+        // Mapowanie typu zdarzenia na dedykowaną stronę docelową
+        const eventPageMap = {
+        serwis: 'serwis-przeprowadzony.html',
+        zgloszenie: 'zgloszenie-serwisowe.html',
+        odpalenie: 'odpalenie-referencyjne.html'
+        };
+
+        // Przejście do dedykowanej strony danego zdarzenia (serwis / zgłoszenie / odpalenie)
+        function goToEventPage(type, ref) {
+        const page = eventPageMap[type];
+        if (!page) return;
+        window.location.href = `${page}`;
+        }
+
         // Tabela filtrów aktywnych (domyślnie wszystkie włączone na start)
         const activeFilters = {
         serwis: true,
@@ -629,12 +677,31 @@
         // Filtrowanie wierszy logów na żywo
         function applyFilters() {
         const rows = document.querySelectorAll('#p5-logs-tbody .log-row');
+
         rows.forEach(row => {
-        const rowType = row.getAttribute('data-type');
+        const rowType = row.dataset.type;
+        const detailsRow = row.nextElementSibling;
+
+        // If no data-type exists, show the row
+        if (!rowType) {
+        row.style.display = '';
+        return;
+        }
+
         if (activeFilters[rowType]) {
         row.style.display = '';
         } else {
         row.style.display = 'none';
+
+        // Hide expanded details row too
+        if (
+        detailsRow &&
+        detailsRow.classList.contains('log-details-row')
+        ) {
+        detailsRow.style.display = 'none';
+        const chevron = row.querySelector('.chevron-icon');
+        if (chevron) chevron.classList.remove('rotated');
+        }
         }
         });
         }
@@ -672,22 +739,29 @@
         UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
 
-function toggleLogDetails(row) {
-    const detailsRow = row.nextElementSibling;
+        function toggleLogDetails(row) {
+        const detailsRow = row.nextElementSibling;
+        const chevron = row.querySelector('.chevron-icon');
+        const isOpening = detailsRow.style.display !== 'table-row';
 
-    // Close all other open rows
-    document.querySelectorAll('.log-details-row').forEach(item => {
+        // Close all other open rows and un-rotate their chevrons
+        document.querySelectorAll('.log-details-row').forEach(item => {
         if (item !== detailsRow) {
-            item.style.display = 'none';
+        item.style.display = 'none';
+        const otherRow = item.previousElementSibling;
+        const otherChevron = otherRow ? otherRow.querySelector('.chevron-icon') : null;
+        if (otherChevron) otherChevron.classList.remove('rotated');
         }
-    });
+        });
 
-    // Toggle current row
-    detailsRow.style.display =
-        detailsRow.style.display === 'table-row'
-            ? 'none'
-            : 'table-row';
-}
+        // Toggle current row
+        detailsRow.style.display = isOpening ? 'table-row' : 'none';
+
+        // Toggle chevron rotation to match open/closed state
+        if (chevron) {
+        chevron.classList.toggle('rotated', isOpening);
+        }
+        }
     </script>
 </body>
 </html>
