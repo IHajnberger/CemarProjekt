@@ -258,6 +258,19 @@
             width: 100%;
             z-index: 1000;
         }
+
+        .log-row {
+            cursor: pointer;
+        }
+
+        .log-details-row td {
+            background: #f8f8f8;
+            padding: 20px;
+        }
+
+        .log-details-content {
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -382,17 +395,28 @@
                             </tr>
                         </thead>
                         <tbody id="p5-logs-tbody">
-                            <tr class="log-row" data-type="blad">
+                            <tr class="log-row" onclick="toggleLogDetails(this)">
                                 <td>10.07.2026 14:22</td>
                                 <td>
                                     <span class="uk-label uk-label-danger">Error Code</span>
-                                    <button class="info-trigger-btn" onclick="showLogDetails('Błąd krytyczny układu hydraulicznego (0x43)')" title="Szczegóły" uk-tooltip>
-                                        <span uk-icon="icon: info; ratio: 0.75"></span>
-                                    </button>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 245 mth</td>
                                 <td>82 mth</td>
+                            </tr>
+
+                            <!-- Hidden details row -->
+                            <tr class="log-details-row" style="display: none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <strong>Szczegóły zdarzenia:</strong><br>
+                                        Błąd krytyczny układu hydraulicznego (0x43)<br><br>
+
+                                        <strong>Opis:</strong><br>
+                                        Wykryto spadek ciśnienia poniżej wartości minimalnej.
+                                        Zalecana natychmiastowa kontrola układu hydraulicznego.
+                                    </div>
+                                </td>
                             </tr>
                             <tr class="log-row" data-type="odpalenie">
                                 <td>09.07.2026 08:15</td>
@@ -545,6 +569,16 @@
         function showPlaceholder(title) {
         UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
+
+        function toggleLogDetails(row) {
+    const detailsRow = row.nextElementSibling;
+
+    if (detailsRow.style.display === 'none') {
+        detailsRow.style.display = 'table-row';
+    } else {
+        detailsRow.style.display = 'none';
+    }
+}
     </script>
 </body>
 </html>
