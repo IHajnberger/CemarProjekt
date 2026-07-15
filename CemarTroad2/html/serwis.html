@@ -34,10 +34,10 @@
         }
 
         .cemar-navbar {
-            background-color: #f8f8f8 !important;
+            background-color: #ffffff !important;
             border-bottom: 3px solid var(--primary-yellow);
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            height: 90px;
+            height: 92px;
         }
 
         .nav-lang-bar {
@@ -103,7 +103,7 @@
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
-            height: 90px;
+            height: 92px;
             border-radius: 0px;
             
             margin: 0 15px;
@@ -134,7 +134,7 @@
         .nav-lang-bar--fixed {
             position: fixed;
             left: 0;
-            bottom: -1px; /* Rozwiązanie problemu subpikselowych szczelin */
+            bottom: 0px; /* Rozwiązanie problemu subpikselowych szczelin */
             width: 100%;
             z-index: 1000;
         }
@@ -169,7 +169,7 @@
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
             <div>
-                <a href="#" onclick="showPlaceholder('Wsparcie techniczne')" class="uk-text-bold">Kontakt pomoc</a>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
             </div>
         </div>
     </div>
@@ -184,16 +184,16 @@
                 <span class="decor-4"></span>
             </div>
             <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
-                <img src="C:\Users\izaX1\Desktop\CemarProjekt\CemarTroad2\images\Logo" style="max-height: 84px; width: auto; overflow: hidden;">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
                 <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="konto-serwis.html">Konto</a></li>
                 <li><a href="serwis.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Serwis</a></li>
-                <li><a href="#" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
-                <li><a href="#" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html">Asystent AI</a></li>
             </ul>
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -569,9 +569,9 @@
                                             <span class="part-name text-gray-700">Złącze hermetyczne</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -582,8 +582,8 @@
                                             <span class="part-name text-gray-700">Zapięcie płaskie</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O" selected>Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -595,9 +595,9 @@
                                             <span class="part-name text-gray-700">Wkład filtra paliwa</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -608,9 +608,9 @@
                                             <span class="part-name text-gray-700">Płytka main sterownik</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -621,8 +621,8 @@
                                             <span class="part-name text-gray-700">Zaślepka filtra</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O" selected>Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -634,9 +634,9 @@
                                             <span class="part-name text-gray-700">Filtr powietrza</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
                                 </div>
@@ -653,8 +653,8 @@
                                             <span class="part-name text-gray-700">4511/4511-C oś turbiny</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -666,8 +666,8 @@
                                             <span class="part-name text-gray-700">4512 wirnik gorący</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -679,8 +679,8 @@
                                             <span class="part-name text-gray-700">4513 kierownica</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -692,8 +692,8 @@
                                             <span class="part-name text-gray-700">4521 koło kompresora</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -705,9 +705,9 @@
                                             <span class="part-name text-gray-700">4531 łożyska</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
                                 </div>
@@ -725,9 +725,9 @@
                                             <span class="part-name text-gray-700">1210 dyfuzor T35</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -739,9 +739,9 @@
                                             <span class="part-name text-gray-700">1240 dyfuzor City 24cm</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -752,9 +752,9 @@
                                             <span class="part-name text-gray-700">1250 dyfuzor City 30cm</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -765,8 +765,8 @@
                                             <span class="part-name text-gray-700">1220 dyfuzor proF</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -778,8 +778,8 @@
                                             <span class="part-name text-gray-700">1160 przedłużki osłony</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O" selected>Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -791,9 +791,9 @@
                                             <span class="part-name text-gray-700">1102 pierścień do ramy</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
                                 </div>
@@ -810,9 +810,9 @@
                                             <span class="part-name text-gray-700">4110 starter MOD</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -823,8 +823,8 @@
                                             <span class="part-name text-gray-700">Zest. Naprawczy startera</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -836,8 +836,8 @@
                                             <span class="part-name text-gray-700">4132 wyrzutnik na oś</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -849,8 +849,8 @@
                                             <span class="part-name text-gray-700">4131 wyrzutnik / 4125 odbojnik teflon</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O" selected>Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -862,9 +862,9 @@
                                             <span class="part-name text-gray-700">1512 blokada kierownicy</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -875,9 +875,9 @@
                                             <span class="part-name text-gray-700">7851 rączki gumy</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -888,9 +888,9 @@
                                             <span class="part-name text-gray-700">7752 koła tylne obrotowe</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -901,9 +901,9 @@
                                             <span class="part-name text-gray-700">7124 MOD pompka paliwo</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
 
@@ -914,8 +914,8 @@
                                             <span class="part-name text-gray-700">7105 pompka paliwa standard</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M" selected>Może</option>
-                                            <option value="O">Opcja</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
                                             <option value="W">Wymagane</option>
                                         </select>
                                     </div>
@@ -927,9 +927,9 @@
                                             <span class="part-name text-gray-700">5104 świeca żarowa</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
-                                            <option value="M">Może</option>
-                                            <option value="O">Opcja</option>
-                                            <option value="W" selected>Wymagane</option>
+                                            <option hidden disabled selected value>Wybierz priorytet</option>
+                                            <option value="O">Opcjonalne</option>
+                                            <option value="W">Wymagane</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1185,8 +1185,8 @@
 
                     let statusLabel = '';
                     if (optionVal === 'W') statusLabel = '<span class="text-red-400 font-bold ml-1">[Wymagane]</span>';
-                    if (optionVal === 'O') statusLabel = '<span class="text-amber-400 font-bold ml-1">[Opcja]</span>';
-                    if (optionVal === 'M') statusLabel = '<span class="text-blue-400 font-bold ml-1">[Może]</span>';
+                    if (optionVal === 'O') statusLabel = '<span class="text-amber-400 font-bold ml-1">[Opcjonalne]</span>';
+    
 
                     const li = document.createElement('div');
                     li.innerHTML = `• <span class="font-mono text-amber-500">${code}</span> ${name} ${statusLabel}`;
