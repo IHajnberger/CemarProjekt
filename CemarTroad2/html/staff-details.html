@@ -641,7 +641,7 @@
         function goToEventPage(type, ref) {
         const page = eventPageMap[type];
         if (!page) return;
-        window.location.href = `${page}?machine=${encodeURIComponent(machineId)}&ref=${encodeURIComponent(ref)}`;
+        window.location.href = `${page}`;
         }
 
         // Tabela filtrów aktywnych (domyślnie wszystkie włączone na start)
