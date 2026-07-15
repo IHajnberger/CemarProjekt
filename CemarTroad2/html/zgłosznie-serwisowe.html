@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Podgląd Zgłoszenia Serwisowego</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #dca31a;
+            --primary-yellow-hover: #b88510;
+            --light-bg: #f5f6f8;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        html {
+            background-color: var(--light-bg);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h2, h4, .uk-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .cemar-navbar {
+            background-color: #f8f8f8 !important;
+            border-bottom: 3px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            height: 90px;
+        }
+
+        .nav-lang-bar {
+            background-color: #2a2a2a;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+            .nav-lang-bar a {
+                color: #aaa;
+                transition: color 0.2s;
+            }
+
+                .nav-lang-bar a:hover, .nav-lang-bar a.active {
+                    color: var(--primary-yellow);
+                }
+
+        .cemar-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eaeaea;
+        }
+
+        .yellow-accent-bar {
+            height: 6px;
+            background: var(--primary-yellow);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
+            }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            border-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                border-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
+
+        .cemar-table th {
+            background-color: #2a2a2a;
+            color: #fff !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .cemar-decor-blocks {
+            display: inline-flex;
+            width: 140px;
+            height: 90px;
+            overflow: hidden;
+            margin: 0 15px;
+            vertical-align: middle;
+        }
+
+            .cemar-decor-blocks span {
+                flex: 1;
+                height: 100%;
+            }
+
+        .decor-1 {
+            background-color: #dfa63b;
+        }
+
+        .decor-2 {
+            background-color: #be8525;
+        }
+
+        .decor-3 {
+            background-color: #ff9c00;
+        }
+
+        .decor-4 {
+            background-color: #f6c365;
+        }
+
+        .nav-lang-bar--fixed {
+            position: fixed;
+            left: 0;
+            bottom: -1px;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+            .status-badge.status-nowe {
+                background-color: #dbeafe;
+                color: #1d4ed8;
+            }
+
+            .status-badge.status-trakcie {
+                background-color: #fef3c7;
+                color: #b45309;
+            }
+
+            .status-badge.status-zakonczone {
+                background-color: #d1fae5;
+                color: #065f46;
+            }
+
+        .priority-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+            .priority-badge.priority-niski {
+                background-color: #d1fae5;
+                color: #065f46;
+            }
+
+            .priority-badge.priority-sredni {
+                background-color: #fef3c7;
+                color: #b45309;
+            }
+
+            .priority-badge.priority-wysoki {
+                background-color: #fee2e2;
+                color: #991b1b;
+            }
+
+        .info-field-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .info-field-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-top: 2px;
+        }
+
+        .media-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .media-gallery-item {
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .media-gallery-item .media-filename {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.55);
+                color: #fff;
+                font-size: 10px;
+                padding: 3px 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div><a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a></div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span><span class="decor-2"></span><span class="decor-3"></span><span class="decor-4"></span>
+            </div>
+            <a class="uk-navbar-item uk-logo" href="staff-list.html" style="color: #222; font-size: 24px; letter-spacing: 1px;">LOGO placeholder</a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right">
+            <ul class="uk-navbar-nav">
+                <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a href="konto-serwis.html" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
+                <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+            </ul>
+            <div class="uk-navbar-item">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container" style="margin-top: 20px; padding-bottom: 80px; max-width: 900px;">
+        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" onclick="window.location.href='staff-details.html'">
+            <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+        </button>
+
+        <!-- Nagłówek zgłoszenia -->
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-expand@m">
+                        <span class="uk-label uk-label-warning uk-margin-small-bottom" style="font-size: 10px; padding: 2px 8px;">Zgłoszenie Serwisowe</span>
+                        <h2 class="uk-margin-remove-top uk-text-bold">Zgłoszenie <span id="p8-ticket-id">#SRV-00000</span></h2>
+                        <p class="uk-text-muted uk-margin-remove-top">Utworzone: <span id="p8-created-at">--</span></p>
+                    </div>
+                    <div class="uk-width-auto@m">
+                        <span class="status-badge status-nowe" id="p8-status-badge">Nowe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dane zgłoszenia -->
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Informacje o zgłoszeniu</h4>
+                <div class="uk-grid-medium" uk-grid>
+                    <div class="uk-width-1-2@s">
+                        <span class="info-field-label">Numer maszyny</span>
+                        <p class="info-field-value" id="p8-machine-number">--</p>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <span class="info-field-label">Typ maszyny</span>
+                        <p class="info-field-value" id="p8-machine-type">--</p>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <span class="info-field-label">Osoba zgłaszająca</span>
+                        <p class="info-field-value" id="p8-reporter-name">--</p>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <span class="info-field-label">Kontakt</span>
+                        <p class="info-field-value" id="p8-reporter-contact">--</p>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <span class="info-field-label">Priorytet</span>
+                        <p class="uk-margin-remove-top"><span class="priority-badge priority-sredni" id="p8-priority-badge">Średni</span></p>
+                    </div>
+                    <div class="uk-width-1-2@s">
+                        <span class="info-field-label">Preferowany termin serwisu</span>
+                        <p class="info-field-value" id="p8-availability">--</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <span class="info-field-label">Opis usterki</span>
+                <p class="uk-margin-small-top" id="p8-description" style="font-size: 14px; line-height: 1.6;">--</p>
+            </div>
+        </div>
+
+        <!-- Załączniki -->
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-small-bottom">Załączone zdjęcia / wideo</h4>
+                <p class="uk-text-meta uk-margin-medium-bottom">Podgląd plików dołączonych do zgłoszenia przez osobę zgłaszającą.</p>
+                <div class="media-gallery-grid" id="p8-media-gallery"></div>
+                <div class="empty-state" id="p8-media-empty">
+                    <span uk-icon="icon: image; ratio: 1.6"></span>
+                    <p class="uk-margin-small-top">Do tego zgłoszenia nie dołączono żadnych plików.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historia statusu zgłoszenia -->
+        <div class="cemar-card">
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Historia zgłoszenia</h4>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-hover uk-table-divider cemar-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Serwisant</th>
+                                <th>Notatka</th>
+                            </tr>
+                        </thead>
+                        <tbody id="p8-history-tbody">
+                            <!-- Wiersze historii statusu będą dodawane tutaj dynamicznie -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Dane przykładowe (docelowo pobierane z backendu na podstawie ID zgłoszenia)
+        const sampleTicket = {
+        id: urlParams.get('ticket') || 'SRV-10423',
+        createdAt: '15.07.2026 09:42',
+        status: 'nowe', // nowe | trakcie | zakonczone
+        machineNumber: urlParams.get('id') || '434',
+        machineType: urlParams.get('type') || 'City',
+        reporterName: urlParams.get('reporter') || 'Jan Kowalski',
+        reporterContact: urlParams.get('contact') || '+48 600 000 000',
+        priority: urlParams.get('priority') || 'sredni', // niski | sredni | wysoki
+        availability: urlParams.get('availability') || '18.07.2026',
+        description: urlParams.get('description') || 'Maszyna wydaje nietypowy dźwięk podczas pracy pompy wtryskowej, spadek ciśnienia na zaworze głównym.',
+        media: [] // np. [{ name: 'usterka_1.jpg', type: 'image' }, { name: 'nagranie.mp4', type: 'video' }]
+        };
+
+        renderTicket(sampleTicket);
+
+        function renderTicket(ticket) {
+        document.getElementById('p8-ticket-id').innerText = `#${ticket.id}`;
+        document.getElementById('p8-created-at').innerText = ticket.createdAt;
+        document.getElementById('p8-machine-number').innerText = ticket.machineNumber;
+        document.getElementById('p8-machine-type').innerText = ticket.machineType;
+        document.getElementById('p8-reporter-name').innerText = ticket.reporterName;
+        document.getElementById('p8-reporter-contact').innerText = ticket.reporterContact;
+        document.getElementById('p8-availability').innerText = ticket.availability;
+        document.getElementById('p8-description').innerText = ticket.description;
+
+        // Status
+        const statusBadge = document.getElementById('p8-status-badge');
+        const statusMap = { nowe: 'Nowe', trakcie: 'W trakcie', zakonczone: 'Zakończone' };
+        statusBadge.innerText = statusMap[ticket.status] || 'Nowe';
+        statusBadge.className = `status-badge status-${ticket.status}`;
+
+        // Priorytet
+        const priorityBadge = document.getElementById('p8-priority-badge');
+        const priorityMap = { niski: 'Niski', sredni: 'Średni', wysoki: 'Wysoki' };
+        priorityBadge.innerText = priorityMap[ticket.priority] || 'Średni';
+        priorityBadge.className = `priority-badge priority-${ticket.priority}`;
+
+        // Załączniki
+        const gallery = document.getElementById('p8-media-gallery');
+        const emptyState = document.getElementById('p8-media-empty');
+        if (ticket.media && ticket.media.length > 0) {
+        emptyState.style.display = 'none';
+        ticket.media.forEach(file => {
+        const item = document.createElement('div');
+        item.className = 'media-gallery-item';
+        const icon = file.type === 'video' ? 'icon: play-circle; ratio: 1.6' : 'icon: image; ratio: 1.6';
+        item.innerHTML = `<span uk-icon="${icon}"></span><div class="media-filename">${file.name}</div>`;
+        gallery.appendChild(item);
+        });
+        } else {
+        gallery.style.display = 'none';
+        emptyState.style.display = 'block';
+        }
+        }
+
+        function showPlaceholder(title) {
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
+    </script>
+</body>
+</html>

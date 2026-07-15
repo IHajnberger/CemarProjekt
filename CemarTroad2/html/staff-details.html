@@ -258,6 +258,29 @@
             width: 100%;
             z-index: 1000;
         }
+
+        .log-row {
+            cursor: pointer;
+            transition: background-color .2s ease;
+        }
+
+            .log-row:hover {
+                background-color: rgba(0,0,0,0.03);
+            }
+
+        .log-details-row td {
+            background: #f8f9fb;
+            padding: 20px;
+            border-top: none;
+        }
+
+        .log-details-content h5 {
+            margin-bottom: 10px;
+        }
+
+        .log-details-content p {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -370,6 +393,7 @@
         <div class="cemar-card">
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-medium-bottom">Pełne logi operacyjne maszyny</h4>
+
                 <div class="uk-overflow-auto">
                     <table class="uk-table uk-table-hover uk-table-divider cemar-table">
                         <thead>
@@ -381,55 +405,157 @@
                                 <th>Czas od serwisu</th>
                             </tr>
                         </thead>
+
                         <tbody id="p5-logs-tbody">
-                            <tr class="log-row" data-type="blad">
+
+                            <!-- ERROR -->
+                            <tr class="log-row" onclick="toggleLogDetails(this)">
                                 <td>10.07.2026 14:22</td>
                                 <td>
                                     <span class="uk-label uk-label-danger">Error Code</span>
-                                    <button class="info-trigger-btn" onclick="showLogDetails('Błąd krytyczny układu hydraulicznego (0x43)')" title="Szczegóły" uk-tooltip>
-                                        <span uk-icon="icon: info; ratio: 0.75"></span>
-                                    </button>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 245 mth</td>
                                 <td>82 mth</td>
                             </tr>
-                            <tr class="log-row" data-type="odpalenie">
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Błąd krytyczny układu hydraulicznego (0x43)</h5>
+                                        <p>
+                                            Wykryto spadek ciśnienia poniżej minimalnej wartości roboczej.
+                                            System automatycznie ograniczył wydajność maszyny w celu
+                                            zabezpieczenia podzespołów.
+                                        </p>
+
+                                        <div class="uk-grid-small" uk-grid>
+                                            <div class="uk-width-1-2">
+                                                <strong>Kod błędu:</strong> 0x43
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Priorytet:</strong> Krytyczny
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Temperatura:</strong> 87°C
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Ciśnienie:</strong> 1.2 bar
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ODPALENIE -->
+                            <tr class="log-row" onclick="toggleLogDetails(this)">
                                 <td>09.07.2026 08:15</td>
                                 <td>
                                     <span class="uk-label uk-label-success">Odpalenie referencyjne</span>
-                                    <button class="info-trigger-btn" onclick="showLogDetails('Referencyjny rozruch pompy wtryskowej zakończony powodzeniem.')" title="Szczegóły" uk-tooltip>
-                                        <span uk-icon="icon: info; ratio: 0.75"></span>
-                                    </button>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 237 mth</td>
                                 <td>74 mth</td>
                             </tr>
-                            <tr class="log-row" data-type="serwis">
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Referencyjny rozruch pompy wtryskowej</h5>
+
+                                        <p>
+                                            Procedura rozruchu została wykonana poprawnie.
+                                            Wszystkie parametry pracy silnika mieściły się
+                                            w dopuszczalnych zakresach.
+                                        </p>
+
+                                        <div class="uk-grid-small" uk-grid>
+                                            <div class="uk-width-1-2">
+                                                <strong>Status:</strong> Sukces
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Czas rozruchu:</strong> 12 s
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Napięcie:</strong> 24.1 V
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Obroty:</strong> 1 500 RPM
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- SERWIS -->
+                            <tr class="log-row" onclick="toggleLogDetails(this)">
                                 <td>05.07.2026 12:00</td>
                                 <td>
                                     <span class="uk-label uk-label-warning">Serwis</span>
-                                    <button class="info-trigger-btn" onclick="showLogDetails('Okresowa wymiana filtrów, oleju oraz uszczelniaczy.')" title="Szczegóły" uk-tooltip>
-                                        <span uk-icon="icon: info; ratio: 0.75"></span>
-                                    </button>
                                 </td>
                                 <td>Piotr Nowak (Serwisant)</td>
                                 <td>1 163 mth</td>
                                 <td>0 mth</td>
                             </tr>
-                            <tr class="log-row" data-type="zgloszenie">
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Przegląd okresowy</h5>
+
+                                        <p>
+                                            Wykonano pełny przegląd zgodnie z harmonogramem
+                                            producenta.
+                                        </p>
+
+                                        <ul class="uk-list uk-list-bullet">
+                                            <li>Wymiana filtrów hydraulicznych</li>
+                                            <li>Wymiana oleju silnikowego</li>
+                                            <li>Kontrola szczelności układu</li>
+                                            <li>Wymiana uszczelniaczy</li>
+                                            <li>Aktualizacja oprogramowania sterownika</li>
+                                        </ul>
+
+                                        <strong>Następny serwis:</strong> za 250 mth
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ZGŁOSZENIE -->
+                            <tr class="log-row" onclick="toggleLogDetails(this)">
                                 <td>01.07.2026 10:00</td>
                                 <td>
                                     <span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
-                                    <button class="info-trigger-btn" onclick="showLogDetails('Zgłoszenie operatora: Spadek ciśnienia na zaworze głównym.')" title="Szczegóły" uk-tooltip>
-                                        <span uk-icon="icon: info; ratio: 0.75"></span>
-                                    </button>
                                 </td>
                                 <td>Jan Kowalski</td>
                                 <td>1 100 mth</td>
                                 <td>19 mth</td>
                             </tr>
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Zgłoszenie operatora</h5>
+
+                                        <p>
+                                            Operator zgłosił zauważalny spadek ciśnienia
+                                            na zaworze głównym podczas pracy pod obciążeniem.
+                                        </p>
+
+                                        <div class="uk-grid-small" uk-grid>
+                                            <div class="uk-width-1-2">
+                                                <strong>Status:</strong> Zamknięte
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Priorytet:</strong> Wysoki
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Numer zgłoszenia:</strong> SRV-2026-071
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Czas reakcji:</strong> 4h
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -545,6 +671,23 @@
         function showPlaceholder(title) {
         UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
+
+function toggleLogDetails(row) {
+    const detailsRow = row.nextElementSibling;
+
+    // Close all other open rows
+    document.querySelectorAll('.log-details-row').forEach(item => {
+        if (item !== detailsRow) {
+            item.style.display = 'none';
+        }
+    });
+
+    // Toggle current row
+    detailsRow.style.display =
+        detailsRow.style.display === 'table-row'
+            ? 'none'
+            : 'table-row';
+}
     </script>
 </body>
 </html>
