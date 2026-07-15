@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEMAR - Serwis</title>
+    <title>CEMAR - Szczegóły Maszyny</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -91,8 +91,7 @@
                 background-color: #f0f0f0;
                 color: #111;
             }
-
-        .cemar-table th {
+.cemar-table th {
             background-color: #2a2a2a;
             color: #fff !important;
             font-weight: 600;
@@ -138,10 +137,11 @@
             z-index: 1000;
         }
     </style>
+
 </head>
 <body>
 
-
+    <!-- Pasek językowy + kontakt -->
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -170,15 +170,24 @@
             <ul class="uk-navbar-nav">
                 <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
                 <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
-                <li><a href="serwis.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Serwis</a></li>
+                <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
                 <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
                 <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
             </ul>
+
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
             </div>
         </div>
     </nav>
+
+    <div> 
+        Sorry, we couldn't find what you're looking for.
+    </div>
+
+
+ 
+
     <!-- Dolny pas -->
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
@@ -188,12 +197,44 @@
             </div>
         </div>
     </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
+        // Parsowanie parametrów URL w celu załadowania odpowiedniej maszyny
         const urlParams = new URLSearchParams(window.location.search);
+        const machineId = urlParams.get('id') || 'E59008';
+        const machineType = urlParams.get('type') || 'City';
 
+        document.getElementById('p2-machine-number').innerText = machineId;
+        document.getElementById('p2-machine-type').innerText = machineType;
+
+        // Dynamiczna modyfikacja pól dla demonstracji
+        if (machineId === 'E62441') {
+            document.getElementById('p2-prod-date').innerText = '28.02.2025';
+            document.getElementById('p2-hours').innerText = '890 mth';
+            document.getElementById('p2-next-service').innerText = '110 mth';
+            document.getElementById('p2-last-service').innerText = '12.03.2026';
+        }
+
+        function filterServices() {
+            const query = document.getElementById('service-search-input').value.toLowerCase();
+            const items = document.querySelectorAll('#services-accordion .service-item');
+            items.forEach(item => {
+                const name = item.querySelector('.service-name').innerText.toLowerCase();
+                const date = item.querySelector('.service-date').innerText.toLowerCase();
+                if (name.includes(query) || date.includes(query)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function showContact() {
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">Kontakt Serwis</h2><p>Infolinia pilna: +48 123 456 789. Formularz zgłoszeniowy został aktywowany.</p></div>`);
+        }
         function showPlaceholder(title) {
             UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
