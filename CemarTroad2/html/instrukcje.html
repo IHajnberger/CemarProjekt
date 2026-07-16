@@ -11,7 +11,7 @@
         :root {
             --primary-yellow: #dca31a;
             --primary-yellow-hover: #b88510;
-            --light-bg: #dfdfdf;
+            --light-bg: #f5f6f8;
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
@@ -97,7 +97,7 @@
             width: 140px;
             height: 92px;
             border-radius: 0px;
-            
+            overflow: hidden;
             margin: 0 15px;
             vertical-align: middle;
         }
@@ -131,31 +131,81 @@
             z-index: 1000;
         }
 
-        /* --- Instrukcje --- */
-        .instr-cat-pill {
-            display: inline-block;
-            padding: 7px 16px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            background: #fff;
-            color: #555;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 0 8px 8px 0;
+        /* --- Nowe, Czyste Filtrowanie w Stylu CRM --- */
+        .filter-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.75px;
+            color: #888;
+            margin-bottom: 12px;
+            display: block;
         }
 
-            .instr-cat-pill:hover {
+        .filter-pills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .instr-filter-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease, transform 0.1s ease;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+            .instr-filter-pill:hover {
                 border-color: var(--primary-yellow);
-                color: var(--primary-yellow-hover);
+                background-color: #fdfbf7;
+                transform: translateY(-1px);
             }
 
-            .instr-cat-pill.active {
-                background-color: var(--primary-yellow);
-                border-color: var(--primary-yellow);
-                color: #fff;
+            /* Klasy aktywne */
+            .instr-filter-pill.active {
+                background-color: #2a2a2a;
+                border-color: #2a2a2a;
+                color: #ffffff;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             }
+
+                /* Dodatkowy żółty akcent dla przycisków "Wszystkie" */
+                .instr-filter-pill.active.accented {
+                    background-color: var(--primary-yellow);
+                    border-color: var(--primary-yellow);
+                    color: #ffffff;
+                    box-shadow: 0 4px 12px rgba(220, 163, 26, 0.2);
+                }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: #f1f5f9;
+            font-size: 10px;
+            margin-left: 8px;
+            color: #64748b;
+            font-weight: 700;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .instr-filter-pill.active .pill-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
 
         .instr-card {
             background: #fff;
@@ -193,8 +243,16 @@
             text-transform: uppercase;
             padding: 2px 8px;
             border-radius: 4px;
-            background-color: #f0f0f0;
-            color: #777;
+        }
+
+        .badge-pdf {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .badge-video {
+            background-color: #dbeafe;
+            color: #1d4ed8;
         }
 
         .instr-empty-icon {
@@ -239,7 +297,6 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <!-- Dodany identyfikator nav-logo dla dynamicznego przypisywania linku w zależności od roli -->
             <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
                 <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
@@ -265,7 +322,6 @@
                 <span class="uk-label uk-label-warning uk-margin-small-bottom">Baza wiedzy</span>
                 <h2 class="uk-margin-remove-top uk-text-bold">Instrukcje</h2>
             </div>
-            <!-- Dodany identyfikator back-btn do dynamicznego powrotu -->
             <button id="back-btn" class="uk-button cemar-btn-secondary">
                 <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
             </button>
@@ -281,57 +337,99 @@
                         <input class="uk-input instr-search-input uk-width-1-1" id="instr-search" type="text" placeholder="Szukaj instrukcji, np. „wymiana filtra”, „City”, „error”…" oninput="filterInstructions()">
                     </div>
                 </div>
-                <div id="instr-categories">
-                    <span class="instr-cat-pill active" data-cat="wszystkie" onclick="setInstrCategory(this)">Wszystkie</span>
-                    <span class="instr-cat-pill" data-cat="obsluga" onclick="setInstrCategory(this)">Obsługa maszyny</span>
-                    <span class="instr-cat-pill" data-cat="serwis" onclick="setInstrCategory(this)">Serwis i konserwacja</span>
-                    <span class="instr-cat-pill" data-cat="bezpieczenstwo" onclick="setInstrCategory(this)">Bezpieczeństwo</span>
-                    <span class="instr-cat-pill" data-cat="bledy" onclick="setInstrCategory(this)">Kody błędów</span>
-                    <span class="instr-cat-pill" data-cat="instalacja" onclick="setInstrCategory(this)">Instalacja</span>
+
+                <!-- Kategorie (Przebudowane na nowoczesny styl) -->
+                <div class="border-b pb-4 mb-4">
+                    <span class="filter-section-title">Tematyka</span>
+                    <div id="instr-categories" class="filter-pills-container">
+                        <div class="instr-filter-pill active accented" data-cat="wszystkie" onclick="setInstrCategory(this)">
+                            <span>Wszystkie</span>
+                            <span class="pill-badge" id="badge-cat-wszystkie">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-cat="obsluga" onclick="setInstrCategory(this)">
+                            <span>Obsługa maszyny</span>
+                            <span class="pill-badge" id="badge-cat-obsluga">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-cat="serwis" onclick="setInstrCategory(this)">
+                            <span>Serwis i konserwacja</span>
+                            <span class="pill-badge" id="badge-cat-serwis">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-cat="bezpieczenstwo" onclick="setInstrCategory(this)">
+                            <span>Bezpieczeństwo</span>
+                            <span class="pill-badge" id="badge-cat-bezpieczenstwo">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-cat="bledy" onclick="setInstrCategory(this)">
+                            <span>Kody błędów</span>
+                            <span class="pill-badge" id="badge-cat-bledy">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-cat="instalacja" onclick="setInstrCategory(this)">
+                            <span>Instalacja</span>
+                            <span class="pill-badge" id="badge-cat-instalacja">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formaty (Przebudowane na nowoczesny styl) -->
+                <div style=" padding-top: 20px;">
+                    <span class="filter-section-title">Format dokumentu</span>
+                    <div id="instr-formats" class="filter-pills-container">
+                        <div class="instr-filter-pill active" data-format="wszystkie" onclick="setInstrFormat(this)">
+                            <span>Wszystkie formaty</span>
+                            <span class="pill-badge" id="badge-fmt-wszystkie">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-format="pdf" onclick="setInstrFormat(this)">
+                            <span>Dokumenty PDF</span>
+                            <span class="pill-badge" id="badge-fmt-pdf">0</span>
+                        </div>
+                        <div class="instr-filter-pill" data-format="video" onclick="setInstrFormat(this)">
+                            <span>Instrukcje VIDEO</span>
+                            <span class="pill-badge" id="badge-fmt-video">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Użycie natywnego dopasowania wysokości uk-grid-match eliminuje nakładanie się kart przy ich filtrowaniu -->
         <div class="uk-grid-medium uk-child-width-1-3@m uk-child-width-1-2@s uk-grid-match" id="instr-grid" uk-grid>
-            <!-- Karta 1 -->
-            <div class="instr-item" data-cat="obsluga" data-title="instrukcja obsługi maszyny city">
+            <!-- Karta 1 (PDF) -->
+            <div class="instr-item" data-cat="obsluga" data-format="pdf" data-title="instrukcja obsługi maszyny city">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
                         <div class="instr-icon-wrap"><span uk-icon="icon: file-text; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <span class="instr-format-badge badge-pdf">PDF</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Instrukcja obsługi — maszyna City</h4>
                     <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Podstawowa obsługa, panel sterowania, uruchamianie i zatrzymywanie maszyny.</p>
                     <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
                         <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 12.2025</span>
-                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Instrukcja obsługi — maszyna City')">Otwórz</button>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="window.open('InstrukcjaCity2.pdf', '_blank')">Otwórz</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Karta 2 -->
-            <div class="instr-item" data-cat="serwis" data-title="przegląd okresowy i konserwacja">
+            <!-- Karta 2 (VIDEO) -->
+            <div class="instr-item" data-cat="serwis" data-format="video" data-title="przegląd okresowy i konserwacja">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: cog; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: video-camera; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-video">VIDEO</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Przegląd okresowy i konserwacja</h4>
-                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Harmonogram serwisowy, lista czynności kontrolnych, zalecane materiały eksploatacyjne.</p>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Wideoporadnik: Harmonogram serwisowy, lista czynności kontrolnych, zalecane materiały.</p>
                     <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
                         <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 03.2026</span>
-                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Przegląd okresowy i konserwacja')">Otwórz</button>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="window.open('VideoCity2.mp4', '_blank')">Otwórz wideo</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Karta 3 -->
-            <div class="instr-item" data-cat="bledy" data-title="katalog kodów błędów">
+            <!-- Karta 3 (PDF) -->
+            <div class="instr-item" data-cat="bledy" data-format="pdf" data-title="katalog kodów błędów">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: warning; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: file-text; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-pdf">PDF</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Katalog kodów błędów</h4>
                     <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Pełna lista kodów błędów wraz z opisem przyczyn i zalecanymi działaniami.</p>
@@ -342,28 +440,28 @@
                 </div>
             </div>
 
-            <!-- Karta 4 -->
-            <div class="instr-item" data-cat="bezpieczenstwo" data-title="zasady bezpieczeństwa pracy">
+            <!-- Karta 4 (VIDEO) -->
+            <div class="instr-item" data-cat="bezpieczenstwo" data-format="video" data-title="zasady bezpieczeństwa pracy">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: shield; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: video-camera; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-video">VIDEO</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Zasady bezpieczeństwa pracy</h4>
-                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Wymagane środki ochrony osobistej, procedury awaryjnego zatrzymania, strefy zagrożenia.</p>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Szkolenie wideo: Wymagane środki ochrony osobistej, procedury awaryjnego zatrzymania.</p>
                     <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
                         <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 01.2026</span>
-                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Zasady bezpieczeństwa pracy')">Otwórz</button>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="window.open('VideoSafety.mp4', '_blank')">Otwórz wideo</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Karta 5 -->
-            <div class="instr-item" data-cat="instalacja" data-title="instrukcja instalacji i pierwszego uruchomienia">
+            <!-- Karta 5 (PDF) -->
+            <div class="instr-item" data-cat="instalacja" data-format="pdf" data-title="instrukcja instalacji i pierwszego uruchomienia">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: settings; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: file-text; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-pdf">PDF</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Instalacja i pierwsze uruchomienie</h4>
                     <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Wymagania instalacyjne, podłączenie zasilania, konfiguracja wstępna i odpalenie referencyjne.</p>
@@ -374,28 +472,28 @@
                 </div>
             </div>
 
-            <!-- Karta 6 -->
-            <div class="instr-item" data-cat="obsluga" data-title="skrócona instrukcja dla operatora">
+            <!-- Karta 6 (VIDEO) -->
+            <div class="instr-item" data-cat="obsluga" data-format="video" data-title="skrócona instrukcja dla operatora">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: album; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">VIDEO</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: video-camera; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-video">VIDEO</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Skrócona instrukcja dla operatora</h4>
                     <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Materiał wideo pokazujący codzienną obsługę maszyny krok po kroku.</p>
                     <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
                         <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 05.2026</span>
-                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Skrócona instrukcja dla operatora')">Otwórz</button>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="window.open('VideoCity2.mp4', '_blank')">Otwórz wideo</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Karta 7 -->
-            <div class="instr-item" data-cat="serwis" data-title="wymiana części zamiennych">
+            <!-- Karta 7 (PDF) -->
+            <div class="instr-item" data-cat="serwis" data-format="pdf" data-title="wymiana części zamiennych">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: wrench; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: file-text; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-pdf">PDF</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Wymiana części zamiennych</h4>
                     <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Instrukcje krok po kroku dla najczęściej wymienianych podzespołów.</p>
@@ -406,28 +504,28 @@
                 </div>
             </div>
 
-            <!-- Karta 8 -->
-            <div class="instr-item" data-cat="bezpieczenstwo" data-title="karta charakterystyki środków czyszczących">
+            <!-- Karta 8 (VIDEO) -->
+            <div class="instr-item" data-cat="bezpieczenstwo" data-format="video" data-title="karta charakterystyki środków czyszczących">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: bolt; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: video-camera; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-video">VIDEO</span>
                     </div>
-                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Karta charakterystyki środków czyszczących</h4>
-                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Informacje o bezpiecznym stosowaniu i przechowywaniu środków chemicznych.</p>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom">Instruktaż: Środki czyszczące</h4>
+                    <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Materiał wideo o bezpiecznym stosowaniu i przechowywaniu środków chemicznych.</p>
                     <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-top">
                         <span class="uk-text-meta" style="font-size: 12px;">Zaktualizowano: 11.2025</span>
-                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="showPlaceholder('Karta charakterystyki środków czyszczących')">Otwórz</button>
+                        <button class="uk-button uk-button-small cemar-btn-secondary" onclick="window.open('VideoChemistry.mp4', '_blank')">Otwórz wideo</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Karta 9 -->
-            <div class="instr-item" data-cat="instalacja" data-title="wymagania sieciowe i integracja z systemem">
+            <!-- Karta 9 (PDF) -->
+            <div class="instr-item" data-cat="instalacja" data-format="pdf" data-title="wymagania sieciowe i integracja z systemem">
                 <div class="instr-card uk-padding uk-flex uk-flex-column">
                     <div class="uk-flex uk-flex-between uk-flex-top uk-margin-small-bottom">
-                        <div class="instr-icon-wrap"><span uk-icon="icon: database; ratio: 1.3"></span></div>
-                        <span class="instr-format-badge">PDF</span>
+                        <div class="instr-icon-wrap"><span uk-icon="icon: file-text; ratio: 1.3"></span></div>
+                        <span class="instr-format-badge badge-pdf">PDF</span>
                     </div>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom">Wymagania sieciowe i integracja z systemem</h4>
                     <p class="uk-text-meta uk-margin-small-top" style="flex-grow: 1;">Konfiguracja połączenia maszyny z systemem CEMAR i monitoringiem zdalnym.</p>
@@ -464,15 +562,35 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
         let instrActiveCategory = 'wszystkie';
+        let instrActiveFormat = 'wszystkie'; // Nowy stan aktywnego formatu
 
         function showPlaceholder(title) {
             UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Treść instrukcji w przygotowaniu.</p></div>`);
         }
 
+        // Obsługa kategorii w nowym stylu
         function setInstrCategory(el) {
-            document.querySelectorAll('.instr-cat-pill').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('#instr-categories .instr-filter-pill').forEach(p => {
+                p.classList.remove('active', 'accented');
+            });
             el.classList.add('active');
+            if (el.getAttribute('data-cat') === 'wszystkie') {
+                el.classList.add('accented');
+            }
             instrActiveCategory = el.getAttribute('data-cat');
+            filterInstructions();
+        }
+
+        // Obsługa formatów w nowym stylu
+        function setInstrFormat(el) {
+            document.querySelectorAll('#instr-formats .instr-filter-pill').forEach(p => {
+                p.classList.remove('active', 'accented');
+            });
+            el.classList.add('active');
+            if (el.getAttribute('data-format') === 'wszystkie') {
+                el.classList.add('accented');
+            }
+            instrActiveFormat = el.getAttribute('data-format');
             filterInstructions();
         }
 
@@ -483,8 +601,10 @@
 
             items.forEach(item => {
                 const matchesCategory = instrActiveCategory === 'wszystkie' || item.getAttribute('data-cat') === instrActiveCategory;
+                const matchesFormat = instrActiveFormat === 'wszystkie' || item.getAttribute('data-format') === instrActiveFormat;
                 const matchesQuery = !query || item.getAttribute('data-title').includes(query);
-                const visible = matchesCategory && matchesQuery;
+
+                const visible = matchesCategory && matchesFormat && matchesQuery;
                 item.style.display = visible ? '' : 'none';
                 if (visible) visibleCount++;
             });
@@ -497,6 +617,34 @@
                 UIkit.grid(document.getElementById('instr-grid')).update();
             }
         }
+
+        // Dynamiczne wyliczanie ilości elementów w filtrach
+        function updateFilterBadges() {
+            const items = document.querySelectorAll('.instr-item');
+
+            // Definiowanie liczników
+            const catCounts = { wszystkie: items.length, obsluga: 0, serwis: 0, bezpieczenstwo: 0, bledy: 0, instalacja: 0 };
+            const fmtCounts = { wszystkie: items.length, pdf: 0, video: 0 };
+
+            items.forEach(item => {
+                const cat = item.getAttribute('data-cat');
+                const fmt = item.getAttribute('data-format');
+
+                if (catCounts[cat] !== undefined) catCounts[cat]++;
+                if (fmtCounts[fmt] !== undefined) fmtCounts[fmt]++;
+            });
+
+            // Aktualizacja DOM
+            for (const [cat, count] of Object.entries(catCounts)) {
+                const badge = document.getElementById(`badge-cat-${cat}`);
+                if (badge) badge.innerText = count;
+            }
+            for (const [fmt, count] of Object.entries(fmtCounts)) {
+                const badge = document.getElementById(`badge-fmt-${fmt}`);
+                if (badge) badge.innerText = count;
+            }
+        }
+
         // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
         window.onload = function () {
             // Pobieramy rolę użytkownika (domyślnie 'client', jeśli brak zapisu)
@@ -522,6 +670,8 @@
                 };
             }
 
+            // Inicjalizacja liczników instrukcji na start
+            updateFilterBadges();
         }
     </script>
 </body>
