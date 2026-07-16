@@ -301,6 +301,15 @@
         .goto-page-btn {
             margin-top: 6px;
         }
+
+        .log-filter-card {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 16px 20px;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -392,27 +401,37 @@
         </div>
 
         <!-- Nowa sekcja nowoczesnego filtrowania w formie tagów -->
-        <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 13px; text-transform: uppercase; color: #666; letter-spacing: 0.5px;">Filtruj logi według typu zdarzenia:</h5>
-        <div class="filter-pill-container">
-            <div class="filter-pill active" data-filter="serwis" onclick="togglePillFilter('serwis')">
-                <span>Serwis</span>
-                <span class="pill-badge" id="badge-serwis">0</span>
-            </div>
-            <div class="filter-pill active" data-filter="zgloszenie" onclick="togglePillFilter('zgloszenie')">
-                <span>Zgłoszenia</span>
-                <span class="pill-badge" id="badge-zgloszenie">0</span>
-            </div>
-            <div class="filter-pill active" data-filter="odpalenie" onclick="togglePillFilter('odpalenie')">
-                <span>Odpalenia</span>
-                <span class="pill-badge" id="badge-odpalenie">0</span>
-            </div>
-            <div class="filter-pill active" data-filter="blad" onclick="togglePillFilter('blad')">
-                <span>Błędy (Error)</span>
-                <span class="pill-badge" id="badge-blad">0</span>
+        <div class="log-filter-card">
+            <h5 class="uk-text-bold uk-margin-small-bottom"
+                style="font-size: 13px; text-transform: uppercase; color: #ccc; letter-spacing: 0.5px;">
+                Filtruj logi według typu zdarzenia:
+            </h5>
+
+            <div class="filter-pill-container">
+                <div class="filter-pill active" data-filter="serwis" onclick="togglePillFilter('serwis')">
+                    <span>Serwis</span>
+                    <span class="pill-badge" id="badge-serwis">0</span>
+                </div>
+
+                <div class="filter-pill active" data-filter="zgloszenie" onclick="togglePillFilter('zgloszenie')">
+                    <span>Zgłoszenia</span>
+                    <span class="pill-badge" id="badge-zgloszenie">0</span>
+                </div>
+
+                <div class="filter-pill active" data-filter="odpalenie" onclick="togglePillFilter('odpalenie')">
+                    <span>Odpalenia</span>
+                    <span class="pill-badge" id="badge-odpalenie">0</span>
+                </div>
+
+                <div class="filter-pill active" data-filter="blad" onclick="togglePillFilter('blad')">
+                    <span>Błędy (Error)</span>
+                    <span class="pill-badge" id="badge-blad">0</span>
+                </div>
             </div>
         </div>
 
         <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-medium-bottom">Pełne logi operacyjne maszyny</h4>
 
