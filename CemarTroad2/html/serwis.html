@@ -13,7 +13,7 @@
         :root {
             --primary-yellow: #dca31a;
             --primary-yellow-hover: #b88510;
-            --light-bg: #f5f6f8;
+            --light-bg: #dfdfdf;
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
@@ -155,6 +155,25 @@
 
             .custom-scroll::-webkit-scrollbar-thumb:hover {
                 background: #94a3b8;
+            }
+
+        /* --- Style dla Modułu Zdjęć --- */
+        .photo-container img {
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .upload-drop-zone {
+            transition: all 0.25s ease;
+        }
+
+            /* Klasa dodawana podczas przeciągania pliku nad strefę zrzutu */
+            .upload-drop-zone.dragover {
+                border-color: var(--primary-yellow) !important;
+                background-color: rgba(220, 163, 26, 0.08) !important;
             }
     </style>
 </head>
@@ -424,7 +443,7 @@
                                         <div class="flex items-center gap-3">
                                             <input type="checkbox" class="uk-checkbox rounded border-gray-300 text-amber-500 focus:ring-amber-500" data-time="35" data-name="Dyfuzor prostowanie" onchange="calculateValuation()">
                                             <div>
-                                                <span class="activity-name text-sm font-semibold text-gray-800">Dyfuzor prostowanie</span>
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Prostowanie dyfuzora</span>
                                                 <p class="activity-desc text-xs text-gray-400 m-0">Regeneracja mechaniczna geometrii dyfuzora</p>
                                             </div>
                                         </div>
@@ -650,7 +669,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4511" data-name="Oś turbiny (4511/4511-C)" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4511</span>
-                                            <span class="part-name text-gray-700">4511/4511-C oś turbiny</span>
+                                            <span class="part-name text-gray-700">Oś turbiny</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -663,7 +682,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4512" data-name="Wirnik gorący" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4512</span>
-                                            <span class="part-name text-gray-700">4512 wirnik gorący</span>
+                                            <span class="part-name text-gray-700">Wirnik gorący</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -676,7 +695,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4513" data-name="Kierownica turbiny" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4513</span>
-                                            <span class="part-name text-gray-700">4513 kierownica</span>
+                                            <span class="part-name text-gray-700">Kierownica turbiny</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -689,7 +708,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4521" data-name="Koło kompresora" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4521</span>
-                                            <span class="part-name text-gray-700">4521 koło kompresora</span>
+                                            <span class="part-name text-gray-700">Koło kompresora</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -702,7 +721,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4531" data-name="Łożyska" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4531</span>
-                                            <span class="part-name text-gray-700">4531 łożyska</span>
+                                            <span class="part-name text-gray-700">Łożyska</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -722,7 +741,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1210" data-name="Dyfuzor T35" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1210</span>
-                                            <span class="part-name text-gray-700">1210 dyfuzor T35</span>
+                                            <span class="part-name text-gray-700">Dyfuzor T35</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -736,7 +755,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1240" data-name="Dyfuzor City 24cm" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1240</span>
-                                            <span class="part-name text-gray-700">1240 dyfuzor City 24cm</span>
+                                            <span class="part-name text-gray-700">Dyfuzor City 24cm</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -749,7 +768,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1250" data-name="Dyfuzor City 30cm" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1250</span>
-                                            <span class="part-name text-gray-700">1250 dyfuzor City 30cm</span>
+                                            <span class="part-name text-gray-700">Dyfuzor City 30cm</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -762,7 +781,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1220" data-name="Dyfuzor proF" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1220</span>
-                                            <span class="part-name text-gray-700">1220 dyfuzor proF</span>
+                                            <span class="part-name text-gray-700">Dyfuzor proF</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -775,7 +794,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1160" data-name="Przedłużki osłona dyfuzora" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1160</span>
-                                            <span class="part-name text-gray-700">1160 przedłużki osłony</span>
+                                            <span class="part-name text-gray-700">Przedłużki osłona dyfuzora</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -788,7 +807,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1102" data-name="Pierścień dyfuzora do ramy" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1102</span>
-                                            <span class="part-name text-gray-700">1102 pierścień do ramy</span>
+                                            <span class="part-name text-gray-700">Pierścień dyfuzora do ramy</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -807,7 +826,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4110" data-name="Starter MOD" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4110</span>
-                                            <span class="part-name text-gray-700">4110 starter MOD</span>
+                                            <span class="part-name text-gray-700">Starter MOD</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -820,7 +839,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4110-1" data-name="Zestaw naprawczy startera" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4110-1</span>
-                                            <span class="part-name text-gray-700">Zest. Naprawczy startera</span>
+                                            <span class="part-name text-gray-700">Zestaw naprawczy startera</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -833,7 +852,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4132" data-name="Wyrzutnik na oś startera" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4132</span>
-                                            <span class="part-name text-gray-700">4132 wyrzutnik na oś</span>
+                                            <span class="part-name text-gray-700">Wyrzutnik na oś startera</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -846,7 +865,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4131" data-name="Wyrzutnik startera" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4131</span>
-                                            <span class="part-name text-gray-700">4131 wyrzutnik / 4125 odbojnik teflon</span>
+                                            <span class="part-name text-gray-700">Wyrzutnik startera</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -859,7 +878,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1512" data-name="Blokada kierownicy" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1512</span>
-                                            <span class="part-name text-gray-700">1512 blokada kierownicy</span>
+                                            <span class="part-name text-gray-700">Blokada kierownicy</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -872,7 +891,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7851" data-name="Uchwyty rączki" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7851</span>
-                                            <span class="part-name text-gray-700">7851 rączki gumy</span>
+                                            <span class="part-name text-gray-700">Uchwyty rączki</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -885,7 +904,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7752" data-name="Koła tylne obrotowe" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7752</span>
-                                            <span class="part-name text-gray-700">7752 koła tylne obrotowe</span>
+                                            <span class="part-name text-gray-700">Koła tylne obrotowe</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -898,7 +917,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7124" data-name="MOD pompka paliwo" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7124</span>
-                                            <span class="part-name text-gray-700">7124 MOD pompka paliwo</span>
+                                            <span class="part-name text-gray-700">MOD pompka paliwo</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -911,7 +930,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7105" data-name="Pompka paliwo" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7105</span>
-                                            <span class="part-name text-gray-700">7105 pompka paliwa standard</span>
+                                            <span class="part-name text-gray-700">Pompka paliwa standard</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -924,7 +943,7 @@
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="5104" data-name="Świeca żarowa" onchange="calculateValuation()">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">5104</span>
-                                            <span class="part-name text-gray-700">5104 świeca żarowa</span>
+                                            <span class="part-name text-gray-700">Świeca żarowa</span>
                                         </div>
                                         <select class="part-option border rounded px-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" onchange="calculateValuation()">
                                             <option hidden disabled selected value>Wybierz priorytet</option>
@@ -1002,6 +1021,51 @@
             </div>
         </div>
 
+        <!-- Zdjęcia i Dokumentacja Fotograficzna -->
+        <div class="cemar-card mt-6">
+            <div class="yellow-accent-bar"></div>
+            <div class="p-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span uk-icon="image" class="text-amber-500"></span> Dokumentacja Fotograficzna
+                </h3>
+
+                <!-- Siatka galerii zdjęć (zarówno od klienta jak i dodanych przez serwisanta) -->
+                <div id="photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
+                    <!-- Przykładowe zdjęcie od klienta (placeholder) -->
+                    <div class="photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md">
+                        <img src="https://placehold.co/400x300/e2e8f0/475569?text=Zgłoszenie+1" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie od klienta">
+                        <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Od klienta</span>
+                        <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
+                            <span uk-icon="icon: trash; ratio: 0.75"></span>
+                        </button>
+                    </div>
+
+                    <div class="photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md">
+                        <img src="https://placehold.co/400x300/e2e8f0/475569?text=Zgłoszenie+2" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie od klienta">
+                        <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Od klienta</span>
+                        <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
+                            <span uk-icon="icon: trash; ratio: 0.75"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strefa dodawania własnych zdjęć przez Serwisanta (Drag & Drop) -->
+                <div class="upload-drop-zone border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 hover:bg-amber-50/10 transition cursor-pointer relative" id="drop-zone" onclick="document.getElementById('file-input').click()">
+                    <input type="file" id="file-input" class="hidden" accept="image/*" multiple onchange="handlePhotoUpload(this.files)">
+                    <span uk-icon="icon: cloud-upload; ratio: 1.8" class="text-amber-500 mb-2"></span>
+                    <p class="text-sm font-semibold text-gray-700 m-0">Przeciągnij i upuść zdjęcia tutaj lub <span class="text-amber-600">wybierz pliki</span></p>
+                    <p class="text-xs text-gray-400 mt-1">Obsługiwane formaty: JPG, PNG, WEBP (maks. 5MB na plik)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ukryte okno modalne (Lightbox) do podglądu zdjęć w pełnym rozmiarze -->
+        <div id="photo-lightbox" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical bg-transparent shadow-none">
+                <button class="uk-modal-close-outside" type="button" uk-close style="color: #fff !important; background: rgba(0,0,0,0.5); p-2; border-radius: 50%;"></button>
+                <img id="lightbox-img" src="" class="max-w-full max-h-[85vh] rounded-lg border-2 border-white shadow-2xl" alt="Podgląd">
+            </div>
+        </div>
     </div>
 
     <!-- Dolny pas stopki -->
@@ -1307,6 +1371,95 @@
         function showPlaceholder(title) {
             UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">System CEMAR</h2><p>${title}</p></div>`);
         }
+
+        // --- LOGIKA OBSŁUGI ZDJĘĆ SERWISOWYCH ---
+
+        // Inicjalizacja nasłuchiwania przeciągania plików (Drag & Drop)
+        const dropZone = document.getElementById('drop-zone');
+
+        if (dropZone) {
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('dragover');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('dragover');
+                }, false);
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handlePhotoUpload(files);
+            }, false);
+        }
+
+        // Obsługa wgrywania zdjęć i renderowania podglądu w locie
+        function handlePhotoUpload(files) {
+            const grid = document.getElementById('photos-grid');
+
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) {
+                    UIkit.notification({
+                        message: "<span uk-icon='warning'></span> Wybrany plik nie jest obrazem!",
+                        status: 'danger'
+                    });
+                    return;
+                }
+
+                // Generowanie tymczasowego bezpiecznego adresu URL dla podglądu lokalnego pliku
+                const imageUrl = URL.createObjectURL(file);
+
+                const photoDiv = document.createElement('div');
+                photoDiv.className = "photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md animate-fade-in";
+
+                photoDiv.innerHTML = `
+                    <img src="${imageUrl}" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie serwisanta">
+                    <span class="absolute bottom-1 left-1 bg-amber-600 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Serwisant</span>
+                    <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
+                        <span uk-icon="icon: trash; ratio: 0.75"></span>
+                    </button>
+                `;
+
+                grid.appendChild(photoDiv);
+            });
+
+            UIkit.notification({
+                message: "<span uk-icon='check'></span> Zdjęcia dodane do zlecenia.",
+                status: 'success',
+                timeout: 2000
+            });
+        }
+
+        // Usuwanie wybranego zdjęcia z galerii
+        function deletePhoto(button) {
+            const container = button.closest('.photo-container');
+            if (container) {
+                container.style.transform = 'scale(0.9)';
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.remove();
+                }, 200);
+            }
+        }
+
+        // Otwieranie pełnego podglądu w Lightboxie
+        function openPhotoLightbox(src) {
+            const img = document.getElementById('lightbox-img');
+            if (img) {
+                img.src = src;
+                UIkit.modal('#photo-lightbox').show();
+            }
+        }
+
+        // Aktualizacja funkcji resetu wyczyszczenia całego kalkulatora (aby resetowała też dodane zdjęcia)
+        // (Zmodyfikuj swoją istniejącą funkcję clearAllForm() o poniższą linijkę):
+        // document.querySelectorAll('.photo-container').forEach(el => el.remove());
     </script>
 </body>
 </html>
