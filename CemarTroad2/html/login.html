@@ -74,27 +74,23 @@
 <body>
 
     <div class="login-card uk-text-center">
-        <h2 class="uk-margin-remove-bottom uk-text-bold">CEMAR</h2>
+        <h2 class="uk-margin-remove-bottom uk-text-bold">LOGIN PLACEHOLDER</h2>
         <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Wybierz profil logowania do systemu</p>
 
         <div class="uk-child-width-1-2@s uk-grid-small uk-margin-large-bottom" uk-grid>
             <div>
-                <div id="select-client" class="role-selector-btn" onclick="selectRole('client')">
+                <div id="select-client" class="role-selector-btn" onclick="selectRole('client') & proceedLogin()">
                     <span uk-icon="icon: user; ratio: 2" class="uk-text-muted"></span>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Klient</h4>
                 </div>
             </div>
             <div>
-                <div id="select-staff" class="role-selector-btn" onclick="selectRole('staff')">
+                <div id="select-staff" class="role-selector-btn" onclick="selectRole('staff') & proceedLogin()">
                     <span uk-icon="icon: cog; ratio: 2" class="uk-text-muted"></span>
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Serwisant</h4>
                 </div>
             </div>
         </div>
-
-        <button class="uk-button cemar-btn-primary uk-width-1-1 uk-button-large" onclick="proceedLogin()">
-            Zaloguj się
-        </button>
     </div>
 
     <!-- UIkit JS -->
