@@ -281,7 +281,7 @@
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
             <div>
-                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+                <a href="kontakt-pomoc.html" class="uk-text-bold pomoc">Kontakt pomoc</a>
             </div>
         </div>
     </div>
@@ -301,10 +301,12 @@
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
-                <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="konto-kilent.html" onclick="showPlaceholder('Konto')">Konto</a></li>
-                <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
-                <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+                <!-- Dodany identyfikator nav-home dla dynamicznego przekierowania domkiem -->
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li><a id="nav-konto" href="#" onclick="showPlaceholder('Konto')">Konto</a></li>
+                <li class="serwis"><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
+                <li class="instrukcja"><a href="instrukcje.html">Instrukcje</a></li>
+                <li class="ai"><a href="asystent-ai.html">Asystent AI</a></li>
             </ul>
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -494,6 +496,43 @@
         pos: 'top-center',
         timeout: 4000
         });
+        }
+
+        // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
+        window.onload = function () {
+            // Pobieramy rolę użytkownika (domyślnie 'client', jeśli brak zapisu)
+            const userRole = localStorage.getItem('userRole') || 'client';
+
+            // Decydujemy o adresie powrotnym
+            const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
+            const KontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
+
+            const Details = userRole === 'client' ? 'client-details.html' : 'staff-details.html';
+            
+            // Dynamicznie aktualizujemy nawigację na stronie
+            document.getElementById('nav-logo').href = homeUrl;
+            document.getElementById('nav-home').href = homeUrl;
+            document.getElementById('nav-konto').href = KontoUrl;
+
+            if (userRole == 'client') {
+                document.querySelector('.serwis').style.display = 'none';
+            }
+
+            if (userRole != 'client') {
+                document.querySelector('.ai').style.display = 'none';
+                document.querySelector('.instrukcja').style.display = 'none';
+                document.querySelector('.pomoc').style.display = 'none';
+            }
+            const backBtn = document.getElementById('p7-back-btn');
+            if (backBtn) {
+                if (userRole == 'client') {
+                    backBtn.onclick = function () {
+                        window.location.href = Details;
+                    };
+                }
+            }
+
+            scrollAiChatToBottom();
         }
 
         function showPlaceholder(title) {

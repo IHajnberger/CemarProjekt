@@ -321,9 +321,7 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
-            <div>
-                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
-            </div>
+            
         </div>
     </div>
 
@@ -345,8 +343,7 @@
                 <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
                 <li><a href="konto-serwis.html" onclick="showPlaceholder('Konto')">Konto</a></li>
                 <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
-                <li><a href="instrukcje.html" onclick="showPlaceholder('Instrukcje')">Instrukcje</a></li>
-                <li><a href="asystent-ai.html" onclick="showPlaceholder('Asystent AI')">Asystent AI</a></li>
+                
             </ul>
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -370,7 +367,7 @@
                         <h2 class="uk-margin-remove-top uk-text-bold" id="p5-machine-number">434</h2>
                         <p class="uk-text-large uk-text-muted uk-margin-remove-top" id="p5-machine-type">City</p>
                         <button class="uk-button uk-button-small cemar-btn-outline-accent uk-margin-small-top" id="p5-telemetry-link" onclick="goToTelemetry()">
-                            <span uk-icon="icon: database; ratio: 0.9" class="uk-margin-small-right"></span> Logi maszyny
+                             Logi maszyny
                         </button>
                     </div>
                     <div class="uk-width-1-3@m">
@@ -378,16 +375,11 @@
                             <span class="uk-text-meta" style="font-size: 10px;">Użytkownik przypisany:</span>
                             <p class="uk-text-bold uk-margin-remove" id="p5-assigned-user" style="font-size: 13px;">Jan Kowalski (Operator)</p>
                         </div>
-                        <div class="uk-card uk-card-default uk-card-body uk-padding-small uk-margin-small-bottom" style="border-radius: 6px; background-color: var(--primary-yellow); box-shadow: none; border: 1px solid #b45309;">
-                            <a class="uk-button cemar-btn-primary uk-width-1-1"
-                               href="zglos-serwis.html"
-                               onclick="showPlaceholder('Zgłoś potrzebę serwisu')">
-                                Zgłoś potrzebę serwisu
-                            </a>
-                        </div>
+                        <button class="uk-button uk-button-small cemar-btn-outline-accent uk-margin-small-top" id="p5-telemetry-link" onclick="goToService()">
+                             Zgłoś potrzebę serwisu
+                        </button>
                     </div>
                 </div>
-
                 <hr>
 
                 <div class="uk-child-width-1-3@m uk-grid-medium uk-margin-small-top" uk-grid>
@@ -531,7 +523,7 @@
                                             </div>
                                         </div>
 
-                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'ODP-2026-0709')">
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'SRV-2026-0705')">
                                             <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do szczegółów odpalenia
                                         </button>
                                     </div>
@@ -659,11 +651,15 @@
         window.location.href = `machine-logs.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
         }
 
+        function goToService() {
+            window.location.href = 'zglos-serwis.html';
+        }
+
         // Mapowanie typu zdarzenia na dedykowaną stronę docelową
         const eventPageMap = {
         serwis: 'serwis-przeprowadzony.html',
         zgloszenie: 'zgloszenie-serwisowe.html',
-        odpalenie: 'odpalenie-referencyjne.html'
+        odpalenie: 'machine-logs.html',
         };
 
         // Przejście do dedykowanej strony danego zdarzenia (serwis / zgłoszenie / odpalenie)
