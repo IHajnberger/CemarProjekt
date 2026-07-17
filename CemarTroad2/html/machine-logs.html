@@ -6,27 +6,27 @@
     <title>CEMAR - Logi Telemetryczne Maszyny</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS dla zaawansowanego, elastycznego stylowania i nowoczesnego interfejsu -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         :root {
             --primary-yellow: #dca31a;
             --primary-yellow-hover: #b88510;
-            --light-bg: #dfdfdf;
+            --light-bg: #f3f4f6;
             --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        html {
-            background-color: var(--light-bg);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--light-bg);
-            color: #333;
+            color: #1f2937;
             min-height: 100vh;
         }
 
-        h2, h4, .uk-logo {
+        h1, h2, h3, h4, .font-montserrat {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
         }
@@ -78,22 +78,15 @@
         }
 
             .cemar-btn-secondary:hover {
-                background-color: #f0f0f0;
+                background-color: #f3f4f6;
                 color: #111;
             }
 
-        .cemar-table th {
-            background-color: #2a2a2a;
-            color: #fff !important;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-        }
-
+        /* Klasa animująca pulsowanie zielonej kropki telemetrycznej */
         .live-pulse-dot {
             display: inline-block;
-            width: 9px;
-            height: 9px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background-color: #10b981;
             margin-right: 6px;
@@ -102,11 +95,11 @@
 
         @keyframes pulse-glow {
             0% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
             }
 
             70% {
-                box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
             }
 
             100% {
@@ -114,12 +107,12 @@
             }
         }
 
+        /* Elementy dekoracyjne logotypu CEMAR */
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
             height: 92px;
             border-radius: 0px;
-           
             margin: 0 15px;
             vertical-align: middle;
         }
@@ -153,15 +146,22 @@
             z-index: 1000;
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 50px 20px;
-            color: #94a3b8;
+        /* Stylizacja płynnych przejść dla zwijania kolumn */
+        .collapsible-col {
+            transition: all 0.3s ease-in-out;
+            white-space: nowrap;
+        }
+
+        /* Styl dla wierszy reprezentujących nagłówki faz cyklu */
+        .phase-header-row {
+            background-color: #f9fafb;
+            border-left: 4px solid var(--primary-yellow);
         }
     </style>
 </head>
 <body>
 
+    <!-- Pasek językowy -->
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -169,7 +169,9 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
-            
+            <div>
+                <a href="#" onclick="showPlaceholder('Kontakt pomoc')" class="text-xs text-gray-400 hover:text-white">Kontakt pomoc</a>
+            </div>
         </div>
     </div>
 
@@ -183,7 +185,7 @@
                 <span class="decor-4"></span>
             </div>
             <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="staff-list.html">
-                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+                <img src="https://placehold.co/180x50/ffffff/2a2a2a?text=CEMAR" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;" onerror="this.src='Logo.jpg'">
             </a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
@@ -191,7 +193,6 @@
                 <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
                 <li><a href="konto-serwis.html" onclick="showPlaceholder('Konto')">Konto</a></li>
                 <li><a href="serwis.html" onclick="showPlaceholder('Serwis')">Serwis</a></li>
-
             </ul>
             <div class="uk-navbar-item">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -199,50 +200,144 @@
         </div>
     </nav>
 
-    <div class="uk-container" style="margin-top: 20px; padding-bottom: 80px;">
+    <div class="uk-container" style="margin-top: 20px; padding-bottom: 120px;">
         <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" id="p6-back-btn" onclick="goBack()">
             <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do karty maszyny
         </button>
 
+        <!-- Karta Maszyny z podstawowymi telemetrycznymi wskaźnikami KPI -->
         <div class="cemar-card uk-margin-medium-bottom">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
-                <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                    <div class="uk-width-expand@m">
-                        <span class="uk-label uk-label-warning uk-margin-small-bottom" style="font-size: 10px; padding: 2px 8px;">Logi Telemetryczne</span>
-                        <h2 class="uk-margin-remove-top uk-text-bold">Maszyna <span id="p6-machine-number">434</span></h2>
-                        <p class="uk-text-muted uk-margin-remove-top" id="p6-machine-type">City</p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                    <div class="md:col-span-2">
+                        <span class="uk-label uk-label-warning uk-margin-small-bottom text-[10px] px-2 py-0.5">Analiza telemetryczna live</span>
+                        <h2 class="uk-margin-remove-top uk-text-bold text-2xl">Maszyna <span id="p6-machine-number">434</span></h2>
+                        <p class="uk-text-muted uk-margin-remove-top text-sm" id="p6-machine-type">Model: City (Silnik T-35)</p>
                     </div>
-                    <div class="uk-width-auto@m">
-                        <span class="live-pulse-dot"></span><span class="uk-text-bold" style="font-size: 13px;">Odbiór danych co 10 sekund</span>
+                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col justify-center">
+                        <span class="text-xs text-gray-500 font-bold uppercase">Status agregatu</span>
+                        <span class="text-sm font-semibold flex items-center mt-1 text-emerald-600">
+                            <span class="live-pulse-dot"></span> Połączenie aktywne
+                        </span>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col justify-center">
+                        <span class="text-xs text-gray-500 font-bold uppercase">Odbiór pakietów</span>
+                        <span class="text-sm font-semibold text-gray-700 mt-1">Interwał: 10 sekund</span>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Panel szybkiego sterowania strukturą tabeli -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Sterowanie widokiem tabeli</h3>
+                    <p class="text-xs text-gray-400">Dostosuj widoczność danych w osi poziomej (kolumny) i pionowej (wiersze).</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="toggleAllHorizontal(true)" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-2 rounded-lg transition">
+                        Rozwiń wszystkie kolumny
+                    </button>
+                    <button onclick="toggleAllHorizontal(false)" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-2 rounded-lg transition">
+                        Zwiń wszystkie kolumny
+                    </button>
+                    <button onclick="toggleAllVertical(true)" class="text-xs bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold px-3 py-2 rounded-lg transition">
+                        Rozwiń wszystkie etapy
+                    </button>
+                    <button onclick="toggleAllVertical(false)" class="text-xs bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold px-3 py-2 rounded-lg transition">
+                        Zwiń wszystkie etapy
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Główna karta z tabelą -->
         <div class="cemar-card">
             <div class="uk-padding">
-                <h4 class="uk-text-bold uk-margin-small-bottom">Surowe dane telemetryczne</h4>
-                <p class="uk-text-meta uk-margin-medium-bottom">Pakiety odbierane automatycznie z maszyny w interwale 10s. Tabela jest obecnie pusta — do wypełnienia po podłączeniu źródła danych.</p>
-                <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-hover uk-table-divider cemar-table">
-                        <thead>
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h4 class="uk-text-bold uk-margin-remove text-lg">Dziennik pracy maszyny</h4>
+                        <spans text-gray-400">Klikaj w nagłówki kolumn z oznaczeniem <span class="text-amber-500 font-bold">⇄</span> aby zwijać i rozwijać grupy telemetryczne.</span>
+                    </div>
+                    
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="w-full text-left border-collapse bg-white text-xs">
+                        <!-- Pierwszy wiersz nagłówka: Grupy horyzontalne -->
+                        <thead class="bg-gray-800 text-white font-bold uppercase text-[10px]">
                             <tr>
-                                <th>Znacznik czasu</th>
-                                <th>Parametr</th>
-                                <th>Wartość</th>
-                                <th>Jednostka</th>
-                                <th>Status</th>
+                                <th class="p-3 border-r border-gray-700" colspan="3">Ogólne</th>
+                                <!-- Grupa Zasilanie -->
+                                <th id="hdr-group-power" onclick="toggleColumnGroup('power')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="3">
+                                    Zasilanie <span id="indicator-power" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Grupa Turbina -->
+                                <th id="hdr-group-turbine" onclick="toggleColumnGroup('turbine')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
+                                    Turbina <span id="indicator-turbine" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Grupa Olej -->
+                                <th id="hdr-group-oil" onclick="toggleColumnGroup('oil')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="4">
+                                    Układ Olejowy <span id="indicator-oil" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Grupa Paliwo -->
+                                <th id="hdr-group-fuel" onclick="toggleColumnGroup('fuel')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
+                                    Układ Paliwowy <span id="indicator-fuel" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Grupa Starter -->
+                                <th id="hdr-group-starter" onclick="toggleColumnGroup('starter')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
+                                    Starter <span id="indicator-starter" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Pozostałe parametry pomocnicze -->
+                                <th class="p-3 text-center" colspan="3">Diagnostyka i Czas</th>
+                            </tr>
+
+                            <!-- Drugi wiersz nagłówka: Konkretne kolumny -->
+                            <tr class="bg-gray-700 text-gray-200 text-[9px] border-t border-gray-600">
+                                <th class="p-3">Cykl</th>
+                                <th class="p-3">Data i Czas</th>
+                                <th class="p-3 border-r border-gray-600">Etap</th>
+
+                                <!-- Zasilanie -->
+                                <th class="p-3 col-power collapsible-col">Napięcie AC</th>
+                                <th class="p-3 bg-gray-750 font-bold">RPM</th> <!-- Kolumna zawsze widoczna dla grupy -->
+                                <th class="p-3 col-power collapsible-col border-r border-gray-600">Moc zadana</th>
+
+                                <!-- Turbina -->
+                                <th class="p-3 font-bold">Temp. Turbiny</th> <!-- Zawsze widoczna -->
+                                <th class="p-3 col-turbine collapsible-col border-r border-gray-600">Temp. Wylot</th>
+
+                                <!-- Olej -->
+                                <th class="p-3 col-oil collapsible-col">Temp. Oleju</th>
+                                <th class="p-3 col-oil collapsible-col">Poziom Oleju</th>
+                                <th class="p-3 font-bold">Ciśnienie Oleju</th> <!-- Zawsze widoczna -->
+                                <th class="p-3 col-oil collapsible-col border-r border-gray-600">PWM Pompy Ol.</th>
+
+                                <!-- Paliwo -->
+                                <th class="p-3 font-bold">Poziom Paliwa</th> <!-- Zawsze widoczna -->
+                                <th class="p-3 col-fuel collapsible-col border-r border-gray-600">PWM Pompy Pal.</th>
+
+                                <!-- Starter -->
+                                <th class="p-3 col-starter collapsible-col">PWM Start</th>
+                                <th class="p-3 font-bold border-r border-gray-600">Prąd Startu</th> <!-- Zawsze widoczna -->
+                                <!-- Diagnostyka/Misc -->
+                                <th class="p-3">Ciśnienie Powietrza</th>
+                                <th class="p-3">Kod błędu</th>
+                                <th class="p-3">Znacznik czasu</th>
                             </tr>
                         </thead>
+
                         <tbody id="p6-telemetry-tbody">
-                            <!-- Wiersze danych telemetrycznych będą dodawane tutaj dynamicznie -->
+                            <!-- Dane ładowane dynamicznie przez JS -->
                         </tbody>
                     </table>
-                    <div class="empty-state" id="p6-empty-state">
-                        <span uk-icon="icon: database; ratio: 1.6"></span>
-                        <p class="uk-margin-small-top">Brak danych telemetrycznych do wyświetlenia.</p>
-                    </div>
+                </div>
+
+                <div class="empty-state hidden" id="p6-empty-state">
+                    <span uk-icon="icon: database; ratio: 1.6"></span>
+                    <p class="uk-margin-small-top">Brak danych telemetrycznych do wyświetlenia.</p>
                 </div>
             </div>
         </div>
@@ -261,10 +356,11 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const machineId = urlParams.get('id') || '167';
-        const machineType = urlParams.get('type') || 'T35';
+        const machineId = urlParams.get('id') || '434';
+        const machineType = urlParams.get('type') || 'City';
 
         document.getElementById('p6-machine-number').innerText = machineId;
         document.getElementById('p6-machine-type').innerText = machineType;
@@ -274,11 +370,311 @@
         }
 
         function showPlaceholder(title) {
-        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+            UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
         }
 
-        // Miejsce na przyszłe podłączenie źródła danych telemetrycznych (np. WebSocket / polling co 10s)
-        // function renderTelemetryRow(row) { ... }
+        // --- STAN FILTROWANIA HORYZONTALNEGO (KOLUMNY) ---
+        // true = kolumna rozwinięta (pełne dane), false = kolumna zwinięta
+        const columnGroups = {
+            power: false,    // Zasilanie AC, Moc zadana
+            turbine: false,  // Temperatura Wychodząca
+            oil: false,      // Temperatura oleju, Poziom oleju, PWM pompy oleju
+            fuel: false,     // PWM pompy paliwa
+            starter: false   // PWM startera
+        };
+
+        // --- STAN FILTROWANIA WERTYKALNEGO (ETAPY CYKLI) ---
+        // Przechowuje informację o rozwijanych etapach w formule: 'Cykl_NazwaEtapu': true/false
+        const expandedPhases = {};
+
+        // --- DANE TESTOWE TELEMETRII ---
+        // Symulacja pełnego zbioru logów pogrupowanych w cykle i etapy
+        let telemetryCycles = [
+            {
+                cycleId: "Cykl 12",
+                phases: [
+                    {
+                        phaseName: "1. Rozruch",
+                        logs: [
+                            { time: "14:20:00", ac_volt: "228 V", rpm: "450", power: "12 kW", temp_turb: "110 °C", temp_out: "85 °C", temp_oil: "22 °C", oil_lvl: "92%", oil_press: "1.8 bar", pwm_oil: "15%", fuel: "84%", pwm_fuel: "12%", pwm_start: "95%", current_start: "45 A", air_press: "1.1 bar", error: "0x00", timestamp: "14200021" },
+                            { time: "14:20:10", ac_volt: "230 V", rpm: "820", power: "15 kW", temp_turb: "150 °C", temp_out: "95 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.4 bar", pwm_oil: "20%", fuel: "84%", pwm_fuel: "15%", pwm_start: "85%", current_start: "38 A", air_press: "1.3 bar", error: "0x00", timestamp: "14201021" },
+                            { time: "14:20:20", ac_volt: "229 V", rpm: "1250", power: "22 kW", temp_turb: "210 °C", temp_out: "115 °C", temp_oil: "25 °C", oil_lvl: "91%", oil_press: "3.1 bar", pwm_oil: "28%", fuel: "83%", pwm_fuel: "18%", pwm_start: "70%", current_start: "25 A", air_press: "1.6 bar", error: "0x00", timestamp: "14202021" },
+                            { time: "14:20:30", ac_volt: "231 V", rpm: "1800", power: "35 kW", temp_turb: "320 °C", temp_out: "155 °C", temp_oil: "28 °C", oil_lvl: "91%", oil_press: "3.7 bar", pwm_oil: "35%", fuel: "83%", pwm_fuel: "22%", pwm_start: "40%", current_start: "12 A", air_press: "1.9 bar", error: "0x00", timestamp: "14203021" },
+                            { time: "14:20:40", ac_volt: "230 V", rpm: "2350", power: "55 kW", temp_turb: "450 °C", temp_out: "210 °C", temp_oil: "32 °C", oil_lvl: "91%", oil_press: "4.1 bar", pwm_oil: "42%", fuel: "83%", pwm_fuel: "28%", pwm_start: "10%", current_start: "4 A", air_press: "2.2 bar", error: "0x00", timestamp: "14204021" },
+                            { time: "14:20:50", ac_volt: "230 V", rpm: "2800", power: "75 kW", temp_turb: "520 °C", temp_out: "260 °C", temp_oil: "36 °C", oil_lvl: "91%", oil_press: "4.3 bar", pwm_oil: "50%", fuel: "82%", pwm_fuel: "35%", pwm_start: "0%", current_start: "0 A", air_press: "2.5 bar", error: "0x00", timestamp: "14205021" }
+                        ]
+                    },
+                    {
+                        phaseName: "2. Praca",
+                        logs: [
+                            { time: "14:21:00", ac_volt: "230 V", rpm: "3100", power: "80 kW", temp_turb: "580 °C", temp_out: "310 °C", temp_oil: "42 °C", oil_lvl: "91%", oil_press: "4.4 bar", pwm_oil: "55%", fuel: "82%", pwm_fuel: "38%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14210021" },
+                            { time: "14:25:00", ac_volt: "231 V", rpm: "3150", power: "82 kW", temp_turb: "595 °C", temp_out: "325 °C", temp_oil: "45 °C", oil_lvl: "90%", oil_press: "4.4 bar", pwm_oil: "58%", fuel: "78%", pwm_fuel: "40%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14250021" },
+                            { time: "14:30:00", ac_volt: "229 V", rpm: "3120", power: "80 kW", temp_turb: "605 °C", temp_out: "330 °C", temp_oil: "48 °C", oil_lvl: "90%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "74%", pwm_fuel: "42%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14300021" },
+                            { time: "14:35:00", ac_volt: "230 V", rpm: "3100", power: "80 kW", temp_turb: "610 °C", temp_out: "335 °C", temp_oil: "50 °C", oil_lvl: "89%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "70%", pwm_fuel: "42%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14350021" },
+                            { time: "14:40:00", ac_volt: "230 V", rpm: "3140", power: "81 kW", temp_turb: "608 °C", temp_out: "332 °C", temp_oil: "51 °C", oil_lvl: "89%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "66%", pwm_fuel: "41%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14400021" }
+                        ]
+                    },
+                    {
+                        phaseName: "3. Cooling",
+                        logs: [
+                            { time: "14:41:10", ac_volt: "228 V", rpm: "1800", power: "20 kW", temp_turb: "450 °C", temp_out: "220 °C", temp_oil: "48 °C", oil_lvl: "89%", oil_press: "3.2 bar", pwm_oil: "30%", fuel: "65%", pwm_fuel: "12%", pwm_start: "0%", current_start: "0 A", air_press: "1.8 bar", error: "0x00", timestamp: "14411021" },
+                            { time: "14:41:20", ac_volt: "229 V", rpm: "1200", power: "10 kW", temp_turb: "350 °C", temp_out: "180 °C", temp_oil: "44 °C", oil_lvl: "89%", oil_press: "2.5 bar", pwm_oil: "20%", fuel: "65%", pwm_fuel: "8%", pwm_start: "0%", current_start: "0 A", air_press: "1.4 bar", error: "0x00", timestamp: "14412021" },
+                            { time: "14:41:30", ac_volt: "230 V", rpm: "600", power: "2 kW", temp_turb: "220 °C", temp_out: "120 °C", temp_oil: "39 °C", oil_lvl: "89%", oil_press: "1.8 bar", pwm_oil: "10%", fuel: "64%", pwm_fuel: "4%", pwm_start: "0%", current_start: "0 A", air_press: "1.1 bar", error: "0x00", timestamp: "14413021" },
+                            { time: "14:41:40", ac_volt: "230 V", rpm: "0", power: "0 kW", temp_turb: "95 °C", temp_out: "60 °C", temp_oil: "34 °C", oil_lvl: "89%", oil_press: "0.2 bar", pwm_oil: "0%", fuel: "64%", pwm_fuel: "0%", pwm_start: "0%", current_start: "0 A", air_press: "0.0 bar", error: "0x00", timestamp: "14414021" }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Przełącznik widoczności grupy kolumn (Horizontal Toggle)
+        function toggleColumnGroup(groupName) {
+            columnGroups[groupName] = !columnGroups[groupName];
+            applyColumnVisibility();
+        }
+
+        // Zbiorcza zmiana widoczności wszystkich kolumn
+        function toggleAllHorizontal(expand) {
+            for (let key in columnGroups) {
+                columnGroups[key] = expand;
+            }
+            applyColumnVisibility();
+        }
+
+        // Zastosowanie stylów ukrywania i rozciągania nagłówków
+        function applyColumnVisibility() {
+            // Słownik określający szerokość (colspan) nagłówków nadrzędnych przy stanie zamkniętym vs otwartym
+            const colspans = {
+                power: { collapsed: 1, expanded: 3 },
+                turbine: { collapsed: 1, expanded: 2 },
+                oil: { collapsed: 1, expanded: 4 },
+                fuel: { collapsed: 1, expanded: 2 },
+                starter: { collapsed: 1, expanded: 2 }
+            };
+
+            for (let key in columnGroups) {
+                const isExpanded = columnGroups[key];
+
+                // 1. Aktualizacja nagłówka nadrzędnego (colspan i wskaźnik ⇄)
+                const header = document.getElementById(`hdr-group-${key}`);
+                const indicator = document.getElementById(`indicator-${key}`);
+
+                if (header) {
+                    header.colSpan = isExpanded ? colspans[key].expanded : colspans[key].collapsed;
+                    if (isExpanded) {
+                        header.classList.add('bg-amber-500', 'text-white');
+                        header.classList.remove('bg-gray-900');
+                    } else {
+                        header.classList.remove('bg-amber-500', 'text-white');
+                        header.classList.add('bg-gray-900');
+                    }
+                }
+
+                if (indicator) {
+                    indicator.innerHTML = isExpanded ? ' ◀▶ ' : ' ⇄ ';
+                }
+
+                // 2. Toggling widoczności konkretnych elementów kolumn w tabeli
+                const cells = document.querySelectorAll(`.col-${key}`);
+                cells.forEach(cell => {
+                    if (isExpanded) {
+                        cell.classList.remove('hidden');
+                    } else {
+                        cell.classList.add('hidden');
+                    }
+                });
+            }
+        }
+
+        // Przełącznik widoczności środkowych logów danej fazy (Vertical Toggle)
+        function togglePhaseVertical(cycleId, phaseName) {
+            const key = `${cycleId}_${phaseName}`;
+            expandedPhases[key] = !expandedPhases[key];
+            renderTable();
+        }
+
+        // Zbiorcza zmiana wszystkich etapów
+        function toggleAllVertical(expand) {
+            telemetryCycles.forEach(cycle => {
+                cycle.phases.forEach(phase => {
+                    const key = `${cycle.cycleId}_${phase.phaseName}`;
+                    expandedPhases[key] = expand;
+                });
+            });
+            renderTable();
+        }
+
+        // Funkcja renderująca całą tabelę ze wszystkimi stanami
+        function renderTable() {
+            const tbody = document.getElementById('p6-telemetry-tbody');
+            const emptyState = document.getElementById('p6-empty-state');
+
+            tbody.innerHTML = '';
+
+            if (telemetryCycles.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            telemetryCycles.forEach(cycle => {
+                cycle.phases.forEach(phase => {
+                    const totalLogs = phase.logs.length;
+                    const phaseKey = `${cycle.cycleId}_${phase.phaseName}`;
+                    const isExpanded = !!expandedPhases[phaseKey];
+
+                    // Nagłówek fazy (rozróżnienie kolorystyczne etapów)
+                    let phaseBadgeColor = "bg-blue-100 text-blue-800";
+                    if (phase.phaseName.includes("Praca")) {
+                        phaseBadgeColor = "bg-emerald-100 text-emerald-800";
+                    } else if (phase.phaseName.includes("Cooling")) {
+                        phaseBadgeColor = "bg-purple-100 text-purple-800";
+                    }
+
+                    // Wiersz sekcji / etapu
+                    const sectionHeaderRow = document.createElement('tr');
+                    sectionHeaderRow.className = "phase-header-row font-semibold text-gray-700 text-[11px]";
+                    sectionHeaderRow.innerHTML = `
+                            <td colspan="19" class="p-2 border-b border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-bold text-gray-900">${cycle.cycleId}</span>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${phaseBadgeColor}">${phase.phaseName}</span>
+                                        <span class="text-xs text-gray-400 font-normal">(${totalLogs} pakietów telemetrycznych)</span>
+                                    </div>
+                                    <button onclick="togglePhaseVertical('${cycle.cycleId}', '${phase.phaseName}')" class="text-[10px] bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-bold px-2 py-0.5 rounded transition">
+                                        ${isExpanded ? '⛌ Zwiń etap' : 'Pokaż wszystkie logi'}
+                                    </button>
+                                </div>
+                            </td>
+                        `;
+                    tbody.appendChild(sectionHeaderRow);
+
+                    // Pętla renderowania konkretnych logów telemetrycznych
+                    phase.logs.forEach((log, index) => {
+                        const isFirst = index === 0;
+                        const isLast = index === totalLogs - 1;
+                        const isMiddle = !isFirst && !isLast;
+
+                        // Jeśli log jest środkowy, a etap jest zwinięty - nie renderujemy go
+                        if (isMiddle && !isExpanded) {
+                            // Jeśli to drugi log (pierwszy ze środkowych), renderujemy wiersz rozwijający "placeholder"
+                            if (index === 1) {
+                                const placeholderRow = document.createElement('tr');
+                                placeholderRow.className = "bg-amber-50/50 hover:bg-amber-100/70 cursor-pointer text-center font-bold text-amber-800 transition text-[10px]";
+                                placeholderRow.onclick = () => togglePhaseVertical(cycle.cycleId, phase.phaseName);
+                                placeholderRow.innerHTML = `
+                                        <td colspan="19" class="p-2 border-t border-b border-amber-200 text-center">
+                                             Pokaż pozostałe ${totalLogs - 2} logów etapu ${phase.phaseName} 
+                                        </td>
+                                    `;
+                                tbody.appendChild(placeholderRow);
+                            }
+                            return;
+                        }
+
+                        // Tworzenie standardowego wiersza danych
+                        const row = document.createElement('tr');
+                        row.className = `hover:bg-gray-50/80 transition ${isMiddle ? 'bg-amber-50/10' : ''}`;
+
+                        row.innerHTML = `
+                                <td class="p-2.5 font-bold text-gray-500">${cycle.cycleId}</td>
+                                <td class="p-2.5 font-semibold text-gray-800">${log.time}</td>
+                                <td class="p-2.5 border-r border-gray-100"><span class="px-1.5 py-0.5 rounded text-[9px] ${phaseBadgeColor}">${phase.phaseName.replace(/^\d+\.\s/, '')}</span></td>
+
+                                <!-- Zasilanie -->
+                                <td class="p-2.5 col-power collapsible-col text-gray-600">${log.ac_volt}</td>
+                                <td class="p-2.5 font-bold text-gray-900 bg-gray-50/40">${log.rpm}</td>
+                                <td class="p-2.5 col-power collapsible-col text-gray-600 border-r border-gray-100">${log.power}</td>
+
+                                <!-- Turbina -->
+                                <td class="p-2.5 font-bold text-red-600">${log.temp_turb}</td>
+                                <td class="p-2.5 col-turbine collapsible-col text-gray-600 border-r border-gray-100">${log.temp_out}</td>
+
+                                <!-- Olej -->
+                                <td class="p-2.5 col-oil collapsible-col text-gray-600">${log.temp_oil}</td>
+                                <td class="p-2.5 col-oil collapsible-col text-gray-600">${log.oil_lvl}</td>
+                                <td class="p-2.5 font-bold text-blue-600">${log.oil_press}</td>
+                                <td class="p-2.5 col-oil collapsible-col text-gray-600 border-r border-gray-100">${log.pwm_oil}</td>
+
+                                <!-- Paliwo -->
+                                <td class="p-2.5 font-bold text-gray-700">${log.fuel}</td>
+                                <td class="p-2.5 col-fuel collapsible-col text-gray-600 border-r border-gray-100">${log.pwm_fuel}</td>
+
+                                <!-- Starter -->
+                                <td class="p-2.5 col-starter collapsible-col text-gray-600">${log.pwm_start}</td>
+                                <td class="p-2.5 font-bold text-gray-700 border-r border-gray-100">${log.current_start}</td>
+
+                                <!-- Diagnostyka/Misc -->
+                                <td class="p-2.5 text-gray-600">${log.air_press}</td>
+                                <td class="p-2.5"><span class="px-1.5 py-0.5 rounded font-mono font-bold ${log.error !== '0x00' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'}">${log.error}</span></td>
+                                <td class="p-2.5 font-mono text-gray-400">${log.timestamp}</td>
+                            `;
+                        tbody.appendChild(row);
+                    });
+                });
+            });
+
+            // Po wyrenderowaniu tabeli aplikujemy stan ukrywania kolumn
+            applyColumnVisibility();
+        }
+
+        // Funkcja generująca i dołączająca pojedynczy, nowy rekord telemetryczny do ostatniego etapu
+        function simulateNewLog() {
+            const lastCycle = telemetryCycles[telemetryCycles.length - 1];
+            const lastPhase = lastCycle.phases[lastCycle.phases.length - 1];
+
+            // Pobieramy aktualną godzinę
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            const timestampVal = Math.floor(now.getTime() / 1000).toString().slice(-8);
+
+            // Generujemy losowe wartości bliskie normom telemetrycznym dla etapu Cooling
+            const newLog = {
+                time: timeStr,
+                ac_volt: `${228 + Math.floor(Math.random() * 5)} V`,
+                rpm: "0",
+                power: "0 kW",
+                temp_turb: `${85 - Math.floor(Math.random() * 10)} °C`,
+                temp_out: `${55 - Math.floor(Math.random() * 8)} °C`,
+                temp_oil: `${33 - Math.floor(Math.random() * 3)} °C`,
+                oil_lvl: "89%",
+                oil_press: "0.1 bar",
+                pwm_oil: "0%",
+                fuel: "64%",
+                pwm_fuel: "0%",
+                pwm_start: "0%",
+                current_start: "0 A",
+                air_press: "0.0 bar",
+                error: Math.random() > 0.95 ? "0x12" : "0x00", // Rzadki błąd testowy
+                timestamp: timestampVal
+            };
+
+            // Dodajemy do etapu Cooling
+            lastPhase.logs.push(newLog);
+
+            // Powiadomienie systemowe
+            UIkit.notification({
+                message: `<span uk-icon='icon: check; ratio: 0.8'></span> Otrzymano nowy pakiet telemetryczny: ${timeStr}`,
+                status: 'success',
+                pos: 'bottom-right',
+                timeout: 2000
+            });
+
+            // Ponowne renderowanie widoku
+            renderTable();
+        }
+
+        // Inicjalizacja tabeli przy starcie
+        window.onload = function () {
+            renderTable();
+        };
+    </script>
+</body>
+</html>ad = function () {
+            renderTable();
+        };
     </script>
 </body>
 </html>
