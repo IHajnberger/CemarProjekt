@@ -426,10 +426,6 @@
         });
         }
 
-        function goBack() {
-        window.location.href = `client-details.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
-        }
-
         // Obsługa przeciągnij i upuść
         const dropzone = document.getElementById('p7-dropzone');
         ['dragenter', 'dragover'].forEach(evt => {
@@ -517,6 +513,9 @@
             if (userRole == 'client') {
                 document.querySelector('.serwis').style.display = 'none';
             }
+            function goBack() {
+                window.location.href = Details;
+            }
 
             if (userRole != 'client') {
                 document.querySelector('.ai').style.display = 'none';
@@ -525,11 +524,9 @@
             }
             const backBtn = document.getElementById('p7-back-btn');
             if (backBtn) {
-                if (userRole == 'client') {
                     backBtn.onclick = function () {
                         window.location.href = Details;
                     };
-                }
             }
 
             scrollAiChatToBottom();
