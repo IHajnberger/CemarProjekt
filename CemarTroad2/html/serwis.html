@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEMAR - Serwis i Edycja</title>
+    <title>CEMAR - Serwis i Edycja Zlecenia</title>
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -82,6 +82,20 @@
             .cemar-btn-primary:hover {
                 background-color: var(--primary-yellow-hover);
                 color: #fff;
+            }
+
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
             }
 
         .cemar-decor-blocks {
@@ -191,7 +205,7 @@
                     </a>
                 </li>
                 <li><a href="wycena.html">Wycena</a></li>
-                <li><a href="serwis.html" class="font-bold">Serwis</a></li>
+                <li><a href="serwis.html" style="color: var(--primary-yellow-hover);">Serwis</a></li>
                 <li><a href="konto-serwis.html">Konto</a></li>
             </ul>
             <div class="uk-navbar-item">
@@ -203,13 +217,13 @@
     <!-- Główny Kontener Strony -->
     <div class="uk-container uk-margin-medium-top" style="padding-bottom: 120px;">
 
-        <!-- Panel wyboru maszyny i przycisku start -->
+        <!-- PANEL STARTU: Wybór maszyny z Wycen -->
         <div class="cemar-card uk-margin-medium-bottom">
             <div class="yellow-accent-bar"></div>
             <div class="p-6">
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div class="w-full md:w-1/2">
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Zaciągnij dane z wyceny maszyny</label>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Zaciągnij dane z wyceny</label>
                         <select id="select-saved-machine" class="w-full border-2 border-amber-500 rounded p-2 text-base font-semibold bg-white focus:outline-none" onchange="loadSelectedMachine()">
                             <!-- Generowane dynamicznie przez JS -->
                         </select>
@@ -226,15 +240,15 @@
             </div>
         </div>
 
-        <!-- Formularz w trybie edycji (domyślnie zablokowany, dopóki nie klikniemy START SERWIS) -->
+        <!-- FORMULARZ EDYCJI: Dostępny po kliknięciu START SERWIS -->
         <div id="service-form-container" class="opacity-40 pointer-events-none transition-all duration-300">
 
-            <!-- Karta Informacyjna Maszyny -->
+            <!-- Karta Informacyjna -->
             <div class="cemar-card uk-margin-medium-bottom">
                 <div class="yellow-accent-bar"></div>
                 <div class="p-6">
-                    <span class="text-xs uppercase font-bold tracking-wider text-amber-600">Dokumentacja Serwisowa</span>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-0">Karta Techniczna (Edytowalna)</h2>
+                    <span class="text-xs uppercase font-bold tracking-wider text-amber-600">Dokumentacja Diagnostyczno-Serwisowa</span>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4 mt-0">Edycja Zlecenia Serwisowego</h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         <div>
@@ -246,32 +260,32 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Nr Maszyny</label>
-                            <input id="form-machine-num" type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
+                            <input id="form-machine-num" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Klient</label>
-                            <input id="form-client" type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
+                            <input id="form-client" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Roboczogodziny (mth)</label>
-                            <input id="form-hours" type="number" class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none" placeholder="np. 1200">
+                            <input id="form-hours" type="number" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Serwisant</label>
-                            <input id="form-technician" type="text" class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none" value="Jan Kowalski">
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Serwis przeprowadził</label>
+                            <input id="form-technician" type="text" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Data</label>
-                            <input id="form-date" type="date" class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none">
+                            <input id="form-date" type="date" class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Układ dwukolumnowy: Lewa (Czynności) | Prawa (Części) -->
+            <!-- Układ dwukolumnowy: Pełne listy opcji z Wyceny -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-                <!-- LEWA KOLUMNA: CZYNNOŚCI (Z pełną listą z wyceny) -->
+                <!-- LEWA KOLUMNA: Pełna lista czynności z wyceny -->
                 <div class="lg:col-span-7 flex flex-col gap-4">
                     <div class="cemar-card flex-1">
                         <div class="yellow-accent-bar"></div>
@@ -281,19 +295,19 @@
                                     <h3 class="text-lg font-bold text-gray-800 m-0 flex items-center gap-2">
                                         <span uk-icon="cog" class="text-amber-500"></span> Czynności serwisowe
                                     </h3>
-                                    <span class="text-xs text-gray-500">Możesz swobodnie zaznaczać i odznaczać procedury</span>
+                                    <span class="text-xs text-gray-500">Zaznaczone są pozycje z wyceny. Możesz je dowolnie zmieniać.</span>
                                 </div>
                                 <div class="relative w-full md:w-64">
                                     <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-400">
                                         <span uk-icon="icon: search; ratio: 0.85"></span>
                                     </span>
-                                    <input id="activity-search" type="text" class="w-full text-xs border border-gray-300 rounded pl-8 pr-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-amber-500" placeholder="Filtruj czynności..." oninput="filterActivities()">
+                                    <input id="activity-search" type="text" class="w-full text-xs border border-gray-300 rounded pl-8 pr-3 py-1.5 focus:outline-none" placeholder="Filtruj czynności..." oninput="filterActivities()">
                                 </div>
                             </div>
 
-                            <div id="activities-container" class="space-y-6 custom-scroll overflow-y-auto max-h-[600px] pr-2">
+                            <div id="activities-container" class="space-y-6 custom-scroll overflow-y-auto max-h-[750px] pr-2">
 
-                                <!-- Czyszczenie i Mycie -->
+                                <!-- Sekcja: Czyszczenie i Mycie -->
                                 <div class="activity-section">
                                     <h4 class="text-sm font-bold text-gray-700 bg-gray-100 px-3 py-1.5 rounded mb-3 border-l-4 border-amber-500 uppercase tracking-wide">Czyszczenie i Mycie</h4>
                                     <div class="space-y-2.5">
@@ -302,48 +316,54 @@
                                                 <input type="checkbox" class="uk-checkbox" data-name="Czyszczenie skorupy">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Czyszczenie skorupy</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">~120 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Mycie boxa">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Mycie boxa</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">25 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Czyszczenie zbiornika paliwa">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Czyszczenie zbiornika paliwa</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">40 min</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <!-- Serwis Turbiny -->
+                                <!-- Sekcja: Serwis Turbiny -->
                                 <div class="activity-section">
-                                    <h4 class="text-sm font-bold text-gray-700 bg-gray-100 px-3 py-1.5 rounded mb-3 border-l-4 border-amber-500 uppercase tracking-wide">Serwis Turbiny</h4>
+                                    <h4 class="text-sm font-bold text-gray-700 bg-gray-100 px-3 py-1.5 rounded mb-3 border-l-4 border-amber-500 uppercase tracking-wide">Serwis Turbiny (HQW / GRW)</h4>
                                     <div class="space-y-2.5">
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Czyszczenie turbiny">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Czyszczenie turbiny</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">~50 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Piaskowanie elementów turbiny">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Piaskowanie elementów turbiny</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">25 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Składanie turbiny + montaż do boxa">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Składanie turbiny + montaż do boxa</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">240 min</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <!-- Układ Paliwowy i Elektronika -->
+                                <!-- Sekcja: Układ Paliwowy i Elektronika -->
                                 <div class="activity-section">
                                     <h4 class="text-sm font-bold text-gray-700 bg-gray-100 px-3 py-1.5 rounded mb-3 border-l-4 border-amber-500 uppercase tracking-wide">Układ Paliwowy i Elektronika</h4>
                                     <div class="space-y-2.5">
@@ -352,33 +372,122 @@
                                                 <input type="checkbox" class="uk-checkbox" data-name="Wymiana filtra paliwa">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Wymiana filtra paliwa</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">20 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Uszczelnienie, kondensator, vago">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Uszczelnienie, kondensator, vago</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">40 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Wymiana płytki / wgrywanie oprogramowania">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Wymiana płytki / wgrywanie oprogramowania</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">20 min</span>
                                         </label>
                                         <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
                                             <div class="flex items-center gap-3">
                                                 <input type="checkbox" class="uk-checkbox" data-name="Przeróbka i zaślepienie małego filtra">
                                                 <span class="activity-name text-sm font-semibold text-gray-800">Przeróbka i zaślepienie małego filtra</span>
                                             </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">50 min</span>
                                         </label>
                                     </div>
                                 </div>
+
+                                <!-- Sekcja: Dyfuzory i Rama -->
+                                <div class="activity-section">
+                                    <h4 class="text-sm font-bold text-gray-700 bg-gray-100 px-3 py-1.5 rounded mb-3 border-l-4 border-amber-500 uppercase tracking-wide">Układ Dyfuzora i Konstrukcja</h4>
+                                    <div class="space-y-2.5">
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana dyfuzora">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana dyfuzora</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">25 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Dyfuzor prostowanie">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Prostowanie dyfuzora</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">35 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana pierścienia dyfuzora">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana pierścienia dyfuzora</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">70 min</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Sekcja: Mechanika i Akcesoria -->
+                                <div class="activity-section">
+                                    <h4 class="text-sm font-bold text-gray-700 bg-gray-100 px-3 py-1.5 rounded mb-3 border-l-4 border-amber-500 uppercase tracking-wide">Mechanika i Akcesoria</h4>
+                                    <div class="space-y-2.5">
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana startera">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana startera</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">20 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana blokady kierownicy">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana blokady kierownicy</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">25 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana rączek">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana rączek</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">15 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana szybki wyświetlacza">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana szybki wyświetlacza</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">20 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Montaż boxa, parametry, odpalenie">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Montaż boxa, parametry, odpalenie</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">60 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana pompki paliwa">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana pompki paliwa</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">90 min</span>
+                                        </label>
+                                        <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <input type="checkbox" class="uk-checkbox" data-name="Wymiana świecy">
+                                                <span class="activity-name text-sm font-semibold text-gray-800">Wymiana świecy</span>
+                                            </div>
+                                            <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-1 rounded">15 min</span>
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- PRAWA KOLUMNA: CZĘŚCI ZAMIENNE -->
+                <!-- PRAWA KOLUMNA: Pełna lista części z wyceny -->
                 <div class="lg:col-span-5 flex flex-col gap-6">
                     <div class="cemar-card flex-1">
                         <div class="yellow-accent-bar"></div>
@@ -388,19 +497,21 @@
                                     <h3 class="text-lg font-bold text-gray-800 m-0 flex items-center gap-2">
                                         <span uk-icon="nut" class="text-amber-500"></span> Części zamienne
                                     </h3>
-                                    <span class="text-xs text-gray-500">Edytuj części użyte w serwisie</span>
+                                    <span class="text-xs text-gray-500">Zaznacz lub odznacz wymienione komponenty</span>
                                 </div>
                                 <div class="relative w-full md:w-40">
                                     <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-400">
                                         <span uk-icon="icon: search; ratio: 0.85"></span>
                                     </span>
-                                    <input id="parts-search" type="text" class="w-full text-xs border border-gray-300 rounded pl-8 pr-3 py-1.5 focus:outline-none" placeholder="Szukaj części..." oninput="filterParts()">
+                                    <input id="parts-search" type="text" class="w-full text-xs border border-gray-300 rounded pl-8 pr-3 py-1.5 focus:outline-none" placeholder="Szukaj..." oninput="filterParts()">
                                 </div>
                             </div>
 
-                            <div id="parts-container" class="space-y-4 custom-scroll overflow-y-auto max-h-[600px] pr-2">
+                            <div id="parts-container" class="space-y-4 custom-scroll overflow-y-auto max-h-[750px] pr-2">
+
+                                <!-- Elementy Konstrukcyjne i Elektryka -->
                                 <div class="part-section">
-                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Konstrukcyjne i Elektryka</span>
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Elementy Konstrukcyjne i Elektryka</span>
                                     <div class="space-y-2">
                                         <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
                                             <input type="checkbox" class="part-checkbox uk-checkbox" data-code="8250" data-name="Złącze hermetyczne">
@@ -413,18 +524,61 @@
                                             <span class="part-name text-gray-700">Zapięcie płaskie</span>
                                         </div>
                                         <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
-                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7601" data-name="Wkład filtra paliwa">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7601" data-name="Wkład filtra">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7601</span>
                                             <span class="part-name text-gray-700">Wkład filtra paliwa</span>
                                         </div>
                                         <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
-                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="8103" data-name="Płytka main sterownik">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="8103" data-name="Płytka main">
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">8103</span>
                                             <span class="part-name text-gray-700">Płytka main sterownik</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="2208" data-name="Zaślepka małego filtra">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">2208</span>
+                                            <span class="part-name text-gray-700">Zaślepka filtra</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7604" data-name="Filtr powietrza">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7604</span>
+                                            <span class="part-name text-gray-700">Filtr powietrza</span>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- Komponenty Turbiny -->
+                                <div class="part-section">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Komponenty Turbiny</span>
+                                    <div class="space-y-2">
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4511" data-name="Oś turbiny (4511/4511-C)">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4511</span>
+                                            <span class="part-name text-gray-700">Oś turbiny</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4512" data-name="Wirnik gorący">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4512</span>
+                                            <span class="part-name text-gray-700">Wirnik gorący</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4513" data-name="Kierownica turbiny">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4513</span>
+                                            <span class="part-name text-gray-700">Kierownica turbiny</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4521" data-name="Koło kompresora">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4521</span>
+                                            <span class="part-name text-gray-700">Koło kompresora</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4531" data-name="Łożyska">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4531</span>
+                                            <span class="part-name text-gray-700">Łożyska</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dyfuzory -->
                                 <div class="part-section">
                                     <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Dyfuzory (Zależne od Modelu)</span>
                                     <div class="space-y-2">
@@ -438,22 +592,75 @@
                                             <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1240</span>
                                             <span class="part-name text-gray-700">Dyfuzor City 24cm</span>
                                         </div>
+                                        <div id="part-diffuser-city-30" class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1250" data-name="Dyfuzor City 30cm">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1250</span>
+                                            <span class="part-name text-gray-700">Dyfuzor City 30cm</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1220" data-name="Dyfuzor proF">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1220</span>
+                                            <span class="part-name text-gray-700">Dyfuzor proF</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1160" data-name="Przedłużki osłona dyfuzora">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1160</span>
+                                            <span class="part-name text-gray-700">Przedłużki osłona dyfuzora</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1102" data-name="Pierścień dyfuzora do ramy">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1102</span>
+                                            <span class="part-name text-gray-700">Pierścień dyfuzora do ramy</span>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <!-- Starter i Akcesoria -->
+                                <div class="part-section">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Starter i Akcesoria</span>
+                                    <div class="space-y-2">
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4110" data-name="Starter MOD">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4110</span>
+                                            <span class="part-name text-gray-700">Starter MOD</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4110-1" data-name="Zestaw naprawczy startera">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4110-1</span>
+                                            <span class="part-name text-gray-700">Zestaw naprawczy startera</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1512" data-name="Blokada kierownicy">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1512</span>
+                                            <span class="part-name text-gray-700">Blokada kierownicy</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7124" data-name="MOD pompka paliwo">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7124</span>
+                                            <span class="part-name text-gray-700">MOD pompka paliwo</span>
+                                        </div>
+                                        <div class="part-item flex items-center gap-2 p-2 rounded hover:bg-gray-50 border border-gray-100 text-sm">
+                                            <input type="checkbox" class="part-checkbox uk-checkbox" data-code="5104" data-name="Świeca żarowa">
+                                            <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">5104</span>
+                                            <span class="part-name text-gray-700">Świeca żarowa</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Uwagi Serwisowe -->
+            <!-- Uwagi końcowe -->
             <div class="cemar-card mt-6">
                 <div class="yellow-accent-bar"></div>
                 <div class="p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
-                        <span uk-icon="file-edit" class="text-amber-500"></span> Uwagi z Przeprowadzonego Serwisu
+                        <span uk-icon="file-edit" class="text-amber-500"></span> Opis Usterki i Wnioski Po Serwisie
                     </h3>
-                    <textarea id="technician-notes" class="w-full border border-gray-300 rounded p-3 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500" rows="4" placeholder="Wprowadź uwagi lub opisz modyfikacje wyceny..."></textarea>
+                    <textarea id="technician-notes" class="w-full border border-gray-300 rounded p-3 text-sm focus:outline-none" rows="4"></textarea>
                 </div>
             </div>
 
@@ -462,21 +669,21 @@
                 <div class="yellow-accent-bar"></div>
                 <div class="p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                        <span uk-icon="image" class="text-amber-500"></span> Zdjęcia Dokumentacyjne
+                        <span uk-icon="image" class="text-amber-500"></span> Dokumentacja Fotograficzna Naprawy
                     </h3>
                     <div id="photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6"></div>
                     <div class="upload-drop-zone border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 hover:bg-amber-50/10 transition cursor-pointer relative" id="drop-zone" onclick="document.getElementById('file-input').click()">
                         <input type="file" id="file-input" class="hidden" accept="image/*" multiple onchange="handlePhotoUpload(this.files)">
                         <span uk-icon="icon: cloud-upload; ratio: 1.8" class="text-amber-500 mb-2"></span>
-                        <p class="text-sm font-semibold text-gray-700 m-0">Dodaj zdjęcia wykonanej naprawy</p>
+                        <p class="text-sm font-semibold text-gray-700 m-0">Dodaj zdjęcia z prac serwisowych</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Przycisk Koniec Serwisu -->
+            <!-- Koniec Serwisu -->
             <div class="mt-8 flex justify-center">
                 <button class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-12 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg tracking-wider flex items-center gap-3" onclick="finishService()">
-                    <span uk-icon="icon: check; ratio: 1.3"></span> KONIEC SERWISU & RAPORT
+                    <span uk-icon="icon: check; ratio: 1.3"></span> KONIEC SERWISU I RAPORT
                 </button>
             </div>
 
@@ -501,7 +708,7 @@
         let timerInterval = null;
         let activePhotos = [];
 
-        // Baza testowa, na wypadek gdyby nic nie zostało wygenerowane na stronie wyceny
+        // Przykładowe rekordy na start, gdy baza wycen jest pusta
         const defaultWyceny = [
         {
         id: "w1",
@@ -512,8 +719,8 @@
         technician: "Marek Nowak",
         date: "2026-07-15",
         activities: ["Czyszczenie skorupy", "Czyszczenie turbiny"],
-        parts: ["8250"],
-        notes: "Nalot na turbinie, uszczelka lekko przetarta."
+        parts: ["8250", "4511"],
+        notes: "Zalecana czujność przy turbinie, widoczne mikropęknięcia."
         },
         {
         id: "w2",
@@ -523,9 +730,9 @@
         hours: "890",
         technician: "Jan Kowalski",
         date: "2026-07-17",
-        activities: ["Mycie boxa", "Wymiana filtra paliwa"],
+        activities: ["Mycie boxa", "Wymiana filtra paliwa", "Wymiana dyfuzora"],
         parts: ["7601", "1240"],
-        notes: "Filtry i dyfuzor do bezwzględnej wymiany."
+        notes: "Wymiana płynów w boxie oraz kompletnego wkładu filtra."
         }
         ];
 
@@ -551,14 +758,14 @@
         toggleModelParts();
         };
 
-        // ZACIĄGANIE I PRE-SELEKCJA DANYCH (Teraz z możliwością edycji)
+        // GŁÓWNA LOGIKA: Ładowanie wszystkich opcji i zaznaczanie wybranych z wyceny
         function loadSelectedMachine() {
         const selectEl = document.getElementById('select-saved-machine');
         const wyceny = JSON.parse(localStorage.getItem('cemar_wyceny') || '[]');
         const selected = wyceny.find(x => x.id === selectEl.value);
 
         if (selected) {
-        // Wpisanie danych podstawowych
+        // Załadowanie metadanych
         document.getElementById('machine-model').value = selected.model;
         document.getElementById('form-machine-num').value = selected.machineNum;
         document.getElementById('form-client').value = selected.client;
@@ -567,10 +774,10 @@
         document.getElementById('form-date').value = selected.date;
         document.getElementById('technician-notes').value = selected.notes || '';
 
-        // Reset wszystkich checkboxów na stronie serwisu
+        // KROK 1: Resetujemy absolutnie wszystkie checkboxy do czystego stanu (odznaczone)
         document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
 
-        // ZACIĄGNIĘCIE I ZAZNACZENIE CZYNNOŚCI Z WYCENY
+        // KROK 2: Włączamy pełną listę i zaznaczamy tylko te elementy, które były w wycenie
         if (selected.activities) {
         selected.activities.forEach(name => {
         const cb = document.querySelector(`input[data-name="${name}"]`);
@@ -578,7 +785,6 @@
         });
         }
 
-        // ZACIĄGNIĘCIE I ZAZNACZENIE CZĘŚCI Z WYCENY
         if (selected.parts) {
         selected.parts.forEach(code => {
         const cb = document.querySelector(`.part-checkbox[data-code="${code}"]`);
@@ -587,25 +793,24 @@
         }
 
         toggleModelParts();
-        UIkit.notification({ message: "Zaciągnięto dane z wyceny! Możesz je teraz dowolnie edytować.", status: 'success' });
+        UIkit.notification({ message: "Wczytano pełną listę opcji. Zaznaczono pozycje z wyceny.", status: 'success' });
         }
         }
 
         function startService() {
         const selectEl = document.getElementById('select-saved-machine');
         if(!selectEl.value) {
-        UIkit.notification({ message: "Wybierz maszynę z listy przed rozpoczęciem serwisu!", status: 'warning' });
+        UIkit.notification({ message: "Wybierz maszynę przed startem serwisu!", status: 'warning' });
         return;
         }
 
         serviceStarted = true;
         startTime = new Date();
 
-        // Odblokowanie formularza do pełnej edycji
+        // Odblokowanie interfejsu do swobodnej edycji
         const formContainer = document.getElementById('service-form-container');
         formContainer.classList.remove('opacity-40', 'pointer-events-none');
 
-        // Aktywacja timera
         const btnStart = document.getElementById('btn-start-service');
         btnStart.disabled = true;
         btnStart.className = "bg-gray-400 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 cursor-not-allowed";
@@ -621,8 +826,6 @@
         const secs = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
         timerEl.textContent = `${hrs}:${mins}:${secs}`;
         }, 1000);
-
-        UIkit.notification({ message: "Rozpoczęto serwis. Licznik czasu ruszył.", status: 'info' });
         }
 
         function finishService() {
@@ -631,15 +834,12 @@
         clearInterval(timerInterval);
         const finalDurationStr = document.getElementById('service-timer').textContent;
 
-        // Zbieranie ostatecznie zaznaczonych czynności (po edycji)
+        // Pobranie ostatecznej konfiguracji po modyfikacjach serwisanta
         let finalActivities = [];
-        document.querySelectorAll('input[type="checkbox"][data-time]').forEach(cb => {
-        if (cb.checked) {
-        finalActivities.push(cb.getAttribute('data-name'));
-        }
+        document.querySelectorAll('#activities-container input[type="checkbox"]').forEach(cb => {
+        if (cb.checked) finalActivities.push(cb.getAttribute('data-name'));
         });
 
-        // Zbieranie ostatecznie zaznaczonych części (po edycji)
         let finalParts = [];
         document.querySelectorAll('.part-checkbox').forEach(cb => {
         if (cb.checked) {
@@ -665,10 +865,7 @@
         photos: activePhotos
         };
 
-        // Zapisz raport końcowy serwisu do lokalnej pamięci
         localStorage.setItem('cemar_active_summary', JSON.stringify(summaryData));
-
-        // Przekierowanie do podsumowania
         window.location.href = 'serwis-przeprowadzony.html';
         }
 
@@ -676,13 +873,16 @@
         const model = document.getElementById('machine-model').value;
         const diffT35 = document.getElementById('part-diffuser-t35');
         const diffCity24 = document.getElementById('part-diffuser-city-24');
+        const diffCity30 = document.getElementById('part-diffuser-city-30');
 
         if (model === 't35') {
-        if(diffT35) diffT35.style.display = 'flex';
-        if(diffCity24) diffCity24.style.display = 'none';
+        if(diffT35) diffT35.style.setProperty('display', 'flex', 'important');
+        if(diffCity24) diffCity24.style.setProperty('display', 'none', 'important');
+        if(diffCity30) diffCity30.style.setProperty('display', 'none', 'important');
         } else {
-        if(diffT35) diffT35.style.display = 'none';
-        if(diffCity24) diffCity24.style.display = 'flex';
+        if(diffT35) diffT35.style.setProperty('display', 'none', 'important');
+        if(diffCity24) diffCity24.style.setProperty('display', 'flex', 'important');
+        if(diffCity30) diffCity30.style.setProperty('display', 'flex', 'important');
         }
         }
 
@@ -690,11 +890,7 @@
         const query = document.getElementById('activity-search').value.toLowerCase().trim();
         document.querySelectorAll('.activity-item').forEach(item => {
         const name = item.querySelector('.activity-name').innerText.toLowerCase();
-        if(name.includes(query)) {
-        item.style.setProperty('display', 'flex', 'important');
-        } else {
-        item.style.setProperty('display', 'none', 'important');
-        }
+        item.style.setProperty('display', name.includes(query) ? 'flex' : 'none', 'important');
         });
         }
 
@@ -703,11 +899,7 @@
         document.querySelectorAll('.part-item').forEach(item => {
         const name = item.querySelector('.part-name').innerText.toLowerCase();
         const code = item.querySelector('.part-code').innerText.toLowerCase();
-        if(name.includes(query) || code.includes(query)) {
-        item.style.setProperty('display', 'flex', 'important');
-        } else {
-        item.style.setProperty('display', 'none', 'important');
-        }
+        item.style.setProperty('display', (name.includes(query) || code.includes(query)) ? 'flex' : 'none', 'important');
         });
         }
 
@@ -716,13 +908,11 @@
         Array.from(files).forEach(file => {
         const reader = new FileReader();
         reader.onload = function(e) {
-        const base64Url = e.target.result;
-        activePhotos.push(base64Url);
-
+        activePhotos.push(e.target.result);
         const photoDiv = document.createElement('div');
         photoDiv.className = "photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center";
         photoDiv.innerHTML = `
-        <img src="${base64Url}" class="w-full h-full object-cover">
+        <img src="${e.target.result}" class="w-full h-full object-cover">
         <button type="button" class="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full" onclick="this.closest('.photo-container').remove()">
         <span uk-icon="icon: trash; ratio: 0.75"></span>
         </button>

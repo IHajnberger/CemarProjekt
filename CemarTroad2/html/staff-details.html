@@ -492,44 +492,43 @@
                                 </td>
                             </tr>
 
-                            <!-- ODPALENIE -->
-                            <tr class="log-row" data-type="odpalenie" data-ref="ODP-2026-0709" onclick="toggleLogDetails(this)">
-                                <td>09.07.2026 08:15</td>
+                            <!-- ZGŁOSZENIE -->
+                            <tr class="log-row" data-type="zgloszenie" data-ref="SRV-2026-071" onclick="toggleLogDetails(this)">
+                                <td>01.07.2026 10:00</td>
                                 <td>
-                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-success">Odpalenie referencyjne</span>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
                                 </td>
                                 <td>Jan Kowalski</td>
-                                <td>1 237 mth</td>
-                                <td>74 mth</td>
+                                <td>1 100 mth</td>
+                                <td>19 mth</td>
                             </tr>
                             <tr class="log-details-row" style="display:none;">
                                 <td colspan="5">
                                     <div class="log-details-content">
-                                        <h5 class="uk-margin-small-bottom">Referencyjny rozruch pompy wtryskowej</h5>
+                                        <h5 class="uk-margin-small-bottom">Zgłoszenie operatora</h5>
 
                                         <p>
-                                            Procedura rozruchu została wykonana poprawnie.
-                                            Wszystkie parametry pracy silnika mieściły się
-                                            w dopuszczalnych zakresach.
+                                            Operator zgłosił zauważalny spadek ciśnienia
+                                            na zaworze głównym podczas pracy pod obciążeniem.
                                         </p>
 
                                         <div class="uk-grid-small" uk-grid>
                                             <div class="uk-width-1-2">
-                                                <strong>Status:</strong> Sukces
+                                                <strong>Status:</strong> Zamknięte
                                             </div>
                                             <div class="uk-width-1-2">
-                                                <strong>Czas rozruchu:</strong> 12 s
+                                                <strong>Priorytet:</strong> Wysoki
                                             </div>
                                             <div class="uk-width-1-2">
-                                                <strong>Napięcie:</strong> 24.1 V
+                                                <strong>Numer zgłoszenia:</strong> SRV-2026-071
                                             </div>
                                             <div class="uk-width-1-2">
-                                                <strong>Obroty:</strong> 1 500 RPM
+                                                <strong>Czas reakcji:</strong> 4h
                                             </div>
                                         </div>
 
-                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'SRV-2026-0705')">
-                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do szczegółów odpalenia
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('zgloszenie', 'SRV-2026-071')">
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do zgłoszenia
                                         </button>
                                     </div>
                                 </td>
@@ -574,43 +573,44 @@
                                 </td>
                             </tr>
 
-                            <!-- ZGŁOSZENIE -->
-                            <tr class="log-row" data-type="zgloszenie" data-ref="SRV-2026-071" onclick="toggleLogDetails(this)">
-                                <td>01.07.2026 10:00</td>
+                            <!-- ODPALENIE -->
+                            <tr class="log-row" data-type="odpalenie" data-ref="ODP-2026-0709" onclick="toggleLogDetails(this)">
+                                <td>09.07.2026 08:15</td>
                                 <td>
-                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-success">Odpalenie referencyjne</span>
                                 </td>
                                 <td>Jan Kowalski</td>
-                                <td>1 100 mth</td>
-                                <td>19 mth</td>
+                                <td>1 237 mth</td>
+                                <td>74 mth</td>
                             </tr>
                             <tr class="log-details-row" style="display:none;">
                                 <td colspan="5">
                                     <div class="log-details-content">
-                                        <h5 class="uk-margin-small-bottom">Zgłoszenie operatora</h5>
+                                        <h5 class="uk-margin-small-bottom">Referencyjny rozruch pompy wtryskowej</h5>
 
                                         <p>
-                                            Operator zgłosił zauważalny spadek ciśnienia
-                                            na zaworze głównym podczas pracy pod obciążeniem.
+                                            Procedura rozruchu została wykonana poprawnie.
+                                            Wszystkie parametry pracy silnika mieściły się
+                                            w dopuszczalnych zakresach.
                                         </p>
 
                                         <div class="uk-grid-small" uk-grid>
                                             <div class="uk-width-1-2">
-                                                <strong>Status:</strong> Zamknięte
+                                                <strong>Status:</strong> Sukces
                                             </div>
                                             <div class="uk-width-1-2">
-                                                <strong>Priorytet:</strong> Wysoki
+                                                <strong>Czas rozruchu:</strong> 12 s
                                             </div>
                                             <div class="uk-width-1-2">
-                                                <strong>Numer zgłoszenia:</strong> SRV-2026-071
+                                                <strong>Napięcie:</strong> 24.1 V
                                             </div>
                                             <div class="uk-width-1-2">
-                                                <strong>Czas reakcji:</strong> 4h
+                                                <strong>Obroty:</strong> 1 500 RPM
                                             </div>
                                         </div>
 
-                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('zgloszenie', 'SRV-2026-071')">
-                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do zgłoszenia
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'SRV-2026-0705')">
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do szczegółów odpalenia
                                         </button>
                                     </div>
                                 </td>
