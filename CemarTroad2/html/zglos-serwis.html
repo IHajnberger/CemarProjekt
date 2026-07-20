@@ -41,10 +41,12 @@
             <ul class="uk-navbar-nav">
                 <!-- Dodany identyfikator nav-home dla dynamicznego przekierowania domkiem -->
                 <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a id="nav-konto" href="#" >Konto</a></li>
-                <li class="serwis"><a href="serwis.html" >Serwis</a></li>
+                <li class="wycena"><a href="wycena.html">Wycena</a></li>
+                <li class="serwis"><a href="serwis.html">Serwis</a></li>
+                
                 <li class="instrukcja"><a href="instrukcje.html">Instrukcje</a></li>
                 <li class="ai"><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a id="nav-konto" href="#">Konto</a></li>
             </ul>
             <div class="uk-navbar-item w-lewo">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -232,7 +234,7 @@
         });
         }
 
-        // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
+       // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
         window.onload = function () {
             // Pobieramy rolę użytkownika (domyślnie 'client', jeśli brak zapisu)
             const userRole = localStorage.getItem('userRole') || 'client';
@@ -240,8 +242,11 @@
             // Decydujemy o adresie powrotnym
             const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
             const KontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
-
-            const Details = userRole === 'client' ? 'client-details.html' : 'staff-details.html';
+            
+            // Dynamicznie aktualizujemy nawigację na stronie
+            document.getElementById('nav-logo').href = homeUrl;
+            document.getElementById('nav-home').href = homeUrl;
+           
             
             // Dynamicznie aktualizujemy nawigację na stronie
             document.getElementById('nav-logo').href = homeUrl;
@@ -250,6 +255,7 @@
 
             if (userRole == 'client') {
                 document.querySelector('.serwis').style.display = 'none';
+                document.querySelector('.wycena').style.display = 'none';
             }
             function goBack() {
                 window.location.href = Details;
@@ -266,8 +272,6 @@
                         window.location.href = Details;
                     };
             }
-
-            scrollAiChatToBottom();
         }
 
         function showPlaceholder(title) {

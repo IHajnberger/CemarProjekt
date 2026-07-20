@@ -12,7 +12,6 @@
 </head>
 <body>
 
-    <!-- Pasek językowy + kontakt -->
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -21,7 +20,7 @@
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
             <div>
-                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+                <a href="kontakt-pomoc.html" class="uk-text-bold pomoc">Kontakt pomoc</a>
             </div>
         </div>
     </div>
@@ -35,31 +34,32 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="client-list.html">
                 <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
         </div>
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
-                <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="konto-kilent.html" >Konto</a></li>
-                <li><a href="serwis.html" >Serwis</a></li>
-                <li><a href="instrukcje.html" >Instrukcje</a></li>
-                <li><a href="asystent-ai.html" >Asystent AI</a></li>
+                <!-- Dodany identyfikator nav-home dla dynamicznego przekierowania domkiem -->
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li class="wycena"><a href="wycena.html">Wycena</a></li>
+                <li class="serwis"><a href="serwis.html">Serwis</a></li>
+                <li class="instrukcja"><a href="instrukcje.html">Instrukcje</a></li>
+                <li class="ai"><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a id="nav-konto" href="#">Konto</a></li>
             </ul>
-
             <div class="uk-navbar-item w-lewo">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
             </div>
         </div>
     </nav>
 
-    <div> 
+    <div>
         Sorry, we couldn't find what you're looking for.
     </div>
 
 
- 
+
 
     <!-- Dolny pas -->
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
@@ -75,34 +75,45 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script>
-        // Parsowanie parametrów URL w celu załadowania odpowiedniej maszyny
-        const urlParams = new URLSearchParams(window.location.search);
-        const machineId = urlParams.get('id') || 'E59008';
-        const machineType = urlParams.get('type') || 'City';
 
-        document.getElementById('p2-machine-number').innerText = machineId;
-        document.getElementById('p2-machine-type').innerText = machineType;
+        // DYNAMICZNE PRZYPISYWANIE LINKÓW NA PODSTAWIE ROLI Z LOCALSTORAGE
+        window.onload = function () {
+            // Pobieramy rolę użytkownika (domyślnie 'client', jeśli brak zapisu)
+            const userRole = localStorage.getItem('userRole') || 'client';
 
-        // Dynamiczna modyfikacja pól dla demonstracji
-        if (machineId === 'E62441') {
-            document.getElementById('p2-prod-date').innerText = '28.02.2025';
-            document.getElementById('p2-hours').innerText = '890 mth';
-            document.getElementById('p2-next-service').innerText = '110 mth';
-            document.getElementById('p2-last-service').innerText = '12.03.2026';
-        }
+            // Decydujemy o adresie powrotnym
+            const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
+            const KontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
 
-        function filterServices() {
-            const query = document.getElementById('service-search-input').value.toLowerCase();
-            const items = document.querySelectorAll('#services-accordion .service-item');
-            items.forEach(item => {
-                const name = item.querySelector('.service-name').innerText.toLowerCase();
-                const date = item.querySelector('.service-date').innerText.toLowerCase();
-                if (name.includes(query) || date.includes(query)) {
-                    item.style.display = '';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            // Dynamicznie aktualizujemy nawigację na stronie
+            document.getElementById('nav-logo').href = homeUrl;
+            document.getElementById('nav-home').href = homeUrl;
+
+
+            // Dynamicznie aktualizujemy nawigację na stronie
+            document.getElementById('nav-logo').href = homeUrl;
+            document.getElementById('nav-home').href = homeUrl;
+            document.getElementById('nav-konto').href = KontoUrl;
+
+            if (userRole == 'client') {
+                document.querySelector('.serwis').style.display = 'none';
+                document.querySelector('.wycena').style.display = 'none';
+            }
+            function goBack() {
+                window.location.href = Details;
+            }
+
+            if (userRole != 'client') {
+                document.querySelector('.ai').style.display = 'none';
+                document.querySelector('.instrukcja').style.display = 'none';
+                document.querySelector('.pomoc').style.display = 'none';
+            }
+            const backBtn = document.getElementById('p7-back-btn');
+            if (backBtn) {
+                backBtn.onclick = function () {
+                    window.location.href = Details;
+                };
+            }
         }
 
         function showContact() {
