@@ -9,167 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --primary-yellow: #dca31a;
-            --primary-yellow-hover: #b88510;
-            --light-bg: #dfdfdf;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        html {
-            background-color: var(--light-bg);
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--light-bg);
-            color: #333;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, h4, .uk-logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        .cemar-navbar {
-            background-color: #ffffff !important;
-            border-bottom: 3px solid var(--primary-yellow);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            height: 92px;
-        }
-
-        .nav-lang-bar {
-            background-color: #2a2a2a;
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-            .nav-lang-bar a {
-                color: #aaa;
-                transition: color 0.2s;
-            }
-
-                .nav-lang-bar a:hover, .nav-lang-bar a.active {
-                    color: var(--primary-yellow);
-                }
-
-        .cemar-card {
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid #eaeaea;
-        }
-
-        .yellow-accent-bar {
-            height: 6px;
-            background: var(--primary-yellow);
-            border-radius: 12px 12px 0 0;
-        }
-
-        .cemar-btn-primary {
-            background-color: var(--primary-yellow);
-            color: #fff;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-            .cemar-btn-primary:hover {
-                background-color: var(--primary-yellow-hover);
-                color: #fff;
-            }
-
-        .cemar-btn-secondary {
-            background-color: #fff;
-            color: #333;
-            border: 1px solid #ddd;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-            .cemar-btn-secondary:hover {
-                background-color: #f0f0f0;
-                color: #111;
-            }
-
-        .cemar-decor-blocks {
-            display: inline-flex;
-            width: 140px;
-            height: 92px;
-            border-radius: 0px;
-            margin: 0 15px;
-            vertical-align: middle;
-        }
-
-            .cemar-decor-blocks span {
-                flex: 1;
-                height: 100%;
-            }
-
-        .decor-1 {
-            background-color: #dfa63b;
-        }
-
-        .decor-2 {
-            background-color: #be8525;
-        }
-
-        .decor-3 {
-            background-color: #ff9c00;
-        }
-
-        .decor-4 {
-            background-color: #f6c365;
-        }
-
-        .nav-lang-bar--fixed {
-            position: fixed;
-            left: 0;
-            bottom: 0px;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .custom-scroll::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .custom-scroll::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-
-            .custom-scroll::-webkit-scrollbar-thumb:hover {
-                background: #94a3b8;
-            }
-
-        .photo-container img {
-            transition: transform 0.3s ease;
-        }
-
-        .photo-container:hover img {
-            transform: scale(1.05);
-        }
-
-        .upload-drop-zone {
-            transition: all 0.25s ease;
-        }
-
-            .upload-drop-zone.dragover {
-                border-color: var(--primary-yellow) !important;
-                background-color: rgba(220, 163, 26, 0.08) !important;
-            }
-    </style>
+    <link rel="stylesheet" href="Styl.css">
 </head>
 <body>
 
@@ -690,11 +530,13 @@
         </div>
     </div>
 
-    <!-- Dolna stopka -->
+    <!-- Dolny pas -->
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
-        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
-            <a href="privacy-policy.html">Privacy policy</a>
-            <a href="https://cemar.pro/pl/">Cemar 2026</a>
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
         </div>
     </div>
 
@@ -710,217 +552,217 @@
 
         // Przykładowe rekordy na start, gdy baza wycen jest pusta
         const defaultWyceny = [
-        {
-        id: "w1",
-        model: "t35",
-        machineNum: "E59008",
-        client: "P.H.U. Bud-Max",
-        hours: "1420",
-        technician: "Marek Nowak",
-        date: "2026-07-15",
-        activities: ["Czyszczenie skorupy", "Czyszczenie turbiny"],
-        parts: ["8250", "4511"],
-        notes: "Zalecana czujność przy turbinie, widoczne mikropęknięcia."
-        },
-        {
-        id: "w2",
-        model: "city",
-        machineNum: "C77212",
-        client: "Trans-Met Sp. z o.o.",
-        hours: "890",
-        technician: "Jan Kowalski",
-        date: "2026-07-17",
-        activities: ["Mycie boxa", "Wymiana filtra paliwa", "Wymiana dyfuzora"],
-        parts: ["7601", "1240"],
-        notes: "Wymiana płynów w boxie oraz kompletnego wkładu filtra."
-        }
+            {
+                id: "w1",
+                model: "t35",
+                machineNum: "E59008",
+                client: "P.H.U. Bud-Max",
+                hours: "1420",
+                technician: "Marek Nowak",
+                date: "2026-07-15",
+                activities: ["Czyszczenie skorupy", "Czyszczenie turbiny"],
+                parts: ["8250", "4511"],
+                notes: "Zalecana czujność przy turbinie, widoczne mikropęknięcia."
+            },
+            {
+                id: "w2",
+                model: "city",
+                machineNum: "C77212",
+                client: "Trans-Met Sp. z o.o.",
+                hours: "890",
+                technician: "Jan Kowalski",
+                date: "2026-07-17",
+                activities: ["Mycie boxa", "Wymiana filtra paliwa", "Wymiana dyfuzora"],
+                parts: ["7601", "1240"],
+                notes: "Wymiana płynów w boxie oraz kompletnego wkładu filtra."
+            }
         ];
 
         window.onload = function () {
-        let savedWyceny = localStorage.getItem('cemar_wyceny');
-        if(!savedWyceny) {
-        localStorage.setItem('cemar_wyceny', JSON.stringify(defaultWyceny));
-        savedWyceny = JSON.stringify(defaultWyceny);
-        }
+            let savedWyceny = localStorage.getItem('cemar_wyceny');
+            if (!savedWyceny) {
+                localStorage.setItem('cemar_wyceny', JSON.stringify(defaultWyceny));
+                savedWyceny = JSON.stringify(defaultWyceny);
+            }
 
-        const wyceny = JSON.parse(savedWyceny);
-        const selectEl = document.getElementById('select-saved-machine');
-        selectEl.innerHTML = '<option value="" disabled selected>-- Wybierz zlecenie z Wyceny --</option>';
+            const wyceny = JSON.parse(savedWyceny);
+            const selectEl = document.getElementById('select-saved-machine');
+            selectEl.innerHTML = '<option value="" disabled selected>-- Wybierz zlecenie z Wyceny --</option>';
 
-        wyceny.forEach(item => {
-        const opt = document.createElement('option');
-        opt.value = item.id;
-        opt.textContent = `${item.machineNum} - ${item.client} (${item.model.toUpperCase()})`;
-        selectEl.appendChild(opt);
-        });
+            wyceny.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.id;
+                opt.textContent = `${item.machineNum} - ${item.client} (${item.model.toUpperCase()})`;
+                selectEl.appendChild(opt);
+            });
 
-        document.getElementById('form-date').value = new Date().toISOString().split('T')[0];
-        toggleModelParts();
+            document.getElementById('form-date').value = new Date().toISOString().split('T')[0];
+            toggleModelParts();
         };
 
         // GŁÓWNA LOGIKA: Ładowanie wszystkich opcji i zaznaczanie wybranych z wyceny
         function loadSelectedMachine() {
-        const selectEl = document.getElementById('select-saved-machine');
-        const wyceny = JSON.parse(localStorage.getItem('cemar_wyceny') || '[]');
-        const selected = wyceny.find(x => x.id === selectEl.value);
+            const selectEl = document.getElementById('select-saved-machine');
+            const wyceny = JSON.parse(localStorage.getItem('cemar_wyceny') || '[]');
+            const selected = wyceny.find(x => x.id === selectEl.value);
 
-        if (selected) {
-        // Załadowanie metadanych
-        document.getElementById('machine-model').value = selected.model;
-        document.getElementById('form-machine-num').value = selected.machineNum;
-        document.getElementById('form-client').value = selected.client;
-        document.getElementById('form-hours').value = selected.hours;
-        document.getElementById('form-technician').value = selected.technician;
-        document.getElementById('form-date').value = selected.date;
-        document.getElementById('technician-notes').value = selected.notes || '';
+            if (selected) {
+                // Załadowanie metadanych
+                document.getElementById('machine-model').value = selected.model;
+                document.getElementById('form-machine-num').value = selected.machineNum;
+                document.getElementById('form-client').value = selected.client;
+                document.getElementById('form-hours').value = selected.hours;
+                document.getElementById('form-technician').value = selected.technician;
+                document.getElementById('form-date').value = selected.date;
+                document.getElementById('technician-notes').value = selected.notes || '';
 
-        // KROK 1: Resetujemy absolutnie wszystkie checkboxy do czystego stanu (odznaczone)
-        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+                // KROK 1: Resetujemy absolutnie wszystkie checkboxy do czystego stanu (odznaczone)
+                document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
 
-        // KROK 2: Włączamy pełną listę i zaznaczamy tylko te elementy, które były w wycenie
-        if (selected.activities) {
-        selected.activities.forEach(name => {
-        const cb = document.querySelector(`input[data-name="${name}"]`);
-        if (cb) cb.checked = true;
-        });
-        }
+                // KROK 2: Włączamy pełną listę i zaznaczamy tylko te elementy, które były w wycenie
+                if (selected.activities) {
+                    selected.activities.forEach(name => {
+                        const cb = document.querySelector(`input[data-name="${name}"]`);
+                        if (cb) cb.checked = true;
+                    });
+                }
 
-        if (selected.parts) {
-        selected.parts.forEach(code => {
-        const cb = document.querySelector(`.part-checkbox[data-code="${code}"]`);
-        if (cb) cb.checked = true;
-        });
-        }
+                if (selected.parts) {
+                    selected.parts.forEach(code => {
+                        const cb = document.querySelector(`.part-checkbox[data-code="${code}"]`);
+                        if (cb) cb.checked = true;
+                    });
+                }
 
-        toggleModelParts();
-        UIkit.notification({ message: "Wczytano pełną listę opcji. Zaznaczono pozycje z wyceny.", status: 'success' });
-        }
+                toggleModelParts();
+                UIkit.notification({ message: "Wczytano pełną listę opcji. Zaznaczono pozycje z wyceny.", status: 'success' });
+            }
         }
 
         function startService() {
-        const selectEl = document.getElementById('select-saved-machine');
-        if(!selectEl.value) {
-        UIkit.notification({ message: "Wybierz maszynę przed startem serwisu!", status: 'warning' });
-        return;
-        }
+            const selectEl = document.getElementById('select-saved-machine');
+            if (!selectEl.value) {
+                UIkit.notification({ message: "Wybierz maszynę przed startem serwisu!", status: 'warning' });
+                return;
+            }
 
-        serviceStarted = true;
-        startTime = new Date();
+            serviceStarted = true;
+            startTime = new Date();
 
-        // Odblokowanie interfejsu do swobodnej edycji
-        const formContainer = document.getElementById('service-form-container');
-        formContainer.classList.remove('opacity-40', 'pointer-events-none');
+            // Odblokowanie interfejsu do swobodnej edycji
+            const formContainer = document.getElementById('service-form-container');
+            formContainer.classList.remove('opacity-40', 'pointer-events-none');
 
-        const btnStart = document.getElementById('btn-start-service');
-        btnStart.disabled = true;
-        btnStart.className = "bg-gray-400 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 cursor-not-allowed";
-        btnStart.innerHTML = `<span uk-icon="icon: check"></span> SERWIS W TOKU`;
+            const btnStart = document.getElementById('btn-start-service');
+            btnStart.disabled = true;
+            btnStart.className = "bg-gray-400 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 cursor-not-allowed";
+            btnStart.innerHTML = `<span uk-icon="icon: check"></span> SERWIS W TOKU`;
 
-        const timerEl = document.getElementById('service-timer');
-        timerEl.classList.remove('hidden');
+            const timerEl = document.getElementById('service-timer');
+            timerEl.classList.remove('hidden');
 
-        timerInterval = setInterval(() => {
-        const diff = new Date() - startTime;
-        const hrs = Math.floor(diff / 3600000).toString().padStart(2, '0');
-        const mins = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-        const secs = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-        timerEl.textContent = `${hrs}:${mins}:${secs}`;
-        }, 1000);
+            timerInterval = setInterval(() => {
+                const diff = new Date() - startTime;
+                const hrs = Math.floor(diff / 3600000).toString().padStart(2, '0');
+                const mins = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+                const secs = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+                timerEl.textContent = `${hrs}:${mins}:${secs}`;
+            }, 1000);
         }
 
         function finishService() {
-        if(!serviceStarted) return;
+            if (!serviceStarted) return;
 
-        clearInterval(timerInterval);
-        const finalDurationStr = document.getElementById('service-timer').textContent;
+            clearInterval(timerInterval);
+            const finalDurationStr = document.getElementById('service-timer').textContent;
 
-        // Pobranie ostatecznej konfiguracji po modyfikacjach serwisanta
-        let finalActivities = [];
-        document.querySelectorAll('#activities-container input[type="checkbox"]').forEach(cb => {
-        if (cb.checked) finalActivities.push(cb.getAttribute('data-name'));
-        });
+            // Pobranie ostatecznej konfiguracji po modyfikacjach serwisanta
+            let finalActivities = [];
+            document.querySelectorAll('#activities-container input[type="checkbox"]').forEach(cb => {
+                if (cb.checked) finalActivities.push(cb.getAttribute('data-name'));
+            });
 
-        let finalParts = [];
-        document.querySelectorAll('.part-checkbox').forEach(cb => {
-        if (cb.checked) {
-        finalParts.push({
-        code: cb.getAttribute('data-code'),
-        name: cb.getAttribute('data-name')
-        });
-        }
-        });
+            let finalParts = [];
+            document.querySelectorAll('.part-checkbox').forEach(cb => {
+                if (cb.checked) {
+                    finalParts.push({
+                        code: cb.getAttribute('data-code'),
+                        name: cb.getAttribute('data-name')
+                    });
+                }
+            });
 
-        const modelSelect = document.getElementById('machine-model');
-        const summaryData = {
-        model: modelSelect.options[modelSelect.selectedIndex].text,
-        machineNum: document.getElementById('form-machine-num').value,
-        client: document.getElementById('form-client').value,
-        hours: document.getElementById('form-hours').value,
-        technician: document.getElementById('form-technician').value,
-        date: document.getElementById('form-date').value,
-        notes: document.getElementById('technician-notes').value,
-        duration: finalDurationStr,
-        activities: finalActivities,
-        parts: finalParts,
-        photos: activePhotos
-        };
+            const modelSelect = document.getElementById('machine-model');
+            const summaryData = {
+                model: modelSelect.options[modelSelect.selectedIndex].text,
+                machineNum: document.getElementById('form-machine-num').value,
+                client: document.getElementById('form-client').value,
+                hours: document.getElementById('form-hours').value,
+                technician: document.getElementById('form-technician').value,
+                date: document.getElementById('form-date').value,
+                notes: document.getElementById('technician-notes').value,
+                duration: finalDurationStr,
+                activities: finalActivities,
+                parts: finalParts,
+                photos: activePhotos
+            };
 
-        localStorage.setItem('cemar_active_summary', JSON.stringify(summaryData));
-        window.location.href = 'serwis-przeprowadzony.html';
+            localStorage.setItem('cemar_active_summary', JSON.stringify(summaryData));
+            window.location.href = 'serwis-przeprowadzony.html';
         }
 
         function toggleModelParts() {
-        const model = document.getElementById('machine-model').value;
-        const diffT35 = document.getElementById('part-diffuser-t35');
-        const diffCity24 = document.getElementById('part-diffuser-city-24');
-        const diffCity30 = document.getElementById('part-diffuser-city-30');
+            const model = document.getElementById('machine-model').value;
+            const diffT35 = document.getElementById('part-diffuser-t35');
+            const diffCity24 = document.getElementById('part-diffuser-city-24');
+            const diffCity30 = document.getElementById('part-diffuser-city-30');
 
-        if (model === 't35') {
-        if(diffT35) diffT35.style.setProperty('display', 'flex', 'important');
-        if(diffCity24) diffCity24.style.setProperty('display', 'none', 'important');
-        if(diffCity30) diffCity30.style.setProperty('display', 'none', 'important');
-        } else {
-        if(diffT35) diffT35.style.setProperty('display', 'none', 'important');
-        if(diffCity24) diffCity24.style.setProperty('display', 'flex', 'important');
-        if(diffCity30) diffCity30.style.setProperty('display', 'flex', 'important');
-        }
+            if (model === 't35') {
+                if (diffT35) diffT35.style.setProperty('display', 'flex', 'important');
+                if (diffCity24) diffCity24.style.setProperty('display', 'none', 'important');
+                if (diffCity30) diffCity30.style.setProperty('display', 'none', 'important');
+            } else {
+                if (diffT35) diffT35.style.setProperty('display', 'none', 'important');
+                if (diffCity24) diffCity24.style.setProperty('display', 'flex', 'important');
+                if (diffCity30) diffCity30.style.setProperty('display', 'flex', 'important');
+            }
         }
 
         function filterActivities() {
-        const query = document.getElementById('activity-search').value.toLowerCase().trim();
-        document.querySelectorAll('.activity-item').forEach(item => {
-        const name = item.querySelector('.activity-name').innerText.toLowerCase();
-        item.style.setProperty('display', name.includes(query) ? 'flex' : 'none', 'important');
-        });
+            const query = document.getElementById('activity-search').value.toLowerCase().trim();
+            document.querySelectorAll('.activity-item').forEach(item => {
+                const name = item.querySelector('.activity-name').innerText.toLowerCase();
+                item.style.setProperty('display', name.includes(query) ? 'flex' : 'none', 'important');
+            });
         }
 
         function filterParts() {
-        const query = document.getElementById('parts-search').value.toLowerCase().trim();
-        document.querySelectorAll('.part-item').forEach(item => {
-        const name = item.querySelector('.part-name').innerText.toLowerCase();
-        const code = item.querySelector('.part-code').innerText.toLowerCase();
-        item.style.setProperty('display', (name.includes(query) || code.includes(query)) ? 'flex' : 'none', 'important');
-        });
+            const query = document.getElementById('parts-search').value.toLowerCase().trim();
+            document.querySelectorAll('.part-item').forEach(item => {
+                const name = item.querySelector('.part-name').innerText.toLowerCase();
+                const code = item.querySelector('.part-code').innerText.toLowerCase();
+                item.style.setProperty('display', (name.includes(query) || code.includes(query)) ? 'flex' : 'none', 'important');
+            });
         }
 
         function handlePhotoUpload(files) {
-        const grid = document.getElementById('photos-grid');
-        Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-        activePhotos.push(e.target.result);
-        const photoDiv = document.createElement('div');
-        photoDiv.className = "photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center";
-        photoDiv.innerHTML = `
-        <img src="${e.target.result}" class="w-full h-full object-cover">
-        <button type="button" class="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full" onclick="this.closest('.photo-container').remove()">
-        <span uk-icon="icon: trash; ratio: 0.75"></span>
-        </button>
-        `;
-        grid.appendChild(photoDiv);
-        }
-        reader.readAsDataURL(file);
-        });
+            const grid = document.getElementById('photos-grid');
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    activePhotos.push(e.target.result);
+                    const photoDiv = document.createElement('div');
+                    photoDiv.className = "photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center";
+                    photoDiv.innerHTML = `
+            <img src="${e.target.result}" class="w-full h-full object-cover">
+            <button type="button" class="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full" onclick="this.closest('.photo-container').remove()">
+            <span uk-icon="icon: trash; ratio: 0.75"></span>
+            </button>
+            `;
+                    grid.appendChild(photoDiv);
+                }
+                reader.readAsDataURL(file);
+            });
         }
     </script>
 </body>
