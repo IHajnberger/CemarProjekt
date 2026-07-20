@@ -10,6 +10,9 @@
 .main-container {
     padding-bottom: 40px;
 }
+.w-lewo{
+    padding-right: 40px;
+}
 html, body {
     background-color: var(--light-bg);
     margin: 0;
