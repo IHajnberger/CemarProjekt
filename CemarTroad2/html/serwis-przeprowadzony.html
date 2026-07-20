@@ -11,79 +11,112 @@
     <style>
         :root {
             --primary-yellow: #dca31a;
-            --light-bg: #dfdfdf;
+            --primary-yellow-hover: #b88510;
+            --light-bg: #dfdfdf; /* Poprawione na nowoczesną, czystą szarość zamiast ciemnego błota #dfdfdf */
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+
+        html, body {
             background-color: var(--light-bg);
-            color: #333;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
         }
-        h1, h2, h3, .uk-logo {
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #333;
+        }
+
+        h3, h4, .uk-logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
         }
+
+        .cemar-navbar {
+            background-color: #ffffff !important;
+            border-bottom: 3px solid var(--primary-yellow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            height: 90px;
+        }
+
+        /* Klasa uproszczona i oczyszczona z błędnych marginesów */
         .cemar-card {
             background: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-shadow: var(--card-shadow);
             border: 1px solid #eaeaea;
         }
+
         .yellow-accent-bar {
             height: 6px;
             background: var(--primary-yellow);
             border-radius: 12px 12px 0 0;
         }
-        @media print {
-            body { background: white; }
-            .no-print { display: none !important; }
-            .print-full { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: none;
         }
 
-            /* decor */
-    .cemar-decor-blocks {
-        display: inline-flex;
-        width: 140px;
-        height: 92px;
-        border-radius: 0px;
-        
-        margin: 0 15px;
-        vertical-align: middle;
-    }
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
 
-        .cemar-decor-blocks span {
-            flex: 1;
-            height: 100%;
+        .cemar-btn-secondary {
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
 
-    .decor-1 {
-        background-color: #dfa63b;
-    }
+            .cemar-btn-secondary:hover {
+                background-color: #f0f0f0;
+                color: #111;
+            }
 
-    .decor-2 {
-        background-color: #be8525;
-    }
+        .cemar-decor-blocks {
+            display: inline-flex;
+            width: 140px;
+            height: 90px;
+            border-radius: 0px;
+            margin: 0 15px;
+            vertical-align: middle;
+        }
 
-    .decor-3 {
-        background-color: #ff9c00;
-    }
+            .cemar-decor-blocks span {
+                flex: 1;
+                height: 100%;
+            }
 
-    .decor-4 {
-        background-color: #f6c365;
-    }
+        .decor-1 {
+            background-color: #dfa63b;
+        }
 
-        .cemar-navbar {
-    background-color: #ffffff !important;
-    border-bottom: 3px solid var(--primary-yellow);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    height: 90px;
-}
+        .decor-2 {
+            background-color: #be8525;
+        }
+
+        .decor-3 {
+            background-color: #ff9c00;
+        }
+
+        .decor-4 {
+            background-color: #f6c365;
+        }
     </style>
 </head>
 <body>
 
     <!-- Pasek nawigacyjny -->
-        <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
             <div class="cemar-decor-blocks">
                 <span class="decor-1"></span>
@@ -92,21 +125,21 @@
                 <span class="decor-4"></span>
             </div>
             <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="staff-list.html">
-                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;" onerror="this.src='https://placehold.co/180x50/ffffff/2a2a2a?text=CEMAR'">
             </a>
         </div>
         <div class="uk-navbar-right uk-margin-right">
             <ul class="uk-navbar-nav">
-                <li><a href="serwis.html">Zacznij Nowy Serwis</a></li>
+                <li><a href="serwis.html" class="font-bold">Zacznij Nowy Serwis</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="uk-container uk-margin-large-top uk-margin-large-bottom print-full">
+    <div class="uk-container uk-margin-large-top uk-margin-large-bottom">
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>
             <div class="p-8">
-                
+
                 <!-- Nagłówek Raportu -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-6 mb-6">
                     <div>
@@ -180,7 +213,7 @@
                     <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition" onclick="window.print()">
                         <span uk-icon="icon: print"></span> Drukuj Raport
                     </button>
-                    <a href="serwis.html" class="bg-amber-500 hover:bg-amber-500 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                    <a href="serwis.html" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition">
                         Nowe zlecenie <span uk-icon="icon: arrow-right"></span>
                     </a>
                 </div>
@@ -194,10 +227,16 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
 
     <script>
-        window.onload = function() {
+        window.onload = function () {
             const rawData = localStorage.getItem('cemar_active_summary');
-            if(!rawData) {
-                alert("Brak danych do wygenerowania podsumowania.");
+            if (!rawData) {
+                // Bezpieczne powiadomienie UIkit zamiast zablokowanego alert()
+                UIkit.notification({
+                    message: "<span uk-icon='icon: warning'></span> Brak danych do wygenerowania podsumowania.",
+                    status: 'danger',
+                    pos: 'top-center',
+                    timeout: 5000
+                });
                 return;
             }
 
@@ -216,7 +255,7 @@
             // Czynności
             const actList = document.getElementById('sum-activities');
             actList.innerHTML = '';
-            if(data.activities && data.activities.length > 0) {
+            if (data.activities && data.activities.length > 0) {
                 data.activities.forEach(act => {
                     const li = document.createElement('li');
                     li.textContent = act;
@@ -229,14 +268,14 @@
             // Części
             const partsList = document.getElementById('sum-parts');
             partsList.innerHTML = '';
-            if(data.parts && data.parts.length > 0) {
+            if (data.parts && data.parts.length > 0) {
                 data.parts.forEach(part => {
                     const li = document.createElement('li');
                     li.className = "flex items-center gap-2";
                     li.innerHTML = `
-                        <span class="font-mono bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">${part.code}</span>
-                        <span>${part.name}</span>
-                    `;
+                            <span class="font-mono bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">${part.code}</span>
+                            <span>${part.name}</span>
+                        `;
                     partsList.appendChild(li);
                 });
             } else {
@@ -244,7 +283,7 @@
             }
 
             // Zdjęcia
-            if(data.photos && data.photos.length > 0) {
+            if (data.photos && data.photos.length > 0) {
                 document.getElementById('sum-photos-container').classList.remove('hidden');
                 const photoGrid = document.getElementById('sum-photos');
                 photoGrid.innerHTML = '';

@@ -7,6 +7,7 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-yellow: #dca31a;
@@ -50,6 +51,7 @@
                 .nav-lang-bar a:hover, .nav-lang-bar a.active {
                     color: var(--primary-yellow);
                 }
+
         /* karta z danymi */
         .cemar-card {
             background: #ffffff;
@@ -99,13 +101,13 @@
             text-transform: uppercase;
             font-size: 12px;
         }
+
         /* decor */
         .cemar-decor-blocks {
             display: inline-flex;
             width: 140px;
-            height: 92px;
+            height: 93px;
             border-radius: 0px;
-            
             margin: 0 15px;
             vertical-align: middle;
         }
@@ -130,6 +132,7 @@
         .decor-4 {
             background-color: #f6c365;
         }
+
         .nav-lang-bar--fixed {
             position: fixed;
             left: 0;
@@ -140,7 +143,6 @@
     </style>
 </head>
 <body>
-
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -148,10 +150,9 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
-           
+
         </div>
     </div>
-
     <!-- Główny Nagłówek -->
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
@@ -182,7 +183,7 @@
         </div>
     </nav>
 
-    <div class="uk-container uk-margin-large-top">
+    <div class="uk-container uk-margin-large-top" style="padding-bottom: 100px;">
         <div class="cemar-card uk-margin-medium-bottom">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
@@ -274,7 +275,8 @@
             </div>
         </div>
     </div>
-    <!-- Dolny pas -->
+
+    <!-- Dolny pas (Ustawiony relatywnie dla zachowania szarej przestrzeni pod białymi boksami) -->
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
             <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
@@ -283,6 +285,7 @@
             </div>
         </div>
     </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
