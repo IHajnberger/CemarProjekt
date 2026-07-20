@@ -1,18 +1,14 @@
-﻿/* <link rel="stylesheet" href="Styl.css"> - do podpięcia
-    naiwna próba ustandaryzowania stylu wszystkich plików
-*/
+﻿/* ==========================================================================
+
+ZMIENNE GLOBALNE, RESET I STYLE BAZOWE
+========================================================================== */
 :root {
     --primary-yellow: #dca31a;
     --primary-yellow-hover: #b88510;
     --light-bg: #dfdfdf;
     --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
-.main-container {
-    padding-bottom: 40px;
-}
-.w-lewo{
-    padding-right: 40px;
-}
+
 html, body {
     background-color: var(--light-bg);
     margin: 0;
@@ -25,17 +21,73 @@ body {
     color: #333;
 }
 
+.main-container {
+    padding-bottom: 40px;
+}
+
+.w-lewo {
+    padding-right: 40px;
+}
+
+/* ==========================================================================
+2. TYPOGRAFIA I ELEMENTY GLOBALNE
+========================================================================== */
 h3, h4, .uk-logo {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
 
+/* Konfiguracja formularzy */
+.uk-input, .uk-textarea, .uk-select {
+    border-radius: 6px;
+}
+
+.uk-form-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    font-weight: 700;
+}
+
+/* Dostosowanie globalnego paska przewijania (Webkit) */
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+/* ==========================================================================
+3. STRUKTURA I KOMPONENTY STRONY (NAVBAR, CARDS, LOGO BLOCKS)
+========================================================================== */
 .cemar-navbar {
     background-color: #ffffff !important;
-    border-bottom: 3px solid var(--primary-yellow);
+    border-bottom: 3px solid var(--primary-yellow) !important;
     box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    height: 90px;
+    height: 90px !important;
+    min-height: 90px !important;
+    box-sizing: border-box !important;
 }
+
+    /* Dostosowanie wysokości elementów wewnętrznych dla paska 90px (90px - 3px ramki = 87px) */
+    .cemar-navbar .uk-navbar-left,
+    .cemar-navbar .uk-navbar-right,
+    .cemar-navbar .uk-navbar-nav > li > a {
+        height: 87px !important;
+        min-height: 87px !important;
+        box-sizing: border-box !important;
+    }
 
 .nav-lang-bar {
     background-color: #2a2a2a;
@@ -50,16 +102,24 @@ h3, h4, .uk-logo {
         transition: color 0.2s;
     }
 
-        .nav-lang-bar a:hover, .nav-lang-bar a.active {
+        .nav-lang-bar a:hover,
+        .nav-lang-bar a.active {
             color: var(--primary-yellow);
         }
+
+.nav-lang-bar--fixed {
+    position: fixed;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    z-index: 1000;
+}
 
 .cemar-card {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: var(--card-shadow);
     border: 1px solid #eaeaea;
-
 }
 
 .yellow-accent-bar {
@@ -68,6 +128,40 @@ h3, h4, .uk-logo {
     border-radius: 12px 12px 0 0;
 }
 
+.cemar-decor-blocks {
+    display: inline-flex;
+    width: 140px;
+    height: 90px !important;
+    border-radius: 0px;
+    margin: 0 15px;
+    vertical-align: middle;
+    box-sizing: border-box !important;
+}
+
+    .cemar-decor-blocks span {
+        flex: 1;
+        height: 100%;
+    }
+
+.decor-1 {
+    background-color: #dfa63b;
+}
+
+.decor-2 {
+    background-color: #be8525;
+}
+
+.decor-3 {
+    background-color: #ff9c00;
+}
+
+.decor-4 {
+    background-color: #f6c365;
+}
+
+/* ==========================================================================
+4. PRZYCISKI I INTERAKTYWNE ELEMENTY (PILLS)
+========================================================================== */
 .cemar-btn-primary {
     background-color: var(--primary-yellow);
     color: #fff;
@@ -96,37 +190,179 @@ h3, h4, .uk-logo {
         color: #111;
     }
 
-.cemar-decor-blocks {
-    display: inline-flex;
-    width: 140px;
-    height: 92px;
-    border-radius: 0px;
-    margin: 0 15px;
-    vertical-align: middle;
+/* Kafelki Priorytetów */
+.priority-pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-    .cemar-decor-blocks span {
-        flex: 1;
-        height: 100%;
+.priority-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+    .priority-pill:hover {
+        border-color: #cbd5e1;
+        background-color: #f8fafc;
     }
 
-.decor-1 {
-    background-color: #dfa63b;
+    .priority-pill.active[data-priority="niski"] {
+        background-color: #d1fae5;
+        border-color: #10b981;
+        color: #065f46;
+    }
+
+    .priority-pill.active[data-priority="sredni"] {
+        background-color: #fef3c7;
+        border-color: #f59e0b;
+        color: #b45309;
+    }
+
+    .priority-pill.active[data-priority="wysoki"] {
+        background-color: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+    }
+
+/* Kafelki Filtrowania Zdarzeń i Logów */
+.filter-pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.decor-2 {
-    background-color: #be8525;
+.filter-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.decor-3 {
-    background-color: #ff9c00;
+    .filter-pill:hover {
+        border-color: #cbd5e1;
+        background-color: #f8fafc;
+        transform: translateY(-1px);
+    }
+
+    .filter-pill.active[data-filter="serwis"] {
+        background-color: #fef3c7;
+        border-color: #f59e0b;
+        color: #b45309;
+    }
+
+    .filter-pill.active[data-filter="zgloszenie"] {
+        background-color: #dbeafe;
+        border-color: #3b82f6;
+        color: #1d4ed8;
+    }
+
+    .filter-pill.active[data-filter="odpalenie"] {
+        background-color: #d1fae5;
+        border-color: #10b981;
+        color: #065f46;
+    }
+
+    .filter-pill.active[data-filter="blad"] {
+        background-color: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+    }
+
+    .filter-pill .pill-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        font-size: 11px;
+        margin-left: 8px;
+        color: #4a5568;
+    }
+
+    .filter-pill.active .pill-badge {
+        background: rgba(255, 255, 255, 0.6);
+        color: inherit;
+    }
+
+/* ==========================================================================
+5. MODUŁ METRYK I STATUSÓW (BADGES)
+========================================================================== */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.decor-4 {
-    background-color: #f6c365;
+    .status-badge.status-nowe {
+        background-color: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .status-badge.status-trakcie {
+        background-color: #fef3c7;
+        color: #b45309;
+    }
+
+    .status-badge.status-zakonczone {
+        background-color: #d1fae5;
+        color: #065f46;
+    }
+
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
 }
 
-/* --- Asystent AI --- */
+    .priority-badge.priority-niski {
+        background-color: #d1fae5;
+        color: #065f46;
+    }
+
+    .priority-badge.priority-sredni {
+        background-color: #fef3c7;
+        color: #b45309;
+    }
+
+    .priority-badge.priority-wysoki {
+        background-color: #fee2e2;
+        color: #991b1b;
+    }
+
+/* ==========================================================================
+6. MODUŁ: ASYSTENT AI
+========================================================================== */
 .ai-shell {
     height: calc(100vh - 90px - 32px - 60px);
     min-height: 520px;
@@ -237,7 +473,7 @@ h3, h4, .uk-logo {
     border-bottom: 1px solid #f0f0f0;
     cursor: pointer;
 }
-    
+
     .ai-recent-item:hover {
         color: var(--primary-yellow-hover);
     }
@@ -283,16 +519,9 @@ h3, h4, .uk-logo {
     }
 }
 
-.nav-lang-bar--fixed {
-    position: fixed;
-    left: 0;
-    bottom: -1px;
-    width: 100%;
-    z-index: 1000;
-}
-
-/* instukcje */
-
+/* ==========================================================================
+7. MODUŁ: INSTRUKCJE (BAZA WIEDZY)
+========================================================================== */
 .filter-section-title {
     font-size: 11px;
     font-weight: 700;
@@ -331,7 +560,6 @@ h3, h4, .uk-logo {
         transform: translateY(-1px);
     }
 
-    /* Klasy aktywne */
     .instr-filter-pill.active {
         background-color: #2a2a2a;
         border-color: #2a2a2a;
@@ -339,7 +567,6 @@ h3, h4, .uk-logo {
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-        /* Dodatkowy żółty akcent dla przycisków "Wszystkie" */
         .instr-filter-pill.active.accented {
             background-color: var(--primary-yellow);
             border-color: var(--primary-yellow);
@@ -347,26 +574,10 @@ h3, h4, .uk-logo {
             box-shadow: 0 4px 12px rgba(220, 163, 26, 0.2);
         }
 
-.pill-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 18px;
-    height: 18px;
-    padding: 0 6px;
-    border-radius: 10px;
-    background: #f1f5f9;
-    font-size: 10px;
-    margin-left: 8px;
-    color: #64748b;
-    font-weight: 700;
-    transition: background 0.2s, color 0.2s;
-}
-
-.instr-filter-pill.active .pill-badge {
-    background: rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-}
+        .instr-filter-pill.active .pill-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
 
 .instr-card {
     background: #fff;
@@ -432,24 +643,9 @@ h3, h4, .uk-logo {
     border-radius: 8px;
 }
 
-/*serwis cholera wie co*/
-.custom-scroll::-webkit-scrollbar {
-    width: 6px;
-}
-
-.custom-scroll::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-
-.custom-scroll::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-
-    .custom-scroll::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-    }
-
+/* ==========================================================================
+8. PRZESYŁANIE MEDIÓW (DROPZONES, PHOTO BOX)
+========================================================================== */
 .photo-container img {
     transition: transform 0.3s ease;
 }
@@ -467,98 +663,6 @@ h3, h4, .uk-logo {
         background-color: rgba(220, 163, 26, 0.08) !important;
     }
 
-/* konto coś */
-.account-avatar {
-    width: 84px;
-    height: 84px;
-    border-radius: 12px;
-    background-color: #2a2a2a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 28px;
-    flex-shrink: 0;
-}
-
-.account-role-badge {
-    background-color: #eef4ff;
-    color: #2f6fd6;
-}
-
-.uk-input, .uk-select {
-    border-radius: 6px;
-}
-
-.uk-form-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #888;
-    font-weight: 700;
-}
-
-.account-section-title {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #999;
-    font-weight: 700;
-}
-.nav-lang-bar--fixed {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000;
-}
-.priority-pill-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.priority-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 16px;
-    border-radius: 30px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    font-size: 13px;
-    font-weight: 600;
-    color: #4a5568;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-}
-
-    .priority-pill:hover {
-        border-color: #cbd5e1;
-        background-color: #f8fafc;
-    }
-
-    .priority-pill.active[data-priority="niski"] {
-        background-color: #d1fae5;
-        border-color: #10b981;
-        color: #065f46;
-    }
-
-    .priority-pill.active[data-priority="sredni"] {
-        background-color: #fef3c7;
-        border-color: #f59e0b;
-        color: #b45309;
-    }
-
-    .priority-pill.active[data-priority="wysoki"] {
-        background-color: #fee2e2;
-        border-color: #ef4444;
-        color: #991b1b;
-    }
-
-/* Strefa przeciągnij i upuść dla zdjęć / wideo */
 .media-dropzone {
     border: 2px dashed #cbd5e1;
     border-radius: 10px;
@@ -569,7 +673,8 @@ h3, h4, .uk-logo {
     transition: all 0.2s ease;
 }
 
-    .media-dropzone:hover, .media-dropzone.drag-over {
+    .media-dropzone:hover,
+    .media-dropzone.drag-over {
         border-color: var(--primary-yellow);
         background-color: #fffbeb;
     }
@@ -594,7 +699,8 @@ h3, h4, .uk-logo {
     aspect-ratio: 1 / 1;
 }
 
-    .media-preview-item img, .media-preview-item video {
+    .media-preview-item img,
+    .media-preview-item video {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -617,7 +723,8 @@ h3, h4, .uk-logo {
         border: none;
     }
 
-    .media-preview-item .media-filename {
+    .media-preview-item .media-filename,
+    .media-gallery-item .media-filename {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -630,13 +737,140 @@ h3, h4, .uk-logo {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-/* Column toggling transitions */
+
+.media-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.media-gallery-item {
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+9. PANEL PROFILOWY (KONTO)
+========================================================================== */
+.account-avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 12px;
+    background-color: #2a2a2a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.account-role-badge {
+    background-color: #eef4ff;
+    color: #2f6fd6;
+}
+
+.account-section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+10. MODUŁ METRYK DANYCH DIAGNOSTYCZNYCH (INFO FIELDS)
+========================================================================== */
+.info-field-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.info-field-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-top: 2px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #94a3b8;
+}
+
+/* ==========================================================================
+11. SYSTEMY TELEMETRYCZNE, LOGI I TABELE MASZYNOWE
+========================================================================== */
+.log-row {
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+    .log-row:hover {
+        background-color: rgba(0,0,0,0.03);
+    }
+
+.log-details-row td {
+    background: #f8f9fb;
+    padding: 20px;
+    border-top: none;
+}
+
+.log-details-content h5 {
+    margin-bottom: 10px;
+}
+
+.log-details-content p {
+    margin-bottom: 15px;
+}
+
+/* Animowany chevron przy rozwijaniu logów */
+.chevron-icon {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+    .chevron-icon svg {
+        transition: transform 0.25s ease;
+    }
+
+    .chevron-icon.rotated svg {
+        transform: rotate(180deg);
+    }
+
+.goto-page-btn {
+    margin-top: 6px;
+}
+
+.log-filter-card {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+}
+
 .collapsible-col {
     transition: all 0.3s ease-in-out;
     white-space: nowrap;
 }
 
-/* Stage headers */
 .phase-header-row {
     background-color: #f9fafb;
     border-left: 4px solid var(--primary-yellow);
@@ -652,8 +886,37 @@ table th, table td {
 
 thead tr th {
     height: 48px !important;
+
 }
-/* Pulsing green status indicator dot */
+.uk-table-divider th {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+/* Ikona info przy typach zdarzeń */
+.info-trigger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #f1f5f9;
+    color: #64748b;
+    margin-left: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+}
+
+    .info-trigger-btn:hover {
+        background-color: var(--primary-yellow);
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+/* Zielona kropka statusu Live (Pulse) */
 .live-pulse-dot {
     display: inline-block;
     width: 10px;
@@ -677,7 +940,10 @@ thead tr th {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
 }
-/* --- Kontakt i Pomoc --- */
+
+/* ==========================================================================
+12. CENTRUM POMOCY, KONTAKT I AWARYJNE
+========================================================================== */
 .contact-icon-wrap {
     width: 48px;
     height: 48px;
@@ -727,18 +993,6 @@ thead tr th {
         background-color: #32d296;
     }
 
-.uk-input, .uk-textarea, .uk-select {
-    border-radius: 6px;
-}
-
-.uk-form-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #888;
-    font-weight: 700;
-}
-
 .faq-section-title {
     font-size: 13px;
     text-transform: uppercase;
@@ -762,303 +1016,10 @@ thead tr th {
     color: #fff;
     border-radius: 12px;
 }
-.log-row {
-    cursor: pointer;
-    transition: background-color .2s ease;
-}
 
-    .log-row:hover {
-        background-color: rgba(0,0,0,0.03);
-    }
-
-.log-details-row td {
-    background: #f8f9fb;
-    padding: 20px;
-    border-top: none;
-}
-
-.log-details-content h5 {
-    margin-bottom: 10px;
-}
-
-.log-details-content p {
-    margin-bottom: 15px;
-}
-
-/* Animowany chevron przy rozwijaniu logów */
-.chevron-icon {
-    display: inline-flex;
-    vertical-align: middle;
-    margin-right: 4px;
-}
-
-    .chevron-icon svg {
-        transition: transform 0.25s ease;
-    }
-
-    .chevron-icon.rotated svg {
-        transform: rotate(180deg);
-    }
-
-/* Przycisk przejścia do dedykowanej strony zdarzenia */
-.goto-page-btn {
-    margin-top: 6px;
-}
-
-.log-filter-card {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 16px 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    margin-bottom: 20px;
-}
-.cemar-table th {
-    background-color: #2a2a2a;
-    color: #fff !important;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 12px;
-}
-
-/* Nowe filtrowanie w formie kafelków/tagów */
-.filter-pill-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filter-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 16px;
-    border-radius: 30px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    font-size: 13px;
-    font-weight: 600;
-    color: #4a5568;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
-
-    .filter-pill:hover {
-        border-color: #cbd5e1;
-        background-color: #f8fafc;
-        transform: translateY(-1px);
-    }
-
-    /* Aktywne stany filtrów */
-    .filter-pill.active[data-filter="serwis"] {
-        background-color: #fef3c7;
-        border-color: #f59e0b;
-        color: #b45309;
-    }
-
-    .filter-pill.active[data-filter="zgloszenie"] {
-        background-color: #dbeafe;
-        border-color: #3b82f6;
-        color: #1d4ed8;
-    }
-
-    .filter-pill.active[data-filter="odpalenie"] {
-        background-color: #d1fae5;
-        border-color: #10b981;
-        color: #065f46;
-    }
-
-    .filter-pill.active[data-filter="blad"] {
-        background-color: #fee2e2;
-        border-color: #ef4444;
-        color: #991b1b;
-    }
-
-    .filter-pill .pill-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #f1f5f9;
-        font-size: 11px;
-        margin-left: 8px;
-        color: #4a5568;
-    }
-
-    .filter-pill.active .pill-badge {
-        background: rgba(255, 255, 255, 0.6);
-        color: inherit;
-    }
-
-/* Ikona info przy typach zdarzeń */
-.info-trigger-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: #f1f5f9;
-    color: #64748b;
-    margin-left: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    vertical-align: middle;
-}
-
-    .info-trigger-btn:hover {
-        background-color: var(--primary-yellow);
-        color: #fff;
-        transform: scale(1.1);
-    }
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 14px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-    .status-badge.status-nowe {
-        background-color: #dbeafe;
-        color: #1d4ed8;
-    }
-
-    .status-badge.status-trakcie {
-        background-color: #fef3c7;
-        color: #b45309;
-    }
-
-    .status-badge.status-zakonczone {
-        background-color: #d1fae5;
-        color: #065f46;
-    }
-
-.priority-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 12px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-    .priority-badge.priority-niski {
-        background-color: #d1fae5;
-        color: #065f46;
-    }
-
-    .priority-badge.priority-sredni {
-        background-color: #fef3c7;
-        color: #b45309;
-    }
-
-    .priority-badge.priority-wysoki {
-        background-color: #fee2e2;
-        color: #991b1b;
-    }
-
-.info-field-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #94a3b8;
-    font-weight: 600;
-}
-
-.info-field-value {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1f2937;
-    margin-top: 2px;
-}
-
-.media-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 12px;
-}
-
-.media-gallery-item {
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    background: #f8fafc;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #94a3b8;
-    position: relative;
-    overflow: hidden;
-}
-
-    .media-gallery-item .media-filename {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0,0,0,0.55);
-        color: #fff;
-        font-size: 10px;
-        padding: 3px 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-.empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #94a3b8;
-}
-
-/*wycena*/
-/* Custom scrollbary dla ułatwienia pracy z długimi listami */
-.custom-scroll::-webkit-scrollbar {
-    width: 6px;
-}
-
-.custom-scroll::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-
-.custom-scroll::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-
-    .custom-scroll::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-    }
-
-/* --- Style dla Modułu Zdjęć --- */
-.photo-container img {
-    transition: transform 0.3s ease;
-}
-
-.photo-container:hover img {
-    transform: scale(1.05);
-}
-
-.upload-drop-zone {
-    transition: all 0.25s ease;
-}
-
-    /* Klasa dodawana podczas przeciągania pliku nad strefę zrzutu */
-    .upload-drop-zone.dragover {
-        border-color: var(--primary-yellow) !important;
-        background-color: rgba(220, 163, 26, 0.08) !important;
-    }
-
-/* kontener mapy */
+/* ==========================================================================
+13. MAPA TRASY GPS
+========================================================================== */
 #map {
     height: 400px;
     border-radius: 8px;
