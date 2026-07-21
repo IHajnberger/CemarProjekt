@@ -1,9 +1,43 @@
 ﻿// ==========================================
 // 1. ZMIENNE GLOBALNE I ZABEZPIECZENIA DOM
 // ==========================================
+let serviceStarted = false;
+let startTime = null;
+let timerInterval = null;
+let activePhotos = [];
+
 const urlParams = new URLSearchParams(window.location.search);
 const machineId = urlParams.get('id') || 'E59008';
 const machineType = urlParams.get('type') || 'City';
+const dropZone = document.getElementById('drop-zone');
+
+// Domyślny zestaw wycen na przypadek czystej pamięci przeglądarki
+const defaultWyceny = [
+    {
+        id: "w1",
+        model: "t35",
+        machineNum: "E59008",
+        client: "P.H.U. Bud-Max",
+        hours: "1420",
+        technician: "Marek Nowak",
+        date: "2026-07-15",
+        activities: ["Czyszczenie skorupy", "Czyszczenie turbiny"],
+        parts: ["8250", "4511"],
+        notes: "Zalecana czujność przy turbinie, widoczne mikropęknięcia."
+    },
+    {
+        id: "w2",
+        model: "city",
+        machineNum: "C77212",
+        client: "Trans-Met Sp. z o.o.",
+        hours: "890",
+        technician: "Jan Kowalski",
+        date: "2026-07-17",
+        activities: ["Mycie boxa", "Wymiana filtra paliwa", "Wymiana dyfuzora"],
+        parts: ["7601", "1240"],
+        notes: "Wymiana płynów w boxie oraz kompletnego wkładu filtra."
+    }
+];
 
 // Bezpieczne ustawianie tekstu
 function safeSetText(id, text) {
@@ -11,10 +45,24 @@ function safeSetText(id, text) {
     if (el) el.innerText = text;
 }
 
-// Bezpieczne ustawianie wartości pól formularzy
+// Bezpieczne ustawianie wartości pól formularzy (z obsługą <select>)
 function safeSetValue(id, val) {
     const el = document.getElementById(id);
-    if (el) el.value = val;
+    if (!el) return;
+
+    el.value = val;
+
+    if (el.tagName === 'SELECT' && el.value !== String(val)) {
+        const valLower = String(val).toLowerCase().trim();
+        for (let i = 0; i < el.options.length; i++) {
+            const opt = el.options[i];
+            if (opt.value.toLowerCase().trim() === valLower || opt.text.toLowerCase().trim() === valLower) {
+                el.selectedIndex = i;
+                break;
+            }
+        }
+    }
+    el.dispatchEvent(new Event('change', { bubbles: true }));
 }
 
 // Bezpieczne ukrywanie elementów
@@ -24,10 +72,13 @@ function safeHide(selector) {
 }
 
 // ==========================================
-// 2. GLÓWNA INICJALIZACJA PO ZAŁADOWANIU STRONY
+// 2. GŁÓWNA INICJALIZACJA PO ZAŁADOWANIU STRONY
 // ==========================================
 document.addEventListener('DOMContentLoaded', function () {
-    // Podstawowe dane maszyn
+    // Inicjalizacja listy wycen w dropdownie
+    initSavedMachinesSelect();
+
+    // Podstawowe dane maszyn na podstronach
     safeSetText('p2-machine-number', machineId);
     safeSetText('p2-machine-type', machineType);
     safeSetText('p3-machine-number', machineId);
@@ -72,21 +123,32 @@ document.addEventListener('DOMContentLoaded', function () {
         safeHide('.pomoc');
     }
 
-    // Ustawianie dzisiejszej daty w formularzach
+    // AUTOMATYCZNE WYWOŁANIE RENDEROWANIA DANYCH RAPORTU (SERWIS ZAKOŃCZONY)
+    if (document.getElementById('sum-model') || document.getElementById('sum-num')) {
+        renderServiceReport();
+    }
+
+    const finishBtn = document.getElementById('btn-finish-service');
+    if (finishBtn) {
+        finishBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            finishService();
+        });
+    }
+
+    // Ustawienie dzisiejszej daty w formularzu
     const today = new Date().toISOString().split('T')[0];
     safeSetValue('form-date', today);
 
-    // Inicjalizacje specyficznych podstron (wykonają się tylko jeśli elementy istnieją)
-    initRouteMap();
-    initTicketPage();
-    initServiceForm();
-    initValuationCalculator();
+    // Inicjalizacja poszczególnych modułów
+    if (typeof initRouteMap === 'function') initRouteMap();
+    if (typeof initTicketPage === 'function') initTicketPage();
+    if (typeof initServiceForm === 'function') initServiceForm();
+    if (typeof initValuationCalculator === 'function') initValuationCalculator();
+    if (typeof updateFilterBadges === 'function') updateFilterBadges();
+    if (typeof applyFilters === 'function') applyFilters();
+    if (typeof scrollAiChatToBottom === 'function') scrollAiChatToBottom();
 
-    // Inicjalizacja filtrów i logów
-    updateFilterBadges();
-    applyFilters();
-
-    // Przycisk powrotu
     const p7BackBtn = document.getElementById('p7-back-btn');
     if (p7BackBtn) p7BackBtn.onclick = () => window.location.href = detailsUrl;
 
@@ -94,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (mainBackBtn) mainBackBtn.onclick = () => window.location.href = homeUrl;
 });
 
-// Globalna funkcja powrotu 
 window.goBack = function () {
     const userRole = localStorage.getItem('userRole') || 'client';
     const detailsUrl = userRole === 'client' ? 'client-details.html' : 'staff-details.html';
@@ -367,18 +428,6 @@ function renderPreview(file) {
     grid.appendChild(item);
 }
 
-window.handleSubmit = function (event) {
-    event.preventDefault();
-    if (typeof UIkit !== 'undefined') {
-        UIkit.notification({
-            message: `<span uk-icon='icon: check; ratio: 1' class='uk-margin-small-right'></span> Zgłoszenie serwisowe zostało przygotowane (${attachedFiles.length} zał.).`,
-            status: 'success',
-            pos: 'top-center',
-            timeout: 4000
-        });
-    }
-};
-
 // ==========================================
 // 6. WYCENA I KALKULATOR
 // ==========================================
@@ -392,7 +441,7 @@ window.toggleModelParts = function () {
     const modelEl = document.getElementById('machine-model');
     if (!modelEl) return;
 
-    const model = modelEl.value;
+    const model = modelEl.value.toLowerCase();
     const diffT35 = document.getElementById('part-diffuser-t35');
     const diffCity24 = document.getElementById('part-diffuser-city-24');
     const diffCity30 = document.getElementById('part-diffuser-city-30');
@@ -416,8 +465,8 @@ window.filterActivities = function () {
         let visibleCount = 0;
 
         items.forEach(item => {
-            const name = item.querySelector('.activity-name').innerText.toLowerCase();
-            const desc = item.querySelector('.activity-desc') ? item.querySelector('.activity-desc').innerText.toLowerCase() : '';
+            const name = item.querySelector('.activity-name')?.innerText.toLowerCase() || '';
+            const desc = item.querySelector('.activity-desc')?.innerText.toLowerCase() || '';
 
             if (name.includes(query) || desc.includes(query)) {
                 item.style.setProperty('display', 'flex', 'important');
@@ -432,20 +481,18 @@ window.filterActivities = function () {
 
 window.filterParts = function () {
     const input = document.getElementById('parts-search');
-    if (!input) return;
-
-    const query = input.value.toLowerCase().trim();
+    const query = input ? input.value.toLowerCase().trim() : '';
     const sections = document.querySelectorAll('#parts-container .part-section');
     const modelEl = document.getElementById('machine-model');
-    const model = modelEl ? modelEl.value : '';
+    const model = modelEl ? modelEl.value.toLowerCase() : '';
 
     sections.forEach(section => {
         const items = section.querySelectorAll('.part-item');
         let visibleCount = 0;
 
         items.forEach(item => {
-            const code = item.querySelector('.part-code') ? item.querySelector('.part-code').innerText.toLowerCase() : '';
-            const name = item.querySelector('.part-name') ? item.querySelector('.part-name').innerText.toLowerCase() : '';
+            const code = item.querySelector('.part-code')?.innerText.toLowerCase() || '';
+            const name = item.querySelector('.part-name')?.innerText.toLowerCase() || '';
 
             if (code.includes(query) || name.includes(query)) {
                 if (item.id && item.id.startsWith('part-diffuser-')) {
@@ -474,7 +521,7 @@ window.calculateValuation = function () {
 
     activities.forEach(checkbox => {
         if (checkbox.checked) {
-            totalMinutes += parseInt(checkbox.getAttribute('data-time'));
+            totalMinutes += parseInt(checkbox.getAttribute('data-time') || '0', 10);
         }
     });
 
@@ -504,7 +551,7 @@ window.calculateValuation = function () {
             const code = checkbox.getAttribute('data-code');
             const name = checkbox.getAttribute('data-name');
 
-            const optionSelect = checkbox.closest('.part-item').querySelector('.part-option');
+            const optionSelect = checkbox.closest('.part-item')?.querySelector('.part-option');
             const optionVal = optionSelect ? optionSelect.value : 'W';
 
             let statusLabel = '';
@@ -522,106 +569,495 @@ window.calculateValuation = function () {
     }
 };
 
-window.generateReportText = function () {
-    const modelSelect = document.getElementById('machine-model');
-    if (!modelSelect) return;
+// ==========================================
+// 7. POBIERANIE I WYPEŁNIANIE DANYCH RAPORTU
+// ==========================================
+function getReportDataFromStorage() {
+    const saved = localStorage.getItem('cemar_active_summary');
+    if (saved) {
+        try { return JSON.parse(saved); } catch (e) { return null; }
+    }
+    return null;
+}
 
-    const modelName = modelSelect.options[modelSelect.selectedIndex].text;
-    const machineNum = document.getElementById('form-machine-num')?.value || '---';
-    const client = document.getElementById('form-client')?.value || '---';
-    const hours = document.getElementById('form-hours')?.value || '---';
-    const technician = document.getElementById('form-technician')?.value || '---';
-    const date = document.getElementById('form-date')?.value || '---';
-    const notes = document.getElementById('technician-notes')?.value || 'Brak dodatkowych uwag.';
+window.renderServiceReport = function (dataOverride = null) {
+    let data = dataOverride || getReportDataFromStorage();
 
-    let selectedActivities = [];
-    document.querySelectorAll('input[type="checkbox"][data-time]').forEach(cb => {
-        if (cb.checked) {
-            selectedActivities.push(`- ${cb.getAttribute('data-name')} (${cb.getAttribute('data-time')} min)`);
-        }
-    });
-
-    let selectedParts = [];
-    document.querySelectorAll('.part-checkbox').forEach(cb => {
-        if (cb.checked) {
-            const parent = cb.closest('[id^="part-diffuser-"]');
-            if (parent && parent.style.display === 'none') return;
-            const optionSelect = cb.closest('.part-item')?.querySelector('.part-option');
-            const optionVal = optionSelect ? optionSelect.value : 'W';
-            selectedParts.push(`- [${cb.getAttribute('data-code')}] ${cb.getAttribute('data-name')} (Opcja: ${optionVal})`);
-        }
-    });
-
-    const includeBaseline = document.getElementById('base-service-baseline')?.checked;
-    const finalTime = document.getElementById('summary-total-time')?.innerText || '0.00 godz.';
-
-    let report = `=======================================\n`;
-    report += `    WYCENA SERWISOWA CEMAR\n`;
-    report += `=======================================\n`;
-    report += `Model: ${modelName}\n`;
-    report += `Nr Maszyny: ${machineNum}\n`;
-    report += `Klient: ${client}\n`;
-    report += `Roboczogodziny: ${hours} mth\n`;
-    report += `Sporządził: ${technician}\n`;
-    report += `Data: ${date}\n`;
-    report += `---------------------------------------\n`;
-    report += `WYBRANE CZYNNOŚCI SERWISOWE:\n`;
-    report += selectedActivities.length > 0 ? selectedActivities.join('\n') + '\n' : 'Brak wybranych czynności\n';
-    report += `---------------------------------------\n`;
-    report += `WYBRANE CZĘŚCI ZAMIENNE:\n`;
-    report += selectedParts.length > 0 ? selectedParts.join('\n') + '\n' : 'Brak wybranych części\n';
-    report += `---------------------------------------\n`;
-    report += `Baseline +8h (testy/pakowanie): ${includeBaseline ? 'TAK' : 'NIE'}\n`;
-    report += `CAŁKOWITY CZAS PRACY: ${finalTime}\n`;
-    report += `---------------------------------------\n`;
-    report += `UWAGI SERWISANTA:\n`;
-    report += `${notes}\n`;
-    report += `=======================================`;
-
-    const textarea = document.createElement('textarea');
-    textarea.value = report;
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-        document.execCommand('copy');
-        if (typeof UIkit !== 'undefined') {
-            UIkit.notification({ message: "<span uk-icon='check'></span> Raport wyceny skopiowany do schowka!", status: 'success', pos: 'top-center', timeout: 3000 });
-        }
-    } catch (err) {
-        if (typeof UIkit !== 'undefined') {
-            UIkit.notification({ message: "<span uk-icon='close'></span> Błąd zapisu do schowka.", status: 'danger', pos: 'top-center' });
+    // FALLBACK: Jeśli w cemar_active_summary nic nie ma, wczytaj domyślną wycenę z localStorage
+    if (!data) {
+        try {
+            const wyceny = JSON.parse(localStorage.getItem('cemar_wyceny') || '[]');
+            if (wyceny.length > 0) {
+                const first = wyceny[0];
+                data = {
+                    duration: '01:45:00',
+                    model: first.model || 'City',
+                    machineNum: first.machineNum || 'E59008',
+                    client: first.client || 'P.H.U. Bud-Max',
+                    hours: first.hours || '1420',
+                    technician: first.technician || 'Marek Nowak',
+                    date: first.date || '2026-07-15',
+                    notes: first.notes || 'Brak uwag.',
+                    activities: first.activities || [],
+                    parts: first.parts || [],
+                    photos: []
+                };
+            }
+        } catch (e) {
+            console.error("Błąd odczytu wycen fallback:", e);
         }
     }
-    document.body.removeChild(textarea);
+
+    if (!data) return;
+
+    // Wypełnianie pól w HTML
+    safeSetText('sum-duration', data.duration || '00:00:00');
+    safeSetText('sum-model', (data.model || '---').toUpperCase());
+    safeSetText('sum-num', data.machineNum || '---');
+    safeSetText('sum-client', data.client || '---');
+    safeSetText('sum-hours', data.hours ? `${data.hours} mth` : '--- mth');
+    safeSetText('sum-tech', data.technician || '---');
+    safeSetText('sum-date', data.date || '---');
+    safeSetText('sum-notes', data.notes || 'Brak dodatkowych uwag.');
+
+    // Wykonane procedury
+    const activitiesUl = document.getElementById('sum-activities');
+    if (activitiesUl) {
+        activitiesUl.innerHTML = '';
+        if (data.activities && data.activities.length > 0) {
+            data.activities.forEach(act => {
+                const li = document.createElement('li');
+                li.textContent = act;
+                activitiesUl.appendChild(li);
+            });
+        } else {
+            activitiesUl.innerHTML = '<li class="text-gray-400 italic">Brak zaznaczonych procedur</li>';
+        }
+    }
+
+    // Wykorzystane części
+    const partsUl = document.getElementById('sum-parts');
+    if (partsUl) {
+        partsUl.innerHTML = '';
+        if (data.parts && data.parts.length > 0) {
+            data.parts.forEach(part => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center space-x-2';
+
+                let partText = '';
+                if (typeof part === 'object' && part !== null) {
+                    partText = part.code ? `[${part.code}] ${part.name}` : (part.name || 'Część zamienna');
+                } else {
+                    partText = String(part);
+                }
+
+                li.innerHTML = `<span class="text-amber-500 font-bold">•</span> <span>${partText}</span>`;
+                partsUl.appendChild(li);
+            });
+        } else {
+            partsUl.innerHTML = '<li class="text-gray-400 italic">Nie zużyto żadnych części</li>';
+        }
+    }
+
+    // Zdjęcia
+    const photosContainer = document.getElementById('sum-photos-container');
+    const photosGrid = document.getElementById('sum-photos');
+    if (photosContainer && photosGrid) {
+        photosGrid.innerHTML = '';
+        if (data.photos && data.photos.length > 0) {
+            photosContainer.classList.remove('hidden');
+            data.photos.forEach(photoSrc => {
+                const imgDiv = document.createElement('div');
+                imgDiv.className = 'relative rounded-lg overflow-hidden border border-gray-200 h-28 bg-gray-100';
+                imgDiv.innerHTML = `<img src="${photoSrc}" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox('${photoSrc}')" alt="Dokumentacja serwisowa">`;
+                photosGrid.appendChild(imgDiv);
+            });
+        } else {
+            photosContainer.classList.add('hidden');
+        }
+    }
 };
 
-window.clearAllForm = function () {
+// INICJALIZACJA LISTY ROZWIJANEJ W FORMULARZU
+function initSavedMachinesSelect() {
+    const selectEl = document.getElementById('select-saved-machine');
+    if (!selectEl) return;
+
+    let savedWyceny = localStorage.getItem('cemar_wyceny');
+    if (!savedWyceny) {
+        localStorage.setItem('cemar_wyceny', JSON.stringify(defaultWyceny));
+        savedWyceny = JSON.stringify(defaultWyceny);
+    }
+
+    let wyceny = [];
+    try { wyceny = JSON.parse(savedWyceny); } catch (e) { wyceny = defaultWyceny; }
+
+    selectEl.innerHTML = '<option value="" disabled selected>-- Wybierz zlecenie z Wyceny --</option>';
+
+    wyceny.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.id;
+        opt.textContent = `${item.machineNum || 'Brak NR'} - ${item.client || 'Klient'} (${(item.model || '').toUpperCase()})`;
+        selectEl.appendChild(opt);
+    });
+
+    selectEl.onchange = window.loadSelectedMachine;
+}
+
+// ŁADOWANIE DANYCH Z WYCENY DO FORMULARZA
+window.loadSelectedMachine = function () {
+    const selectEl = document.getElementById('select-saved-machine');
+    if (!selectEl || !selectEl.value) return;
+
+    let wyceny = [];
+    try { wyceny = JSON.parse(localStorage.getItem('cemar_wyceny') || '[]'); } catch (e) { wyceny = defaultWyceny; }
+
+    let selected = wyceny.find(x => String(x.id) === String(selectEl.value));
+    if (!selected && typeof defaultWyceny !== 'undefined') {
+        selected = defaultWyceny.find(x => String(x.id) === String(selectEl.value));
+    }
+
+    if (!selected) return;
+
+    if (selected.model) safeSetValue('machine-model', selected.model);
+    if (selected.machineNum) safeSetValue('form-machine-num', selected.machineNum);
+    if (selected.client) safeSetValue('form-client', selected.client);
+    if (selected.hours) safeSetValue('form-hours', selected.hours);
+    if (selected.technician) safeSetValue('form-technician', selected.technician);
+    if (selected.date) safeSetValue('form-date', selected.date);
+    if (selected.notes) safeSetValue('technician-notes', selected.notes);
+
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-    const baseline = document.getElementById('base-service-baseline');
-    if (baseline) baseline.checked = true;
 
-    safeSetValue('form-machine-num', '');
-    safeSetValue('form-client', '');
-    safeSetValue('form-hours', '');
-    safeSetValue('technician-notes', '');
-    safeSetValue('activity-search', '');
-    safeSetValue('parts-search', '');
+    if (Array.isArray(selected.activities)) {
+        selected.activities.forEach(actName => {
+            if (!actName) return;
+            const actLower = String(actName).toLowerCase().trim();
 
-    filterActivities();
-    filterParts();
-    calculateValuation();
+            document.querySelectorAll('#activities-container input[type="checkbox"], input[data-time]').forEach(checkbox => {
+                const dataName = (checkbox.getAttribute('data-name') || '').toLowerCase().trim();
+                const val = (checkbox.value || '').toLowerCase().trim();
+                const parentLabel = (checkbox.closest('label')?.innerText || checkbox.parentElement?.innerText || '').toLowerCase().trim();
+
+                if ((dataName && dataName.includes(actLower)) ||
+                    (val && val.includes(actLower)) ||
+                    (parentLabel && parentLabel.includes(actLower))) {
+                    checkbox.checked = true;
+                }
+            });
+        });
+    }
+
+    if (Array.isArray(selected.parts)) {
+        selected.parts.forEach(part => {
+            if (!part) return;
+            const partCode = ((typeof part === 'object' && part !== null) ? part.code : String(part)).toLowerCase().trim();
+            const partName = ((typeof part === 'object' && part !== null) ? part.name : '').toLowerCase().trim();
+
+            document.querySelectorAll('.part-checkbox, #parts-container input[type="checkbox"]').forEach(checkbox => {
+                const code = (checkbox.getAttribute('data-code') || '').toLowerCase().trim();
+                const val = (checkbox.value || '').toLowerCase().trim();
+                const name = (checkbox.getAttribute('data-name') || '').toLowerCase().trim();
+                const parentText = (checkbox.closest('.part-item')?.innerText || checkbox.parentElement?.innerText || '').toLowerCase().trim();
+
+                if ((code && code === partCode) ||
+                    (val && val === partCode) ||
+                    (name && partName && name.includes(partName)) ||
+                    (partCode && parentText.includes(partCode))) {
+                    checkbox.checked = true;
+                }
+            });
+        });
+    }
+
+    if (typeof toggleModelParts === 'function') toggleModelParts();
+    if (typeof calculateValuation === 'function') calculateValuation();
 
     if (typeof UIkit !== 'undefined') {
-        UIkit.notification({ message: "Kalkulator został wyczyszczony.", status: 'primary', pos: 'bottom-center' });
+        UIkit.notification({
+            message: `<span uk-icon='icon: check'></span> Wczytano dane dla: <b>${selected.machineNum}</b>`,
+            status: 'success',
+            pos: 'top-center',
+            timeout: 2500
+        });
     }
 };
 
 // ==========================================
-// 7. INNE POMOCNICZE FUNKCJE STRON
+// 8. AI ASYSTENT
 // ==========================================
-function initRouteMap() {
+function fillAiInput(text) {
+    const input = document.getElementById('ai-input');
+    if (!input) return;
+    input.value = text;
+    input.focus();
+}
+
+function handleAiKeydown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendAiMessage(e);
+    }
+}
+
+function scrollAiChatToBottom() {
+    const scrollEl = document.getElementById('ai-chat-scroll');
+    if (!scrollEl) return;
+    scrollEl.scrollTop = scrollEl.scrollHeight;
+}
+
+function currentTime() {
+    const d = new Date();
+    return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+}
+
+function sendAiMessage(e) {
+    if (e) e.preventDefault();
+    const input = document.getElementById('ai-input');
+    if (!input) return false;
+    const text = input.value.trim();
+    if (!text) return false;
+
+    const scrollEl = document.getElementById('ai-chat-scroll');
+    if (!scrollEl) return false;
+
+    const userRow = document.createElement('div');
+    userRow.className = 'ai-msg-row user';
+    userRow.innerHTML = `
+                        <div>
+                        <div class="ai-bubble"></div>
+                        <div class="ai-msg-meta uk-text-right">Ty · ${currentTime()}</div>
+                        </div>
+                        <div class="ai-avatar user">TY</div>`;
+    userRow.querySelector('.ai-bubble').innerText = text;
+    scrollEl.appendChild(userRow);
+
+    input.value = '';
+    scrollAiChatToBottom();
+
+    const typingRow = document.createElement('div');
+    typingRow.className = 'ai-msg-row bot';
+    typingRow.id = 'ai-typing-row';
+    typingRow.innerHTML = `
+                        <div class="ai-avatar bot">AI</div>
+                        <div>
+                        <div class="ai-bubble ai-typing"><span></span><span></span><span></span></div>
+                        </div>`;
+    scrollEl.appendChild(typingRow);
+    scrollAiChatToBottom();
+
+    setTimeout(() => {
+        const row = document.getElementById('ai-typing-row');
+        if (row) row.remove();
+
+        const botRow = document.createElement('div');
+        botRow.className = 'ai-msg-row bot';
+        botRow.innerHTML = `
+                        <div class="ai-avatar bot">AI</div>
+                        <div>
+                        <div class="ai-bubble"></div>
+                        <div class="ai-msg-meta">Asystent AI · ${currentTime()}</div>
+                        </div>`;
+        botRow.querySelector('.ai-bubble').innerText = 'To jest odpowiedź demonstracyjna. Podłącz backend Asystenta AI, aby otrzymywać rzeczywiste odpowiedzi.';
+        scrollEl.appendChild(botRow);
+        scrollAiChatToBottom();
+    }, 900);
+
+    return false;
+}
+
+// ==========================================
+// 9. OBSŁUGA ZDJĘĆ
+// ==========================================
+if (dropZone) {
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+        }, false);
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handlePhotoUpload(files);
+    }, false);
+}
+
+function handlePhotoUpload(files) {
+    const grid = document.getElementById('photos-grid');
+    if (!grid) return;
+
+    Array.from(files).forEach(file => {
+        if (!file.type.startsWith('image/')) {
+            if (typeof UIkit !== 'undefined') {
+                UIkit.notification({
+                    message: "<span uk-icon='warning'></span> Wybrany plik nie jest obrazem!",
+                    status: 'danger'
+                });
+            }
+            return;
+        }
+
+        const imageUrl = URL.createObjectURL(file);
+        activePhotos.push(imageUrl);
+
+        const photoDiv = document.createElement('div');
+        photoDiv.className = "photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md animate-fade-in";
+
+        photoDiv.innerHTML = `
+        <img src="${imageUrl}" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie serwisanta">
+        <span class="absolute bottom-1 left-1 bg-amber-600 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Serwisant</span>
+        <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
+        <span uk-icon="icon: trash; ratio: 0.75"></span>
+        </button>
+        `;
+
+        grid.appendChild(photoDiv);
+    });
+
+    if (typeof UIkit !== 'undefined') {
+        UIkit.notification({
+            message: "<span uk-icon='check'></span> Zdjęcia dodane do zlecenia.",
+            status: 'success',
+            timeout: 2000
+        });
+    }
+}
+
+function deletePhoto(button) {
+    const container = button.closest('.photo-container');
+    if (container) {
+        const img = container.querySelector('img');
+        if (img && img.src) {
+            activePhotos = activePhotos.filter(src => src !== img.src);
+        }
+        container.style.transform = 'scale(0.9)';
+        container.style.opacity = '0';
+        setTimeout(() => {
+            container.remove();
+        }, 200);
+    }
+}
+
+function openPhotoLightbox(src) {
+    const img = document.getElementById('lightbox-img');
+    if (img && typeof UIkit !== 'undefined') {
+        img.src = src;
+        UIkit.modal('#photo-lightbox').show();
+    }
+}
+
+// ==========================================
+// 10. STOPER, ZAKOŃCZENIE SERWISU, LEAFLET I PDF
+// ==========================================
+window.startService = function () {
+    const selectEl = document.getElementById('select-saved-machine');
+    if (selectEl && !selectEl.value) {
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({ message: "Wybierz maszynę przed startem serwisu!", status: 'warning' });
+        }
+        return;
+    }
+
+    serviceStarted = true;
+    startTime = new Date();
+
+    const formContainer = document.getElementById('service-form-container');
+    if (formContainer) {
+        formContainer.classList.remove('opacity-40', 'pointer-events-none');
+    }
+
+    const btnStart = document.getElementById('btn-start-service');
+    if (btnStart) {
+        btnStart.disabled = true;
+        btnStart.className = "bg-gray-400 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 cursor-not-allowed";
+        btnStart.innerHTML = `<span uk-icon="icon: check"></span> SERWIS W TOKU`;
+    }
+
+    const timerEl = document.getElementById('service-timer');
+    if (timerEl) {
+        timerEl.classList.remove('hidden');
+        timerEl.style.display = 'block';
+
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            const diff = new Date() - startTime;
+            const hrs = Math.floor(diff / 3600000).toString().padStart(2, '0');
+            const mins = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+            const secs = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+            timerEl.textContent = `${hrs}:${mins}:${secs}`;
+        }, 1000);
+    }
+};
+
+window.finishService = function () {
+    if (timerInterval) clearInterval(timerInterval);
+    const timerEl = document.getElementById('service-timer');
+    const finalDurationStr = timerEl ? timerEl.textContent : '01:45:00';
+
+    let finalActivities = [];
+    document.querySelectorAll('input[type="checkbox"][data-time]:checked, #activities-container input[type="checkbox"]:checked').forEach(cb => {
+        const name = cb.getAttribute('data-name') || cb.value;
+        if (name && !finalActivities.includes(name)) finalActivities.push(name);
+    });
+
+    let finalParts = [];
+    document.querySelectorAll('.part-checkbox:checked').forEach(cb => {
+        finalParts.push({
+            code: cb.getAttribute('data-code') || 'CZĘŚĆ',
+            name: cb.getAttribute('data-name') || cb.value || 'Część zamienna'
+        });
+    });
+
+    const getVal = (id) => document.getElementById(id)?.value || document.getElementById(id)?.innerText || '';
+
+    const modelSelect = document.getElementById('machine-model');
+    let modelText = '---';
+    if (modelSelect) {
+        modelText = modelSelect.tagName === 'SELECT' && modelSelect.selectedIndex >= 0
+            ? modelSelect.options[modelSelect.selectedIndex].text
+            : modelSelect.value || '---';
+    }
+
+    let photoArr = Array.isArray(activePhotos) ? [...activePhotos] : [];
+    document.querySelectorAll('#photos-grid img, #p7-media-preview img').forEach(img => {
+        if (img.src && !photoArr.includes(img.src)) photoArr.push(img.src);
+    });
+
+    const summaryData = {
+        model: modelText,
+        machineNum: getVal('form-machine-num') || getVal('p5-machine-number') || '---',
+        client: getVal('form-client') || '---',
+        hours: getVal('form-hours') || '',
+        technician: getVal('form-technician') || '---',
+        date: getVal('form-date') || new Date().toISOString().split('T')[0],
+        notes: getVal('technician-notes') || 'Brak uwag.',
+        duration: finalDurationStr,
+        activities: finalActivities,
+        parts: finalParts,
+        photos: photoArr
+    };
+
+    localStorage.setItem('cemar_active_summary', JSON.stringify(summaryData));
+    window.location.href = 'serwis-przeprowadzony.html';
+};
+
+// OBSŁUGA MAPY LEAFLET
+window.initRouteMap = function initRouteMap() {
     const mapEl = document.getElementById('map');
     if (!mapEl || typeof L === 'undefined') return;
+
+    if (window.cemarMap) {
+        window.cemarMap.remove();
+    }
 
     const mapCenter = [51.107885, 17.038538];
     window.cemarMap = L.map('map').setView(mapCenter, 14);
@@ -646,13 +1082,16 @@ function initRouteMap() {
     const polyline = L.polyline(routeCoordinates, { color: '#dca31a', weight: 5 }).addTo(map);
     routeCoordinates.forEach(coord => L.marker(coord, { icon: waypointIcon }).addTo(map));
     map.fitBounds(polyline.getBounds());
-}
+};
 
-function download() {
+// GENEROWANIE PDF
+window.download = function download() {
     const btn = document.getElementById('btn-download-report');
     if (btn) btn.style.visibility = 'hidden';
 
-    UIkit.notification({ message: 'Generowanie PDF...', status: 'primary', pos: 'top-center' });
+    if (typeof UIkit !== 'undefined') {
+        UIkit.notification({ message: 'Generowanie PDF...', status: 'primary', pos: 'top-center' });
+    }
 
     const mapDiv = document.getElementById('map');
 
@@ -667,64 +1106,110 @@ function download() {
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                const snap = document.getElementById('map-snapshot');
-                if (snap) snap.remove();
-                mapDiv.style.display = '';
-                if (btn) btn.style.visibility = 'visible';
-            }).catch(err => {
-                console.error('Błąd html2pdf:', err);
-                const snap = document.getElementById('map-snapshot');
-                if (snap) snap.remove();
-                mapDiv.style.display = '';
-                if (btn) btn.style.visibility = 'visible';
-                UIkit.notification({ message: 'Błąd generowania PDF.', status: 'danger', pos: 'top-center' });
-            });
+            if (typeof html2pdf !== 'undefined') {
+                html2pdf().set(opt).from(element).save().then(() => {
+                    const snap = document.getElementById('map-snapshot');
+                    if (snap) snap.remove();
+                    if (mapDiv) mapDiv.style.display = '';
+                    if (btn) btn.style.visibility = 'visible';
+                }).catch(err => {
+                    console.error('Błąd html2pdf:', err);
+                    const snap = document.getElementById('map-snapshot');
+                    if (snap) snap.remove();
+                    if (mapDiv) mapDiv.style.display = '';
+                    if (btn) btn.style.visibility = 'visible';
+                    if (typeof UIkit !== 'undefined') UIkit.notification({ message: 'Błąd generowania PDF.', status: 'danger', pos: 'top-center' });
+                });
+            }
         }, 300);
     }
 
     try {
-        leafletImage(window.cemarMap, function (err, canvas) {
-            if (err) {
-                console.error('leafletImage error:', err);
-                generatePdf(); // generujemy PDF mimo błędu mapy
-                return;
-            }
+        if (typeof leafletImage !== 'undefined' && window.cemarMap) {
+            leafletImage(window.cemarMap, function (err, canvas) {
+                if (err) {
+                    console.error('leafletImage error:', err);
+                    generatePdf();
+                    return;
+                }
 
-            try {
-                const dataUrl = canvas.toDataURL(); // to jest miejsce gdzie zwykle wywala SecurityError
+                try {
+                    const dataUrl = canvas.toDataURL();
+                    const img = new Image();
+                    img.src = dataUrl;
+                    img.id = 'map-snapshot';
+                    img.style.width = '100%';
+                    img.style.height = (mapDiv ? mapDiv.offsetHeight : 300) + 'px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '8px';
 
-                const img = new Image();
-                img.src = dataUrl;
-                img.id = 'map-snapshot';
-                img.style.width = '100%';
-                img.style.height = mapDiv.offsetHeight + 'px';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = '8px';
+                    if (mapDiv) {
+                        mapDiv.style.display = 'none';
+                        mapDiv.parentNode.insertBefore(img, mapDiv);
+                    }
+                } catch (canvasErr) {
+                    console.error('Canvas tainted:', canvasErr);
+                }
 
-                mapDiv.style.display = 'none';
-                mapDiv.parentNode.insertBefore(img, mapDiv);
-
-            } catch (canvasErr) {
-                console.error('Canvas tainted, nie można pobrać obrazu mapy:', canvasErr);
-                // mapa zostaje ukryta, PDF generuje się bez niej
-            }
-
+                generatePdf();
+            });
+        } else {
             generatePdf();
-        });
+        }
     } catch (outerErr) {
         console.error('Błąd ogólny leafletImage:', outerErr);
         generatePdf();
     }
-}
-function onRangeChange() {
-    UIkit.notification({
-        message: '<span uk-icon=\'refresh\'></span> Aktualizowanie trasy GPS dla wybranego okresu...',
-        status: 'primary',
-        pos: 'bottom-right',
-        timeout: 2000
+};
+
+// METODY POMOCNICZE WIDOKÓW
+window.submitContactForm = function (e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (typeof UIkit !== 'undefined') {
+        UIkit.notification({
+            message: 'Twoje zgłoszenie zostało wysłane. Odpowiemy najszybciej jak to możliwe.',
+            status: 'success',
+            pos: 'top-center',
+            timeout: 2500
+        });
+    }
+    const safeClear = (id) => { const el = document.getElementById(id); if (el) el.value = ''; };
+    safeClear('cf-name');
+    safeClear('cf-email');
+    safeClear('cf-message');
+    const topic = document.getElementById('cf-topic');
+    if (topic) topic.selectedIndex = 0;
+    return false;
+};
+
+window.filterServices = function () {
+    const input = document.getElementById('service-search-input');
+    if (!input) return;
+
+    const query = input.value.toLowerCase();
+    const items = document.querySelectorAll('#services-accordion .service-item');
+
+    items.forEach(item => {
+        const nameEl = item.querySelector('.service-name');
+        const dateEl = item.querySelector('.service-date');
+
+        const name = nameEl ? nameEl.innerText.toLowerCase() : '';
+        const date = dateEl ? dateEl.innerText.toLowerCase() : '';
+
+        item.style.display = (name.includes(query) || date.includes(query)) ? '' : 'none';
     });
-}
+};
+
+window.onRangeChange = function () {
+    if (typeof UIkit !== 'undefined') {
+        UIkit.notification({
+            message: '<span uk-icon=\'refresh\'></span> Aktualizowanie trasy GPS dla wybranego okresu...',
+            status: 'primary',
+            pos: 'bottom-right',
+            timeout: 2000
+        });
+    }
+};
 
 window.goToDetails = function (num, type) {
     window.location.href = `client-details.html?id=${encodeURIComponent(num)}&type=${encodeURIComponent(type)}`;
