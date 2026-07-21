@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Moje Konto (Klient)</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="client-list.html">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a href="konto-kilent.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Konto</a></li>
+            </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
+            <div>
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Moje konto</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+            </div>
+            <button class="uk-button cemar-btn-secondary" onclick="window.location.href='client-list.html'">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+            </button>
+        </div>
+
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-expand@m">
+
+                <!-- Dane profilowe -->
+                <div class="cemar-card uk-margin-medium-bottom">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                            <div class="account-avatar" id="acc-initials">AK</div>
+                            <div>
+                                <span class="uk-label account-role-badge uk-margin-small-bottom">Klient</span>
+                                <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Anna Kowalczyk</h3>
+                                <p class="uk-text-meta uk-margin-remove-top" id="acc-company">Zakłady Piekarnicze "Kowalczyk" Sp. z o.o.</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                    <input class="uk-input" id="acc-first-name" type="text" value="Anna">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                    <input class="uk-input" id="acc-last-name" type="text" value="Kowalczyk">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                    <input class="uk-input" id="acc-email" type="email" value="a.kowalczyk@piekarnia-kowalczyk.pl">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                    <input class="uk-input" id="acc-phone" type="tel" value="+48 601 234 567">
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <label class="uk-form-label" for="acc-company-name">Nazwa firmy</label>
+                                    <input class="uk-input" id="acc-company-name" type="text" value="Zakłady Piekarnicze &quot;Kowalczyk&quot; Sp. z o.o.">
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <label class="uk-form-label" for="acc-address">Adres</label>
+                                    <input class="uk-input" id="acc-address" type="text" value="ul. Piekarska 12, 58-260 Bielawa">
+                                </div>
+                            </div>
+                            <div class="uk-margin-medium-top uk-text-right">
+                                <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Zmiana hasła -->
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <h4 class="uk-margin-remove-top">Zmiana hasła</h4>
+                        <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe hasło do swojego konta.</p>
+
+                        <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-1">
+                                    <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                    <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                    <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                    <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div class="uk-margin-medium-top uk-text-right">
+                                <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Panel boczny -->
+            <div class="uk-width-1-3@m">
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="account-section-title uk-margin-remove-top">Podsumowanie konta</p>
+                        <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                <span class="uk-text-muted">Typ konta</span>
+                                <span class="uk-text-bold">Klient</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                <span class="uk-text-muted">Numer klienta</span>
+                                <span class="uk-text-bold">KL-00842</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                <span class="uk-text-muted">Przypisane maszyny</span>
+                                <span class="uk-text-bold">6</span>
+                            </li>
+                            <li class="uk-flex uk-flex-between">
+                                <span class="uk-text-muted">Konto od</span>
+                                <span class="uk-text-bold">03.2022</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+
+</body>
+</html>

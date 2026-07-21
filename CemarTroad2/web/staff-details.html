@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Karta Diagnostyczna Maszyny</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="staff-list.html">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a href="staff-list.html" title="Strona główna" uk-tooltip>
+                        <span class="uk-text-bold" style="color: var(--primary-yellow-hover);" uk-icon="icon: home; ratio: 1.1;"></span>
+                    </a>
+                </li>
+                <li><a href="wycena.html" >Wycena</a></li>
+                <li><a href="serwis.html" >Serwis</a></li>
+                <li><a href="konto-serwis.html" >Konto</a></li>
+
+            </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Zmniejszony margines górny i padding dolny -->
+    <div class="uk-container" style="margin-top: 20px; padding-bottom: 80px;">
+        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" onclick="window.location.href='staff-list.html'">
+            <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
+        </button>
+
+        <!-- Zmieniona na mniejszą, bardziej kompaktową kartę maszyny -->
+        <div class="cemar-card cemar-card-compact uk-margin-medium-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium" uk-grid>
+                    <div class="uk-width-expand@m">
+                        <span class="uk-label uk-label-primary uk-margin-small-bottom">Karta Maszyny</span>
+                        <h2 class="uk-margin-remove-top uk-text-bold" id="p5-machine-number">434</h2>
+                        <p class="uk-text-large uk-text-muted uk-margin-remove-top" id="p5-machine-type">City</p>
+                        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;" id="p5-telemetry-link" onclick="goToTelemetry()">
+                            Logi maszyny
+                        </button>
+                    </div>
+                    <div class="uk-width-1-3@m">
+                        <div class="uk-card uk-card-default uk-card-body uk-padding-small uk-margin-small-bottom" style="border-radius: 6px; box-shadow: none; border: 1px solid #e5e7eb;">
+                            <span class="uk-text-meta" style="font-size: 10px;">Użytkownik przypisany:</span>
+                            <p class="uk-text-bold uk-margin-remove" id="p5-assigned-user" style="font-size: 13px;">Jan Kowalski (Operator)</p>
+                        </div>
+                        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 6px; box-shadow: none; border: 1px solid #e5e7eb;" id="p5-telemetry-link" onclick="goToService()">
+                            Zgłoś serwis
+                        </button>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="uk-child-width-1-3@m uk-grid-medium uk-margin-small-top" uk-grid>
+                    <div>
+                        <span class="uk-text-meta" style="font-size: 11px;">Ostatni serwis</span>
+                        <p class="uk-text-bold uk-margin-remove-top" id="p5-last-service" style="font-size: 15px;">04.05.2026</p>
+                    </div>
+                    <div>
+                        <span class="uk-text-meta" style="font-size: 11px;">Przepracowane godziny (Razem)</span>
+                        <p class="uk-text-bold uk-text-warning uk-margin-remove-top" id="p5-total-hours" style="font-size: 15px;">1 245 mth</p>
+                    </div>
+                    <div>
+                        <span class="uk-text-meta" style="font-size: 11px;">Godziny do następnego serwisu</span>
+                        <p class="uk-text-bold uk-text-danger uk-margin-remove-top" id="p5-remaining-hours" style="font-size: 15px;">255 mth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nowa sekcja nowoczesnego filtrowania w formie tagów -->
+        <div class="yellow-accent-bar"></div>
+        <div class="log-filter-card">
+
+            <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 13px; text-transform: uppercase; color: #666; letter-spacing: 0.5px;">Filtruj logi według typu zdarzenia:</h5>
+            <div class="filter-pill-container flex justify-center gap-3 w-full" style="display: flex; justify-content: space-between; width: 100%; padding-right: 120px !important; padding-left: 120px !important; box-sizing: border-box !important; flex-wrap: wrap; gap: 12px;">
+                <div class="filter-pill active flex-1 justify-center" style="padding: 10px 24px !important; text-align: center;" data-filter="serwis" onclick="togglePillFilter('serwis')">
+                    <span>Serwis</span>
+                    <span class="pill-badge" id="badge-serwis">0</span>
+                </div>
+                <div class="filter-pill active flex-1 justify-center" style="padding: 10px 24px !important; text-align: center;" data-filter="zgloszenie" onclick="togglePillFilter('zgloszenie')">
+                    <span>Zgłoszenia</span>
+                    <span class="pill-badge" id="badge-zgloszenie">0</span>
+                </div>
+                <div class="filter-pill active flex-1 justify-center" style="padding: 10px 24px !important; text-align: center;" data-filter="odpalenie" onclick="togglePillFilter('odpalenie')">
+                    <span>Odpalenia</span>
+                    <span class="pill-badge" id="badge-odpalenie">0</span>
+                </div>
+                <div class="filter-pill active flex-1 justify-center" style="padding: 10px 24px !important; text-align: center;" data-filter="blad" onclick="togglePillFilter('blad')">
+                    <span>Błędy (Error)</span>
+                    <span class="pill-badge" id="badge-blad">0</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Pełne logi operacyjne maszyny</h4>
+
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-hover uk-table-divider cemar-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Typ zdarzenia</th>
+                                <th>Użytkownik</th>
+                                <th>Czas całkowity działania</th>
+                                <th>Czas od serwisu</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="p5-logs-tbody">
+
+                            <!-- ERROR -->
+                            <tr class="log-row" data-type="blad" data-ref="ERR-0x43" onclick="toggleLogDetails(this)">
+                                <td>10.07.2026 14:22</td>
+                                <td>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-danger">Error Code</span>
+                                </td>
+                                <td>Jan Kowalski</td>
+                                <td>1 245 mth</td>
+                                <td>82 mth</td>
+                            </tr>
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Błąd krytyczny układu hydraulicznego (0x43)</h5>
+                                        <p>
+                                            Wykryto spadek ciśnienia poniżej minimalnej wartości roboczej.
+                                            System automatycznie ograniczył wydajność maszyny w celu
+                                            zabezpieczenia podzespołów.
+                                        </p>
+
+                                        <div class="uk-grid-small" uk-grid>
+                                            <div class="uk-width-1-2">
+                                                <strong>Kod błędu:</strong> 0x43
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Priorytet:</strong> Krytyczny
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Temperatura:</strong> 87°C
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Ciśnienie:</strong> 1.2 bar
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ZGŁOSZENIE -->
+                            <tr class="log-row" data-type="zgloszenie" data-ref="SRV-2026-071" onclick="toggleLogDetails(this)">
+                                <td>01.07.2026 10:00</td>
+                                <td>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
+                                </td>
+                                <td>Jan Kowalski</td>
+                                <td>1 100 mth</td>
+                                <td>19 mth</td>
+                            </tr>
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Zgłoszenie operatora</h5>
+
+                                        <p>
+                                            Operator zgłosił zauważalny spadek ciśnienia
+                                            na zaworze głównym podczas pracy pod obciążeniem.
+                                        </p>
+
+                                        <div class="uk-grid-small" uk-grid>
+                                            <div class="uk-width-1-2">
+                                                <strong>Status:</strong> Zamknięte
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Priorytet:</strong> Wysoki
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Numer zgłoszenia:</strong> SRV-2026-071
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Czas reakcji:</strong> 4h
+                                            </div>
+                                        </div>
+
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;" onclick="event.stopPropagation(); goToEventPage('zgloszenie', 'SRV-2026-071')">
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do zgłoszenia
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- SERWIS -->
+                            <tr class="log-row" data-type="serwis" data-ref="SRV-2026-0705" onclick="toggleLogDetails(this)">
+                                <td>05.07.2026 12:00</td>
+                                <td>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-warning">Serwis</span>
+                                </td>
+                                <td>Piotr Nowak (Serwisant)</td>
+                                <td>1 163 mth</td>
+                                <td>0 mth</td>
+                            </tr>
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Przegląd okresowy</h5>
+
+                                        <p>
+                                            Wykonano pełny przegląd zgodnie z harmonogramem
+                                            producenta.
+                                        </p>
+
+                                        <ul class="uk-list uk-list-bullet">
+                                            <li>Wymiana filtrów hydraulicznych</li>
+                                            <li>Wymiana oleju silnikowego</li>
+                                            <li>Kontrola szczelności układu</li>
+                                            <li>Wymiana uszczelniaczy</li>
+                                            <li>Aktualizacja oprogramowania sterownika</li>
+                                        </ul>
+
+                                        <strong>Następny serwis:</strong> za 250 mth
+
+                                        <div>
+                                            <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;" onclick="event.stopPropagation(); goToEventPage('serwis', 'SRV-2026-0705')">
+                                                <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do karty serwisu
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ODPALENIE -->
+                            <tr class="log-row" data-type="odpalenie" data-ref="ODP-2026-0709" onclick="toggleLogDetails(this)">
+                                <td>09.07.2026 08:15</td>
+                                <td>
+                                    <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-success">Odpalenie referencyjne</span>
+                                </td>
+                                <td>Jan Kowalski</td>
+                                <td>1 237 mth</td>
+                                <td>74 mth</td>
+                            </tr>
+                            <tr class="log-details-row" style="display:none;">
+                                <td colspan="5">
+                                    <div class="log-details-content">
+                                        <h5 class="uk-margin-small-bottom">Referencyjny rozruch pompy wtryskowej</h5>
+
+                                        <p>
+                                            Procedura rozruchu została wykonana poprawnie.
+                                            Wszystkie parametry pracy silnika mieściły się
+                                            w dopuszczalnych zakresach.
+                                        </p>
+
+                                        <div class="uk-grid-small" uk-grid>
+                                            <div class="uk-width-1-2">
+                                                <strong>Status:</strong> Sukces
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Czas rozruchu:</strong> 12 s
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Napięcie:</strong> 24.1 V
+                                            </div>
+                                            <div class="uk-width-1-2">
+                                                <strong>Obroty:</strong> 1 500 RPM
+                                            </div>
+                                        </div>
+
+                                        <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'SRV-2026-0705')">
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right" ></span> Przejdź do szczegółów odpalenia
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Kontakt i Pomoc</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="contact-help.html" class="uk-text-bold active">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <!-- Dodany identyfikator nav-logo dla dynamicznego przypisywania linku w zależności od roli -->
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+
+                <li class="serwis"><a href="serwis.html">Serwis</a></li>
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a id="nav-konto" href="#">Konto</a></li>
+            </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-medium-bottom uk-flex-wrap">
+            <div>
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Wsparcie</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Kontakt i Pomoc</h2>
+            </div>
+            <!-- Dodany identyfikator back-btn do dynamicznego powrotu -->
+            <button id="back-btn" class="uk-button cemar-btn-secondary">
+                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do bazy maszyn
+            </button>
+        </div>
+
+        <div class="uk-grid-medium" uk-grid>
+
+            <!-- Lewa kolumna: kanały kontaktu -->
+            <div class="uk-width-1-2@m">
+
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="faq-section-title uk-margin-remove-top">Skontaktuj się z nami</p>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: receiver; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Numer kontaktowy</span>
+                                <p class="contact-channel-value uk-margin-remove"><a href="tel:+48574160932">+48 574 160 932</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: mail; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">E-mail</span>
+                                <p class="contact-channel-value uk-margin-remove"><a href="mailto:cemar@cemar.pro">cemar@cemar.pro</a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: clock; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Godziny otwarcia</span>
+                                <p class="contact-channel-value uk-margin-remove">Pon–Pt, 7:00–18:00</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-channel-row">
+                            <div class="contact-icon-wrap"><span uk-icon="icon: location; ratio: 1.1"></span></div>
+                            <div>
+                                <span class="uk-text-meta" style="font-size: 12px;">Siedziba firmy</span>
+                                <p class="contact-channel-value uk-margin-remove">
+                                    CEMAR Sp. z o.o. <br />
+                                    ul. Ostroszowicka 24 <br />
+                                    58-260 Bielawa, woj. dolnośląskie <br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Prawa kolumna: FAQ -->
+            <div class="uk-width-1-2@m">
+                <div class="cemar-card">
+                    <div class="yellow-accent-bar"></div>
+                    <div class="uk-padding">
+                        <p class="faq-section-title uk-margin-remove-top">Najczęściej zadawane pytania</p>
+
+                        <ul uk-accordion="multiple: false">
+                            <li class="uk-open">
+                                <a class="uk-accordion-title" href="#">Jak zgłosić awarię maszyny?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Zaloguj się do systemu, otwórz kartę maszyny i wybierz opcję „Zgłoszenie serwisowe”, lub zadzwoń bezpośrednio na infolinię serwisową.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Gdzie znajdę historię serwisową mojej maszyny?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Na karcie danej maszyny w sekcji „Pełne logi operacyjne” — możesz filtrować logi według typu zdarzenia.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Jak zresetować hasło do konta?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Przejdź do sekcji „Konto”, następnie „Zmiana hasła”. Jeśli nie pamiętasz obecnego hasła, skontaktuj się z pomocą techniczną.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Co oznaczają kody błędów na maszynie?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Pełen opis kodów błędów znajdziesz w sekcji „Instrukcje” → „Katalog kodów błędów”, lub zapytaj Asystenta AI.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="uk-accordion-title" href="#">Jak długo czeka się na odpowiedź serwisu?</a>
+                                <div class="uk-accordion-content">
+                                    <p style="font-size: 13px; color: #666;">Standardowe zgłoszenia obsługujemy w ciągu 1 dnia roboczego. Awarie krytyczne zgłoszone na numer 800 999 888 obsługiwane są priorytetowo, 24/7.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+</body>
+</html>
