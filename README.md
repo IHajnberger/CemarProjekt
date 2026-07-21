@@ -3,8 +3,8 @@
 Celem projektu było stworzenie interaktywnej aplikacji webowej dla firmy CEMAR Sp. z o.o., na wzór pierwotnego TRoad'a, wzorując się stylem na obecnej stronie Cemar'u https://cemar.pro/pl/, w ramach odbywanej praktyki.
 ## Funkcjonalność: 
 
-<details>
-<summary> 
+<details> 
+<summary> Funkcje projektu </summary>
   
 * Wybór widoku klienta lub serwisanta przy ekranie logowania
 * Dla klienta:
@@ -29,25 +29,23 @@ Celem projektu było stworzenie interaktywnej aplikacji webowej dla firmy CEMAR 
     - raport z wykoanego serwisu oraz możliwość wydruku
 * Przekierowanie na oficjalną stronę CEMAR Sp. z o.o.
 
-</summary>
 </details>
+
 
 ## Budowa projektu:
 <details>
-<summary> 
+<summary> Projekt został podzielony na: </summary>
   
-Projekt został podzielony na:
   * plik styl.css zawierający implementacje styli użytych na stronie
   * pliki .html dla poszczególnych stron
   * plik .js z implemntacjami funkcji
 
-</summary>
 </details>
 
 ## Podgląd strony:
 STAN NA: 21/07/2026 
 <details>
-<summary> 
+<summary> Zrzuty ekranu </summary>
 
 Widok strony logowania:
 <img width="1917" height="903" alt="login" src="https://github.com/user-attachments/assets/938a81a5-a22d-4108-a773-c97c4fc32777" />
@@ -58,7 +56,6 @@ Widok strony klienta:
 Widok strony serwisanta:
 <img width="1898" height="891" alt="serwisant" src="https://github.com/user-attachments/assets/a44c5eba-81e8-4170-a554-05c68073ab06" />
 
-</summary>
 </details>
 
 ## Pierwszy model - Figma:
