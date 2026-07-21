@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <!-- Pasek nawigacyjny -->
+    <!-- Główny Nagłówek Nawigacyjny -->
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
             <div class="cemar-decor-blocks">
@@ -41,8 +41,18 @@
         </div>
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
-                <li><a href="serwis.html" class="font-bold">Zacznij Nowy Serwis</a></li>
+                <li>
+                    <a href="staff-list.html" title="Strona główna" uk-tooltip>
+                        <span class="uk-text-bold" uk-icon="icon: home; ratio: 1.1;"></span>
+                    </a>
+                </li>
+                <li><a href="wycena.html">Wycena</a></li>
+                <li><a href="serwis.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Serwis</a></li>
+                <li><a href="konto-serwis.html">Konto</a></li>
             </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
         </div>
     </nav>
 
@@ -96,13 +106,11 @@
                     <div>
                         <h3 class="text-lg font-bold border-b pb-2 mb-3 text-gray-800">Wykonane Procedury</h3>
                         <ul id="sum-activities" class="list-disc pl-5 text-sm space-y-2 text-gray-700">
-                            <!-- JS dynamic injection -->
                         </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold border-b pb-2 mb-3 text-gray-800 font-mono text-amber-600">Wykorzystane Części</h3>
                         <ul id="sum-parts" class="list-none pl-0 text-sm space-y-2 text-gray-700">
-                            <!-- JS dynamic injection -->
                         </ul>
                     </div>
                 </div>
@@ -136,6 +144,77 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
-    <script src="java.js"></script>
+<script src="java.js"></script>
+
+<script>
+    window.onload = function () {
+    const rawData = localStorage.getItem('cemar_active_summary');
+    if (!rawData) {
+    // Bezpieczne powiadomienie UIkit zamiast zablokowanego alert()
+    UIkit.notification({
+    message: "<span uk-icon='icon: warning'></span> Brak danych do wygenerowania podsumowania.",
+    status: 'danger',
+    pos: 'top-center',
+    timeout: 5000
+    });
+    return;
+    }
+
+    const data = JSON.parse(rawData);
+
+    // Wypełnianie pól tekstowych
+    document.getElementById('sum-duration').textContent = data.duration;
+    document.getElementById('sum-model').textContent = data.model;
+    document.getElementById('sum-num').textContent = data.machineNum || '---';
+    document.getElementById('sum-client').textContent = data.client || '---';
+    document.getElementById('sum-hours').textContent = data.hours ? `${data.hours} mth` : '---';
+    document.getElementById('sum-tech').textContent = data.technician || '---';
+    document.getElementById('sum-date').textContent = data.date;
+    document.getElementById('sum-notes').textContent = data.notes || "Brak uwag.";
+
+    // Czynności
+    const actList = document.getElementById('sum-activities');
+    actList.innerHTML = '';
+    if (data.activities && data.activities.length > 0) {
+    data.activities.forEach(act => {
+    const li = document.createElement('li');
+    li.textContent = act;
+    actList.appendChild(li);
+    });
+    } else {
+    actList.innerHTML = '<li class="text-gray-400">Nie wybrano żadnych czynności.</li>';
+    }
+
+    // Części
+    const partsList = document.getElementById('sum-parts');
+    partsList.innerHTML = '';
+    if (data.parts && data.parts.length > 0) {
+    data.parts.forEach(part => {
+    const li = document.createElement('li');
+    li.className = "flex items-center gap-2";
+    li.innerHTML = `
+    <span class="font-mono bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">${part.code}</span>
+    <span>${part.name}</span>
+    `;
+    partsList.appendChild(li);
+    });
+    } else {
+    partsList.innerHTML = '<li class="text-gray-400">Brak użytych części zamiennych.</li>';
+    }
+
+    // Zdjęcia
+    if (data.photos && data.photos.length > 0) {
+    document.getElementById('sum-photos-container').classList.remove('hidden');
+    const photoGrid = document.getElementById('sum-photos');
+    photoGrid.innerHTML = '';
+    data.photos.forEach(imgSrc => {
+    const img = document.createElement('img');
+    img.src = imgSrc;
+    img.className = "w-full h-32 object-cover rounded-lg border";
+    photoGrid.appendChild(img);
+    });
+    }
+    };
+</script>
 </body>
 </html>

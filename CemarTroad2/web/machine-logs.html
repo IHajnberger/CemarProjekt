@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <!-- Language Bar -->
+    <!-- Pasek języka -->
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -22,11 +22,11 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
-            
+
         </div>
     </div>
 
-    <!-- Main Navigation Header -->
+    <!-- Główny Nagłówek -->
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
             <div class="cemar-decor-blocks">
@@ -42,9 +42,9 @@
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
                 <li><a href="staff-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-                <li><a href="wycena.html" >Wycena</a></li>
-                <li><a href="serwis.html" >Serwis</a></li>
-                <li><a href="konto-serwis.html" >Konto</a></li>
+                <li><a href="wycena.html">Wycena</a></li>
+                <li><a href="serwis.html">Serwis</a></li>
+                <li><a href="konto-serwis.html">Konto</a></li>
             </ul>
             <div class="uk-navbar-item w-lewo">
                 <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -57,516 +57,534 @@
             <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" id="p6-back-btn" onclick="goBack()">
                 <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do karty maszyny
             </button>
-            </div>
-                <!-- KPI Machine Card -->
-                <div class="cemar-card uk-margin-medium-bottom main-container">
-                    <div class="yellow-accent-bar"></div>
-                    <div class="uk-padding">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
-                            <div class="md:col-span-2">
-                                <span class="uk-label uk-label-warning uk-margin-small-bottom text-[10px] px-2 py-0.5">Analiza telemetryczna live</span>
-                                <h2 class="uk-margin-remove-top uk-text-bold text-2xl">Maszyna <span id="p6-machine-number">434</span></h2>
-                                <p class="uk-text-muted uk-margin-remove-top text-sm" id="p6-machine-type">Model: City (Silnik T-35)</p>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col justify-center">
-                                <span class="text-xs text-gray-500 font-bold uppercase">Status agregatu</span>
-                                <span class="text-sm font-semibold flex items-center mt-1 text-emerald-600">
-                                    <span class="live-pulse-dot"></span> Połączenie aktywne
-                                </span>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col justify-center">
-                                <span class="text-xs text-gray-500 font-bold uppercase">Odbiór pakietów</span>
-                                <span class="text-sm font-semibold text-gray-700 mt-1">Interwał: 10 sekund</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Consolidated Telemetry Table Card -->
-                <div class="cemar-card">
-                    <div class="uk-padding">
-                        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-                            <div>
-                                <h4 class="uk-text-bold uk-margin-remove text-lg">Dziennik pracy maszyny</h4>
-                                <span class="text-xs text-gray-400">Klikaj w nagłówki kolumn z oznaczeniem <span class="text-amber-500 font-bold">⇄</span> aby zwijać i rozwijać grupy telemetryczne.</span>
-                            </div>
-
-                        </div>
-
-                        <!-- Table Container -->
-                        <div class="overflow-x-auto rounded-lg border border-gray-200">
-                            <table class="w-full text-left border-collapse bg-white text-xs">
-                                <!-- First Row: Column Group Headers -->
-                                <thead class="bg-gray-800 text-white font-bold uppercase text-[10px]">
-                                    <tr>
-                                        <th class="p-3 border-r border-gray-700" colspan="2">Ogólne</th>
-                                        <!-- Zasilanie Group -->
-                                        <th id="hdr-group-power" onclick="toggleColumnGroup('power')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="3">
-                                            Zasilanie <span id="indicator-power" class="text-amber-400">⇄</span>
-                                        </th>
-                                        <!-- Turbina Group -->
-                                        <th id="hdr-group-turbine" onclick="toggleColumnGroup('turbine')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
-                                            Turbina <span id="indicator-turbine" class="text-amber-400">⇄</span>
-                                        </th>
-                                        <!-- Olej Group -->
-                                        <th id="hdr-group-oil" onclick="toggleColumnGroup('oil')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="4">
-                                            Układ Olejowy <span id="indicator-oil" class="text-amber-400">⇄</span>
-                                        </th>
-                                        <!-- Paliwo Group -->
-                                        <th id="hdr-group-fuel" onclick="toggleColumnGroup('fuel')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
-                                            Układ Paliwowy <span id="indicator-fuel" class="text-amber-400">⇄</span>
-                                        </th>
-                                        <!-- Starter Group -->
-                                        <th id="hdr-group-starter" onclick="toggleColumnGroup('starter')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
-                                            Starter <span id="indicator-starter" class="text-amber-400">⇄</span>
-                                        </th>
-                                        <!-- Diagnostics & Time -->
-                                        <th class="p-3 text-center" colspan="3">Diagnostyka i Czas</th>
-                                    </tr>
-
-                                    <!-- Second Row: Specific Columns -->
-                                    <tr class="bg-gray-700 text-gray-200 text-[9px] border-t border-gray-600">
-                                        <th class="p-3">Data i Czas</th>
-                                        <th class="p-3 border-r border-gray-600">Etap</th>
-
-                                        <!-- Zasilanie Columns -->
-                                        <th class="p-3 col-power collapsible-col">Napięcie AC</th>
-                                        <th class="p-3 bg-gray-750 font-bold">RPM</th>
-                                        <th class="p-3 col-power collapsible-col border-r border-gray-600">Moc zadana</th>
-
-                                        <!-- Turbina Columns -->
-                                        <th class="p-3 font-bold">Temp. Turbiny</th>
-                                        <th class="p-3 col-turbine collapsible-col border-r border-gray-600">Temp. Wylot</th>
-
-                                        <!-- Olej Columns -->
-                                        <th class="p-3 col-oil collapsible-col">Temp. Oleju</th>
-                                        <th class="p-3 col-oil collapsible-col">Poziom Oleju</th>
-                                        <th class="p-3 font-bold">Ciśnienie Oleju</th>
-                                        <th class="p-3 col-oil collapsible-col border-r border-gray-600">PWM Pompy Ol.</th>
-
-                                        <!-- Paliwo Columns -->
-                                        <th class="p-3 font-bold">Poziom Paliwa</th>
-                                        <th class="p-3 col-fuel collapsible-col border-r border-gray-600">PWM Pompy Pal.</th>
-
-                                        <!-- Starter Columns -->
-                                        <th class="p-3 col-starter collapsible-col">PWM Start</th>
-                                        <th class="p-3 font-bold border-r border-gray-600">Prąd Startu</th>
-
-                                        <!-- Misc / Diagnostics -->
-                                        <th class="p-3">Ciśnienie Powietrza</th>
-                                        <th class="p-3">Kod błędu</th>
-                                        <th class="p-3">Znacznik czasu</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody id="p6-telemetry-tbody">
-                                    <!-- Populated dynamically via JS -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Empty State -->
-                        <div class="empty-state hidden" id="p6-empty-state">
-                            <span uk-icon="icon: database; ratio: 1.6"></span>
-                            <p class="uk-margin-small-top">Brak danych telemetrycznych do wyświetlenia.</p>
-                        </div>
-
-                    </div>
-                </div>
         </div>
-
-        <!-- Bottom Lang Bar / Footer -->
-        <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
-            <div class="uk-container uk-flex uk-flex-middle">
-                <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
-                    <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
-                    <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+        <!-- Karta maszyny -->
+        <div class="cemar-card uk-margin-medium-bottom main-container">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                    <div class="md:col-span-2">
+                        <span class="uk-label uk-label-warning uk-margin-small-bottom text-[10px] px-2 py-0.5">Analiza telemetryczna live</span>
+                        <h2 class="uk-margin-remove-top uk-text-bold text-2xl">Maszyna <span id="p6-machine-number">434</span></h2>
+                        <p class="uk-text-muted uk-margin-remove-top text-sm" id="p6-machine-type">Model: City (Silnik T-35)</p>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col justify-center">
+                        <span class="text-xs text-gray-500 font-bold uppercase">Status agregatu</span>
+                        <span class="text-sm font-semibold flex items-center mt-1 text-emerald-600">
+                            <span class="live-pulse-dot"></span> Połączenie aktywne
+                        </span>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 flex flex-col justify-center">
+                        <span class="text-xs text-gray-500 font-bold uppercase">Odbiór pakietów</span>
+                        <span class="text-sm font-semibold text-gray-700 mt-1">Interwał: 10 sekund</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UIkit JS -->
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
 
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            const machineId = urlParams.get('id') || '434';
-            const machineType = urlParams.get('type') || 'City';
+ 
+        <div class="cemar-card">
+            <div class="uk-padding">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h4 class="uk-text-bold uk-margin-remove text-lg">Dziennik pracy maszyny</h4>
+                        <span class="text-xs text-gray-400">Klikaj w nagłówki kolumn z oznaczeniem <span class="text-amber-500 font-bold">⇄</span> aby zwijać i rozwijać grupy telemetryczne.</span>
+                    </div>
 
-            document.getElementById('p6-machine-number').innerText = machineId;
-            document.getElementById('p6-machine-type').innerText = machineType;
+                </div>
 
-            function goBack() {
-                window.location.href = `staff-details.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
-            }
+                <!-- Tabela -->
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="w-full text-left border-collapse bg-white text-xs">
+                        <!-- Pierwszy rząd: nagłówki -->
+                        <thead class="bg-gray-800 text-white font-bold uppercase text-[10px]">
+                            <tr>
+                                <th class="p-3 border-r border-gray-700" colspan="2">Ogólne</th>
+                                <!-- Zasilanie -->
+                                <th id="hdr-group-power" onclick="toggleColumnGroup('power')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="3">
+                                    Zasilanie <span id="indicator-power" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Turbina -->
+                                <th id="hdr-group-turbine" onclick="toggleColumnGroup('turbine')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
+                                    Turbina <span id="indicator-turbine" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Olej -->
+                                <th id="hdr-group-oil" onclick="toggleColumnGroup('oil')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="4">
+                                    Układ Olejowy <span id="indicator-oil" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Paliwo -->
+                                <th id="hdr-group-fuel" onclick="toggleColumnGroup('fuel')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
+                                    Układ Paliwowy <span id="indicator-fuel" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Starter -->
+                                <th id="hdr-group-starter" onclick="toggleColumnGroup('starter')" class="p-3 border-r border-gray-700 bg-gray-900 cursor-pointer hover:bg-amber-600 transition text-center" colspan="2">
+                                    Starter <span id="indicator-starter" class="text-amber-400">⇄</span>
+                                </th>
+                                <!-- Diagnostyka i czas -->
+                                <th class="p-3 text-center" colspan="3">Diagnostyka i Czas</th>
+                            </tr>
 
-            function showPlaceholder(title) {
-                UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
-            }
+                            <!-- Drugi rząd -->
+                            <tr class="bg-gray-700 text-gray-200 text-[9px] border-t border-gray-600">
+                                <th class="p-3">Data i Czas</th>
+                                <th class="p-3 border-r border-gray-600">Etap</th>
 
-            // --- HORIZONTAL FILTERING STATE (COLUMNS) ---
-            const columnGroups = {
-                power: false,    // AC Volt, Power Setpoint
-                turbine: false,  // Out temp
-                oil: false,      // Oil Temp, Oil Lvl, Oil Pump PWM
-                fuel: false,     // Fuel Pump PWM
-                starter: false   // Starter PWM
-            };
+                                <!-- Zasilanie  -->
+                                <th class="p-3 col-power collapsible-col">Napięcie AC</th>
+                                <th class="p-3 bg-gray-750 font-bold">RPM</th>
+                                <th class="p-3 col-power collapsible-col border-r border-gray-600">Moc zadana</th>
 
-            // --- VERTICAL STAGE FILTERING STATE (STAGES) ---
-            // Format: `${cycleId}_${phaseName}_${stageId}` -> boolean
-            const expandedStages = {};
+                                <!-- Turbina  -->
+                                <th class="p-3 font-bold">Temp. Turbiny</th>
+                                <th class="p-3 col-turbine collapsible-col border-r border-gray-600">Temp. Wylot</th>
 
-            // --- DETAILED SIMULATION DATA GROUPED BY STAGE ---
-            let telemetryCycles = [
-                {
-                    cycleId: "Cykl 1",
-                    phases: [
-                        {
-                            phaseName: "Rozruch",
-                            stages: [
-                                {
-                                    stageId: 0,
-                                    logs: [
-                                        { time: "14:20:00", ac_volt: "228 V", rpm: "450", power: "12 kW", temp_turb: "110 °C", temp_out: "85 °C", temp_oil: "22 °C", oil_lvl: "92%", oil_press: "1.8 bar", pwm_oil: "15%", fuel: "84%", pwm_fuel: "12%", pwm_start: "95%", current_start: "45 A", air_press: "1.1 bar", error: "0x00", timestamp: "14200021" },
-                                        { time: "14:20:02", ac_volt: "228 V", rpm: "480", power: "13 kW", temp_turb: "112 °C", temp_out: "86 °C", temp_oil: "22 °C", oil_lvl: "92%", oil_press: "1.9 bar", pwm_oil: "16%", fuel: "84%", pwm_fuel: "12%", pwm_start: "93%", current_start: "43 A", air_press: "1.1 bar", error: "0x00", timestamp: "14200221" },
-                                        { time: "14:20:04", ac_volt: "229 V", rpm: "520", power: "13 kW", temp_turb: "114 °C", temp_out: "88 °C", temp_oil: "23 °C", oil_lvl: "92%", oil_press: "2.0 bar", pwm_oil: "17%", fuel: "84%", pwm_fuel: "13%", pwm_start: "91%", current_start: "41 A", air_press: "1.2 bar", error: "0x00", timestamp: "14200421" },
-                                        { time: "14:20:06", ac_volt: "229 V", rpm: "600", power: "14 kW", temp_turb: "125 °C", temp_out: "91 °C", temp_oil: "23 °C", oil_lvl: "92%", oil_press: "2.1 bar", pwm_oil: "18%", fuel: "84%", pwm_fuel: "13%", pwm_start: "88%", current_start: "40 A", air_press: "1.2 bar", error: "0x00", timestamp: "14200621" }
-                                    ]
-                                },
-                                {
-                                    stageId: 2,
-                                    logs: [
-                                        { time: "14:20:10", ac_volt: "230 V", rpm: "820", power: "15 kW", temp_turb: "150 °C", temp_out: "95 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.4 bar", pwm_oil: "20%", fuel: "84%", pwm_fuel: "15%", pwm_start: "85%", current_start: "38 A", air_press: "1.3 bar", error: "0x00", timestamp: "14201021" },
-                                        { time: "14:20:12", ac_volt: "230 V", rpm: "890", power: "16 kW", temp_turb: "158 °C", temp_out: "99 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.5 bar", pwm_oil: "21%", fuel: "84%", pwm_fuel: "16%", pwm_start: "80%", current_start: "34 A", air_press: "1.4 bar", error: "0x00", timestamp: "14201221" },
-                                        { time: "14:20:14", ac_volt: "230 V", rpm: "980", power: "17 kW", temp_turb: "170 °C", temp_out: "102 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.6 bar", pwm_oil: "22%", fuel: "84%", pwm_fuel: "16%", pwm_start: "78%", current_start: "32 A", air_press: "1.4 bar", error: "0x00", timestamp: "14201421" }
-                                    ]
-                                },
-                                {
-                                    stageId: 5,
-                                    logs: [
-                                        { time: "14:20:20", ac_volt: "229 V", rpm: "1250", power: "22 kW", temp_turb: "210 °C", temp_out: "115 °C", temp_oil: "25 °C", oil_lvl: "91%", oil_press: "3.1 bar", pwm_oil: "28%", fuel: "83%", pwm_fuel: "18%", pwm_start: "70%", current_start: "25 A", air_press: "1.6 bar", error: "0x00", timestamp: "14202021" },
-                                        { time: "14:20:22", ac_volt: "229 V", rpm: "1350", power: "24 kW", temp_turb: "232 °C", temp_out: "122 °C", temp_oil: "25 °C", oil_lvl: "91%", oil_press: "3.2 bar", pwm_oil: "30%", fuel: "83%", pwm_fuel: "19%", pwm_start: "65%", current_start: "22 A", air_press: "1.7 bar", error: "0x00", timestamp: "14202221" },
-                                        { time: "14:20:24", ac_volt: "229 V", rpm: "1450", power: "26 kW", temp_turb: "250 °C", temp_out: "135 °C", temp_oil: "26 °C", oil_lvl: "91%", oil_press: "3.4 bar", pwm_oil: "32%", fuel: "83%", pwm_fuel: "20%", pwm_start: "60%", current_start: "20 A", air_press: "1.7 bar", error: "0x00", timestamp: "14202421" }
-                                    ]
-                                },
-                                {
-                                    stageId: 8,
-                                    logs: [
-                                        { time: "14:20:30", ac_volt: "231 V", rpm: "1800", power: "35 kW", temp_turb: "320 °C", temp_out: "155 °C", temp_oil: "28 °C", oil_lvl: "91%", oil_press: "3.7 bar", pwm_oil: "35%", fuel: "83%", pwm_fuel: "22%", pwm_start: "40%", current_start: "12 A", air_press: "1.9 bar", error: "0x00", timestamp: "14203021" },
-                                        { time: "14:20:32", ac_volt: "231 V", rpm: "1910", power: "39 kW", temp_turb: "344 °C", temp_out: "172 °C", temp_oil: "28 °C", oil_lvl: "91%", oil_press: "3.8 bar", pwm_oil: "36%", fuel: "83%", pwm_fuel: "24%", pwm_start: "35%", current_start: "10 A", air_press: "2.0 bar", error: "0x00", timestamp: "14203221" },
-                                        { time: "14:20:34", ac_volt: "231 V", rpm: "2000", power: "42 kW", temp_turb: "360 °C", temp_out: "175 °C", temp_oil: "29 °C", oil_lvl: "91%", oil_press: "3.9 bar", pwm_oil: "38%", fuel: "83%", pwm_fuel: "24%", pwm_start: "30%", current_start: "8 A", air_press: "2.0 bar", error: "0x00", timestamp: "14203421" }
-                                    ]
-                                },
-                                {
-                                    stageId: 11,
-                                    logs: [
-                                        { time: "14:20:40", ac_volt: "230 V", rpm: "2350", power: "55 kW", temp_turb: "450 °C", temp_out: "210 °C", temp_oil: "32 °C", oil_lvl: "91%", oil_press: "4.1 bar", pwm_oil: "42%", fuel: "83%", pwm_fuel: "28%", pwm_start: "10%", current_start: "4 A", air_press: "2.2 bar", error: "0x00", timestamp: "14204021" },
-                                        { time: "14:20:42", ac_volt: "230 V", rpm: "2440", power: "59 kW", temp_turb: "468 °C", temp_out: "225 °C", temp_oil: "33 °C", oil_lvl: "91%", oil_press: "4.2 bar", pwm_oil: "44%", fuel: "83%", pwm_fuel: "30%", pwm_start: "8%", current_start: "3 A", air_press: "2.3 bar", error: "0x00", timestamp: "14204221" },
-                                        { time: "14:20:44", ac_volt: "230 V", rpm: "2550", power: "63 kW", temp_turb: "490 °C", temp_out: "240 °C", temp_oil: "34 °C", oil_lvl: "91%", oil_press: "4.2 bar", pwm_oil: "46%", fuel: "83%", pwm_fuel: "32%", pwm_start: "5%", current_start: "2 A", air_press: "2.3 bar", error: "0x00", timestamp: "14204421" }
-                                    ]
-                                },
-                                {
-                                    stageId: 13,
-                                    logs: [
-                                        { time: "14:20:50", ac_volt: "230 V", rpm: "2800", power: "75 kW", temp_turb: "520 °C", temp_out: "260 °C", temp_oil: "36 °C", oil_lvl: "91%", oil_press: "4.3 bar", pwm_oil: "50%", fuel: "82%", pwm_fuel: "35%", pwm_start: "0%", current_start: "0 A", air_press: "2.5 bar", error: "0x00", timestamp: "14205021" },
-                                        { time: "14:20:52", ac_volt: "230 V", rpm: "2920", power: "78 kW", temp_turb: "542 °C", temp_out: "285 °C", temp_oil: "37 °C", oil_lvl: "91%", oil_press: "4.3 bar", pwm_oil: "52%", fuel: "82%", pwm_fuel: "36%", pwm_start: "0%", current_start: "0 A", air_press: "2.5 bar", error: "0x00", timestamp: "14205221" },
-                                        { time: "14:20:54", ac_volt: "230 V", rpm: "3000", power: "79 kW", temp_turb: "560 °C", temp_out: "290 °C", temp_oil: "40 °C", oil_lvl: "91%", oil_press: "4.4 bar", pwm_oil: "53%", fuel: "82%", pwm_fuel: "37%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14205421" }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            phaseName: "Praca",
-                            stages: [
-                                {
-                                    stageId: 14,
-                                    logs: [
-                                        { time: "14:21:00", ac_volt: "230 V", rpm: "3100", power: "80 kW", temp_turb: "580 °C", temp_out: "310 °C", temp_oil: "42 °C", oil_lvl: "91%", oil_press: "4.4 bar", pwm_oil: "55%", fuel: "82%", pwm_fuel: "38%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14210021" },
-                                        { time: "14:25:00", ac_volt: "231 V", rpm: "3150", power: "82 kW", temp_turb: "595 °C", temp_out: "325 °C", temp_oil: "45 °C", oil_lvl: "90%", oil_press: "4.4 bar", pwm_oil: "58%", fuel: "78%", pwm_fuel: "40%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14250021" },
-                                        { time: "14:30:00", ac_volt: "229 V", rpm: "3120", power: "80 kW", temp_turb: "605 °C", temp_out: "330 °C", temp_oil: "48 °C", oil_lvl: "90%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "74%", pwm_fuel: "42%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14300021" },
-                                        { time: "14:35:00", ac_volt: "230 V", rpm: "3100", power: "80 kW", temp_turb: "610 °C", temp_out: "335 °C", temp_oil: "50 °C", oil_lvl: "89%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "70%", pwm_fuel: "42%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14350021" },
-                                        { time: "14:40:00", ac_volt: "230 V", rpm: "3140", power: "81 kW", temp_turb: "608 °C", temp_out: "332 °C", temp_oil: "51 °C", oil_lvl: "89%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "66%", pwm_fuel: "41%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14400021" }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            phaseName: "Cooling",
-                            stages: [
-                                {
-                                    stageId: 40,
-                                    logs: [
-                                        { time: "14:41:10", ac_volt: "228 V", rpm: "1800", power: "20 kW", temp_turb: "450 °C", temp_out: "220 °C", temp_oil: "48 °C", oil_lvl: "89%", oil_press: "3.2 bar", pwm_oil: "30%", fuel: "65%", pwm_fuel: "12%", pwm_start: "0%", current_start: "0 A", air_press: "1.8 bar", error: "0x00", timestamp: "14411021" },
-                                        { time: "14:41:15", ac_volt: "228 V", rpm: "1500", power: "15 kW", temp_turb: "400 °C", temp_out: "200 °C", temp_oil: "46 °C", oil_lvl: "89%", oil_press: "2.8 bar", pwm_oil: "25%", fuel: "65%", pwm_fuel: "10%", pwm_start: "0%", current_start: "0 A", air_press: "1.6 bar", error: "0x00", timestamp: "14411521" },
-                                        { time: "14:41:20", ac_volt: "229 V", rpm: "1200", power: "10 kW", temp_turb: "350 °C", temp_out: "180 °C", temp_oil: "44 °C", oil_lvl: "89%", oil_press: "2.5 bar", pwm_oil: "20%", fuel: "65%", pwm_fuel: "8%", pwm_start: "0%", current_start: "0 A", air_press: "1.4 bar", error: "0x00", timestamp: "14412021" }
-                                    ]
-                                },
-                                {
-                                    stageId: 41,
-                                    logs: [
-                                        { time: "14:41:30", ac_volt: "230 V", rpm: "600", power: "2 kW", temp_turb: "220 °C", temp_out: "120 °C", temp_oil: "39 °C", oil_lvl: "89%", oil_press: "1.8 bar", pwm_oil: "10%", fuel: "64%", pwm_fuel: "4%", pwm_start: "0%", current_start: "0 A", air_press: "1.1 bar", error: "0x00", timestamp: "14413021" },
-                                        { time: "14:41:33", ac_volt: "230 V", rpm: "400", power: "1 kW", temp_turb: "180 °C", temp_out: "100 °C", temp_oil: "37 °C", oil_lvl: "89%", oil_press: "1.2 bar", pwm_oil: "5%", fuel: "64%", pwm_fuel: "2%", pwm_start: "0%", current_start: "0 A", air_press: "0.8 bar", error: "0x00", timestamp: "14413321" },
-                                        { time: "14:41:36", ac_volt: "230 V", rpm: "200", power: "0 kW", temp_turb: "140 °C", temp_out: "80 °C", temp_oil: "35 °C", oil_lvl: "89%", oil_press: "0.6 bar", pwm_oil: "2%", fuel: "64%", pwm_fuel: "1%", pwm_start: "0%", current_start: "0 A", air_press: "0.4 bar", error: "0x00", timestamp: "14413621" },
-                                        { time: "14:41:40", ac_volt: "230 V", rpm: "0", power: "0 kW", temp_turb: "95 °C", temp_out: "60 °C", temp_oil: "34 °C", oil_lvl: "89%", oil_press: "0.2 bar", pwm_oil: "0%", fuel: "64%", pwm_fuel: "0%", pwm_start: "0%", current_start: "0 A", air_press: "0.0 bar", error: "0x00", timestamp: "14414021" }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ];
+                                <!-- Olej  -->
+                                <th class="p-3 col-oil collapsible-col">Temp. Oleju</th>
+                                <th class="p-3 col-oil collapsible-col">Poziom Oleju</th>
+                                <th class="p-3 font-bold">Ciśnienie Oleju</th>
+                                <th class="p-3 col-oil collapsible-col border-r border-gray-600">PWM Pompy Ol.</th>
 
-            // Column Group Visibility Handler (Horizontal)
-            function toggleColumnGroup(groupName) {
-                columnGroups[groupName] = !columnGroups[groupName];
-                applyColumnVisibility();
-            }
+                                <!-- Paliwo -->
+                                <th class="p-3 font-bold">Poziom Paliwa</th>
+                                <th class="p-3 col-fuel collapsible-col border-r border-gray-600">PWM Pompy Pal.</th>
 
-            function toggleAllHorizontal(expand) {
-                for (let key in columnGroups) {
-                    columnGroups[key] = expand;
-                }
-                applyColumnVisibility();
-            }
+                                <!-- Starter -->
+                                <th class="p-3 col-starter collapsible-col">PWM Start</th>
+                                <th class="p-3 font-bold border-r border-gray-600">Prąd Startu</th>
 
-            function applyColumnVisibility() {
-                const colspans = {
-                    power: { collapsed: 1, expanded: 3 },
-                    turbine: { collapsed: 1, expanded: 2 },
-                    oil: { collapsed: 1, expanded: 4 },
-                    fuel: { collapsed: 1, expanded: 2 },
-                    starter: { collapsed: 1, expanded: 2 }
-                };
+                                <!-- Misc / Diagnostyka -->
+                                <th class="p-3">Ciśnienie Powietrza</th>
+                                <th class="p-3">Kod błędu</th>
+                                <th class="p-3">Znacznik czasu</th>
+                            </tr>
+                        </thead>
 
-                for (let key in columnGroups) {
-                    const isExpanded = columnGroups[key];
+                        <tbody id="p6-telemetry-tbody">
+                        </tbody>
+                    </table>
+                </div>
 
-                    const header = document.getElementById(`hdr-group-${key}`);
-                    const indicator = document.getElementById(`indicator-${key}`);
+                <!-- pusty stan -->
+                <div class="empty-state hidden" id="p6-empty-state">
+                    <span uk-icon="icon: database; ratio: 1.6"></span>
+                    <p class="uk-margin-small-top">Brak danych telemetrycznych do wyświetlenia.</p>
+                </div>
 
-                    if (header) {
-                        header.colSpan = isExpanded ? colspans[key].expanded : colspans[key].collapsed;
-                        if (isExpanded) {
-                            header.classList.add('bg-amber-500', 'text-white');
-                            header.classList.remove('bg-gray-900');
-                        } else {
-                            header.classList.remove('bg-amber-500', 'text-white');
-                            header.classList.add('bg-gray-900');
-                        }
-                    }
+            </div>
+        </div>
+    </div>
 
-                    if (indicator) {
-                        indicator.innerHTML = isExpanded ? ' < > ' : ' ⇄ ';
-                    }
+    <!-- Donly pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
 
-                    const cells = document.querySelectorAll(`.col-${key}`);
-                    cells.forEach(cell => {
-                        if (isExpanded) {
-                            cell.classList.remove('hidden');
-                        } else {
-                            cell.classList.add('hidden');
-                        }
-                    });
-                }
-            }
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
 
-            // Individual Stage Visibility Handler (Vertical)
-            function toggleStageVertical(cycleId, phaseName, stageId) {
-                const key = `${cycleId}_${phaseName}_${stageId}`;
-                expandedStages[key] = !expandedStages[key];
-                renderTable();
-            }
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const machineId = urlParams.get('id') || '434';
+        const machineType = urlParams.get('type') || 'City';
 
-            // Mass vertical expansion control
-            function toggleAllVertical(expand) {
-                telemetryCycles.forEach(cycle => {
-                    cycle.phases.forEach(phase => {
-                        phase.stages.forEach(stage => {
-                            const key = `${cycle.cycleId}_${phase.phaseName}_${stage.stageId}`;
-                            expandedStages[key] = expand;
-                        });
-                    });
-                });
-                renderTable();
-            }
+        document.getElementById('p6-machine-number').innerText = machineId;
+        document.getElementById('p6-machine-type').innerText = machineType;
 
-            // Main rendering function of telemetry rows
-            function renderTable() {
-                const tbody = document.getElementById('p6-telemetry-tbody');
-                const emptyState = document.getElementById('p6-empty-state');
+        function goBack() {
+        window.location.href = `staff-details.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
+        }
 
-                tbody.innerHTML = '';
+        function showPlaceholder(title) {
+        UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">${title}</h2><p>Sekcja ${title} w przygotowaniu.</p></div>`);
+        }
 
-                if (telemetryCycles.length === 0) {
-                    emptyState.classList.remove('hidden');
-                    return;
-                } else {
-                    emptyState.classList.add('hidden');
-                }
+        // --- HORIZONTAL FILTERING STATE (COLUMNS) ---
+        const columnGroups = {
+        power: false,    // AC Volt, Power Setpoint
+        turbine: false,  // Out temp
+        oil: false,      // Oil Temp, Oil Lvl, Oil Pump PWM
+        fuel: false,     // Fuel Pump PWM
+        starter: false   // Starter PWM
+        };
 
-                telemetryCycles.forEach(cycle => {
-                    cycle.phases.forEach(phase => {
-                        // Thin premium separator representing the active system phase
-                        const phaseSeparatorRow = document.createElement('tr');
-                        phaseSeparatorRow.className = "bg-gray-100 border-t-2 border-b border-gray-200";
+        // --- VERTICAL STAGE FILTERING STATE (STAGES) ---
+        // Format: `${cycleId}_${phaseName}_${stageId}` -> boolean
+        const expandedStages = {};
+        const expandedPhases = {};
 
-                        let displayPhaseName = phase.phaseName;
-                        if (displayPhaseName.toLowerCase() === 'cooling') {
-                            displayPhaseName = 'Chłodzenie';
-                        }
+        // --- DETAILED SIMULATION DATA GROUPED BY STAGE ---
+        let telemetryCycles = [
+        {
+        cycleId: "Cykl 1",
+        phases: [
+        {
+        phaseName: "Rozruch",
+        stages: [
+        {
+        stageId: 0,
+        logs: [
+        { time: "14:20:00", ac_volt: "228 V", rpm: "450", power: "12 kW", temp_turb: "110 °C", temp_out: "85 °C", temp_oil: "22 °C", oil_lvl: "92%", oil_press: "1.8 bar", pwm_oil: "15%", fuel: "84%", pwm_fuel: "12%", pwm_start: "95%", current_start: "45 A", air_press: "1.1 bar", error: "0x00", timestamp: "14200021" },
+        { time: "14:20:02", ac_volt: "228 V", rpm: "480", power: "13 kW", temp_turb: "112 °C", temp_out: "86 °C", temp_oil: "22 °C", oil_lvl: "92%", oil_press: "1.9 bar", pwm_oil: "16%", fuel: "84%", pwm_fuel: "12%", pwm_start: "93%", current_start: "43 A", air_press: "1.1 bar", error: "0x00", timestamp: "14200221" },
+        { time: "14:20:04", ac_volt: "229 V", rpm: "520", power: "13 kW", temp_turb: "114 °C", temp_out: "88 °C", temp_oil: "23 °C", oil_lvl: "92%", oil_press: "2.0 bar", pwm_oil: "17%", fuel: "84%", pwm_fuel: "13%", pwm_start: "91%", current_start: "41 A", air_press: "1.2 bar", error: "0x00", timestamp: "14200421" },
+        { time: "14:20:06", ac_volt: "229 V", rpm: "600", power: "14 kW", temp_turb: "125 °C", temp_out: "91 °C", temp_oil: "23 °C", oil_lvl: "92%", oil_press: "2.1 bar", pwm_oil: "18%", fuel: "84%", pwm_fuel: "13%", pwm_start: "88%", current_start: "40 A", air_press: "1.2 bar", error: "0x00", timestamp: "14200621" }
+        ]
+        },
+        {
+        stageId: 2,
+        logs: [
+        { time: "14:20:10", ac_volt: "230 V", rpm: "820", power: "15 kW", temp_turb: "150 °C", temp_out: "95 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.4 bar", pwm_oil: "20%", fuel: "84%", pwm_fuel: "15%", pwm_start: "85%", current_start: "38 A", air_press: "1.3 bar", error: "0x00", timestamp: "14201021" },
+        { time: "14:20:12", ac_volt: "230 V", rpm: "890", power: "16 kW", temp_turb: "158 °C", temp_out: "99 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.5 bar", pwm_oil: "21%", fuel: "84%", pwm_fuel: "16%", pwm_start: "80%", current_start: "34 A", air_press: "1.4 bar", error: "0x00", timestamp: "14201221" },
+        { time: "14:20:14", ac_volt: "230 V", rpm: "980", power: "17 kW", temp_turb: "170 °C", temp_out: "102 °C", temp_oil: "24 °C", oil_lvl: "92%", oil_press: "2.6 bar", pwm_oil: "22%", fuel: "84%", pwm_fuel: "16%", pwm_start: "78%", current_start: "32 A", air_press: "1.4 bar", error: "0x00", timestamp: "14201421" }
+        ]
+        },
+        {
+        stageId: 5,
+        logs: [
+        { time: "14:20:20", ac_volt: "229 V", rpm: "1250", power: "22 kW", temp_turb: "210 °C", temp_out: "115 °C", temp_oil: "25 °C", oil_lvl: "91%", oil_press: "3.1 bar", pwm_oil: "28%", fuel: "83%", pwm_fuel: "18%", pwm_start: "70%", current_start: "25 A", air_press: "1.6 bar", error: "0x00", timestamp: "14202021" },
+        { time: "14:20:22", ac_volt: "229 V", rpm: "1350", power: "24 kW", temp_turb: "232 °C", temp_out: "122 °C", temp_oil: "25 °C", oil_lvl: "91%", oil_press: "3.2 bar", pwm_oil: "30%", fuel: "83%", pwm_fuel: "19%", pwm_start: "65%", current_start: "22 A", air_press: "1.7 bar", error: "0x00", timestamp: "14202221" },
+        { time: "14:20:24", ac_volt: "229 V", rpm: "1450", power: "26 kW", temp_turb: "250 °C", temp_out: "135 °C", temp_oil: "26 °C", oil_lvl: "91%", oil_press: "3.4 bar", pwm_oil: "32%", fuel: "83%", pwm_fuel: "20%", pwm_start: "60%", current_start: "20 A", air_press: "1.7 bar", error: "0x00", timestamp: "14202421" }
+        ]
+        },
+        {
+        stageId: 8,
+        logs: [
+        { time: "14:20:30", ac_volt: "231 V", rpm: "1800", power: "35 kW", temp_turb: "320 °C", temp_out: "155 °C", temp_oil: "28 °C", oil_lvl: "91%", oil_press: "3.7 bar", pwm_oil: "35%", fuel: "83%", pwm_fuel: "22%", pwm_start: "40%", current_start: "12 A", air_press: "1.9 bar", error: "0x00", timestamp: "14203021" },
+        { time: "14:20:32", ac_volt: "231 V", rpm: "1910", power: "39 kW", temp_turb: "344 °C", temp_out: "172 °C", temp_oil: "28 °C", oil_lvl: "91%", oil_press: "3.8 bar", pwm_oil: "36%", fuel: "83%", pwm_fuel: "24%", pwm_start: "35%", current_start: "10 A", air_press: "2.0 bar", error: "0x00", timestamp: "14203221" },
+        { time: "14:20:34", ac_volt: "231 V", rpm: "2000", power: "42 kW", temp_turb: "360 °C", temp_out: "175 °C", temp_oil: "29 °C", oil_lvl: "91%", oil_press: "3.9 bar", pwm_oil: "38%", fuel: "83%", pwm_fuel: "24%", pwm_start: "30%", current_start: "8 A", air_press: "2.0 bar", error: "0x00", timestamp: "14203421" }
+        ]
+        },
+        {
+        stageId: 11,
+        logs: [
+        { time: "14:20:40", ac_volt: "230 V", rpm: "2350", power: "55 kW", temp_turb: "450 °C", temp_out: "210 °C", temp_oil: "32 °C", oil_lvl: "91%", oil_press: "4.1 bar", pwm_oil: "42%", fuel: "83%", pwm_fuel: "28%", pwm_start: "10%", current_start: "4 A", air_press: "2.2 bar", error: "0x00", timestamp: "14204021" },
+        { time: "14:20:42", ac_volt: "230 V", rpm: "2440", power: "59 kW", temp_turb: "468 °C", temp_out: "225 °C", temp_oil: "33 °C", oil_lvl: "91%", oil_press: "4.2 bar", pwm_oil: "44%", fuel: "83%", pwm_fuel: "30%", pwm_start: "8%", current_start: "3 A", air_press: "2.3 bar", error: "0x00", timestamp: "14204221" },
+        { time: "14:20:44", ac_volt: "230 V", rpm: "2550", power: "63 kW", temp_turb: "490 °C", temp_out: "240 °C", temp_oil: "34 °C", oil_lvl: "91%", oil_press: "4.2 bar", pwm_oil: "46%", fuel: "83%", pwm_fuel: "32%", pwm_start: "5%", current_start: "2 A", air_press: "2.3 bar", error: "0x00", timestamp: "14204421" }
+        ]
+        },
+        {
+        stageId: 13,
+        logs: [
+        { time: "14:20:50", ac_volt: "230 V", rpm: "2800", power: "75 kW", temp_turb: "520 °C", temp_out: "260 °C", temp_oil: "36 °C", oil_lvl: "91%", oil_press: "4.3 bar", pwm_oil: "50%", fuel: "82%", pwm_fuel: "35%", pwm_start: "0%", current_start: "0 A", air_press: "2.5 bar", error: "0x00", timestamp: "14205021" },
+        { time: "14:20:52", ac_volt: "230 V", rpm: "2920", power: "78 kW", temp_turb: "542 °C", temp_out: "285 °C", temp_oil: "37 °C", oil_lvl: "91%", oil_press: "4.3 bar", pwm_oil: "52%", fuel: "82%", pwm_fuel: "36%", pwm_start: "0%", current_start: "0 A", air_press: "2.5 bar", error: "0x00", timestamp: "14205221" },
+        { time: "14:20:54", ac_volt: "230 V", rpm: "3000", power: "79 kW", temp_turb: "560 °C", temp_out: "290 °C", temp_oil: "40 °C", oil_lvl: "91%", oil_press: "4.4 bar", pwm_oil: "53%", fuel: "82%", pwm_fuel: "37%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14205421" }
+        ]
+        }
+        ]
+        },
+        {
+        phaseName: "Praca",
+        stages: [
+        {
+        stageId: 14,
+        logs: [
+        { time: "14:21:00", ac_volt: "230 V", rpm: "3100", power: "80 kW", temp_turb: "580 °C", temp_out: "310 °C", temp_oil: "42 °C", oil_lvl: "91%", oil_press: "4.4 bar", pwm_oil: "55%", fuel: "82%", pwm_fuel: "38%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14210021" },
+        { time: "14:25:00", ac_volt: "231 V", rpm: "3150", power: "82 kW", temp_turb: "595 °C", temp_out: "325 °C", temp_oil: "45 °C", oil_lvl: "90%", oil_press: "4.4 bar", pwm_oil: "58%", fuel: "78%", pwm_fuel: "40%", pwm_start: "0%", current_start: "0 A", air_press: "2.6 bar", error: "0x00", timestamp: "14250021" },
+        { time: "14:30:00", ac_volt: "229 V", rpm: "3120", power: "80 kW", temp_turb: "605 °C", temp_out: "330 °C", temp_oil: "48 °C", oil_lvl: "90%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "74%", pwm_fuel: "42%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14300021" },
+        { time: "14:35:00", ac_volt: "230 V", rpm: "3100", power: "80 kW", temp_turb: "610 °C", temp_out: "335 °C", temp_oil: "50 °C", oil_lvl: "89%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "70%", pwm_fuel: "42%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14350021" },
+        { time: "14:40:00", ac_volt: "230 V", rpm: "3140", power: "81 kW", temp_turb: "608 °C", temp_out: "332 °C", temp_oil: "51 °C", oil_lvl: "89%", oil_press: "4.5 bar", pwm_oil: "60%", fuel: "66%", pwm_fuel: "41%", pwm_start: "0%", current_start: "0 A", air_press: "2.7 bar", error: "0x00", timestamp: "14400021" }
+        ]
+        }
+        ]
+        },
+        {
+        phaseName: "Cooling",
+        stages: [
+        {
+        stageId: 40,
+        logs: [
+        { time: "14:41:10", ac_volt: "228 V", rpm: "1800", power: "20 kW", temp_turb: "450 °C", temp_out: "220 °C", temp_oil: "48 °C", oil_lvl: "89%", oil_press: "3.2 bar", pwm_oil: "30%", fuel: "65%", pwm_fuel: "12%", pwm_start: "0%", current_start: "0 A", air_press: "1.8 bar", error: "0x00", timestamp: "14411021" },
+        { time: "14:41:15", ac_volt: "228 V", rpm: "1500", power: "15 kW", temp_turb: "400 °C", temp_out: "200 °C", temp_oil: "46 °C", oil_lvl: "89%", oil_press: "2.8 bar", pwm_oil: "25%", fuel: "65%", pwm_fuel: "10%", pwm_start: "0%", current_start: "0 A", air_press: "1.6 bar", error: "0x00", timestamp: "14411521" },
+        { time: "14:41:20", ac_volt: "229 V", rpm: "1200", power: "10 kW", temp_turb: "350 °C", temp_out: "180 °C", temp_oil: "44 °C", oil_lvl: "89%", oil_press: "2.5 bar", pwm_oil: "20%", fuel: "65%", pwm_fuel: "8%", pwm_start: "0%", current_start: "0 A", air_press: "1.4 bar", error: "0x00", timestamp: "14412021" }
+        ]
+        },
+        {
+        stageId: 41,
+        logs: [
+        { time: "14:41:30", ac_volt: "230 V", rpm: "600", power: "2 kW", temp_turb: "220 °C", temp_out: "120 °C", temp_oil: "39 °C", oil_lvl: "89%", oil_press: "1.8 bar", pwm_oil: "10%", fuel: "64%", pwm_fuel: "4%", pwm_start: "0%", current_start: "0 A", air_press: "1.1 bar", error: "0x00", timestamp: "14413021" },
+        { time: "14:41:33", ac_volt: "230 V", rpm: "400", power: "1 kW", temp_turb: "180 °C", temp_out: "100 °C", temp_oil: "37 °C", oil_lvl: "89%", oil_press: "1.2 bar", pwm_oil: "5%", fuel: "64%", pwm_fuel: "2%", pwm_start: "0%", current_start: "0 A", air_press: "0.8 bar", error: "0x00", timestamp: "14413321" },
+        { time: "14:41:36", ac_volt: "230 V", rpm: "200", power: "0 kW", temp_turb: "140 °C", temp_out: "80 °C", temp_oil: "35 °C", oil_lvl: "89%", oil_press: "0.6 bar", pwm_oil: "2%", fuel: "64%", pwm_fuel: "1%", pwm_start: "0%", current_start: "0 A", air_press: "0.4 bar", error: "0x00", timestamp: "14413621" },
+        { time: "14:41:40", ac_volt: "230 V", rpm: "0", power: "0 kW", temp_turb: "95 °C", temp_out: "60 °C", temp_oil: "34 °C", oil_lvl: "89%", oil_press: "0.2 bar", pwm_oil: "0%", fuel: "64%", pwm_fuel: "0%", pwm_start: "0%", current_start: "0 A", air_press: "0.0 bar", error: "0x00", timestamp: "14414021" }
+        ]
+        }
+        ]
+        }
+        ]
+        }
+        ];
 
-                        phaseSeparatorRow.innerHTML = `
-                                            <td colspan="18" class="p-1 px-3 bg-slate-200 text-[10px] font-bold text-slate-700 uppercase tracking-wider" style="height: 20px !important;">
-                                                <div class="flex items-center gap-2">
-                                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                                                    Faza pracy agregatu: ${displayPhaseName}
-                                                </div>
-                                            </td>
-                                        `;
-                        tbody.appendChild(phaseSeparatorRow);
+        // Column Group Visibility Handler (Horizontal)
+        function toggleColumnGroup(groupName) {
+        columnGroups[groupName] = !columnGroups[groupName];
+        applyColumnVisibility();
+        }
 
-                        phase.stages.forEach(stage => {
-                            const totalLogs = stage.logs.length;
-                            const stageKey = `${cycle.cycleId}_${phase.phaseName}_${stage.stageId}`;
-                            const isExpanded = !!expandedStages[stageKey];
+        function toggleAllHorizontal(expand) {
+        for (let key in columnGroups) {
+        columnGroups[key] = expand;
+        }
+        applyColumnVisibility();
+        }
 
-                            // Stage Subheader row (No Emojis!)
-                            const sectionHeaderRow = document.createElement('tr');
-                            sectionHeaderRow.className = "phase-header-row font-semibold text-gray-700 text-[11px]";
-                            sectionHeaderRow.innerHTML = `
-                                                <td colspan="18" class="p-2 border-b border-gray-200">
-                                                    <div class="flex items-center justify-between">
-                                                        <div class="flex items-center gap-2">
-                                                            <span class="font-bold text-gray-950">${cycle.cycleId} - Etap ${stage.stageId}</span>
-                                                            <span class="text-xs text-gray-400 font-normal">(${totalLogs} pakietów telemetrycznych)</span>
-                                                        </div>
-                                                        <button onclick="toggleStageVertical('${cycle.cycleId}', '${phase.phaseName}', ${stage.stageId})" class="text-[10px] bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-bold px-2 py-0.5 rounded transition">
-                                                            ${isExpanded ? 'Zwiń etap' : 'Rozwiń etap'}
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            `;
-                            tbody.appendChild(sectionHeaderRow);
+        function applyColumnVisibility() {
+        const colspans = {
+        power: { collapsed: 1, expanded: 3 },
+        turbine: { collapsed: 1, expanded: 2 },
+        oil: { collapsed: 1, expanded: 4 },
+        fuel: { collapsed: 1, expanded: 2 },
+        starter: { collapsed: 1, expanded: 2 }
+        };
 
-                            // Stage log processing
-                            stage.logs.forEach((log, index) => {
-                                const isFirst = index === 0;
-                                const isLast = index === totalLogs - 1;
-                                const isMiddle = !isFirst && !isLast;
+        for (let key in columnGroups) {
+        const isExpanded = columnGroups[key];
 
-                                // When collapsed, render only 1st and last elements with an expanding row placeholder in-between
-                                if (isMiddle && !isExpanded) {
-                                    if (index === 1) {
-                                        const placeholderRow = document.createElement('tr');
-                                        placeholderRow.className = "bg-amber-50/50 hover:bg-amber-100/70 cursor-pointer text-center font-bold text-amber-800 transition text-[10px]";
-                                        placeholderRow.onclick = () => toggleStageVertical(cycle.cycleId, phase.phaseName, stage.stageId);
-                                        placeholderRow.innerHTML = `
-                                                            <td colspan="18" class="p-2 border-t border-b border-amber-200 text-center">
-                                                                [Rozwiń] Pokaż pozostałe ${totalLogs - 2} logów etapu ${stage.stageId}
-                                                            </td>
-                                                        `;
-                                        tbody.appendChild(placeholderRow);
-                                    }
-                                    return;
-                                }
+        const header = document.getElementById(`hdr-group-${key}`);
+        const indicator = document.getElementById(`indicator-${key}`);
 
-                                // Telemetry Log Record Row
-                                const row = document.createElement('tr');
-                                row.className = `hover:bg-gray-50/80 transition ${isMiddle ? 'bg-amber-50/10' : ''}`;
+        if (header) {
+        header.colSpan = isExpanded ? colspans[key].expanded : colspans[key].collapsed;
+        if (isExpanded) {
+        header.classList.add('bg-amber-500', 'text-white');
+        header.classList.remove('bg-gray-900');
+        } else {
+        header.classList.remove('bg-amber-500', 'text-white');
+        header.classList.add('bg-gray-900');
+        }
+        }
 
-                                row.innerHTML = `
-                                                    <td class="p-2.5 font-semibold text-gray-800">${log.time}</td>
-                                                    <td class="p-2.5 border-r border-gray-100">
-                                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
-                                                            Etap ${stage.stageId}
-                                                        </span>
-                                                    </td>
+        if (indicator) {
+        indicator.innerHTML = isExpanded ? ' < > ' : ' ⇄ ';
+        }
 
-                                                    <!-- Zasilanie -->
-                                                    <td class="p-2.5 col-power collapsible-col text-gray-600">${log.ac_volt}</td>
-                                                    <td class="p-2.5 font-bold text-gray-900 bg-gray-50/40">${log.rpm}</td>
-                                                    <td class="p-2.5 col-power collapsible-col text-gray-600 border-r border-gray-100">${log.power}</td>
+        const cells = document.querySelectorAll(`.col-${key}`);
+        cells.forEach(cell => {
+        if (isExpanded) {
+        cell.classList.remove('hidden');
+        } else {
+        cell.classList.add('hidden');
+        }
+        });
+        }
+        }
 
-                                                    <!-- Turbina -->
-                                                    <td class="p-2.5 font-bold text-red-600">${log.temp_turb}</td>
-                                                    <td class="p-2.5 col-turbine collapsible-col text-gray-600 border-r border-gray-100">${log.temp_out}</td>
+        // Individual Stage Visibility Handler (Vertical)
+        function toggleStageVertical(cycleId, phaseName, stageId) {
+        const key = `${cycleId}_${phaseName}_${stageId}`;
+        expandedStages[key] = !expandedStages[key];
+        renderTable();
+        }
 
-                                                    <!-- Olej -->
-                                                    <td class="p-2.5 col-oil collapsible-col text-gray-600">${log.temp_oil}</td>
-                                                    <td class="p-2.5 col-oil collapsible-col text-gray-600">${log.oil_lvl}</td>
-                                                    <td class="p-2.5 font-bold text-blue-600">${log.oil_press}</td>
-                                                    <td class="p-2.5 col-oil collapsible-col text-gray-600 border-r border-gray-100">${log.pwm_oil}</td>
+        // Przełączanie widoczności pojedynczej fazy
+        function togglePhaseVertical(cycleId, phaseName) {
+        const key = `${cycleId}_${phaseName}`;
+        expandedPhases[key] = !expandedPhases[key];
+        renderTable();
+        }
 
-                                                    <!-- Paliwo -->
-                                                    <td class="p-2.5 font-bold text-gray-700">${log.fuel}</td>
-                                                    <td class="p-2.5 col-fuel collapsible-col text-gray-600 border-r border-gray-100">${log.pwm_fuel}</td>
+        // Mass vertical expansion control
+        function toggleAllVertical(expand) {
+        telemetryCycles.forEach(cycle => {
+        cycle.phases.forEach(phase => {
+        phase.stages.forEach(stage => {
+        const key = `${cycle.cycleId}_${phase.phaseName}_${stage.stageId}`;
+        expandedStages[key] = expand;
+        });
+        });
+        });
+        renderTable();
+        }
 
-                                                    <!-- Starter -->
-                                                    <td class="p-2.5 col-starter collapsible-col text-gray-600">${log.pwm_start}</td>
-                                                    <td class="p-2.5 font-bold text-gray-700 border-r border-gray-100">${log.current_start}</td>
+        // Main rendering function of telemetry rows
+        function renderTable() {
+        const tbody = document.getElementById('p6-telemetry-tbody');
+        const emptyState = document.getElementById('p6-empty-state');
 
-                                                    <!-- Diagnostyka/Misc -->
-                                                    <td class="p-2.5 text-gray-600">${log.air_press}</td>
-                                                    <td class="p-2.5"><span class="px-1.5 py-0.5 rounded font-mono font-bold ${log.error !== '0x00' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'}">${log.error}</span></td>
-                                                    <td class="p-2.5 font-mono text-gray-400">${log.timestamp}</td>
-                                                `;
-                                tbody.appendChild(row);
-                            });
-                        });
-                    });
-                });
+        tbody.innerHTML = '';
 
-                applyColumnVisibility();
-            }
+        if (telemetryCycles.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+        } else {
+        emptyState.classList.add('hidden');
+        }
 
-            // Simulation packet generator appended directly to the active live stage (Cooling, Etap 41)
-            function simulateNewLog() {
-                const lastCycle = telemetryCycles[telemetryCycles.length - 1];
-                const lastPhase = lastCycle.phases[lastCycle.phases.length - 1];
-                const lastStage = lastPhase.stages[lastPhase.stages.length - 1];
+telemetryCycles.forEach(cycle => {
+    cycle.phases.forEach(phase => {
+        const phaseKey = `${cycle.cycleId}_${phase.phaseName}`;
+        const isPhaseExpanded = !!expandedPhases[phaseKey];
 
-                const now = new Date();
-                const timeStr = now.toTimeString().split(' ')[0];
-                const timestampVal = Math.floor(now.getTime() / 1000).toString().slice(-8);
+        const phaseSeparatorRow = document.createElement('tr');
+        phaseSeparatorRow.className = "bg-gray-100 border-t-2 border-b border-gray-200";
 
-                const newLog = {
-                    time: timeStr,
-                    ac_volt: `${228 + Math.floor(Math.random() * 5)} V`,
-                    rpm: "0",
-                    power: "0 kW",
-                    temp_turb: `${85 - Math.floor(Math.random() * 10)} °C`,
-                    temp_out: `${55 - Math.floor(Math.random() * 8)} °C`,
-                    temp_oil: `${33 - Math.floor(Math.random() * 3)} °C`,
-                    oil_lvl: "89%",
-                    oil_press: "0.1 bar",
-                    pwm_oil: "0%",
-                    fuel: "64%",
-                    pwm_fuel: "0%",
-                    pwm_start: "0%",
-                    current_start: "0 A",
-                    air_press: "0.0 bar",
-                    error: Math.random() > 0.95 ? "0x12" : "0x00",
-                    timestamp: timestampVal
-                };
+        let displayPhaseName = phase.phaseName;
+        if (displayPhaseName.toLowerCase() === 'cooling') {
+            displayPhaseName = 'Chłodzenie';
+        }
 
-                lastStage.logs.push(newLog);
+        phaseSeparatorRow.innerHTML = `
+        <td colspan="18" class="p-1.5 px-3 bg-slate-200 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    Faza pracy agregatu: ${displayPhaseName}
+                </div>
+                <button onclick="togglePhaseVertical('${cycle.cycleId}', '${phase.phaseName}')" class="text-[9px] bg-slate-300 hover:bg-slate-400 text-slate-800 font-bold px-2 py-0.5 rounded transition">
+                    ${isPhaseExpanded ? '▲ Zwiń fazę' : '▼ Rozwiń fazę'}
+                </button>
+            </div>
+        </td>
+        `;
+        tbody.appendChild(phaseSeparatorRow);
 
-                UIkit.notification({
-                    message: `<span uk-icon='icon: check; ratio: 0.8'></span> Otrzymano nowy pakiet telemetryczny: ${timeStr} (Etap ${lastStage.stageId})`,
-                    status: 'success',
-                    pos: 'bottom-right',
-                    timeout: 2000
-                });
+        if (!isPhaseExpanded) {
+            return;
+        }
 
-                renderTable();
-            }
+        phase.stages.forEach(stage => {
+        const totalLogs = stage.logs.length;
+        const stageKey = `${cycle.cycleId}_${phase.phaseName}_${stage.stageId}`;
+        const isExpanded = !!expandedStages[stageKey];
 
-            window.onload = function () {
-                renderTable();
-            };
-        </script>
+        // Stage Subheader row (No Emojis!)
+        const sectionHeaderRow = document.createElement('tr');
+        sectionHeaderRow.className = "phase-header-row font-semibold text-gray-700 text-[11px]";
+        sectionHeaderRow.innerHTML = `
+        <td colspan="18" class="p-2 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+        <span class="font-bold text-gray-950">${cycle.cycleId} - Etap ${stage.stageId}</span>
+        <span class="text-xs text-gray-400 font-normal">(${totalLogs} pakietów telemetrycznych)</span>
+        </div>
+        <button onclick="toggleStageVertical('${cycle.cycleId}', '${phase.phaseName}', ${stage.stageId})" class="text-[10px] bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-bold px-2 py-0.5 rounded transition">
+        ${isExpanded ? 'Zwiń etap' : 'Rozwiń etap'}
+        </button>
+        </div>
+        </td>
+        `;
+        tbody.appendChild(sectionHeaderRow);
+
+        // Stage log processing
+        stage.logs.forEach((log, index) => {
+        const isFirst = index === 0;
+        const isLast = index === totalLogs - 1;
+        const isMiddle = !isFirst && !isLast;
+
+        // When collapsed, render only 1st and last elements with an expanding row placeholder in-between
+        if (isMiddle && !isExpanded) {
+        if (index === 1) {
+        const placeholderRow = document.createElement('tr');
+        placeholderRow.className = "bg-amber-50/50 hover:bg-amber-100/70 cursor-pointer text-center font-bold text-amber-800 transition text-[10px]";
+        placeholderRow.onclick = () => toggleStageVertical(cycle.cycleId, phase.phaseName, stage.stageId);
+        placeholderRow.innerHTML = `
+        <td colspan="18" class="p-2 border-t border-b border-amber-200 text-center">
+        [Rozwiń] Pokaż pozostałe ${totalLogs - 2} logów etapu ${stage.stageId}
+        </td>
+        `;
+        tbody.appendChild(placeholderRow);
+        }
+        return;
+        }
+
+        // Telemetry Log Record Row
+        const row = document.createElement('tr');
+        row.className = `hover:bg-gray-50/80 transition ${isMiddle ? 'bg-amber-50/10' : ''}`;
+
+        row.innerHTML = `
+        <td class="p-2.5 font-semibold text-gray-800">${log.time}</td>
+        <td class="p-2.5 border-r border-gray-100">
+        <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
+        Etap ${stage.stageId}
+        </span>
+        </td>
+
+        <!-- Zasilanie -->
+        <td class="p-2.5 col-power collapsible-col text-gray-600">${log.ac_volt}</td>
+        <td class="p-2.5 font-bold text-gray-900 bg-gray-50/40">${log.rpm}</td>
+        <td class="p-2.5 col-power collapsible-col text-gray-600 border-r border-gray-100">${log.power}</td>
+
+        <!-- Turbina -->
+        <td class="p-2.5 font-bold text-red-600">${log.temp_turb}</td>
+        <td class="p-2.5 col-turbine collapsible-col text-gray-600 border-r border-gray-100">${log.temp_out}</td>
+
+        <!-- Olej -->
+        <td class="p-2.5 col-oil collapsible-col text-gray-600">${log.temp_oil}</td>
+        <td class="p-2.5 col-oil collapsible-col text-gray-600">${log.oil_lvl}</td>
+        <td class="p-2.5 font-bold text-blue-600">${log.oil_press}</td>
+        <td class="p-2.5 col-oil collapsible-col text-gray-600 border-r border-gray-100">${log.pwm_oil}</td>
+
+        <!-- Paliwo -->
+        <td class="p-2.5 font-bold text-gray-700">${log.fuel}</td>
+        <td class="p-2.5 col-fuel collapsible-col text-gray-600 border-r border-gray-100">${log.pwm_fuel}</td>
+
+        <!-- Starter -->
+        <td class="p-2.5 col-starter collapsible-col text-gray-600">${log.pwm_start}</td>
+        <td class="p-2.5 font-bold text-gray-700 border-r border-gray-100">${log.current_start}</td>
+
+        <!-- Diagnostyka/Misc -->
+        <td class="p-2.5 text-gray-600">${log.air_press}</td>
+        <td class="p-2.5"><span class="px-1.5 py-0.5 rounded font-mono font-bold ${log.error !== '0x00' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'}">${log.error}</span></td>
+        <td class="p-2.5 font-mono text-gray-400">${log.timestamp}</td>
+        `;
+        tbody.appendChild(row);
+        });
+        });
+        });
+        });
+
+        applyColumnVisibility();
+        }
+
+        // Simulation packet generator appended directly to the active live stage (Cooling, Etap 41)
+        function simulateNewLog() {
+        const lastCycle = telemetryCycles[telemetryCycles.length - 1];
+        const lastPhase = lastCycle.phases[lastCycle.phases.length - 1];
+        const lastStage = lastPhase.stages[lastPhase.stages.length - 1];
+
+        const now = new Date();
+        const timeStr = now.toTimeString().split(' ')[0];
+        const timestampVal = Math.floor(now.getTime() / 1000).toString().slice(-8);
+
+        const newLog = {
+        time: timeStr,
+        ac_volt: `${228 + Math.floor(Math.random() * 5)} V`,
+        rpm: "0",
+        power: "0 kW",
+        temp_turb: `${85 - Math.floor(Math.random() * 10)} °C`,
+        temp_out: `${55 - Math.floor(Math.random() * 8)} °C`,
+        temp_oil: `${33 - Math.floor(Math.random() * 3)} °C`,
+        oil_lvl: "89%",
+        oil_press: "0.1 bar",
+        pwm_oil: "0%",
+        fuel: "64%",
+        pwm_fuel: "0%",
+        pwm_start: "0%",
+        current_start: "0 A",
+        air_press: "0.0 bar",
+        error: Math.random() > 0.95 ? "0x12" : "0x00",
+        timestamp: timestampVal
+        };
+
+        lastStage.logs.push(newLog);
+
+        UIkit.notification({
+        message: `<span uk-icon='icon: check; ratio: 0.8'></span> Otrzymano nowy pakiet telemetryczny: ${timeStr} (Etap ${lastStage.stageId})`,
+        status: 'success',
+        pos: 'bottom-right',
+        timeout: 2000
+        });
+
+        renderTable();
+        }
+
+        window.onload = function () {
+        renderTable();
+        };
+    </script>
 </body>
 </html>
