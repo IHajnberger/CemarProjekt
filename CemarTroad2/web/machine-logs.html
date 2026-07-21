@@ -217,6 +217,7 @@
         // --- VERTICAL STAGE FILTERING STATE (STAGES) ---
         // Format: `${cycleId}_${phaseName}_${stageId}` -> boolean
         const expandedStages = {};
+        const expandedPhases = {};
 
         // --- DETAILED SIMULATION DATA GROUPED BY STAGE ---
         let telemetryCycles = [
@@ -379,6 +380,13 @@
         renderTable();
         }
 
+        // Przełączanie widoczności pojedynczej fazy
+        function togglePhaseVertical(cycleId, phaseName) {
+        const key = `${cycleId}_${phaseName}`;
+        expandedPhases[key] = !expandedPhases[key];
+        renderTable();
+        }
+
         // Mass vertical expansion control
         function toggleAllVertical(expand) {
         telemetryCycles.forEach(cycle => {
@@ -406,26 +414,37 @@
         emptyState.classList.add('hidden');
         }
 
-        telemetryCycles.forEach(cycle => {
-        cycle.phases.forEach(phase => {
-        // Thin premium separator representing the active system phase
+telemetryCycles.forEach(cycle => {
+    cycle.phases.forEach(phase => {
+        const phaseKey = `${cycle.cycleId}_${phase.phaseName}`;
+        const isPhaseExpanded = !!expandedPhases[phaseKey];
+
         const phaseSeparatorRow = document.createElement('tr');
         phaseSeparatorRow.className = "bg-gray-100 border-t-2 border-b border-gray-200";
 
         let displayPhaseName = phase.phaseName;
         if (displayPhaseName.toLowerCase() === 'cooling') {
-        displayPhaseName = 'Chłodzenie';
+            displayPhaseName = 'Chłodzenie';
         }
 
         phaseSeparatorRow.innerHTML = `
-        <td colspan="18" class="p-1 px-3 bg-slate-200 text-[10px] font-bold text-slate-700 uppercase tracking-wider" style="height: 20px !important;">
-        <div class="flex items-center gap-2">
-        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-        Faza pracy agregatu: ${displayPhaseName}
-        </div>
+        <td colspan="18" class="p-1.5 px-3 bg-slate-200 text-[10px] font-bold text-slate-700 uppercase tracking-wider">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    Faza pracy agregatu: ${displayPhaseName}
+                </div>
+                <button onclick="togglePhaseVertical('${cycle.cycleId}', '${phase.phaseName}')" class="text-[9px] bg-slate-300 hover:bg-slate-400 text-slate-800 font-bold px-2 py-0.5 rounded transition">
+                    ${isPhaseExpanded ? '▲ Zwiń fazę' : '▼ Rozwiń fazę'}
+                </button>
+            </div>
         </td>
         `;
         tbody.appendChild(phaseSeparatorRow);
+
+        if (!isPhaseExpanded) {
+            return;
+        }
 
         phase.stages.forEach(stage => {
         const totalLogs = stage.logs.length;
