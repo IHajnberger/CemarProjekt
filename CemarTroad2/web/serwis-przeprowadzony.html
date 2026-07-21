@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Serwis Przeprowadzony</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <!-- Pasek językowy + kontakt -->
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek Nawigacyjny -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="staff-list.html">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a href="staff-list.html" title="Strona główna" uk-tooltip>
+                        <span class="uk-text-bold" uk-icon="icon: home; ratio: 1.1;"></span>
+                    </a>
+                </li>
+                <li><a href="wycena.html">Wycena</a></li>
+                <li><a href="serwis.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Serwis</a></li>
+                <li><a href="konto-serwis.html">Konto</a></li>
+            </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top uk-margin-large-bottom">
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="p-8">
+
+                <!-- Nagłówek Raportu -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-6 mb-6">
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Karta Pracy Serwisowej</span>
+                        <h1 class="text-3xl font-extrabold text-gray-900 mt-1">SERWIS ZAKOŃCZONY</h1>
+                    </div>
+                    <div class="text-left md:text-right mt-4 md:mt-0">
+                        <p class="text-sm text-gray-500 m-0">Czas trwania prac:</p>
+                        <h2 id="sum-duration" class="text-2xl font-bold text-amber-500 m-0">00:00:00</h2>
+                    </div>
+                </div>
+
+                <!-- Szczegóły maszyny -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 bg-gray-50 p-6 rounded-lg mb-8">
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase">Model maszyny</span>
+                        <span id="sum-model" class="font-bold text-gray-800">-</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase">Numer maszyny</span>
+                        <span id="sum-num" class="font-bold text-gray-800">-</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase">Klient</span>
+                        <span id="sum-client" class="font-bold text-gray-800">-</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase">Roboczogodziny</span>
+                        <span id="sum-hours" class="font-bold text-gray-800">- mth</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase">Serwisant</span>
+                        <span id="sum-tech" class="font-bold text-gray-800">-</span>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-gray-400 uppercase">Data wykonania</span>
+                        <span id="sum-date" class="font-bold text-gray-800">-</span>
+                    </div>
+                </div>
+
+                <!-- Przebieg oraz Części -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-bold border-b pb-2 mb-3 text-gray-800">Wykonane Procedury</h3>
+                        <ul id="sum-activities" class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold border-b pb-2 mb-3 text-gray-800 font-mono text-amber-600">Wykorzystane Części</h3>
+                        <ul id="sum-parts" class="list-none pl-0 text-sm space-y-2 text-gray-700">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Notatki końcowe -->
+                <div class="border-t pt-6 mb-8">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Szczegółowy Opis Serwisu</h3>
+                    <p id="sum-notes" class="text-sm text-gray-600 italic bg-gray-50 p-4 rounded border-l-4 border-amber-400 whitespace-pre-wrap">-</p>
+                </div>
+
+                <!-- Zdjęcia podsumowujące -->
+                <div id="sum-photos-container" class="border-t pt-6 mb-8 hidden">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Dokumentacja Wizualna</h3>
+                    <div id="sum-photos" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+                </div>
+
+                <!-- Akcje druku / powrotu -->
+                <div class="flex gap-4 justify-end no-print">
+                    <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition" onclick="window.print()">
+                        <span uk-icon="icon: print"></span> Drukuj Raport
+                    </button>
+                    <a href="serwis.html" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                        Nowe zlecenie <span uk-icon="icon: arrow-right"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+<script src="java.js"></script>
+
+<script>
+    window.onload = function () {
+    const rawData = localStorage.getItem('cemar_active_summary');
+    if (!rawData) {
+    // Bezpieczne powiadomienie UIkit zamiast zablokowanego alert()
+    UIkit.notification({
+    message: "<span uk-icon='icon: warning'></span> Brak danych do wygenerowania podsumowania.",
+    status: 'danger',
+    pos: 'top-center',
+    timeout: 5000
+    });
+    return;
+    }
+
+    const data = JSON.parse(rawData);
+
+    // Wypełnianie pól tekstowych
+    document.getElementById('sum-duration').textContent = data.duration;
+    document.getElementById('sum-model').textContent = data.model;
+    document.getElementById('sum-num').textContent = data.machineNum || '---';
+    document.getElementById('sum-client').textContent = data.client || '---';
+    document.getElementById('sum-hours').textContent = data.hours ? `${data.hours} mth` : '---';
+    document.getElementById('sum-tech').textContent = data.technician || '---';
+    document.getElementById('sum-date').textContent = data.date;
+    document.getElementById('sum-notes').textContent = data.notes || "Brak uwag.";
+
+    // Czynności
+    const actList = document.getElementById('sum-activities');
+    actList.innerHTML = '';
+    if (data.activities && data.activities.length > 0) {
+    data.activities.forEach(act => {
+    const li = document.createElement('li');
+    li.textContent = act;
+    actList.appendChild(li);
+    });
+    } else {
+    actList.innerHTML = '<li class="text-gray-400">Nie wybrano żadnych czynności.</li>';
+    }
+
+    // Części
+    const partsList = document.getElementById('sum-parts');
+    partsList.innerHTML = '';
+    if (data.parts && data.parts.length > 0) {
+    data.parts.forEach(part => {
+    const li = document.createElement('li');
+    li.className = "flex items-center gap-2";
+    li.innerHTML = `
+    <span class="font-mono bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">${part.code}</span>
+    <span>${part.name}</span>
+    `;
+    partsList.appendChild(li);
+    });
+    } else {
+    partsList.innerHTML = '<li class="text-gray-400">Brak użytych części zamiennych.</li>';
+    }
+
+    // Zdjęcia
+    if (data.photos && data.photos.length > 0) {
+    document.getElementById('sum-photos-container').classList.remove('hidden');
+    const photoGrid = document.getElementById('sum-photos');
+    photoGrid.innerHTML = '';
+    data.photos.forEach(imgSrc => {
+    const img = document.createElement('img');
+    img.src = imgSrc;
+    img.className = "w-full h-32 object-cover rounded-lg border";
+    photoGrid.appendChild(img);
+    });
+    }
+    };
+</script>
+</body>
+</html>

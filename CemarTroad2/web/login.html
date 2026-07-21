@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Logowanie</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #dca31a;
+            --primary-yellow-hover: #b88510;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top left, #2c2c2c, #121212);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-top: 5px solid var(--primary-yellow);
+        }
+
+        .role-selector-btn {
+            border: 2px solid #eaeaea;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+            .role-selector-btn:hover {
+                border-color: var(--primary-yellow);
+                background-color: rgba(220, 163, 26, 0.05);
+            }
+
+            .role-selector-btn.active {
+                border-color: var(--primary-yellow);
+                background-color: rgba(220, 163, 26, 0.1);
+            }
+
+        .cemar-btn-primary {
+            background-color: var(--primary-yellow);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+            .cemar-btn-primary:hover {
+                background-color: var(--primary-yellow-hover);
+                color: #fff;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="login-card uk-text-center">
+        <h2 class="uk-margin-remove-bottom uk-text-bold">LOGIN PLACEHOLDER</h2>
+        <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Wybierz profil logowania do systemu</p>
+
+        <div class="uk-child-width-1-2@s uk-grid-small uk-margin-large-bottom" uk-grid>
+            <div>
+                <div id="select-client" class="role-selector-btn" onclick="selectRole('client') & proceedLogin()">
+                    <span uk-icon="icon: user; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Klient</h4>
+                </div>
+            </div>
+            <div>
+                <div id="select-staff" class="role-selector-btn" onclick="selectRole('staff') & proceedLogin()">
+                    <span uk-icon="icon: cog; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Serwisant</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+
+    <script>
+        let selectedRole = '';
+
+        function selectRole(role) {
+            selectedRole = role;
+            document.getElementById('select-client').classList.remove('active');
+            document.getElementById('select-staff').classList.remove('active');
+
+            if (role === 'client') {
+                document.getElementById('select-client').classList.add('active');
+            } else {
+                document.getElementById('select-staff').classList.add('active');
+            }
+        }
+
+        function proceedLogin() {
+            if (!selectedRole) {
+                UIkit.notification({
+                    message: '<span uk-icon=\'info\'></span> Wybierz najpierw rolę użytkownika!',
+                    status: 'warning',
+                    pos: 'top-center'
+                });
+                return;
+            }
+
+            // Wybór roli
+            localStorage.setItem('userRole', selectedRole);
+            if (selectedRole === 'client') {
+                window.location.href = 'client-list.html';
+            } else {
+                window.location.href = 'staff-list.html';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Zgłoś Serwis</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold pomoc">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" onclick="goBack">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <!-- Identyfikator nav-home dla dynamicznego przekierowania domkiem -->
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li class="wycena"><a href="wycena.html">Wycena</a></li>
+                <li class="serwis"><a href="serwis.html">Serwis</a></li>
+                
+                <li class="instrukcja"><a href="instrukcje.html">Instrukcje</a></li>
+                <li class="ai"><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a id="nav-konto" href="#">Konto</a></li>
+            </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container" style="margin-top: 20px; padding-bottom: 80px; max-width: 900px;">
+        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" id="p7-back-btn" onclick="goBack">
+            <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do karty maszyny
+        </button>
+
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <span class="uk-label uk-label-warning uk-margin-small-bottom">Formularz</span>
+                <h2 class="uk-margin-remove-top uk-text-bold">Zgłoś serwis</h2>
+                <p class="uk-text-muted uk-margin-remove-top uk-margin-medium-bottom">Wypełnij poniższy formularz, aby zgłosić potrzebę serwisu maszyny. Możesz dołączyć zdjęcia lub nagrania wideo usterki.</p>
+
+                <hr>
+
+                <form id="p7-service-form" onsubmit="handleSubmit(event)">
+                    <div class="uk-grid-medium" uk-grid>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-machine-number">Numer maszyny</label>
+                            <input class="uk-input" id="p7-machine-number" type="text" required>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-machine-type">Typ maszyny</label>
+                            <input class="uk-input" id="p7-machine-type" type="text" required>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-reporter-name">Osoba zgłaszająca</label>
+                            <input class="uk-input" id="p7-reporter-name" type="text" placeholder="Imię i nazwisko" required>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="p7-reporter-contact">Telefon lub e-mail kontaktowy</label>
+                            <input class="uk-input" id="p7-reporter-contact" type="text" required>
+                        </div>
+
+                        <div class="uk-width-1-1">
+                            <label class="uk-form-label" for="p7-description">Opis usterki / powód zgłoszenia</label>
+                            <textarea class="uk-textarea" id="p7-description" rows="5" placeholder="Opisz dokładnie na czym polega problem, kiedy się pojawił oraz w jakich okolicznościach." required></textarea>
+                        </div>
+
+                        <div class="uk-width-1-1">
+                            <label class="uk-form-label">Zdjęcia / wideo usterki (opcjonalnie)</label>
+                            <div class="media-dropzone" id="p7-dropzone" onclick="document.getElementById('p7-file-input').click()">
+                                <span uk-icon="icon: cloud-upload; ratio: 1.6"></span>
+                                <p class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold" style="font-size: 14px;">Kliknij, aby dodać pliki, lub przeciągnij je tutaj</p>
+                                <p class="uk-text-meta uk-margin-remove-top">Obsługiwane formaty: JPG, PNG, MP4, MOV — wiele plików naraz</p>
+                            </div>
+                            <input type="file" id="p7-file-input" accept="image/*,video/*" multiple style="display:none" onchange="handleFiles(this.files)">
+                            <div class="media-preview-grid" id="p7-media-preview"></div>
+                        </div>
+
+                        <div class="uk-width-1-1 uk-margin-medium-top">
+                            <button type="submit" class="uk-button cemar-btn-primary uk-width-1-1">
+                                <span uk-icon="icon: check; ratio: 0.9" class="uk-margin-small-right"></span> Wyślij zgłoszenie
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+</body>
+</html>

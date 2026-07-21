@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Panel Klienta</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <!-- Pasek językowy + kontakt -->
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a href="client-list.html" title="Strona główna" uk-tooltip>
+                        <span class="uk-text-bold" style="color: var(--primary-yellow-hover);" uk-icon="icon: home; ratio: 1.1;"></span>
+                    </a>
+                </li>
+
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html">Asystent AI</a></li>
+                <li><a href="konto-kilent.html">Konto</a></li>
+            </ul>
+
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top main-container">
+        <div class="cemar-card uk-margin-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <span uk-icon="icon: user; ratio: 2.5" class="uk-text-warning"></span>
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Dzień dobry, Klient placeholder</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">nazwa firmy placeholder • client@placeholder.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-medium-bottom">Twoje aktywne maszyny</h4>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider uk-table-hover cemar-table">
+                        <thead>
+                            <tr>
+                                <th>Data Dodania</th>
+                                <th>Numer Maszyny</th>
+                                <th>Typ Maszyny</th>
+                                <th class="uk-text-center">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12.04.2026</td>
+                                <td><span class="uk-text-bold">E59008</span></td>
+                                <td>City</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small uk-margin-small-right" onclick="goToDetails('E59008', 'City')">Szczegóły</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToReport('E59008', 'City')">Raport</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>28.05.2026</td>
+                                <td><span class="uk-text-bold">E62441</span></td>
+                                <td>T-35</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small uk-margin-small-right" onclick="goToDetails('E62441', 'T-35')">Szczegóły</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToReport('E62441', 'T-35')">Raport</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+</body>
+</html>
