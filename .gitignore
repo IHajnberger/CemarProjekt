@@ -24,3 +24,7 @@ CemarTroad2/bin/Debug/net8.0/CemarTroad2.pdb
 CemarTroad2/obj/Debug/net8.0/CemarTroad2.AssemblyInfo.cs
 *.pdb
 *.db-shm
+*.cache
+*.props
+*.slnx
+*.targets
