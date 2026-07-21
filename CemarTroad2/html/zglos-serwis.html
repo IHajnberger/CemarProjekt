@@ -39,7 +39,7 @@
         </div>
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
-                <!-- Dodany identyfikator nav-home dla dynamicznego przekierowania domkiem -->
+                <!-- Identyfikator nav-home dla dynamicznego przekierowania domkiem -->
                 <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
                 <li class="wycena"><a href="wycena.html">Wycena</a></li>
                 <li class="serwis"><a href="serwis.html">Serwis</a></li>
@@ -88,23 +88,8 @@
                         </div>
 
                         <div class="uk-width-1-1">
-                            <label class="uk-form-label">Priorytet zgłoszenia</label>
-                            <div class="priority-pill-container">
-                                <div class="priority-pill" data-priority="niski" onclick="setPriority('niski')">Niski</div>
-                                <div class="priority-pill" data-priority="sredni" onclick="setPriority('sredni')">Średni</div>
-                                <div class="priority-pill" data-priority="wysoki" onclick="setPriority('wysoki')">Wysoki</div>
-                            </div>
-                            <input type="hidden" id="p7-priority" value="sredni">
-                        </div>
-
-                        <div class="uk-width-1-1">
                             <label class="uk-form-label" for="p7-description">Opis usterki / powód zgłoszenia</label>
                             <textarea class="uk-textarea" id="p7-description" rows="5" placeholder="Opisz dokładnie na czym polega problem, kiedy się pojawił oraz w jakich okolicznościach." required></textarea>
-                        </div>
-
-                        <div class="uk-width-1-1">
-                            <label class="uk-form-label" for="p7-availability">Preferowany termin serwisu</label>
-                            <input class="uk-input" id="p7-availability" type="date">
                         </div>
 
                         <div class="uk-width-1-1">

@@ -35,14 +35,24 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="staff-list.html">
+            <!-- Identyfikator nav-logo dla dynamicznego przypisywania linku w zależności od roli -->
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
                 <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
         </div>
         <div class="uk-navbar-right uk-margin-right w-lewo">
-            <ul class="uk-navbar-nav">
-                <li><a href="serwis.html" class="font-bold">Zacznij Nowy Serwis</a></li>
+            <ul class="uk-navbar-nav ">
+                <!-- Identyfikator nav-home dla dynamicznego przekierowania domkiem -->
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+
+                <li class="serwis"><a href="serwis.html">Serwis</a></li>
+                <li><a href="instrukcje.html">Instrukcje</a></li>
+                <li><a href="asystent-ai.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Asystent AI</a></li>
+                <li><a id="nav-konto" href="#">Konto</a></li>
             </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="login.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
         </div>
     </nav>
 
@@ -96,13 +106,11 @@
                     <div>
                         <h3 class="text-lg font-bold border-b pb-2 mb-3 text-gray-800">Wykonane Procedury</h3>
                         <ul id="sum-activities" class="list-disc pl-5 text-sm space-y-2 text-gray-700">
-                            <!-- JS dynamic injection -->
                         </ul>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold border-b pb-2 mb-3 text-gray-800 font-mono text-amber-600">Wykorzystane Części</h3>
                         <ul id="sum-parts" class="list-none pl-0 text-sm space-y-2 text-gray-700">
-                            <!-- JS dynamic injection -->
                         </ul>
                     </div>
                 </div>
