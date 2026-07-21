@@ -2,15 +2,26 @@
 ## Cel:
 Celem projektu było stworzenie interaktywnej aplikacji webowej, na wzór pierwotnego TRoad'a, wzorując się stylem na obecnej stronie Cemar'u https://cemar.pro/pl/.
 ## Funkcjonalność: 
-tba
+<details>
+<summary> tba </summary>
+</details>
+
 ## Budowa projektu:
-tba
+<details>
+<summary> tba </summary>
+</details>
+
 ## Podgląd strony:
-tba
+<details>
+<summary> tba </summary>
+</details>
+
 ## Pierwszy model - Figma:
 ### Model UI:
 https://www.figma.com/design/UVaKYIwzOtoJYkFxFBSIW0/Cemar?node-id=0-1&t=WUInL01daNpfY4rf-1
+
 ## Raporty:
-### A:
-https://www.overleaf.com/read/xvwthmdjvvbb#706416
+<details>
+<summary> tba </summary>
+</details>
 
