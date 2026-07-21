@@ -21,7 +21,7 @@
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
             <div>
-                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+
             </div>
         </div>
     </div>
@@ -141,80 +141,20 @@
         </div>
     </div>
 
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
-<script src="java.js"></script>
+    <script src="java.js"></script>
 
-<script>
-    window.onload = function () {
-    const rawData = localStorage.getItem('cemar_active_summary');
-    if (!rawData) {
-    // Bezpieczne powiadomienie UIkit zamiast zablokowanego alert()
-    UIkit.notification({
-    message: "<span uk-icon='icon: warning'></span> Brak danych do wygenerowania podsumowania.",
-    status: 'danger',
-    pos: 'top-center',
-    timeout: 5000
-    });
-    return;
-    }
-
-    const data = JSON.parse(rawData);
-
-    // Wypełnianie pól tekstowych
-    document.getElementById('sum-duration').textContent = data.duration;
-    document.getElementById('sum-model').textContent = data.model;
-    document.getElementById('sum-num').textContent = data.machineNum || '---';
-    document.getElementById('sum-client').textContent = data.client || '---';
-    document.getElementById('sum-hours').textContent = data.hours ? `${data.hours} mth` : '---';
-    document.getElementById('sum-tech').textContent = data.technician || '---';
-    document.getElementById('sum-date').textContent = data.date;
-    document.getElementById('sum-notes').textContent = data.notes || "Brak uwag.";
-
-    // Czynności
-    const actList = document.getElementById('sum-activities');
-    actList.innerHTML = '';
-    if (data.activities && data.activities.length > 0) {
-    data.activities.forEach(act => {
-    const li = document.createElement('li');
-    li.textContent = act;
-    actList.appendChild(li);
-    });
-    } else {
-    actList.innerHTML = '<li class="text-gray-400">Nie wybrano żadnych czynności.</li>';
-    }
-
-    // Części
-    const partsList = document.getElementById('sum-parts');
-    partsList.innerHTML = '';
-    if (data.parts && data.parts.length > 0) {
-    data.parts.forEach(part => {
-    const li = document.createElement('li');
-    li.className = "flex items-center gap-2";
-    li.innerHTML = `
-    <span class="font-mono bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs">${part.code}</span>
-    <span>${part.name}</span>
-    `;
-    partsList.appendChild(li);
-    });
-    } else {
-    partsList.innerHTML = '<li class="text-gray-400">Brak użytych części zamiennych.</li>';
-    }
-
-    // Zdjęcia
-    if (data.photos && data.photos.length > 0) {
-    document.getElementById('sum-photos-container').classList.remove('hidden');
-    const photoGrid = document.getElementById('sum-photos');
-    photoGrid.innerHTML = '';
-    data.photos.forEach(imgSrc => {
-    const img = document.createElement('img');
-    img.src = imgSrc;
-    img.className = "w-full h-32 object-cover rounded-lg border";
-    photoGrid.appendChild(img);
-    });
-    }
-    };
-</script>
 </body>
 </html>
