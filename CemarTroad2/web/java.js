@@ -5,6 +5,7 @@ let serviceStarted = false;
 let startTime = null;
 let timerInterval = null;
 let activePhotos = [];
+let currentSortColumn = '';
 
 const urlParams = new URLSearchParams(window.location.search);
 const machineId = urlParams.get('id') || 'E59008' || '434';
@@ -187,12 +188,49 @@ const eventPageMap = {
     odpalenie: 'machine-logs.html',
 };
 
+// staff-list:
+function openSortPanel(columnKey, columnName) {
+    currentSortColumn = columnKey;
+    document.getElementById('sort-column-label').innerText = columnName;
+    document.getElementById('sort-panel').style.display = 'block';
+}
+function closeSortPanel() {
+    document.getElementById('sort-panel').style.display = 'none';
+    currentSortColumn = '';
+}
 const activeFilters = {
     serwis: true,
     zgloszenie: true,
     odpalenie: true,
     blad: true
 };
+
+function sortData(order) {
+    if (!currentSortColumn) return;
+
+    const tbody = document.querySelector('#devices-table tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+        let valA = a.getAttribute(`data-${currentSortColumn}`) || '';
+        let valB = b.getAttribute(`data-${currentSortColumn}`) || '';
+
+        // Próba konwersji na liczbę (dla numeru maszyny, karty, telefonu)
+        let numA = parseFloat(valA.replace(/\s+/g, ''));
+        let numB = parseFloat(valB.replace(/\s+/g, ''));
+
+        if (!isNaN(numA) && !isNaN(numB)) {
+            return order === 'asc' ? numA - numB : numB - numA;
+        } else {
+            return order === 'asc'
+                ? valA.localeCompare(valB, 'pl', { numeric: true })
+                : valB.localeCompare(valA, 'pl', { numeric: true });
+        }
+    });
+
+    // Ponowne wstawienie posortowanych wierszy do tabeli
+    rows.forEach(row => tbody.appendChild(row));
+}
 
 window.goToTelemetry = function () {
     window.location.href = `machine-logs.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;
