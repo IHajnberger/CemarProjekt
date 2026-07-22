@@ -137,35 +137,36 @@
     <script>
         let selectedRole = '';
 
+        // Mapa konfiguracji ról: [klucz roli]: { id elementu HTML, strona docelowa }
+        const ROLE_MAP = {
+            'client': { id: 'select-client', page: 'client-list.html' },
+            'staff': { id: 'select-staff', page: 'staff-list.html' },
+            'staff0': { id: 'select-staff0', page: 'staff0-menu.html' },
+            'admin': { id: 'select-admin', page: 'admin-menu.html' },
+            'caregiver': { id: 'select-caregiver', page: 'caregiver-menu.html' },
+            'distibutor': { id: 'select-distibutor', page: 'distributor-menu.html' },
+            'n1': { id: 'select-n1', page: 'n-menu.html' },
+            'n2': { id: 'select-n2', page: 'n-menu.html' }
+        };
+
         function selectRole(role) {
+            if (!ROLE_MAP[role]) return;
+
             selectedRole = role;
-            document.getElementById('select-client').classList.remove('active');
-            document.getElementById('select-staff').classList.remove('active');
-            /*
-            document.getElementById('select-staff0').classList.remove('active');
-            document.getElementById('select-admin').classList.remove('active');
-            document.getElementById('select-caregiver').classList.remove('active');
-            document.getElementById('select-distibutor').classList.remove('active');
-            document.getElementById('select-n1').classList.remove('active');
-            document.getElementById('select-n2').classList.remove('active');
-            */
-            if (role === 'client') {
-                document.getElementById('select-client').classList.add('active');
-            } else {
-                document.getElementById('select-staff').classList.add('active');
-            }
+
+            // 1. Usuń klasę 'active' ze wszystkich przycisków ról
+            Object.values(ROLE_MAP).forEach(config => {
+                const el = document.getElementById(config.id);
+                if (el) el.classList.remove('active');
+            });
+
+            // 2. Dodaj klasę 'active' tylko do wybranego elementu
+            const activeEl = document.getElementById(ROLE_MAP[role].id);
+            if (activeEl) activeEl.classList.add('active');
         }
-        /* 
-        document.getElementById('select-client').classList.add('active');
-        document.getElementById('select-staff0').classList.add('active');
-        document.getElementById('select-admin').classList.add('active');
-        document.getElementById('select-caregiver').classList.add('active');
-        document.getElementById('select-distibutor').classList.add('active');
-        document.getElementById('select-n1').classList.add('active');
-        document.getElementById('select-n2').classList.add('active');
-        */
+
         function proceedLogin() {
-            if (!selectedRole) {
+            if (!selectedRole || !ROLE_MAP[selectedRole]) {
                 UIkit.notification({
                     message: '<span uk-icon=\'info\'></span> Wybierz najpierw rolę użytkownika!',
                     status: 'warning',
@@ -174,20 +175,9 @@
                 return;
             }
 
-            // Wybór roli
+            // Zapis roli do pamięci i przekierowanie na odpowiednią stronę
             localStorage.setItem('userRole', selectedRole);
-            if (selectedRole === 'client') {
-                window.location.href = 'client-list.html';
-            } else {
-                window.location.href = 'staff-list.html';
-            }
-            /*
-            window.location.href = 'admin-menu.html';
-            window.location.href = 'staff0-menu.html';
-            window.location.href = 'caregiver-menu.html';
-            window.location.href = 'distributor-menu.html';
-            window.location.href = 'n-menu.html';
-            */
+            window.location.href = ROLE_MAP[selectedRole].page;
         }
     </script>
 </body>
