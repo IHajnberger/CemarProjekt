@@ -44,19 +44,7 @@ Celem projektu było stworzenie interaktywnej aplikacji webowej dla firmy CEMAR 
 
 ## Podgląd strony:
 STAN NA: 21/07/2026 
-<details>
-<summary> Zrzuty ekranu </summary>
-
-Widok strony logowania:
-<img width="1917" height="903" alt="login" src="https://github.com/user-attachments/assets/938a81a5-a22d-4108-a773-c97c4fc32777" />
-
-Widok strony klienta:
-<img width="1897" height="891" alt="klient" src="https://github.com/user-attachments/assets/80bf1aab-7640-49ed-bdaa-590e93c280dc" /> 
-
-Widok strony serwisanta:
-<img width="1898" height="891" alt="serwisant" src="https://github.com/user-attachments/assets/a44c5eba-81e8-4170-a554-05c68073ab06" />
-
-</details>
+https://cemartroad2.netlify.app/
 
 ## Pierwszy model - Figma:
 ### Model UI:
