@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="Styl.css">
 </head>
 <body>
+
     <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
             <div>
@@ -17,9 +18,9 @@
                 <a href="#" class="uk-margin-right">English</a>
                 <a href="#" class="uk-margin-right">Deutsch</a>
             </div>
-
         </div>
     </div>
+
     <!-- Główny Nagłówek -->
     <nav class="uk-navbar-container cemar-navbar" uk-navbar>
         <div class="uk-navbar-left uk-margin-left">
@@ -32,7 +33,7 @@
             <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
                 <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
-        </div> 
+        </div>
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
                 <li>
@@ -40,9 +41,9 @@
                         <span class="uk-text-bold" style="color: var(--primary-yellow-hover);" uk-icon="icon: home; ratio: 1.1;"></span>
                     </a>
                 </li>
-                <li><a href="wycena.html" >Wycena</a></li>
-                <li><a href="serwis.html" >Serwis</a></li>
-                <li><a href="konto-serwis.html" >Konto</a></li>
+                <li><a href="wycena.html">Wycena</a></li>
+                <li><a href="serwis.html">Serwis</a></li>
+                <li><a href="konto-serwis.html">Konto</a></li>
             </ul>
             <div class="uk-navbar-item w-lewo">
                 <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -50,7 +51,7 @@
         </div>
     </nav>
 
-    <div class="uk-container uk-margin-large-top main-container" >
+    <div class="uk-container uk-margin-large-top main-container">
         <div class="cemar-card uk-margin-medium-bottom">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
@@ -83,25 +84,73 @@
                 </div>
 
                 <h4 class="uk-text-bold uk-margin-medium-bottom">Baza Urządzeń Klientów</h4>
+
+                <!-- Wyszukiwany / Rozwijany Panel Sortowania nad Tabelą -->
+                <div id="sort-panel" class="uk-margin-bottom">
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap gap-2">
+                        <div>
+                            <span class="uk-text-meta uk-text-uppercase uk-text-bold">Opcje Sortowania:</span>
+                            <span id="sort-column-label" class="uk-badge uk-margin-small-left" style="background:#E59008;">---</span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle gap-2">
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('asc')">
+                                <span uk-icon="icon: arrow-up; ratio: 0.8"></span> Rosnąco (A-Z / 0-9)
+                            </button>
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('desc')">
+                                <span uk-icon="icon: arrow-down; ratio: 0.8"></span> Malejąco (Z-A / 9-0)
+                            </button>
+                            <button class="uk-close-small uk-margin-small-left" type="button" uk-close onclick="closeSortPanel()"></button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-divider cemar-table">
+                    <table class="uk-table uk-table-divider cemar-table" id="devices-table">
                         <thead>
                             <tr>
-                                <th class="uk-text-center" style="width: 220px;">Status maszyny</th>
-                                <th>Numer maszyny & Typ</th>
-                                <th>Użytkownik (klient)</th>
+                                <th class="uk-text-center" style="width: 200px;">Status maszyny</th>
+
+                                <th class="sort-th" onclick="openSortPanel('machine', 'Numer maszyny & Typ')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Numer maszyny & Typ</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <th class="sort-th" onclick="openSortPanel('card', 'Numer karty')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Numer karty</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <th class="sort-th" onclick="openSortPanel('phone', 'Numer telefonu')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Numer telefonu</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <th class="sort-th" onclick="openSortPanel('client', 'Użytkownik (klient)')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Użytkownik (klient)</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- Dane w atrybutach data-* pozwalają na dokładne i szybkie sortowanie -->
+                            <tr data-machine="167" data-card="52616" data-phone="532211310" data-client="Firma 1 (Jan Kowalski)">
                                 <td class="uk-text-center">
                                     <span class="uk-label" style="background-color: #10b981; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 12px; display: inline-block; min-width: 140px; text-align: center;">Sprawna</span>
                                 </td>
                                 <td>
                                     <ul uk-accordion="collapsible: true">
                                         <li>
-                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#" style="font-size:18px !important">
-                                                <span uk-icon="chevron-down" class="uk-margin-small-right" ></span> 167
+                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis uk-flex uk-flex-middle" href="#" style="font-size:18px !important">
+                                                <span uk-icon="icon: chevron-down; ratio: 0.9" class="cemar-chevron uk-margin-small-right"></span>
+                                                <span>167</span>
                                             </a>
                                             <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
                                                 <p class="uk-text-meta uk-margin-remove">Typ: T35</p>
@@ -113,17 +162,20 @@
                                         </li>
                                     </ul>
                                 </td>
+                                <td> 52616 </td>
+                                <td> 532 211 310 </td>
                                 <td>Firma 1 (Jan Kowalski)</td>
                             </tr>
-                            <tr>
+                            <tr data-machine="521" data-card="52356" data-phone="532211310" data-client="Firma 2 (Marek Nowak)">
                                 <td class="uk-text-center">
                                     <span class="uk-label" style="background-color: #f59e0b; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 12px; display: inline-block; min-width: 140px; text-align: center;">Wymaga przeglądu</span>
                                 </td>
                                 <td>
                                     <ul uk-accordion="collapsible: true">
                                         <li>
-                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis" href="#" style="font-size:18px !important">
-                                                <span uk-icon="chevron-down" class="uk-margin-small-right"></span> 521
+                                            <a class="uk-accordion-title uk-text-bold uk-text-emphasis uk-flex uk-flex-middle" href="#" style="font-size:18px !important">
+                                                <span uk-icon="icon: chevron-down; ratio: 0.9" class="cemar-chevron uk-margin-small-right"></span>
+                                                <span>521</span>
                                             </a>
                                             <div class="uk-accordion-content uk-margin-small-top uk-padding-small" style="background: #fafafa; border-radius: 6px;">
                                                 <p class="uk-text-meta uk-margin-remove">Typ: City</p>
@@ -135,6 +187,8 @@
                                         </li>
                                     </ul>
                                 </td>
+                                <td> 52356 </td>
+                                <td> 532 211 310 </td>
                                 <td>Firma 2 (Marek Nowak)</td>
                             </tr>
                         </tbody>
@@ -160,3 +214,4 @@
     <script src="java.js"></script>
 </body>
 </html>
+
