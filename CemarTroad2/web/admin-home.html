@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Spis Maszyn (Admin)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek Navbar -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="admin-home.html">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active">
+                    <a href="admin-home.html" title="Strona główna" uk-tooltip>
+                        <span class="uk-text-bold" style="color: var(--primary-yellow-hover);" uk-icon="icon: home; ratio: 1.1;"></span>
+                    </a>
+                </li>
+                <li><a href="admin-maszyny.html">Karty Maszyn</a></li>
+                <li><a href="admin-przypisania.html">Przypisania</a></li>
+                <li><a href="admin-uzytkownicy.html">Użytkownicy i Role</a></li>
+                <li><a href="konto-admin.html">Konto</a></li>
+            </ul>
+
+            <div class="uk-navbar-item w-lewo">
+                <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top main-container">
+
+        <!-- Wyszukiwarka i Nagłówek -->
+        <div class="cemar-card uk-margin-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <h3 class="uk-text-bold uk-margin-small-bottom">Centralna Baza Maszyn CEMAR</h3>
+                <p class="uk-text-meta uk-margin-medium-bottom">Wyszukuj maszyny po numerze karty SIM/GPRS lub numerze telefonu przypisanym do maszyny.</p>
+
+                <div class="uk-grid-small" uk-grid>
+                    <div class="uk-width-expand@s">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon" uk-icon="icon: search"></span>
+                            <input class="uk-input" type="text" id="admin-search-input" placeholder="Wpisz numer maszyny, numer karty SIM lub numer telefonu..." onkeyup="filterMachinesTable()">
+                        </div>
+                    </div>
+                    <div class="uk-width-auto@s">
+                        <button class="uk-button cemar-btn-primary" onclick="filterMachinesTable()">Szukaj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela Wszystkich Maszyn -->
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-small-bottom">Spis Wszystkich Maszyn</h4>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider uk-table-hover cemar-table">
+                        <thead>
+                            <tr>
+                                <th>Numer Maszyny</th>
+                                <th>Model</th>
+                                <th>Nr Karty SIM</th>
+                                <th>Nr Telefonu Maszyny</th>
+                                <th>Przypisany Klient</th>
+                                <th class="uk-text-center">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-machines-tbody">
+                            <tr>
+                                <td><span class="uk-text-bold">E59008</span></td>
+                                <td>City</td>
+                                <td><span class="uk-label uk-label-warning">SIM-8842-X</span></td>
+                                <td>+48 600 111 222</td>
+                                <td>P.H.U. Bud-Max</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="window.location.href='admin-maszyny.html?id=E59008'">Edytuj</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="uk-text-bold">E62441</span></td>
+                                <td>T-35</td>
+                                <td><span class="uk-label uk-label-warning">SIM-9912-A</span></td>
+                                <td>+48 600 333 444</td>
+                                <td>Trans-Met Sp. z o.o.</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="window.location.href='admin-maszyny.html?id=E62441'">Edytuj</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="uk-text-bold">C77212</span></td>
+                                <td>City</td>
+                                <td><span class="uk-label uk-label-warning">SIM-1043-B</span></td>
+                                <td>+48 600 555 666</td>
+                                <td>Kowalski Transport S.A.</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="window.location.href='admin-maszyny.html?id=C77212'">Edytuj</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+    <script>
+        function filterMachinesTable() {
+        const query = document.getElementById('admin-search-input').value.toLowerCase().trim();
+        const rows = document.querySelectorAll('#all-machines-tbody tr');
+
+        rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+        });
+        }
+    </script>
+</body>
+</html>

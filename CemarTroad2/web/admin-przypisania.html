@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Przypisania Podmiotów</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek Navbar -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="admin-home.html">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a href="admin-home.html" title="Strona główna" uk-tooltip>
+                        <span class="uk-text-bold" uk-icon="icon: home; ratio: 1.1;"></span>
+                    </a>
+                </li>
+                <li><a href="admin-maszyny.html">Karty Maszyn</a></li>
+                <li class="uk-active"><a href="admin-przypisania.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Przypisania</a></li>
+                <li><a href="admin-uzytkownicy.html">Użytkownicy i Role</a></li>
+                <li><a href="konto-admin.html">Konto</a></li>
+            </ul>
+
+            <div class="uk-navbar-item w-lewo">
+                <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top main-container">
+        
+        <div class="cemar-card uk-margin-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <span uk-icon="icon: link; ratio: 2.5" class="uk-text-warning"></span>
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Przypisanie Dystrybutora i Klienta</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">Zarządzaj powiązaniami prawnymi, sieciami dystrybucji oraz klientami przypisanymi do maszyn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cemar-card">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <h4 class="uk-text-bold uk-margin-small-bottom">Formularz Powiązań</h4>
+                <p class="uk-text-meta uk-margin-medium-bottom">Wybierz maszynę z bazy, a następnie przypisz do niej dystrybutora oraz klienta docelowego.</p>
+
+                <form id="form-assign-entities" class="uk-form-stacked" onsubmit="return handleAssignEntities(event)">
+                    <div class="uk-grid-medium" uk-grid>
+                        <div class="uk-width-1-3@m">
+                            <label class="uk-form-label">1. Wybierz Maszynę</label>
+                            <select class="uk-select" id="assign-machine-id" required>
+                                <option value="" disabled selected>-- Wybierz Maszynę --</option>
+                                <optgroup label="Maszyny nieprzypisane">
+                                    <option value="E71002">E71002 (City 24) - Brak przypisania</option>
+                                    <option value="E83110">E83110 (City 30) - Brak przypisania</option>
+                                </optgroup>
+                                <optgroup label="Maszyny w użyciu">
+                                    <option value="E59008">E59008 (City)</option>
+                                    <option value="E62441">E62441 (T-35)</option>
+                                    <option value="C77212">C77212 (City)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="uk-width-1-3@m">
+                            <label class="uk-form-label">2. Przypisz Dystrybutora</label>
+                            <select class="uk-select" id="assign-distributor-id" required>
+                                <option value="" disabled selected>-- Wybierz Dystrybutora --</option>
+                                <option value="d1">Cemar Polska Sp. z o.o. [Główny]</option>
+                                <option value="d2">Agro-Tech Dystrybucja Centralna</option>
+                                <option value="d3">Maszyny-Bud Dystrybutor Północ</option>
+                            </select>
+                        </div>
+
+                        <div class="uk-width-1-3@m">
+                            <label class="uk-form-label">3. Przypisz Klienta Docelowego</label>
+                            <select class="uk-select" id="assign-client-id" required>
+                                <option value="" disabled selected>-- Wybierz Klienta --</option>
+                                <option value="c1">P.H.U. Bud-Max</option>
+                                <option value="c2">Trans-Met Sp. z o.o.</option>
+                                <option value="c3">Kowalski Transport S.A.</option>
+                            </select>
+                        </div>
+
+                        <div class="uk-width-1-1 uk-margin-top uk-text-right">
+                            <button type="submit" class="uk-button cemar-btn-primary">Zapisz Powiązania Maszyny</button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="uk-margin-medium-top uk-margin-medium-bottom">
+
+                <h5 class="uk-text-bold uk-margin-small-bottom">Status Powiązań Maszyn w Bazie</h5>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider uk-table-hover cemar-table">
+                        <thead>
+                            <tr>
+                                <th>Numer Maszyny</th>
+                                <th>Model</th>
+                                <th>Przypisany Dystrybutor</th>
+                                <th>Przypisany Klient</th>
+                                <th class="uk-text-center">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-assignments">
+                            <!-- Wiersze maszyn nieprzypisanych -->
+                            <tr class="uk-background-muted">
+                                <td><span class="uk-text-bold">E71002</span></td>
+                                <td>City 24</td>
+                                <td><span class="uk-text-muted italic">Brak dystrybutora</span></td>
+                                <td><span class="uk-label uk-label-danger">Nieprzypisany</span></td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E71002', '', '')">Przypisz</button>
+                                </td>
+                            </tr>
+                            <tr class="uk-background-muted">
+                                <td><span class="uk-text-bold">E83110</span></td>
+                                <td>City 30</td>
+                                <td>Agro-Tech Dystrybucja</td>
+                                <td><span class="uk-label uk-label-danger">Nieprzypisany</span></td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E83110', 'd2', '')">Przypisz</button>
+                                </td>
+                            </tr>
+                            <!-- Wiersze maszyn przypisanych -->
+                            <tr>
+                                <td><span class="uk-text-bold">E59008</span></td>
+                                <td>City</td>
+                                <td>Cemar Polska Sp. z o.o.</td>
+                                <td>P.H.U. Bud-Max</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E59008', 'd1', 'c1')">Edytuj</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="uk-text-bold">E62441</span></td>
+                                <td>T-35</td>
+                                <td>Agro-Tech Dystrybucja</td>
+                                <td>Trans-Met Sp. z o.o.</td>
+                                <td class="uk-text-center">
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E62441', 'd2', 'c2')">Edytuj</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+    <script>
+        function handleAssignEntities(e) {
+            e.preventDefault();
+            const machine = document.getElementById('assign-machine-id').value;
+
+            UIkit.notification({
+                message: `<span uk-icon='icon: check'></span> Zapisano powiązania podmiotów dla maszyny <b>${machine}</b>`,
+                status: 'success',
+                pos: 'top-center',
+                timeout: 3000
+            });
+
+            return false;
+        }
+
+        function editAssignment(machineId, distId, clientId) {
+            safeSetValue('assign-machine-id', machineId);
+            safeSetValue('assign-distributor-id', distId || '');
+            safeSetValue('assign-client-id', clientId || '');
+
+            UIkit.notification({
+                message: `Wczytano do edycji maszynę ${machineId}`,
+                status: 'info',
+                pos: 'top-center',
+                timeout: 2000
+            });
+        }
+    </script>
+</body>
+</html>
