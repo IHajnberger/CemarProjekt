@@ -42,7 +42,6 @@
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
                 <li><a href="client-list.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
-
                 <li><a href="instrukcje.html">Instrukcje</a></li>
                 <li><a href="asystent-ai.html">Asystent AI</a></li>
                 <li><a href="konto-kilent.html">Konto</a></li>
@@ -59,8 +58,11 @@
         <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" onclick="window.location.href='client-list.html'">
             <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do listy maszyn
         </button>
+
+        <!-- KONTENER DO PDF -->
         <div id="element-to-print">
-            <!-- Karta nagłówkowa-->
+
+            <!-- Karta nagłówkowa (Dane maszyny) -->
             <div class="cemar-card uk-margin-small-bottom">
                 <div class="yellow-accent-bar"></div>
                 <div class="uk-padding uk-padding-small">
@@ -99,14 +101,24 @@
                 </div>
             </div>
 
-            <!-- Główna siatka -->
-            <div class="uk-grid-medium" uk-grid>
+            <!-- Główna siatka: MAPA I PODSUMOWANIE -->
+            <div class="uk-grid-medium uk-margin-top" uk-grid>
                 <!-- Kolumna z Mapą  -->
                 <div class="uk-width-3-4@m">
                     <div class="cemar-card">
                         <div class="uk-padding uk-padding-small">
                             <h4 class="uk-text-bold uk-margin-small-bottom" style="font-size: 15px;">Wizualizacja przebytej drogi (GPS)</h4>
-                            <div id="map"></div>
+
+                            <div class="uk-position-relative">
+                                <div id="map"></div>
+
+                                <button class="uk-icon-button uk-position-top-right uk-margin-small-top uk-margin-small-right"
+                                        style="z-index: 1000; background-color: #ef4444; color: white; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"
+                                        uk-icon="icon: warning; ratio: 0.9"
+                                        uk-toggle="target: #map-info-modal"
+                                        title="Informacje o mapie i trasie" uk-tooltip>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,8 +151,89 @@
                 </div>
             </div>
 
+            <!-- Tabela z odcinkami trasy pod mapą -->
+            <div class="cemar-card uk-margin-medium-top">
+                <div class="yellow-accent-bar"></div>
+                <div class="uk-padding uk-padding-small">
+                    <h4 class="uk-text-bold uk-margin-small-bottom" style="font-size: 16px;">
+                        <span uk-icon="icon: list; ratio: 0.9" class="uk-margin-small-right"></span>
+                        Szczegółowy podział na odcinki
+                    </h4>
+
+                    <div class="uk-overflow-auto">
+                        <table class="uk-table uk-table-striped uk-table-divider cemar-table uk-table-small">
+                            <thead>
+                                <tr>
+                                    <th class="uk-text-bold">Numer odcinka</th>
+                                    <th class="uk-text-bold">Droga (km)</th>
+                                    <th class="uk-text-bold">Zużycie paliwa</th>
+                                    <th class="uk-text-bold">Start</th>
+                                    <th class="uk-text-bold">Koniec</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>23.4 km</td>
+                                    <td>5.8 l</td>
+                                    <td>2026-07-01 08:15</td>
+                                    <td>2026-07-01 11:30</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>25.2 km</td>
+                                    <td>6.6 l</td>
+                                    <td>2026-07-01 12:45</td>
+                                    <td>2026-07-01 16:30</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="background-color: rgba(229, 144, 8, 0.12); font-weight: bold;">
+                                    <td class="uk-text-bold" style="color: #1e293b;">PODSUMOWANIE</td>
+                                    <td class="uk-text-bold uk-text-warning" style="font-size: 15px;">48.6 km</td>
+                                    <td class="uk-text-bold" style="font-size: 15px;">12.4 l</td>
+                                    <td colspan="2" class="uk-text-bold uk-text-warning" style="font-size: 15px; padding-left:140px;">
+                                        Czas całkowity: 7.0h
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- KONIEC element-to-print -->
+
+    </div>
+
+    <!-- MODAL / POPUP INFORMACYJNY -->
+    <div id="map-info-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="border-radius: 8px; border-top: 5px solid #E59008;">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+
+            <h3 class="uk-modal-title uk-text-bold" style="font-size: 18px; color: #1e293b;">
+                <span uk-icon="icon: warning; ratio: 1.1" class="uk-margin-small-right uk-text-danger"></span>
+                Informacje dodatkowe
+            </h3>
+
+            <div class="uk-margin-top uk-text-small" style="line-height: 1.6; color: #475569;">
+                <p class="uk-margin-small-bottom">
+                    Prezentowana mapa ma charakter wyłącznie poglądowy – widoczne na niej punkty trasy nie odzwierciedlają bezpośrednio statystyk w poniższej tabeli. Podczas analizy szczegółowych danych należy pamiętać, że:
+                </p>
+
+                <ul class="uk-list uk-list-bullet uk-margin-remove-top">
+                    <li>
+                        <strong>Pomiar dystansu:</strong> Odległość jest naliczana od momentu rozpoczęcia etapu 15 (gdy maszyna kończy procedurę rozruchową i przechodzi w właściwy tryb pracy).
+                    </li>
+                    <li>
+                        <strong>Zużycie paliwa:</strong> Obliczane jest na podstawie obrotów silnika (RPM). Więcej szczegółów technicznych znajdziesz na stronie <a href="https://cemar.pro" target="_blank" rel="noopener" style="color: #E59008; font-weight: 600;">Cemar.pro</a>.
+                    </li>
+                </ul>
+
+            </div>
         </div>
     </div>
+
     <!-- Dolny pas -->
     <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
         <div class="uk-container uk-flex uk-flex-middle">
@@ -155,7 +248,6 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-image@0.0.4/leaflet-image.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="java.js"></script>
 

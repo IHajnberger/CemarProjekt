@@ -1121,20 +1121,58 @@ window.initRouteMap = function initRouteMap() {
 
     const waypointIcon = L.divIcon({
         className: 'custom-div-icon',
-        html: "<div style='background-color:#dca31a; width:12px; height:12px; border-radius:50%; border:2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);'></div>",
-        iconSize: [12, 12],
-        iconAnchor: [6, 6]
+        html: "<div style='background-color:#dca31a; width:6px; height:6px; border-radius:50%; border:2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);'></div>",
+        iconSize: [3, 3],
+        iconAnchor: [3, 3]
     });
 
     const routeCoordinates = [
-        [51.111, 17.030],
-        [51.109, 17.034],
-        [51.107, 17.036],
-        [51.104, 17.042]
+        [51.11207850754373, 17.057663939775914],
+        [51.1120683061286, 17.057733585457136],
+        [51.112051459577984, 17.05780864838397],
+        [51.11203461302123, 17.05787834967315],
+        [51.11199755057471, 17.057953412599986],
+        [51.11198407331408, 17.058028475526818],
+        [51.111964197650565, 17.05809270952322],
+        [51.1119372431059, 17.05815704917479],
+        [51.111910288545516, 17.058140964261863],
+        [51.11189344193729, 17.058087347885564],
+        [51.1118833339694, 17.058001561683465],
+        [51.11185637937756, 17.057921137119017],
+        [51.11182942477003, 17.057872882380373],
+        [51.11180920880403, 17.057846074192184],
+        [51.11177551550776, 17.057792457815886],
+        [51.11173508351978, 17.057744203077238],
+        [51.11169802083306, 17.0576905867009],
+        [51.11165758877728, 17.05762624704933]
+    ];
+
+    const routeCoordinatesNew = [
+        [51.11372544192486, 17.059697949049045],
+        [51.11373891867765, 17.059821266714522],
+        [51.11372207273604, 17.059928499467162],
+        [51.113705226788326, 17.060003562393955],
+        [51.113685011642936, 17.06006790204552],
+        [51.11366479648871, 17.060142964972353],
+        [51.113658058101976, 17.060234112812072],
+        [51.11365131971428, 17.06031453737656],
+        [51.11365468890827, 17.060378877028125],
+        [51.11360415097295, 17.060362792115203],
+        [51.113573828185224, 17.060346707202324],
+        [51.11353002856784, 17.060325260651787],
+        [51.113482859702664, 17.060319899014175],
+        [51.113452536835354, 17.06033062228944],
+        [51.11341547552605, 17.06034134556471],
+        [51.113375044972926, 17.060346707202324],
+        [51.11332113751373, 17.060362792115203]
     ];
 
     const polyline = L.polyline(routeCoordinates, { color: '#dca31a', weight: 5 }).addTo(map);
     routeCoordinates.forEach(coord => L.marker(coord, { icon: waypointIcon }).addTo(map));
+    map.fitBounds(polyline.getBounds());
+
+    const polyline2 = L.polyline(routeCoordinatesNew, { color: '#dca31a', weight: 5 }).addTo(map);
+    routeCoordinatesNew.forEach(coord => L.marker(coord, { icon: waypointIcon }).addTo(map));
     map.fitBounds(polyline.getBounds());
 };
 // LOGI
@@ -1504,73 +1542,75 @@ window.download = function download() {
         UIkit.notification({ message: 'Generowanie PDF...', status: 'primary', pos: 'top-center' });
     }
 
-    const mapDiv = document.getElementById('map');
-
-    function generatePdf() {
-        setTimeout(() => {
-            var element = document.getElementById('element-to-print');
-            var opt = {
-                margin: 10,
-                filename: `raport-gps-${machineId}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
-            };
-
-            if (typeof html2pdf !== 'undefined') {
-                html2pdf().set(opt).from(element).save().then(() => {
-                    const snap = document.getElementById('map-snapshot');
-                    if (snap) snap.remove();
-                    if (mapDiv) mapDiv.style.display = '';
-                    if (btn) btn.style.visibility = 'visible';
-                }).catch(err => {
-                    console.error('Błąd html2pdf:', err);
-                    const snap = document.getElementById('map-snapshot');
-                    if (snap) snap.remove();
-                    if (mapDiv) mapDiv.style.display = '';
-                    if (btn) btn.style.visibility = 'visible';
-                    if (typeof UIkit !== 'undefined') UIkit.notification({ message: 'Błąd generowania PDF.', status: 'danger', pos: 'top-center' });
-                });
-            }
-        }, 300);
+    const element = document.getElementById('element-to-print');
+    if (!element) {
+        if (btn) btn.style.visibility = 'visible';
+        return;
     }
 
-    try {
-        if (typeof leafletImage !== 'undefined' && window.cemarMap) {
-            leafletImage(window.cemarMap, function (err, canvas) {
-                if (err) {
-                    console.error('leafletImage error:', err);
-                    generatePdf();
-                    return;
-                }
+    // Pobranie numeru maszyny do nazwy pliku
+    const machineIdEl = document.getElementById('p3-machine-number');
+    const machineId = machineIdEl ? machineIdEl.innerText.trim() : 'E59008';
 
-                try {
-                    const dataUrl = canvas.toDataURL();
-                    const img = new Image();
-                    img.src = dataUrl;
-                    img.id = 'map-snapshot';
-                    img.style.width = '100%';
-                    img.style.height = (mapDiv ? mapDiv.offsetHeight : 300) + 'px';
-                    img.style.objectFit = 'cover';
-                    img.style.borderRadius = '8px';
+    // 1. Znajdujemy sekcję z mapą i podsumowaniem
+    const mapGrid = document.getElementById('map')?.closest('.uk-grid-medium');
 
-                    if (mapDiv) {
-                        mapDiv.style.display = 'none';
-                        mapDiv.parentNode.insertBefore(img, mapDiv);
-                    }
-                } catch (canvasErr) {
-                    console.error('Canvas tainted:', canvasErr);
-                }
+    // 2. Tworzymy tymczasowy napis z linkiem (wyłącznie do PDF)
+    const tempFooter = document.createElement('div');
+    tempFooter.id = 'temp-pdf-footer';
+    tempFooter.style.textAlign = 'center';
+    tempFooter.style.marginTop = '25px';
+    tempFooter.style.paddingTop = '15px';
+    tempFooter.style.borderTop = '1px dashed #cbd5e1';
+    tempFooter.style.fontSize = '13px';
+    tempFooter.style.color = '#475569';
+    tempFooter.style.fontFamily = 'sans-serif';
+    tempFooter.innerHTML = 'Po więcej informacji <a href="https://TWOJ-LINK-PLACEHOLDER.PL" target="_blank" style="color: #E59008; font-weight: bold; text-decoration: underline;">LINK</a>';
 
-                generatePdf();
-            });
-        } else {
-            generatePdf();
+    // Wstawiamy tymczasową stopkę na dół drukowanej sekcji
+    element.appendChild(tempFooter);
+
+    // 3. Całkowicie zwijamy sekcję mapy na czas generowania PDF (żeby nie zostawiała pustej przestrzeni)
+    if (mapGrid) {
+        mapGrid.style.display = 'none';
+    }
+
+    // Funkcja czyszcząca – przywraca widok strony do stanu początkowego
+    const cleanup = () => {
+        if (mapGrid) {
+            mapGrid.style.display = '';
         }
-    } catch (outerErr) {
-        console.error('Błąd ogólny leafletImage:', outerErr);
-        generatePdf();
-    }
+        const footer = document.getElementById('temp-pdf-footer');
+        if (footer) {
+            footer.remove();
+        }
+        if (btn) btn.style.visibility = 'visible';
+    };
+
+    const opt = {
+        margin: 10,
+        filename: `raport-gps-${machineId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+
+    // Dajemy przeglądarce 50ms na przeliczenie układu bez mapy
+    setTimeout(() => {
+        if (typeof html2pdf !== 'undefined') {
+            html2pdf().set(opt).from(element).save()
+                .then(cleanup)
+                .catch(err => {
+                    console.error('Błąd html2pdf:', err);
+                    cleanup();
+                    if (typeof UIkit !== 'undefined') {
+                        UIkit.notification({ message: 'Błąd generowania PDF.', status: 'danger', pos: 'top-center' });
+                    }
+                });
+        } else {
+            cleanup();
+        }
+    }, 50);
 };
 
 // METODY POMOCNICZE WIDOKÓW
