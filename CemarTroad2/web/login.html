@@ -29,10 +29,10 @@
 
         .login-card {
             background: rgba(255, 255, 255, 0.98);
-            border-radius: 16px;
-            padding: 40px;
+            border-radius: 14px;
+            padding: 35px;
             width: 100%;
-            max-width: 450px;
+            max-width: 700px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             border-top: 5px solid var(--primary-yellow);
         }
@@ -85,11 +85,48 @@
                 </div>
             </div>
             <div>
-                <div id="select-staff" class="role-selector-btn" onclick="selectRole('staff') & proceedLogin()">
+                <div id="select-staff0" class="role-selector-btn" onclick="selectRole('staff0') & proceedLogin()">
                     <span uk-icon="icon: cog; ratio: 2" class="uk-text-muted"></span>
-                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Serwisant</h4>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Serwisant lvl1</h4>
                 </div>
             </div>
+            <div>
+                <div id="select-staff" class="role-selector-btn" onclick="selectRole('staff') & proceedLogin()">
+                    <span uk-icon="icon: cog; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Serwisant lvl2</h4>
+                </div>
+            </div>
+            <div>
+                <div id="select-admin" class="role-selector-btn" onclick="selectRole('admin') & proceedLogin()">
+                    <span uk-icon="icon: lock; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Administrator</h4>
+                </div>
+            </div>
+            <div>
+                <div id="select-caregiver" class="role-selector-btn" onclick="selectRole('caregiver') & proceedLogin()">
+                    <span uk-icon="icon: lifesaver; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Opiekun klienta</h4>
+                </div>
+            </div>
+            <div>
+                <div id="select-distributor" class="role-selector-btn" onclick="selectRole('distributor') & proceedLogin()">
+                    <span uk-icon="icon: cart; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Dystrybutor</h4>
+                </div>
+            </div>
+            <div>
+                <div id="select-n1" class="role-selector-btn" onclick="selectRole('Niespodzianka1') & proceedLogin()">
+                    <span uk-icon="icon: happy; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Niespodzianka 1</h4>
+                </div>
+            </div>
+            <div>
+                <div id="select-n2" class="role-selector-btn" onclick="selectRole('Niespodzianka2') & proceedLogin()">
+                    <span uk-icon="icon: happy; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Niespodzianka 2</h4>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -104,14 +141,29 @@
             selectedRole = role;
             document.getElementById('select-client').classList.remove('active');
             document.getElementById('select-staff').classList.remove('active');
-
+            /*
+            document.getElementById('select-staff0').classList.remove('active');
+            document.getElementById('select-admin').classList.remove('active');
+            document.getElementById('select-caregiver').classList.remove('active');
+            document.getElementById('select-distibutor').classList.remove('active');
+            document.getElementById('select-n1').classList.remove('active');
+            document.getElementById('select-n2').classList.remove('active');
+            */
             if (role === 'client') {
                 document.getElementById('select-client').classList.add('active');
             } else {
                 document.getElementById('select-staff').classList.add('active');
             }
         }
-
+        /* 
+        document.getElementById('select-client').classList.add('active');
+        document.getElementById('select-staff0').classList.add('active');
+        document.getElementById('select-admin').classList.add('active');
+        document.getElementById('select-caregiver').classList.add('active');
+        document.getElementById('select-distibutor').classList.add('active');
+        document.getElementById('select-n1').classList.add('active');
+        document.getElementById('select-n2').classList.add('active');
+        */
         function proceedLogin() {
             if (!selectedRole) {
                 UIkit.notification({
@@ -129,6 +181,13 @@
             } else {
                 window.location.href = 'staff-list.html';
             }
+            /*
+            window.location.href = 'admin-menu.html';
+            window.location.href = 'staff0-menu.html';
+            window.location.href = 'caregiver-menu.html';
+            window.location.href = 'distributor-menu.html';
+            window.location.href = 'n-menu.html';
+            */
         }
     </script>
 </body>
