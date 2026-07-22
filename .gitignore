@@ -28,3 +28,7 @@ CemarTroad2/obj/Debug/net8.0/CemarTroad2.AssemblyInfo.cs
 *.props
 *.slnx
 *.targets
+*.bin
+*.txt
+*.BuildWithSkipAnalyzers
+*.editorconfig

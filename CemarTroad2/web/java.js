@@ -1276,8 +1276,7 @@ function toggleAllVertical(expand) {
     });
     renderTable();
 }
-
-function renderTable() {
+window.renderTable = function renderTable() {
     const tbody = document.getElementById('p6-telemetry-tbody');
     const emptyState = document.getElementById('p6-empty-state');
 
@@ -1573,6 +1572,97 @@ window.filterServices = function () {
         item.style.display = (name.includes(query) || date.includes(query)) ? '' : 'none';
     });
 };
+
+// Generowanie czystego raportu tekstowego do schowka
+window.generateReportText = function () {
+    const modelSelect = document.getElementById('machine-model');
+    let modelName = '---';
+    if (modelSelect && modelSelect.selectedIndex >= 0) {
+        modelName = modelSelect.options[modelSelect.selectedIndex].text;
+    }
+
+    const machineNum = document.getElementById('form-machine-num')?.value || '---';
+    const client = document.getElementById('form-client')?.value || '---';
+    const hours = document.getElementById('form-hours')?.value || '---';
+    const technician = document.getElementById('form-technician')?.value || '---';
+    const date = document.getElementById('form-date')?.value || '---';
+    const notes = document.getElementById('technician-notes')?.value || 'Brak dodatkowych uwag.';
+
+    // Pobranie zaznaczonych procedur
+    const activities = [];
+    document.querySelectorAll('#activities-container input[type="checkbox"]:checked, input[data-time]:checked').forEach(cb => {
+        const name = cb.getAttribute('data-name') || cb.value;
+        if (name && !activities.includes(name)) activities.push(name);
+    });
+
+    // Pobranie zaznaczonych części
+    const parts = [];
+    document.querySelectorAll('.part-checkbox:checked').forEach(cb => {
+        const code = cb.getAttribute('data-code') || '';
+        const name = cb.getAttribute('data-name') || cb.value || '';
+        parts.push(code ? `[${code}] ${name}` : name);
+    });
+
+    // Sformatowanie szablonu tekstu
+    const reportText =
+        `=== KARTA PRACY SERWISOWEJ ===
+Model: ${modelName}
+Nr maszyny: ${machineNum}
+Klient: ${client}
+MTH: ${hours} mth
+Serwisant: ${technician}
+Data: ${date}
+
+--- WYKONANE PROCEDURY ---
+${activities.length > 0 ? activities.map(a => `• ${a}`).join('\n') : 'Brak'}
+
+--- ZUŻYTE CZĘŚCI ---
+${parts.length > 0 ? parts.map(p => `• ${p}`).join('\n') : 'Brak'}
+
+--- UWAGI ---
+${notes}
+==============================`;
+
+    // Zapis do schowka i powiadomienie
+    navigator.clipboard.writeText(reportText).then(() => {
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({
+                message: "<span uk-icon='icon: check'></span> Raport skopiowany do schowka!",
+                status: 'success',
+                pos: 'top-center',
+                timeout: 2500
+            });
+        } else {
+            alert('Raport został skopiowany do schowka!');
+        }
+    }).catch(err => {
+        console.error('Błąd kopiowania do schowka:', err);
+    });
+};
+
+// Resetowanie formularza i wszystkich zaznaczeń
+window.clearAllForm = function clearAllForm() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+    });
+    document.getElementById('base-service-baseline').checked = true;
+    document.getElementById('form-machine-num').value = '';
+    document.getElementById('form-client').value = '';
+    document.getElementById('form-hours').value = '';
+    document.getElementById('technician-notes').value = '';
+    document.getElementById('activity-search').value = '';
+    document.getElementById('parts-search').value = '';
+
+    filterActivities();
+    filterParts();
+    calculateValuation();
+
+    UIkit.notification({
+        message: "Kalkulator został wyczyszczony.",
+        status: 'primary',
+        pos: 'bottom-center'
+    });
+}
 
 window.onRangeChange = function () {
     if (typeof UIkit !== 'undefined') {
