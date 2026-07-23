@@ -43,6 +43,8 @@ Celem projektu było stworzenie interaktywnej aplikacji webowej dla firmy CEMAR 
 </details>
 
 ## Podgląd strony:
+stan z dnia: 23.07.2026 godzina: 8:30
+
 https://cemartroad2.netlify.app/
 
 ## Pierwszy model - Figma:
