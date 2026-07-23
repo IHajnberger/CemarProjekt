@@ -1776,3 +1776,149 @@ window.showContact = function () {
         UIkit.modal.dialog(`<div class="uk-modal-body"><h2 class="uk-text-bold">Kontakt Serwis</h2><p>Infolinia pilna: +48 123 456 789. Formularz zgłoszeniowy został aktywowany.</p></div>`);
     }
 };
+
+
+// ==========================================
+// 10. ADMIN - FUNKCJE
+// ==========================================
+
+        function filterMachinesTable() {
+        const query = document.getElementById('admin-search-input').value.toLowerCase().trim();
+        const rows = document.querySelectorAll('#all-machines-tbody tr');
+
+        rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+        });
+        }
+
+        function handleMachineSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('admin-m-id').value;
+            const type = document.getElementById('admin-m-type').value;
+
+            UIkit.notification({
+                message: `<span uk-icon='icon: check'></span> Zapisano dane karty maszyny <b>${id} (${type})</b>`,
+                status: 'success',
+                pos: 'top-center',
+                timeout: 3000
+            });
+
+            resetMachineForm();
+            return false;
+        }
+
+        function loadMachineToEdit(id, type, sim, prodDate, hours, nextService, notes) {
+            document.getElementById('machine-form-title').innerText = `Edycja Karty Maszyny: ${id}`;
+            safeSetValue('admin-m-id', id);
+            safeSetValue('admin-m-type', type);
+            safeSetValue('admin-m-sim', sim);
+            safeSetValue('admin-m-prod-date', prodDate);
+            safeSetValue('admin-m-hours', hours);
+            safeSetValue('admin-m-next-service', nextService);
+            safeSetValue('admin-m-notes', notes);
+
+            UIkit.notification({
+                message: `<span uk-icon='icon: file-edit'></span> Wczytano dane maszyny ${id}`,
+                status: 'primary',
+                pos: 'top-center',
+                timeout: 2000
+            });
+        }
+
+        function resetMachineForm() {
+            document.getElementById('machine-form-title').innerText = 'Wprowadzanie Danych Nowej Maszyny';
+            document.getElementById('form-machine-edit').reset();
+        }
+
+        function filterMachineList() {
+            const query = document.getElementById('machine-search-filter').value.toLowerCase();
+            const items = document.querySelectorAll('#machine-quick-list li');
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        }
+
+
+       function onMachineSelectChange(selectEl) {
+            const selectedOpt = selectEl.options[selectEl.selectedIndex];
+            const sim = selectedOpt.getAttribute('data-sim') || '';
+            safeSetValue('assign-sim-card', sim);
+        }
+
+        function handleAssignEntities(e) {
+            e.preventDefault();
+            const machine = document.getElementById('assign-machine-id').value;
+            const sim = document.getElementById('assign-sim-card').value;
+
+            UIkit.notification({
+                message: `<span uk-icon='icon: check'></span> Zapisano powiązania oraz kartę SIM (<b>${sim}</b>) dla maszyny <b>${machine}</b>`,
+                status: 'success',
+                pos: 'top-center',
+                timeout: 3000
+            });
+
+            return false;
+        }
+
+        function editAssignment(machineId, simCard, distId, clientId) {
+            safeSetValue('assign-machine-id', machineId);
+            safeSetValue('assign-sim-card', simCard || '');
+            safeSetValue('assign-distributor-id', distId || '');
+            safeSetValue('assign-client-id', clientId || '');
+
+            UIkit.notification({
+                message: `Wczytano do edycji maszynę ${machineId} z kartą SIM: ${simCard}`,
+                status: 'info',
+                pos: 'top-center',
+                timeout: 2000
+            });
+        }
+
+                function handleUserSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('user-fullname').value;
+            const email = document.getElementById('user-email').value;
+
+            UIkit.notification({
+                message: `<span uk-icon='icon: check'></span> Zapisano dane użytkownika <b>${name}</b> (${email})`,
+                status: 'success',
+                pos: 'top-center',
+                timeout: 3000
+            });
+
+            resetUserForm();
+            return false;
+        }
+
+        function loadUserToEdit(fullname, email, phone, role) {
+            document.getElementById('user-form-title').innerText = `Edycja Użytkownika: ${fullname}`;
+            safeSetValue('user-fullname', fullname);
+            safeSetValue('user-email', email);
+            safeSetValue('user-phone', phone);
+            safeSetValue('user-role', role);
+
+            UIkit.notification({
+                message: `<span uk-icon='icon: user'></span> Wczytano dane użytkownika ${fullname}`,
+                status: 'primary',
+                pos: 'top-center',
+                timeout: 2000
+            });
+        }
+
+        function resetUserForm() {
+            document.getElementById('user-form-title').innerText = 'Tworzenie Nowego Konta';
+            document.getElementById('form-user-edit').reset();
+        }
+
+        function filterUserList() {
+            const query = document.getElementById('user-search-filter').value.toLowerCase();
+            const items = document.querySelectorAll('#user-quick-list li');
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        }
+
+

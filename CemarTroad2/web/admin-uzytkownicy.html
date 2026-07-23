@@ -103,10 +103,10 @@
                                     <label class="uk-form-label">Przypisana Rola w Systemie</label>
                                     <select class="uk-select" id="user-role" required>
                                         <option value="" disabled selected>-- Wybierz Rolę --</option>
-                                        <option value="client">Klient (Dostęp do własnych maszyn i raportów)</option>
-                                        <option value="distributor">Dystrybutor (Dostęp do floty w rejonie)</option>
-                                        <option value="staff">Serwisant (Dostęp do diagnozy i protokołów)</option>
-                                        <option value="admin">Administrator (Pełny dostęp do systemu)</option>
+                                        <option value="client">Klient</option>
+                                        <option value="distributor">Dystrybutor</option>
+                                        <option value="staff">Serwisant</option>
+                                        <option value="admin">Administrator</option>
                                     </select>
                                 </div>
 
@@ -183,51 +183,5 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script src="java.js"></script>
-    <script>
-        function handleUserSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('user-fullname').value;
-            const email = document.getElementById('user-email').value;
-
-            UIkit.notification({
-                message: `<span uk-icon='icon: check'></span> Zapisano dane użytkownika <b>${name}</b> (${email})`,
-                status: 'success',
-                pos: 'top-center',
-                timeout: 3000
-            });
-
-            resetUserForm();
-            return false;
-        }
-
-        function loadUserToEdit(fullname, email, phone, role) {
-            document.getElementById('user-form-title').innerText = `Edycja Użytkownika: ${fullname}`;
-            safeSetValue('user-fullname', fullname);
-            safeSetValue('user-email', email);
-            safeSetValue('user-phone', phone);
-            safeSetValue('user-role', role);
-
-            UIkit.notification({
-                message: `<span uk-icon='icon: user'></span> Wczytano dane użytkownika ${fullname}`,
-                status: 'primary',
-                pos: 'top-center',
-                timeout: 2000
-            });
-        }
-
-        function resetUserForm() {
-            document.getElementById('user-form-title').innerText = 'Tworzenie Nowego Konta';
-            document.getElementById('form-user-edit').reset();
-        }
-
-        function filterUserList() {
-            const query = document.getElementById('user-search-filter').value.toLowerCase();
-            const items = document.querySelectorAll('#user-quick-list li');
-            items.forEach(item => {
-                const text = item.innerText.toLowerCase();
-                item.style.display = text.includes(query) ? 'flex' : 'none';
-            });
-        }
-    </script>
 </body>
 </html>

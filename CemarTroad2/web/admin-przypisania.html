@@ -67,7 +67,7 @@
                     </div>
                     <div class="uk-width-expand">
                         <h3 class="uk-margin-remove-bottom uk-text-bold">Przypisanie Dystrybutora i Klienta</h3>
-                        <p class="uk-text-meta uk-margin-remove-top">Zarządzaj powiązaniami prawnymi, sieciami dystrybucji oraz klientami przypisanymi do maszyn</p>
+                        <p class="uk-text-meta uk-margin-remove-top">Zarządzaj powiązaniami podmiotów oraz weryfikuj numer karty SIM w przypisanej maszynie</p>
                     </div>
                 </div>
             </div>
@@ -77,28 +77,33 @@
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-small-bottom">Formularz Powiązań</h4>
-                <p class="uk-text-meta uk-margin-medium-bottom">Wybierz maszynę z bazy, a następnie przypisz do niej dystrybutora oraz klienta docelowego.</p>
+                <p class="uk-text-meta uk-margin-medium-bottom">Wybierz maszynę z bazy, uzupełnij jej numer karty SIM/GPRS, a następnie przypisz dystrybutora i klienta docelowego.</p>
 
                 <form id="form-assign-entities" class="uk-form-stacked" onsubmit="return handleAssignEntities(event)">
                     <div class="uk-grid-medium" uk-grid>
-                        <div class="uk-width-1-3@m">
+                        <div class="uk-width-1-2@m">
                             <label class="uk-form-label">1. Wybierz Maszynę</label>
-                            <select class="uk-select" id="assign-machine-id" required>
+                            <select class="uk-select" id="assign-machine-id" required onchange="onMachineSelectChange(this)">
                                 <option value="" disabled selected>-- Wybierz Maszynę --</option>
                                 <optgroup label="Maszyny nieprzypisane">
-                                    <option value="E71002">E71002 (City 24) - Brak przypisania</option>
-                                    <option value="E83110">E83110 (City 30) - Brak przypisania</option>
+                                    <option value="E71002" data-sim="7102-Z">E71002 (City 24) - Brak przypisania</option>
+                                    <option value="E83110" data-sim="8311-Y">E83110 (City 30) - Brak przypisania</option>
                                 </optgroup>
                                 <optgroup label="Maszyny w użyciu">
-                                    <option value="E59008">E59008 (City)</option>
-                                    <option value="E62441">E62441 (T-35)</option>
-                                    <option value="C77212">C77212 (City)</option>
+                                    <option value="E59008" data-sim="8842-X">E59008 (City)</option>
+                                    <option value="E62441" data-sim="9912-A">E62441 (T-35)</option>
+                                    <option value="C77212" data-sim="1043-B">C77212 (City)</option>
                                 </optgroup>
                             </select>
                         </div>
 
-                        <div class="uk-width-1-3@m">
-                            <label class="uk-form-label">2. Przypisz Dystrybutora</label>
+                        <div class="uk-width-1-2@m">
+                            <label class="uk-form-label">2. Numer Karty Maszyny</label>
+                            <input class="uk-input" type="text" id="assign-sim-card" placeholder="np. 8842-X">
+                        </div>
+
+                        <div class="uk-width-1-2@m">
+                            <label class="uk-form-label">3. Przypisz Dystrybutora</label>
                             <select class="uk-select" id="assign-distributor-id" required>
                                 <option value="" disabled selected>-- Wybierz Dystrybutora --</option>
                                 <option value="d1">Cemar Polska Sp. z o.o. [Główny]</option>
@@ -107,8 +112,8 @@
                             </select>
                         </div>
 
-                        <div class="uk-width-1-3@m">
-                            <label class="uk-form-label">3. Przypisz Klienta Docelowego</label>
+                        <div class="uk-width-1-2@m">
+                            <label class="uk-form-label">4. Przypisz Klienta Docelowego</label>
                             <select class="uk-select" id="assign-client-id" required>
                                 <option value="" disabled selected>-- Wybierz Klienta --</option>
                                 <option value="c1">P.H.U. Bud-Max</option>
@@ -125,13 +130,14 @@
 
                 <hr class="uk-margin-medium-top uk-margin-medium-bottom">
 
-                <h5 class="uk-text-bold uk-margin-small-bottom">Status Powiązań Maszyn w Bazie</h5>
+                <h5 class="uk-text-bold uk-margin-small-bottom">Status Powiązań Maszyn i Kart w Bazie</h5>
                 <div class="uk-overflow-auto">
                     <table class="uk-table uk-table-divider uk-table-hover cemar-table">
                         <thead>
                             <tr>
                                 <th>Numer Maszyny</th>
                                 <th>Model</th>
+                                <th>Karta</th>
                                 <th>Przypisany Dystrybutor</th>
                                 <th>Przypisany Klient</th>
                                 <th class="uk-text-center">Akcje</th>
@@ -142,38 +148,42 @@
                             <tr class="uk-background-muted">
                                 <td><span class="uk-text-bold">E71002</span></td>
                                 <td>City 24</td>
+                                <td><span class="uk-label uk-label-warning">7102-Z</span></td>
                                 <td><span class="uk-text-muted italic">Brak dystrybutora</span></td>
                                 <td><span class="uk-label uk-label-danger">Nieprzypisany</span></td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E71002', '', '')">Przypisz</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E71002', 'SIM-7102-Z', '', '')">Przypisz</button>
                                 </td>
                             </tr>
                             <tr class="uk-background-muted">
                                 <td><span class="uk-text-bold">E83110</span></td>
                                 <td>City 30</td>
+                                <td><span class="uk-label uk-label-warning">8311-Y</span></td>
                                 <td>Agro-Tech Dystrybucja</td>
                                 <td><span class="uk-label uk-label-danger">Nieprzypisany</span></td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E83110', 'd2', '')">Przypisz</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E83110', 'SIM-8311-Y', 'd2', '')">Przypisz</button>
                                 </td>
                             </tr>
                             <!-- Wiersze maszyn przypisanych -->
                             <tr>
                                 <td><span class="uk-text-bold">E59008</span></td>
                                 <td>City</td>
+                                <td><span class="uk-label uk-label-warning">8842-X</span></td>
                                 <td>Cemar Polska Sp. z o.o.</td>
                                 <td>P.H.U. Bud-Max</td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E59008', 'd1', 'c1')">Edytuj</button>
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E59008', 'SIM-8842-X', 'd1', 'c1')">Edytuj</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td><span class="uk-text-bold">E62441</span></td>
                                 <td>T-35</td>
+                                <td><span class="uk-label uk-label-warning">9912-A</span></td>
                                 <td>Agro-Tech Dystrybucja</td>
                                 <td>Trans-Met Sp. z o.o.</td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E62441', 'd2', 'c2')">Edytuj</button>
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E62441', 'SIM-9912-A', 'd2', 'c2')">Edytuj</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -197,33 +207,5 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script src="java.js"></script>
-    <script>
-        function handleAssignEntities(e) {
-            e.preventDefault();
-            const machine = document.getElementById('assign-machine-id').value;
-
-            UIkit.notification({
-                message: `<span uk-icon='icon: check'></span> Zapisano powiązania podmiotów dla maszyny <b>${machine}</b>`,
-                status: 'success',
-                pos: 'top-center',
-                timeout: 3000
-            });
-
-            return false;
-        }
-
-        function editAssignment(machineId, distId, clientId) {
-            safeSetValue('assign-machine-id', machineId);
-            safeSetValue('assign-distributor-id', distId || '');
-            safeSetValue('assign-client-id', clientId || '');
-
-            UIkit.notification({
-                message: `Wczytano do edycji maszynę ${machineId}`,
-                status: 'info',
-                pos: 'top-center',
-                timeout: 2000
-            });
-        }
-    </script>
 </body>
 </html>

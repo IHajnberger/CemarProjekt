@@ -90,8 +90,8 @@
                             <tr>
                                 <th>Numer Maszyny</th>
                                 <th>Model</th>
-                                <th>Nr Karty SIM</th>
-                                <th>Nr Telefonu Maszyny</th>
+                                <th>Nr Karty</th>
+                                <th>Nr Telefonu Klienta</th>
                                 <th>Przypisany Klient</th>
                                 <th class="uk-text-center">Akcje</th>
                             </tr>
@@ -100,7 +100,7 @@
                             <tr>
                                 <td><span class="uk-text-bold">E59008</span></td>
                                 <td>City</td>
-                                <td><span class="uk-label uk-label-warning">SIM-8842-X</span></td>
+                                <td><span class="uk-label uk-label-warning">8842-X</span></td>
                                 <td>+48 600 111 222</td>
                                 <td>P.H.U. Bud-Max</td>
                                 <td class="uk-text-center">
@@ -110,7 +110,7 @@
                             <tr>
                                 <td><span class="uk-text-bold">E62441</span></td>
                                 <td>T-35</td>
-                                <td><span class="uk-label uk-label-warning">SIM-9912-A</span></td>
+                                <td><span class="uk-label uk-label-warning">9912-A</span></td>
                                 <td>+48 600 333 444</td>
                                 <td>Trans-Met Sp. z o.o.</td>
                                 <td class="uk-text-center">
@@ -120,7 +120,7 @@
                             <tr>
                                 <td><span class="uk-text-bold">C77212</span></td>
                                 <td>City</td>
-                                <td><span class="uk-label uk-label-warning">SIM-1043-B</span></td>
+                                <td><span class="uk-label uk-label-warning">1043-B</span></td>
                                 <td>+48 600 555 666</td>
                                 <td>Kowalski Transport S.A.</td>
                                 <td class="uk-text-center">
@@ -148,16 +148,5 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script src="java.js"></script>
-    <script>
-        function filterMachinesTable() {
-        const query = document.getElementById('admin-search-input').value.toLowerCase().trim();
-        const rows = document.querySelectorAll('#all-machines-tbody tr');
-
-        rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(query) ? '' : 'none';
-        });
-        }
-    </script>
 </body>
 </html>

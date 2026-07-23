@@ -99,8 +99,8 @@
                                     </select>
                                 </div>
                                 <div class="uk-width-1-3@s">
-                                    <label class="uk-form-label">Numer Karty SIM/GPRS</label>
-                                    <input class="uk-input" type="text" id="admin-m-sim" placeholder="np. SIM-8842-X">
+                                    <label class="uk-form-label">Numer Karty</label>
+                                    <input class="uk-input" type="text" id="admin-m-sim" placeholder="np. 8842-X">
                                 </div>
 
                                 <div class="uk-width-1-3@s">
@@ -140,21 +140,21 @@
                         <p class="uk-text-meta uk-margin-small-bottom">Kliknij maszynę, aby wczytać jej dane.</p>
                         
                         <div class="uk-margin-small-bottom">
-                            <input class="uk-input uk-form-small" type="text" id="machine-search-filter" placeholder="Szukaj maszyny lub SIM..." onkeyup="filterMachineList()">
+                            <input class="uk-input uk-form-small" type="text" id="machine-search-filter" placeholder="Szukaj maszyny lub karty..." onkeyup="filterMachineList()">
                         </div>
 
                         <ul class="uk-list uk-list-divider custom-scroll" id="machine-quick-list" style="max-height: 380px; overflow-y: auto;">
                             <li class="uk-flex uk-flex-between uk-flex-middle">
                                 <div>
                                     <span class="uk-text-bold">E59008</span> <span class="uk-label uk-label-warning">City</span>
-                                    <div class="uk-text-meta">SIM: SIM-8842-X</div>
+                                    <div class="uk-text-meta">karta: 8842-X</div>
                                 </div>
                                 <button class="uk-button cemar-btn-secondary uk-button-xsmall" onclick="loadMachineToEdit('E59008', 'City', 'SIM-8842-X', '2025-02-10', 1420, 80, 'Wymieniony filtr glowny.')">Edytuj</button>
                             </li>
                             <li class="uk-flex uk-flex-between uk-flex-middle">
                                 <div>
                                     <span class="uk-text-bold">E62441</span> <span class="uk-label uk-label-warning">T-35</span>
-                                    <div class="uk-text-meta">SIM: SIM-9912-A</div>
+                                    <div class="uk-text-meta">karta: 9912-A</div>
                                 </div>
                                 <button class="uk-button cemar-btn-secondary uk-button-xsmall" onclick="loadMachineToEdit('E62441', 'T-35', 'SIM-9912-A', '2025-02-28', 890, 110, 'Standardowa konfiguracja.')">Edytuj</button>
                             </li>
@@ -179,54 +179,5 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
     <script src="java.js"></script>
-    <script>
-        function handleMachineSubmit(e) {
-            e.preventDefault();
-            const id = document.getElementById('admin-m-id').value;
-            const type = document.getElementById('admin-m-type').value;
-
-            UIkit.notification({
-                message: `<span uk-icon='icon: check'></span> Zapisano dane karty maszyny <b>${id} (${type})</b>`,
-                status: 'success',
-                pos: 'top-center',
-                timeout: 3000
-            });
-
-            resetMachineForm();
-            return false;
-        }
-
-        function loadMachineToEdit(id, type, sim, prodDate, hours, nextService, notes) {
-            document.getElementById('machine-form-title').innerText = `Edycja Karty Maszyny: ${id}`;
-            safeSetValue('admin-m-id', id);
-            safeSetValue('admin-m-type', type);
-            safeSetValue('admin-m-sim', sim);
-            safeSetValue('admin-m-prod-date', prodDate);
-            safeSetValue('admin-m-hours', hours);
-            safeSetValue('admin-m-next-service', nextService);
-            safeSetValue('admin-m-notes', notes);
-
-            UIkit.notification({
-                message: `<span uk-icon='icon: file-edit'></span> Wczytano dane maszyny ${id}`,
-                status: 'primary',
-                pos: 'top-center',
-                timeout: 2000
-            });
-        }
-
-        function resetMachineForm() {
-            document.getElementById('machine-form-title').innerText = 'Wprowadzanie Danych Nowej Maszyny';
-            document.getElementById('form-machine-edit').reset();
-        }
-
-        function filterMachineList() {
-            const query = document.getElementById('machine-search-filter').value.toLowerCase();
-            const items = document.querySelectorAll('#machine-quick-list li');
-            items.forEach(item => {
-                const text = item.innerText.toLowerCase();
-                item.style.display = text.includes(query) ? 'flex' : 'none';
-            });
-        }
-    </script>
 </body>
 </html>
