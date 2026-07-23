@@ -32,3 +32,5 @@ CemarTroad2/obj/Debug/net8.0/CemarTroad2.AssemblyInfo.cs
 *.txt
 *.BuildWithSkipAnalyzers
 *.editorconfig
+CemarTroad2/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+CemarTroad2/obj/Debug/net8.0/CemarTroad2.GlobalUsings.g.cs
