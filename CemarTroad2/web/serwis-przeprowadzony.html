@@ -35,20 +35,18 @@
                 <span class="decor-3"></span>
                 <span class="decor-4"></span>
             </div>
-            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="staff-list.html">
+            <a id="nav-logo" class="uk-navbar-item uk-logo py-0 flex items-center" href="#">
                 <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
         </div>
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
-                <li>
-                    <a href="staff-list.html" title="Strona główna" uk-tooltip>
-                        <span class="uk-text-bold" uk-icon="icon: home; ratio: 1.1;"></span>
-                    </a>
-                </li>
-                <li><a href="wycena.html">Wycena</a></li>
-                <li><a href="serwis.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Serwis</a></li>
-                <li><a href="konto-serwis.html">Konto</a></li>
+                <li><a id="nav-home" href="#" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+                <li class="rental"><a href="rental.html">Rental</a></li>
+                <li class="wycena"><a href="wycena.html">Wycena</a></li>
+                <li class="serwis"><a href="serwis.html">Serwis</a></li>
+                <li class="przypisanie"><a href="admin-przypisania.html">Przypisanie</a></li>
+                <li><a id="nav-konto" href="#">Konto</a></li>
             </ul>
             <div class="uk-navbar-item w-lewo">
                 <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -56,13 +54,17 @@
         </div>
     </nav>
 
-    <div class="uk-container uk-margin-large-top uk-margin-large-bottom">
+    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+        <button class="uk-button cemar-btn-secondary uk-margin-small-bottom" onclick="goBack()">
+            <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+        </button>
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>
             <div class="p-8">
 
                 <!-- Nagłówek Raportu -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-6 mb-6">
+
                     <div>
                         <span class="text-xs font-bold text-amber-600 uppercase tracking-widest">Karta Pracy Serwisowej</span>
                         <h1 class="text-3xl font-extrabold text-gray-900 mt-1">SERWIS ZAKOŃCZONY</h1>
@@ -132,7 +134,7 @@
                     <button class="bg-gray-800 hover:bg-gray-700 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition" onclick="window.print()">
                         <span uk-icon="icon: print"></span> Drukuj Raport
                     </button>
-                    <a href="serwis.html" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                    <a href="serwis.html" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-lg flex items-center gap-2 transition nowe-zlecenie">
                         Nowe zlecenie <span uk-icon="icon: arrow-right"></span>
                     </a>
                 </div>

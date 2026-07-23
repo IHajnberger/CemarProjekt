@@ -116,27 +116,112 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Dynamiczna nawigacja na podstawie roli
     const userRole = localStorage.getItem('userRole') || 'client';
-    const homeUrl = userRole === 'client' ? 'client-list.html' : 'staff-list.html';
-    const kontoUrl = userRole === 'client' ? 'konto-kilent.html' : 'konto-serwis.html';
-    const detailsUrl = userRole === 'client' ? 'client-details.html' : 'staff-details.html';
 
+    // Używamy 'let', aby móc modyfikować wartości w zależności od roli
+    let homeUrl = '#';
+    let kontoUrl = '#';
+    let detailsUrl = '#';
+
+    // Pomocnicza funkcja do ustawiania href
     function safeSetHref(id, url) {
         const el = document.getElementById(id);
         if (el) el.href = url;
     }
 
+    
+    // Logika przypisania adresów i widoczności na podstawie roli
+    switch (userRole) {
+        case 'client':
+            detailsUrl = 'client-details.html';
+            homeUrl = 'client-list.html';
+            kontoUrl = 'konto-kilent.html'; 
+            safeHide('.serwis');
+            safeHide('.wycena');
+            safeHide('.przypisania');
+            break;
+
+        case 'staff':
+            detailsUrl = 'staff-details.html';
+            homeUrl = 'staff-list.html';
+            kontoUrl = 'konto-serwis.html';
+            safeHide('.ai');
+            safeHide('.instrukcja');
+            safeHide('.pomoc');
+            safeHide('.rental');
+            safeHide('.przypisania');
+            break;
+
+        case 'staff0':
+            detailsUrl = 'staff-details.html';
+            homeUrl = 'staff-list.html';
+            kontoUrl = 'konto-serwis.html';
+            safeHide('.ai');
+            safeHide('.instrukcja');
+            safeHide('.pomoc');
+            safeHide('.rental');
+            safeHide('.przypisania');
+            break;
+
+        case 'caregiver':
+            detailsUrl = 'staff-details.html';
+            homeUrl = 'caregiver-menu.html';
+            kontoUrl = 'konto-caregiver.html';
+            safeHide('.ai');
+            safeHide('.instrukcja');
+            safeHide('.pomoc');
+            safeHide('.serwis');
+            safeHide('.zglos-serwis');
+            safeHide('.nowe-zlecenie');
+            safeHide('.admincard');
+            safeHide('.userNrole');
+            break;
+
+        case 'distributor':
+            detailsUrl = 'distributor-details.html';
+            homeUrl = 'distributor-list.html';
+            kontoUrl = 'konto-distributor.html';
+            safeHide('.ai');
+            safeHide('.instrukcja');
+            safeHide('.pomoc');
+            safeHide('.serwis');
+            safeHide('.wycena');
+            break;
+
+        case 'admin':
+            detailsUrl = 'admin-details.html';
+            homeUrl = 'admin-home.html';
+            kontoUrl = 'konto-admin.html';
+            safeHide('.ai');
+            safeHide('.instrukcja');
+            safeHide('.pomoc');
+            safeHide('.serwis');
+            safeHide('.wycena');
+            safeHide('.rental');
+            break;
+
+        default:
+            // Domyślne wartości w przypadku nieznanej roli
+            detailsUrl = 'client-details.html';
+            homeUrl = 'client-list.html';
+            kontoUrl = 'konto-klient.html';
+            break;
+    }
+    // Guziki od powrotów
+    window.goBack = function () {
+        window.location.href = detailsUrl;
+    };
+    window.goBackMenu = function () {
+        window.location.href = homeUrl;
+    }
+
+    // Przypisanie adresów do elementów w HTML dopieropo po ich ustaleniu w switch()
     safeSetHref('nav-logo', homeUrl);
     safeSetHref('nav-home', homeUrl);
     safeSetHref('nav-konto', kontoUrl);
 
-    if (userRole === 'client') {
-        safeHide('.serwis');
-        safeHide('.wycena');
-    } else {
-        safeHide('.ai');
-        safeHide('.instrukcja');
-        safeHide('.pomoc');
-    }
+
+    // Jeśli używasz detailsUrl w jakimś przycisku w HTML, możesz też ustawić go tak:
+    safeSetHref('nav-details', detailsUrl);
 
     // AUTOMATYCZNE WYWOŁANIE RENDEROWANIA DANYCH RAPORTU (SERWIS ZAKOŃCZONY)
     if (document.getElementById('sum-model') || document.getElementById('sum-num')) {
@@ -172,12 +257,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     renderTable();
 });
-
-window.goBack = function () {
-    const userRole = localStorage.getItem('userRole') || 'client';
-    const detailsUrl = userRole === 'client' ? 'client-details.html' : 'staff-details.html';
-    window.location.href = detailsUrl;
-};
 
 // ==========================================
 // 3. STAFF DETAILS / LOGI / ROZWIJANIE WIERSZY
@@ -602,6 +681,9 @@ function renderPreview(file) {
 // ==========================================
 // 6. WYCENA I KALKULATOR
 // ==========================================
+function savePricing() {
+    // jeszcze nwm co tu
+}
 function initValuationCalculator() {
     if (!document.getElementById('machine-model')) return;
     toggleModelParts();
@@ -2040,4 +2122,6 @@ window.showContact = function () {
             });
         }
 
-
+// ==========================================
+// 11. Dystrybutor i Opiekun
+// ==========================================
