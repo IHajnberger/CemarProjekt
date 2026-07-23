@@ -1176,7 +1176,7 @@ window.initRouteMap = function initRouteMap() {
     routeCoordinatesNew.forEach(coord => L.marker(coord, { icon: waypointIconNew }).addTo(map));
     map.fitBounds(polyline.getBounds());
 };
-// LOGI
+// LOGI TELEMETRYCZNE (PRZYKŁADOWE DANE)
 let telemetryCycles = [
     {
         cycleId: "Cykl 1",
