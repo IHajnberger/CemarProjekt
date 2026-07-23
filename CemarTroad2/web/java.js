@@ -1959,7 +1959,7 @@ window.showContact = function () {
         }
 
 
-       function onMachineSelectChange(selectEl) {
+               function onMachineSelectChange(selectEl) {
             const selectedOpt = selectEl.options[selectEl.selectedIndex];
             const sim = selectedOpt.getAttribute('data-sim') || '';
             safeSetValue('assign-sim-card', sim);
@@ -1968,10 +1968,11 @@ window.showContact = function () {
         function handleAssignEntities(e) {
             e.preventDefault();
             const machine = document.getElementById('assign-machine-id').value;
-            const sim = document.getElementById('assign-sim-card').value;
+            const techSelect = document.getElementById('assign-tech-id');
+            const techName = techSelect.selectedIndex >= 0 ? techSelect.options[techSelect.selectedIndex].text : '';
 
             UIkit.notification({
-                message: `<span uk-icon='icon: check'></span> Zapisano powiązania oraz kartę SIM (<b>${sim}</b>) dla maszyny <b>${machine}</b>`,
+                message: `<span uk-icon='icon: check'></span> Przypisano podmioty oraz serwisanta (<b>${techName}</b>) do maszyny <b>${machine}</b>`,
                 status: 'success',
                 pos: 'top-center',
                 timeout: 3000
@@ -1980,20 +1981,20 @@ window.showContact = function () {
             return false;
         }
 
-        function editAssignment(machineId, simCard, distId, clientId) {
+        function editAssignment(machineId, simCard, distId, clientId, techId) {
             safeSetValue('assign-machine-id', machineId);
             safeSetValue('assign-sim-card', simCard || '');
             safeSetValue('assign-distributor-id', distId || '');
             safeSetValue('assign-client-id', clientId || '');
+            safeSetValue('assign-tech-id', techId || '');
 
             UIkit.notification({
-                message: `Wczytano do edycji maszynę ${machineId} z kartą SIM: ${simCard}`,
+                message: `Wczytano powiązania dla maszyny ${machineId}`,
                 status: 'info',
                 pos: 'top-center',
                 timeout: 2000
             });
         }
-
                 function handleUserSubmit(e) {
             e.preventDefault();
             const name = document.getElementById('user-fullname').value;

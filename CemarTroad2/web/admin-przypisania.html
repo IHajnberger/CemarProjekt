@@ -66,8 +66,8 @@
                         <span uk-icon="icon: link; ratio: 2.5" class="uk-text-warning"></span>
                     </div>
                     <div class="uk-width-expand">
-                        <h3 class="uk-margin-remove-bottom uk-text-bold">Przypisanie Dystrybutora i Klienta</h3>
-                        <p class="uk-text-meta uk-margin-remove-top">Zarządzaj powiązaniami podmiotów oraz weryfikuj numer karty SIM w przypisanej maszynie</p>
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Przypisanie Dystrybutora, Klienta i Serwisanta</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">Zarządzaj powiązaniami podmiotów, weryfikuj karty oraz przypisuj opiekunów serwisowych do maszyn</p>
                     </div>
                 </div>
             </div>
@@ -77,11 +77,11 @@
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-small-bottom">Formularz Powiązań</h4>
-                <p class="uk-text-meta uk-margin-medium-bottom">Wybierz maszynę z bazy, uzupełnij jej numer karty SIM/GPRS, a następnie przypisz dystrybutora i klienta docelowego.</p>
+                <p class="uk-text-meta uk-margin-medium-bottom">Wybierz maszynę z bazy, uzupełnij kartę, a następnie przypisz dystrybutora, klienta oraz odpowiedzialnego serwisanta.</p>
 
                 <form id="form-assign-entities" class="uk-form-stacked" onsubmit="return handleAssignEntities(event)">
                     <div class="uk-grid-medium" uk-grid>
-                        <div class="uk-width-1-2@m">
+                        <div class="uk-width-1-3@m">
                             <label class="uk-form-label">1. Wybierz Maszynę</label>
                             <select class="uk-select" id="assign-machine-id" required onchange="onMachineSelectChange(this)">
                                 <option value="" disabled selected>-- Wybierz Maszynę --</option>
@@ -97,12 +97,12 @@
                             </select>
                         </div>
 
-                        <div class="uk-width-1-2@m">
-                            <label class="uk-form-label">2. Numer Karty Maszyny</label>
+                        <div class="uk-width-1-3@m">
+                            <label class="uk-form-label">2. Numer Karty</label>
                             <input class="uk-input" type="text" id="assign-sim-card" placeholder="np. 8842-X">
                         </div>
 
-                        <div class="uk-width-1-2@m">
+                        <div class="uk-width-1-3@m">
                             <label class="uk-form-label">3. Przypisz Dystrybutora</label>
                             <select class="uk-select" id="assign-distributor-id" required>
                                 <option value="" disabled selected>-- Wybierz Dystrybutora --</option>
@@ -122,6 +122,16 @@
                             </select>
                         </div>
 
+                        <div class="uk-width-1-2@m">
+                            <label class="uk-form-label">5. Przypisz Serwisanta (Opiekuna)</label>
+                            <select class="uk-select" id="assign-tech-id" required>
+                                <option value="" disabled selected>-- Wybierz Serwisanta --</option>
+                                <option value="t1">Jan Kowalski (Serwisant Główny)</option>
+                                <option value="t2">Piotr Nowak (Technik Mobilny)</option>
+                                <option value="t3">Marek Wiśniewski (Diagnosta)</option>
+                            </select>
+                        </div>
+
                         <div class="uk-width-1-1 uk-margin-top uk-text-right">
                             <button type="submit" class="uk-button cemar-btn-primary">Zapisz Powiązania Maszyny</button>
                         </div>
@@ -130,7 +140,7 @@
 
                 <hr class="uk-margin-medium-top uk-margin-medium-bottom">
 
-                <h5 class="uk-text-bold uk-margin-small-bottom">Status Powiązań Maszyn i Kart w Bazie</h5>
+                <h5 class="uk-text-bold uk-margin-small-bottom">Status Powiązań Maszyn i Dedykowanych Serwisantów</h5>
                 <div class="uk-overflow-auto">
                     <table class="uk-table uk-table-divider uk-table-hover cemar-table">
                         <thead>
@@ -140,6 +150,7 @@
                                 <th>Karta</th>
                                 <th>Przypisany Dystrybutor</th>
                                 <th>Przypisany Klient</th>
+                                <th>Przypisany Serwisant</th>
                                 <th class="uk-text-center">Akcje</th>
                             </tr>
                         </thead>
@@ -151,8 +162,9 @@
                                 <td><span class="uk-label uk-label-warning">7102-Z</span></td>
                                 <td><span class="uk-text-muted italic">Brak dystrybutora</span></td>
                                 <td><span class="uk-label uk-label-danger">Nieprzypisany</span></td>
+                                <td><span class="uk-text-muted italic">Brak opiekuna</span></td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E71002', 'SIM-7102-Z', '', '')">Przypisz</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E71002', '7102-Z', '', '', '')">Przypisz</button>
                                 </td>
                             </tr>
                             <tr class="uk-background-muted">
@@ -161,8 +173,9 @@
                                 <td><span class="uk-label uk-label-warning">8311-Y</span></td>
                                 <td>Agro-Tech Dystrybucja</td>
                                 <td><span class="uk-label uk-label-danger">Nieprzypisany</span></td>
+                                <td>Piotr Nowak</td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E83110', 'SIM-8311-Y', 'd2', '')">Przypisz</button>
+                                    <button class="uk-button cemar-btn-primary uk-button-small" onclick="editAssignment('E83110', '8311-Y', 'd2', '', 't2')">Przypisz</button>
                                 </td>
                             </tr>
                             <!-- Wiersze maszyn przypisanych -->
@@ -172,8 +185,9 @@
                                 <td><span class="uk-label uk-label-warning">8842-X</span></td>
                                 <td>Cemar Polska Sp. z o.o.</td>
                                 <td>P.H.U. Bud-Max</td>
+                                <td>Jan Kowalski</td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E59008', 'SIM-8842-X', 'd1', 'c1')">Edytuj</button>
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E59008', '8842-X', 'd1', 'c1', 't1')">Edytuj</button>
                                 </td>
                             </tr>
                             <tr>
@@ -182,8 +196,9 @@
                                 <td><span class="uk-label uk-label-warning">9912-A</span></td>
                                 <td>Agro-Tech Dystrybucja</td>
                                 <td>Trans-Met Sp. z o.o.</td>
+                                <td>Marek Wiśniewski</td>
                                 <td class="uk-text-center">
-                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E62441', 'SIM-9912-A', 'd2', 'c2')">Edytuj</button>
+                                    <button class="uk-button cemar-btn-secondary uk-button-small" onclick="editAssignment('E62441', '9912-A', 'd2', 'c2', 't3')">Edytuj</button>
                                 </td>
                             </tr>
                         </tbody>
