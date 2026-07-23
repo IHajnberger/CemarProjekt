@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
         case 'caregiver':
             detailsUrl = 'staff-details.html';
             homeUrl = 'caregiver-menu.html';
-            kontoUrl = 'konto-caregiver.html';
+            kontoUrl = 'Konto.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
