@@ -127,8 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const el = document.getElementById(id);
         if (el) el.href = url;
     }
-
-    
+ 
     // Logika przypisania adresów i widoczności na podstawie roli
     switch (userRole) {
         case 'client':
@@ -149,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.pomoc');
             safeHide('.rental');
             safeHide('.przypisania');
+            safeHide('.admincard');
             break;
 
         case 'staff0':
@@ -172,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.serwis');
             safeHide('.zglos-serwis');
             safeHide('.nowe-zlecenie');
-            safeHide('.admincard');
             safeHide('.userNrole');
             break;
 
@@ -2123,5 +2122,15 @@ window.showContact = function () {
         }
 
 // ==========================================
-// 11. Dystrybutor i Opiekun
+// 11. Konto
 // ==========================================
+function saveAccountProfile(e) {
+    e.preventDefault();
+    UIkit.notification({ message: "<span uk-icon='check'></span> Dane profilowe administratora zostały zapisane.", status: 'success', pos: 'top-center' });
+    return false;
+}
+function changeAccountPassword(e) {
+    e.preventDefault();
+    UIkit.notification({ message: "<span uk-icon='check'></span> Hasło zostało zmienione pomyślnie.", status: 'success', pos: 'top-center' });
+    return false;
+}
