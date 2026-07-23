@@ -194,10 +194,12 @@ function openSortPanel(columnKey, columnName) {
     document.getElementById('sort-column-label').innerText = columnName;
     document.getElementById('sort-panel').style.display = 'block';
 }
+
 function closeSortPanel() {
     document.getElementById('sort-panel').style.display = 'none';
     currentSortColumn = '';
 }
+
 const activeFilters = {
     serwis: true,
     zgloszenie: true,
@@ -215,11 +217,22 @@ function sortData(order) {
         let valA = a.getAttribute(`data-${currentSortColumn}`) || '';
         let valB = b.getAttribute(`data-${currentSortColumn}`) || '';
 
-        // Próba konwersji na liczbę (dla numeru maszyny, karty, telefonu)
-        let numA = parseFloat(valA.replace(/\s+/g, ''));
-        let numB = parseFloat(valB.replace(/\s+/g, ''));
+        // 1. Obsługa sortowania dat (format YYYY-MM-DD)
+        if (currentSortColumn === 'date') {
+            let dateA = new Date(valA).getTime() || 0;
+            let dateB = new Date(valB).getTime() || 0;
+            return order === 'asc' ? dateA - dateB : dateB - dateA;
+        }
 
-        if (!isNaN(numA) && !isNaN(numB)) {
+        // 2. Walidacja czy pełna wartość jest liczbą (zapobiega ucinaniu tekstów przez parseFloat)
+        let cleanA = valA.replace(/\s+/g, '');
+        let cleanB = valB.replace(/\s+/g, '');
+        let isNumA = /^-?\d+(\.\d+)?$/.test(cleanA);
+        let isNumB = /^-?\d+(\.\d+)?$/.test(cleanB);
+
+        if (isNumA && isNumB) {
+            let numA = parseFloat(cleanA);
+            let numB = parseFloat(cleanB);
             return order === 'asc' ? numA - numB : numB - numA;
         } else {
             return order === 'asc'

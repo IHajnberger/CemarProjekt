@@ -78,30 +78,83 @@
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-medium-bottom">Twoje aktywne maszyny</h4>
+
+                <!-- Wyszukiwany / Rozwijany Panel Sortowania nad Tabelą -->
+                <div id="sort-panel" class="uk-margin-bottom">
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap gap-2">
+                        <div>
+                            <span class="uk-text-meta uk-text-uppercase uk-text-bold">Opcje Sortowania:</span>
+                            <span id="sort-column-label" class="uk-badge uk-margin-small-left" style="background:#E59008;">---</span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle gap-2">
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('asc')">
+                                <span uk-icon="icon: arrow-up; ratio: 0.8"></span> Rosnąco (A-Z / 0-9)
+                            </button>
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('desc')">
+                                <span uk-icon="icon: arrow-down; ratio: 0.8"></span> Malejąco (Z-A / 9-0)
+                            </button>
+                            <button class="uk-close-small uk-margin-small-left" type="button" uk-close onclick="closeSortPanel()"></button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-divider uk-table-hover cemar-table">
+                    <table class="uk-table uk-table-divider uk-table-hover cemar-table" id="devices-table">
                         <thead>
                             <tr>
-                                <th>Data Dodania</th>
-                                <th>Numer Maszyny</th>
-                                <th>Typ Maszyny</th>
+                                <!-- Nagłówek z sortowaniem: Data Dodania -->
+                                <th class="sort-th" onclick="openSortPanel('date', 'Data Dodania')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Data Dodania</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <!-- Nagłówek z sortowaniem: Numer Maszyny -->
+                                <th class="sort-th uk-text-center" onclick="openSortPanel('machine', 'Numer Maszyny')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Numer Maszyny</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <!-- Nagłówek z sortowaniem: Typ Maszyny -->
+                                <th class="sort-th uk-text-center" onclick="openSortPanel('type', 'Typ Maszyny')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Typ Maszyny</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <!-- Nagłówek z sortowaniem: Czas od ostatniego serwisu -->
+                                <th class="sort-th uk-text-center" onclick="openSortPanel('service', 'Czas od ostatniego serwisu')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Czas od ostatniego serwisu</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <!-- Akcje (bez możliwości sortowania) -->
                                 <th class="uk-text-center">Akcje</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <!-- Dane w atrybutach data-* pozwalają na dokładne i szybkie sortowanie -->
+                            <tr data-date="2026-04-12" data-machine="E59008" data-type="City" data-service="30">
                                 <td>12.04.2026</td>
-                                <td><span class="uk-text-bold">E59008</span></td>
-                                <td>City</td>
+                                <td class="uk-text-center"><span class="uk-text-bold">E59008</span></td>
+                                <td class="uk-text-center">City</td>
+                                <td class="uk-text-center">30h</td>
                                 <td class="uk-text-center">
                                     <button class="uk-button cemar-btn-secondary uk-button-small uk-margin-small-right" onclick="goToDetails('E59008', 'City')">Szczegóły</button>
                                     <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToReport('E59008', 'City')">Raport</button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr data-date="2026-05-28" data-machine="E62441" data-type="T-35" data-service="34">
                                 <td>28.05.2026</td>
-                                <td><span class="uk-text-bold">E62441</span></td>
-                                <td>T-35</td>
+                                <td class="uk-text-center"><span class="uk-text-bold">E62441</span></td>
+                                <td class="uk-text-center">T-35</td>
+                                <td class="uk-text-center">34h</td>
                                 <td class="uk-text-center">
                                     <button class="uk-button cemar-btn-secondary uk-button-small uk-margin-small-right" onclick="goToDetails('E62441', 'T-35')">Szczegóły</button>
                                     <button class="uk-button cemar-btn-primary uk-button-small" onclick="goToReport('E62441', 'T-35')">Raport</button>
