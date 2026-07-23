@@ -244,6 +244,110 @@ function sortData(order) {
     // Ponowne wstawienie posortowanych wierszy do tabeli
     rows.forEach(row => tbody.appendChild(row));
 }
+// SPEECH-TO-TEXT (DYKTOWANIE NOTATKI)
+let speechRecognition = null;
+let isRecording = false;
+
+function toggleSpeechToText() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({ message: 'Twoja przeglądarka nie obsługuje rozpoznawania mowy.', status: 'danger', pos: 'top-center' });
+        } else {
+            alert('Przeglądarka nie obsługuje rozpoznawania mowy.');
+        }
+        return;
+    }
+
+    if (isRecording) {
+        stopSpeechToText();
+        return;
+    }
+
+    if (!speechRecognition) {
+        speechRecognition = new SpeechRecognition();
+        speechRecognition.lang = 'pl-PL';
+        speechRecognition.continuous = true;
+        speechRecognition.interimResults = false;
+
+        speechRecognition.onstart = function () {
+            isRecording = true;
+            updateMicButtonUI(true);
+            // Wywalone powiadomienie informacyjne - brak popupu
+        };
+
+        speechRecognition.onresult = function (event) {
+            const textarea = document.getElementById('technician-notes');
+            if (!textarea) return;
+
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    transcript += event.results[i][0].transcript;
+                }
+            }
+
+            if (transcript.trim().length > 0) {
+                const currentText = textarea.value;
+                const needsSpace = currentText.length > 0 && !currentText.endsWith(' ') && !currentText.endsWith('\n');
+                textarea.value = currentText + (needsSpace ? ' ' : '') + transcript.trim();
+            }
+        };
+
+        speechRecognition.onerror = function (event) {
+            console.error('Błąd Speech-to-Text:', event.error);
+            stopSpeechToText();
+            // Powiadomienie tylko w przypadku błędu
+            if (typeof UIkit !== 'undefined') {
+                UIkit.notification({ message: 'Błąd mikrofonu lub brak uprawnień.', status: 'danger', pos: 'top-center' });
+            }
+        };
+
+        speechRecognition.onend = function () {
+            stopSpeechToText();
+        };
+    }
+
+    try {
+        speechRecognition.start();
+    } catch (err) {
+        console.error('Nie udało się uruchomić nagrywania:', err);
+    }
+}
+
+function stopSpeechToText() {
+    if (speechRecognition && isRecording) {
+        speechRecognition.stop();
+    }
+    isRecording = false;
+    updateMicButtonUI(false);
+}
+
+function updateMicButtonUI(active) {
+    const btn = document.getElementById('mic-btn');
+    if (!btn) return;
+
+    const newTitle = active ? 'Nagrywam... (Kliknij, aby zatrzymać)' : 'Dyktuj uwagi';
+
+    if (active) {
+        btn.style.backgroundColor = '#ef4444'; // Czerwony kolor gdy nagrywa
+    } else {
+        btn.style.backgroundColor = '#E59008'; // Domyślny pomarańczowy Cemar
+    }
+
+    // Ustawienie nowego atrybutu title
+    btn.setAttribute('title', newTitle);
+
+    // Przebudowanie tooltipa UIkit, aby odczytał nowy tekst
+    if (typeof UIkit !== 'undefined') {
+        const tooltipInstance = UIkit.tooltip(btn);
+        if (tooltipInstance) {
+            tooltipInstance.$destroy(); // Usunięcie starego tooltipa z pamięci UIkit
+        }
+        UIkit.tooltip(btn); // Utworzenie nowego z aktualnym tekstem
+    }
+}
 
 window.goToTelemetry = function () {
     window.location.href = `machine-logs.html?id=${encodeURIComponent(machineId)}&type=${encodeURIComponent(machineType)}`;

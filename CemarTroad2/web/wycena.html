@@ -129,7 +129,7 @@
                         </div>
 
                         <!-- Lista czynności pogrupowana sekcjami -->
-                        <div id="activities-container" class="space-y-6 custom-scroll overflow-y-auto max-h-[850px] pr-2">
+                        <div id="activities-container" class="space-y-6 custom-scroll overflow-y-auto max-h-[10000px] pr-2">
 
                             <!-- Sekcja: Przygotowawcze -->
                             <div class="activity-section">
@@ -410,7 +410,7 @@
                         </div>
 
                         <!-- Lista części do wyboru -->
-                        <div id="parts-container" class="space-y-4 custom-scroll overflow-y-auto max-h-[350px] pr-2">
+                        <div id="parts-container" class="space-y-4 custom-scroll overflow-y-auto max-h-[10000px] pr-2">
 
                             <!-- Podzespoły Główne i Złącza -->
                             <div class="part-section">
@@ -849,9 +849,20 @@
         <div class="cemar-card mt-6">
             <div class="yellow-accent-bar"></div>
             <div class="p-6">
-                <h3 class="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
-                    <span uk-icon="file-edit" class="text-amber-500"></span> Uwagi i Zalecenia Serwisanta
-                </h3>
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2 m-0">
+                        <span uk-icon="file-edit" class="text-amber-500"></span> Uwagi i Zalecenia Serwisanta
+                    </h3>
+
+                    <!-- Okrągły przycisk mikrofonu -->
+                    <button type="button" id="mic-btn" onclick="toggleSpeechToText()"
+                            class="uk-icon-button"
+                            style="background-color: #E59008; color: white; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.2);"
+                            uk-icon="icon: microphone; ratio: 0.9"
+                            title="Dyktuj uwagi" uk-tooltip>
+                    </button>
+                </div>
+
                 <textarea id="technician-notes" class="w-full border border-gray-300 rounded p-3 text-sm focus:outline-none focus:ring-1 focus:ring-amber-500" rows="4" placeholder="Wpisz dodatkowe uwagi diagnostyczne, zalecenia eksploatacyjne dla klienta lub opis nietypowych usterek..."></textarea>
             </div>
         </div>
