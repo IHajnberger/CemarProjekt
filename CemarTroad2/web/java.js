@@ -174,14 +174,12 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
+            safeHide('.wycena');
             safeHide('.przypisanie');
-            safeHide('.przypisania');
             safeHide('.admincard');
             safeHide('.userNrole');
             safeHide('.zglos-serwis');
             safeHide('.nowe-zlecenie');
-            safeHide('.wycena');
-            sefaHide('.serwis')
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-care');
