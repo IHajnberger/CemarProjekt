@@ -133,10 +133,15 @@ document.addEventListener('DOMContentLoaded', function () {
         case 'client':
             detailsUrl = 'client-details.html';
             homeUrl = 'client-list.html'; 
+            kontoUrl = 'Konto.html';
             safeHide('.serwis');
             safeHide('.wycena');
             safeHide('.przypisanie');
+            safeHide('.rental');
+            safeHide('.przypisanie');
+            safeHide('.admincard');
             safeHide('.przypisania');
+            safeHide('.userNrole');
             safeHide('.konto-admin');
             safeHide('.konto-serwis');
             safeHide('.konto-care');
@@ -146,12 +151,14 @@ document.addEventListener('DOMContentLoaded', function () {
         case 'staff':
             detailsUrl = 'staff-details.html';
             homeUrl = 'staff-list.html';
+            kontoUrl = 'Konto.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
             safeHide('.przypisanie');
             safeHide('.admincard');
+            safeHide('.userNrole');
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-care');
@@ -161,6 +168,8 @@ document.addEventListener('DOMContentLoaded', function () {
         case 'staff0':
             detailsUrl = 'staff-details.html';
             homeUrl = 'staff-list.html';
+            kontoUrl = 'Konto.html';
+            safeHide('.serwis');
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
@@ -168,7 +177,11 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.przypisanie');
             safeHide('.przypisania');
             safeHide('.admincard');
+            safeHide('.userNrole');
+            safeHide('.zglos-serwis');
+            safeHide('.nowe-zlecenie');
             safeHide('.wycena');
+            sefaHide('.serwis')
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-care');
@@ -194,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         case 'distributor':
             detailsUrl = 'distributor-details.html';
-            homeUrl = 'distributor-list.html';
+            homeUrl = 'distributor-menu.html';
             kontoUrl = 'Konto.html';
             safeHide('.ai');
             safeHide('.instrukcja');
