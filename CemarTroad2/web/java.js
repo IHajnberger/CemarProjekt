@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.userNrole');
             safeHide('.zglos-serwis');
             safeHide('.nowe-zlecenie');
+
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-care');
@@ -807,10 +808,42 @@ window.filterParts = function () {
     });
 };
 
+// 1. AUTOMATYCZNA SYNCHRONIZACJA STANU (Działa na całym dokumentach bez zmian w HTML)
+document.addEventListener('change', function (e) {
+    const target = e.target;
+    if (!target) return;
+
+    // A) Jeśli zmieniono wybór w listce <select class="part-option">
+    if (target.classList.contains('part-option')) {
+        const partItem = target.closest('.part-item');
+        if (partItem) {
+            const checkbox = partItem.querySelector('.part-checkbox');
+            if (checkbox) {
+                // Jeśli wybrano 'O' lub 'W' -> zaznacz checkbox. Jeśli zresetowano -> odznacz.
+                checkbox.checked = (target.value === 'O' || target.value === 'W');
+            }
+        }
+    }
+
+    // B) Jeśli odznaczono <input class="part-checkbox">
+    if (target.classList.contains('part-checkbox')) {
+        const partItem = target.closest('.part-item');
+        if (partItem && !target.checked) {
+            const select = partItem.querySelector('.part-option');
+            if (select) {
+                // Zresetuj listę do pierwszej opcji "Wybierz priorytet"
+                select.selectedIndex = 0;
+            }
+        }
+    }
+});
+
+// 2. CZYSTA FUNKCJA PRZELICZAJĄCA (Bez żadnych hacków i modyfikacji stanu)
 window.calculateValuation = function () {
     let totalMinutes = 0;
-    const activities = document.querySelectorAll('input[type="checkbox"][data-time]');
 
+    // Przeliczanie czasu czynności
+    const activities = document.querySelectorAll('input[type="checkbox"][data-time]');
     activities.forEach(checkbox => {
         if (checkbox.checked) {
             totalMinutes += parseInt(checkbox.getAttribute('data-time') || '0', 10);
@@ -828,6 +861,7 @@ window.calculateValuation = function () {
     const finalHours = (totalMinutes / 60).toFixed(2);
     safeSetText('summary-total-time', `${finalHours} godz.`);
 
+    // Budowanie listy części
     const partsListContainer = document.getElementById('summary-parts-list');
     if (!partsListContainer) return;
 
@@ -838,19 +872,12 @@ window.calculateValuation = function () {
         const parent = checkbox.closest('[id^="part-diffuser-"]');
         if (parent && parent.style.display === 'none') return;
 
-        const optionSelect = checkbox.closest('.part-item')?.querySelector('.part-option');
-        const optionVal = optionSelect ? optionSelect.value : '';
-
-        // AUTO-CHECK: Jeśli wybrano 'W' lub 'O', automatycznie zaznacz checkbox
-        if (optionVal === 'W' || optionVal === 'O') {
-            checkbox.checked = true;
-        }
-
-        // Teraz sprawdzamy stan checkboxa (zaznaczonego ręcznie lub automatycznie)
         if (checkbox.checked) {
             checkedPartsCount++;
-            const code = checkbox.getAttribute('data-code');
-            const name = checkbox.getAttribute('data-name');
+            const code = checkbox.getAttribute('data-code') || '';
+            const name = checkbox.getAttribute('data-name') || '';
+            const optionSelect = checkbox.closest('.part-item')?.querySelector('.part-option');
+            const optionVal = optionSelect ? optionSelect.value : '';
 
             let statusLabel = '';
             if (optionVal === 'W') statusLabel = '<span class="text-red-400 font-bold ml-1">[Wymagane]</span>';
