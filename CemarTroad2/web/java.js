@@ -132,34 +132,43 @@ document.addEventListener('DOMContentLoaded', function () {
     switch (userRole) {
         case 'client':
             detailsUrl = 'client-details.html';
-            homeUrl = 'client-list.html';
-            kontoUrl = 'konto-kilent.html'; 
+            homeUrl = 'client-list.html'; 
             safeHide('.serwis');
             safeHide('.wycena');
             safeHide('.przypisania');
+            safeHide('.konto-admin');
+            safeHide('.konto-serwis');
+            safeHide('.konto-care');
+            safeHide('.konto-dystr');
             break;
 
         case 'staff':
             detailsUrl = 'staff-details.html';
             homeUrl = 'staff-list.html';
-            kontoUrl = 'konto-serwis.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
             safeHide('.przypisania');
             safeHide('.admincard');
+            safeHide('.konto-admin');
+            safeHide('.konto-klient');
+            safeHide('.konto-care');
+            safeHide('.konto-dystr');
             break;
 
         case 'staff0':
             detailsUrl = 'staff-details.html';
             homeUrl = 'staff-list.html';
-            kontoUrl = 'konto-serwis.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
             safeHide('.przypisania');
+            safeHide('.konto-admin');
+            safeHide('.konto-klient');
+            safeHide('.konto-care');
+            safeHide('.konto-dystr');
             break;
 
         case 'caregiver':
@@ -173,29 +182,39 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.zglos-serwis');
             safeHide('.nowe-zlecenie');
             safeHide('.userNrole');
+            safeHide('.konto-admin');
+            safeHide('.konto-klient');
+            safeHide('.konto-serwis');
+            safeHide('.konto-dystr');
             break;
 
         case 'distributor':
             detailsUrl = 'distributor-details.html';
             homeUrl = 'distributor-list.html';
-            kontoUrl = 'konto-distributor.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.serwis');
             safeHide('.wycena');
+            safeHide('.konto-admin');
+            safeHide('.konto-klient');
+            safeHide('.konto-serwis');
+            safeHide('.konto-care');
             break;
 
         case 'admin':
             detailsUrl = 'admin-details.html';
             homeUrl = 'admin-home.html';
-            kontoUrl = 'konto-admin.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.serwis');
             safeHide('.wycena');
             safeHide('.rental');
+            safeHide('.konto-klient');
+            safeHide('.konto-serwis');
+            safeHide('.konto-care');
+            safeHide('.konto-dystr');
             break;
 
         default:
