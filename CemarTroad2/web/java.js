@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
             homeUrl = 'client-list.html'; 
             safeHide('.serwis');
             safeHide('.wycena');
+            safeHide('.przypisanie');
             safeHide('.przypisania');
             safeHide('.konto-admin');
             safeHide('.konto-serwis');
@@ -149,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
-            safeHide('.przypisania');
+            safeHide('.przypisanie');
             safeHide('.admincard');
             safeHide('.konto-admin');
             safeHide('.konto-klient');
@@ -164,7 +165,10 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
+            safeHide('.przypisanie');
             safeHide('.przypisania');
+            safeHide('.admincard');
+            safeHide('.wycena');
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-care');
@@ -191,11 +195,16 @@ document.addEventListener('DOMContentLoaded', function () {
         case 'distributor':
             detailsUrl = 'distributor-details.html';
             homeUrl = 'distributor-list.html';
+            kontoUrl = 'Konto.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.serwis');
             safeHide('.wycena');
+            safeHide('.rental');
+            safeHide('.zglos-serwis');
+            safeHide('.nowe-zlecenie');
+            safeHide('.userNrole');
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-serwis');
@@ -236,9 +245,6 @@ document.addEventListener('DOMContentLoaded', function () {
     safeSetHref('nav-logo', homeUrl);
     safeSetHref('nav-home', homeUrl);
     safeSetHref('nav-konto', kontoUrl);
-
-
-    // Jeśli używasz detailsUrl w jakimś przycisku w HTML, możesz też ustawić go tak:
     safeSetHref('nav-details', detailsUrl);
 
     // AUTOMATYCZNE WYWOŁANIE RENDEROWANIA DANYCH RAPORTU (SERWIS ZAKOŃCZONY)
