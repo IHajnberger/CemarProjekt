@@ -1194,31 +1194,44 @@ function sendAiMessage(e) {
 // ==========================================
 // 9. OBSŁUGA ZDJĘĆ
 // ==========================================
-if (dropZone) {
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropZone.addEventListener(eventName, (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        }, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-        }, false);
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        handlePhotoUpload(files);
-    }, false);
+// === 1. BEZPIECZNE ZMIENNE (Bez ryzyka re-deklaracji) ===
+if (typeof window.activePhotos === 'undefined') {
+    window.activePhotos = [];
 }
+window.currentPhotoContainer = null;
 
-function handlePhotoUpload(files) {
+// === 2. OBSŁUGA DRAG & DROP ===
+document.addEventListener('DOMContentLoaded', function () {
+    const dropZone = document.getElementById('drop-zone');
+    if (dropZone) {
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.add('border-amber-500', 'bg-amber-50/20');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('border-amber-500', 'bg-amber-50/20');
+            }, false);
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            if (dt && dt.files) {
+                window.handlePhotoUpload(dt.files);
+            }
+        }, false);
+    }
+});
+
+// === 3. FUNKCJE GLOBALNE (Widoczne dla zdarzeń w HTML) ===
+
+window.handlePhotoUpload = function (files) {
     const grid = document.getElementById('photos-grid');
-    if (!grid) return;
+    if (!grid || !files || !files.length) return;
 
     Array.from(files).forEach(file => {
         if (!file.type.startsWith('image/')) {
@@ -1232,17 +1245,17 @@ function handlePhotoUpload(files) {
         }
 
         const imageUrl = URL.createObjectURL(file);
-        activePhotos.push(imageUrl);
+        if (Array.isArray(window.activePhotos)) {
+            window.activePhotos.push(imageUrl);
+        }
 
         const photoDiv = document.createElement('div');
-        photoDiv.className = "photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md animate-fade-in";
+        photoDiv.className = "photo-container relative border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md cursor-pointer animate-fade-in";
+        photoDiv.onclick = function () { window.openPhotoLightbox(this); };
 
         photoDiv.innerHTML = `
-        <img src="${imageUrl}" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie serwisanta">
-        <span class="absolute bottom-1 left-1 bg-amber-600 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Serwisant</span>
-        <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
-        <span uk-icon="icon: trash; ratio: 0.75"></span>
-        </button>
+            <img src="${imageUrl}" class="w-full h-full object-cover" alt="Zdjęcie serwisanta">
+            <span class="absolute bottom-1 left-1 bg-amber-600 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Serwisant</span>
         `;
 
         grid.appendChild(photoDiv);
@@ -1255,30 +1268,48 @@ function handlePhotoUpload(files) {
             timeout: 2000
         });
     }
-}
+};
 
-function deletePhoto(button) {
-    const container = button.closest('.photo-container');
-    if (container) {
-        const img = container.querySelector('img');
-        if (img && img.src) {
-            activePhotos = activePhotos.filter(src => src !== img.src);
-        }
-        container.style.transform = 'scale(0.9)';
-        container.style.opacity = '0';
-        setTimeout(() => {
-            container.remove();
-        }, 200);
-    }
-}
+window.openPhotoLightbox = function (container) {
+    window.currentPhotoContainer = container;
+    const img = container.querySelector('img');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-function openPhotoLightbox(src) {
-    const img = document.getElementById('lightbox-img');
-    if (img && typeof UIkit !== 'undefined') {
-        img.src = src;
+    if (img && lightboxImg && typeof UIkit !== 'undefined') {
+        lightboxImg.src = img.src;
         UIkit.modal('#photo-lightbox').show();
     }
-}
+};
+
+window.deleteCurrentPhoto = function () {
+    if (!window.currentPhotoContainer) return;
+
+    const img = window.currentPhotoContainer.querySelector('img');
+    if (img && img.src && Array.isArray(window.activePhotos)) {
+        window.activePhotos = window.activePhotos.filter(src => src !== img.src);
+    }
+
+    if (typeof UIkit !== 'undefined') {
+        UIkit.modal('#photo-lightbox').hide();
+    }
+
+    window.currentPhotoContainer.style.transform = 'scale(0.8)';
+    window.currentPhotoContainer.style.opacity = '0';
+    setTimeout(() => {
+        if (window.currentPhotoContainer) {
+            window.currentPhotoContainer.remove();
+            window.currentPhotoContainer = null;
+        }
+    }, 200);
+
+    if (typeof UIkit !== 'undefined') {
+        UIkit.notification({
+            message: "<span uk-icon='trash'></span> Zdjęcie zostało usunięte.",
+            status: 'warning',
+            timeout: 2000
+        });
+    }
+};
 
 // ==========================================
 // 10. STOPER, ZAKOŃCZENIE SERWISU, LEAFLET I PDF

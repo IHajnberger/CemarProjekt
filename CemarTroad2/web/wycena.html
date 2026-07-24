@@ -336,7 +336,8 @@
                                     </label>
 
                                     <label class="activity-item flex items-center justify-between p-2.5 rounded hover:bg-gray-50 border border-gray-100 transition cursor-pointer">
-                                        <div class="flex items-center gap-3">this
+                                        <div class="flex items-center gap-3">
+                                            this
                                             <input type="checkbox" class="uk-checkbox rounded border-gray-300 text-amber-500 focus:ring-amber-500" data-time="20" data-name="Wymiana szybki wyświetlacza" onchange="calculateValuation(this)">
                                             <div>
                                                 <span class="activity-name text-base font-semibold text-gray-800">Wymiana szybki wyświetlacza</span>
@@ -872,37 +873,65 @@
                     <span uk-icon="image" class="text-amber-500"></span> Dokumentacja Fotograficzna
                 </h3>
 
-                <!-- Siatka galerii zdjęć (zarówno od klienta jak i dodanych przez serwisanta) -->
+                <!-- Siatka galerii zdjęć -->
                 <div id="photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-                    <!-- Przykładowe zdjęcie od klienta (placeholder) -->
-                    <div class="photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md">
-                        <img src="https://placehold.co/400x300/e2e8f0/475569?text=Zgłoszenie+1" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie od klienta">
+                    <!-- Przykładowe zdjęcia od klienta -->
+                    <div class="photo-container relative border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md cursor-pointer" onclick="openPhotoLightbox(this)">
+                        <img src="https://placehold.co/400x300/e2e8f0/475569?text=Zgłoszenie+1" class="w-full h-full object-cover" alt="Zdjęcie od klienta">
                         <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Od klienta</span>
-                        <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
-                            <span uk-icon="icon: trash; ratio: 0.75"></span>
-                        </button>
                     </div>
 
-                    <div class="photo-container relative group border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md">
-                        <img src="https://placehold.co/400x300/e2e8f0/475569?text=Zgłoszenie+2" class="w-full h-full object-cover cursor-pointer" onclick="openPhotoLightbox(this.src)" alt="Zdjęcie od klienta">
+                    <div class="photo-container relative border border-gray-200 rounded-lg overflow-hidden bg-gray-50 h-32 flex items-center justify-center transition hover:shadow-md cursor-pointer" onclick="openPhotoLightbox(this)">
+                        <img src="https://placehold.co/400x300/e2e8f0/475569?text=Zgłoszenie+2" class="w-full h-full object-cover" alt="Zdjęcie od klienta">
                         <span class="absolute bottom-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">Od klienta</span>
-                        <button type="button" class="delete-photo-btn absolute top-1.5 right-1.5 bg-red-600 text-white p-1.5 rounded-full shadow opacity-0 group-hover:opacity-100 transition hover:bg-red-700" onclick="deletePhoto(this)">
-                            <span uk-icon="icon: trash; ratio: 0.75"></span>
-                        </button>
                     </div>
                 </div>
 
-                <!-- Strefa dodawania własnych zdjęć przez Serwisanta (Drag & Drop) -->
-                <div class="upload-drop-zone border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 hover:bg-amber-50/10 transition cursor-pointer relative" id="drop-zone" onclick="document.getElementById('file-input').click()">
-                    <input type="file" id="file-input" class="hidden" accept="image/*" multiple onchange="handlePhotoUpload(this.files)">
+                <!-- Strefa dodawania zdjęć (Przeciągnij / Aparat / Galeria) -->
+                <div class="upload-drop-zone border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-amber-500 hover:bg-amber-50/10 transition relative" id="drop-zone">
+                    <!-- Ukryte inputy -->
+                    <input type="file" id="file-input-gallery" class="hidden" accept="image/*" multiple onchange="handlePhotoUpload(this.files)">
+                    <input type="file" id="file-input-camera" class="hidden" accept="image/*" capture="environment" onchange="handlePhotoUpload(this.files)">
+
                     <span uk-icon="icon: cloud-upload; ratio: 1.8" class="text-amber-500 mb-2"></span>
-                    <p class="text-sm font-semibold text-gray-700 m-0">Przeciągnij i upuść zdjęcia tutaj lub <span class="text-amber-600">wybierz pliki</span></p>
-                    <p class="text-xs text-gray-400 mt-1">Obsługiwane formaty: JPG, PNG, WEBP (maks. 5MB na plik)</p>
+                    <p class="text-sm font-semibold text-gray-700 m-0 mb-3">Dodaj dokumentację fotograficzną</p>
+
+                    <!-- Przyciski akcji (Aparat / Galeria) -->
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <button type="button" class="bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-2 shadow-sm" onclick="document.getElementById('file-input-camera').click()">
+                            <span uk-icon="icon: camera"></span> Zrób zdjęcie
+                        </button>
+                        <button type="button" class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-2 border border-gray-200" onclick="document.getElementById('file-input-gallery').click()">
+                            <span uk-icon="icon: folder"></span> Wybierz z galerii
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3 m-0 hidden sm:block">Możesz również przeciągnąć i upuścić pliki tutaj</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- POPUP / LIGHTBOX (Podgląd i usuwanie zdjęcia) -->
+        <div id="photo-lightbox" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body p-4 rounded-xl max-w-2xl mx-auto my-auto text-center">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+
+                <!-- Podgląd zdjęcia -->
+                <div class="max-h-[70vh] flex items-center justify-center overflow-hidden rounded-lg bg-black/5 mb-4">
+                    <img id="lightbox-img" src="" class="max-h-[70vh] w-auto object-contain rounded-lg" alt="Podgląd">
                 </div>
 
+                <!-- Działania w popupie -->
+                <div class="flex justify-between items-center gap-3 pt-2 border-t border-gray-100">
+                    <button type="button" class="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition flex items-center gap-2" onclick="deleteCurrentPhoto()">
+                        <span uk-icon="icon: trash"></span> Usuń zdjęcie
+                    </button>
+                    <button type="button" class="uk-modal-close bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium px-4 py-2 rounded-lg transition">
+                        Zamknij
+                    </button>
+                </div>
             </div>
-
         </div>
+
         <!-- Zapisz wycene -->
         <div class="mt-8 flex justify-center">
             <button id="btn-finish-service" type="button" class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-12 py-4 rounded-xl shadow-lg transition-all text-lg flex items-center gap-3">
