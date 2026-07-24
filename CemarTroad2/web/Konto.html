@@ -52,7 +52,7 @@
                 <li class="admincard"><a href="admin-maszyny.html">Karty Maszyn</a></li>
                 <li class="przypisanie"><a href="admin-przypisania.html">Przypisania</a></li>
                 <li class="userNrole"><a href="admin-uzytkownicy.html">Użytkownicy i Role</a></li>
-                <li><a id="nav-konto" href="#" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Konto</a></li>
+                <li><a href="konto.html" class="uk-text-bold" style="color: var(--primary-yellow-hover);">Konto</a></li>
 
             </ul>
 
@@ -60,146 +60,666 @@
                 <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
             </div>
         </div>
+
     </nav>
 
-    <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
-        <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
-            <div>
-                <span class="uk-label uk-label-warning uk-margin-small-bottom">Panel Administratora</span>
-                <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+    <div class="konto-admin">
+        <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
+                <div>
+                    <span class="uk-label uk-label-warning uk-margin-small-bottom">Panel Administratora</span>
+                    <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+                </div>
+                <button class="uk-button cemar-btn-secondary" onclick="goBackMenu()">
+                    <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do spisu maszyn
+                </button>
             </div>
-            <button class="uk-button cemar-btn-secondary" onclick="goBackMenu()">
-                <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do spisu maszyn
-            </button>
-        </div>
 
-        <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-expand@m">
+            <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-expand@m">
 
-                <!-- Dane profilowe -->
-                <div class="cemar-card uk-margin-medium-bottom">
-                    <div class="yellow-accent-bar"></div>
-                    <div class="uk-padding">
-                        <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
-                            <div class="account-avatar" id="acc-initials">AD</div>
-                            <div>
-                                <span class="uk-label account-role-badge uk-margin-small-bottom" style="background-color: #fef3c7; color: #b45309;">Administrator</span>
-                                <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Administrator Główny</h3>
-                                <p class="uk-text-meta uk-margin-remove-top" id="acc-company">CEMAR Sp. z o.o. Centrala</p>
+                    <!-- Dane profilowe admin -->
+
+                    <div class="cemar-card uk-margin-medium-bottom">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                                <div class="account-avatar" id="acc-initials">AD</div>
+                                <div>
+                                    <span class="uk-label account-role-badge uk-margin-small-bottom" style="background-color: #fef3c7; color: #b45309;">Administrator</span>
+                                    <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Administrator Główny</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top" id="acc-company">CEMAR Sp. z o.o. Centrala</p>
+                                </div>
                             </div>
+
+                            <hr>
+
+                            <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                        <input class="uk-input" id="acc-first-name" type="text" value="Administrator">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                        <input class="uk-input" id="acc-last-name" type="text" value="Systemu">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                        <input class="uk-input" id="acc-email" type="email" value="admin@cemar.pro">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                        <input class="uk-input" id="acc-phone" type="tel" value="+48 123 456 789">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-company-name">Nazwa Podmiotu / Działu</label>
+                                        <input class="uk-input" id="acc-company-name" type="text" value="CEMAR Sp. z o.o. - Dział Administracji i Serwisu">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-address">Adres Centrali</label>
+                                        <input class="uk-input" id="acc-address" type="text" value="ul. Przemysłowa 10, 50-001 Wrocław">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                                </div>
+                            </form>
                         </div>
-
-                        <hr>
-
-                        <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
-                            <div class="uk-grid-small" uk-grid>
-                                <div class="uk-width-1-2@s">
-                                    <label class="uk-form-label" for="acc-first-name">Imię</label>
-                                    <input class="uk-input" id="acc-first-name" type="text" value="Administrator">
-                                </div>
-                                <div class="uk-width-1-2@s">
-                                    <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
-                                    <input class="uk-input" id="acc-last-name" type="text" value="Systemu">
-                                </div>
-                                <div class="uk-width-1-2@s">
-                                    <label class="uk-form-label" for="acc-email">Adres e-mail</label>
-                                    <input class="uk-input" id="acc-email" type="email" value="admin@cemar.pro">
-                                </div>
-                                <div class="uk-width-1-2@s">
-                                    <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
-                                    <input class="uk-input" id="acc-phone" type="tel" value="+48 123 456 789">
-                                </div>
-                                <div class="uk-width-1-1">
-                                    <label class="uk-form-label" for="acc-company-name">Nazwa Podmiotu / Działu</label>
-                                    <input class="uk-input" id="acc-company-name" type="text" value="CEMAR Sp. z o.o. - Dział Administracji i Serwisu">
-                                </div>
-                                <div class="uk-width-1-1">
-                                    <label class="uk-form-label" for="acc-address">Adres Centrali</label>
-                                    <input class="uk-input" id="acc-address" type="text" value="ul. Przemysłowa 10, 50-001 Wrocław">
-                                </div>
-                            </div>
-                            <div class="uk-margin-medium-top uk-text-right">
-                                <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
-                            </div>
-                        </form>
                     </div>
+
+
+                    <!-- Zmiana hasła -->
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <h4 class="uk-margin-remove-top">Zmiana hasła administratora</h4>
+                            <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe bezpieczne hasło dostępowe do konta administracyjnego.</p>
+
+                            <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                        <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Zmiana hasła -->
-                <div class="cemar-card">
-                    <div class="yellow-accent-bar"></div>
-                    <div class="uk-padding">
-                        <h4 class="uk-margin-remove-top">Zmiana hasła administratora</h4>
-                        <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe bezpieczne hasło dostępowe do konta administracyjnego.</p>
+                <!-- Panel boczny -->
 
-                        <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
-                            <div class="uk-grid-small" uk-grid>
-                                <div class="uk-width-1-1">
-                                    <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
-                                    <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
-                                </div>
-                                <div class="uk-width-1-2@s">
-                                    <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
-                                    <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
-                                </div>
-                                <div class="uk-width-1-2@s">
-                                    <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
-                                    <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
-                                </div>
-                            </div>
-                            <div class="uk-margin-medium-top uk-text-right">
-                                <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Panel boczny -->
-            <div class="uk-width-1-3@m">
-                <div class="cemar-card">
-                    <div class="yellow-accent-bar"></div>
-                    <div class="uk-padding">
-                        <p class="account-section-title uk-margin-remove-top">Uprawnienia Administracyjne</p>
-                        <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
-                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
-                                <span class="uk-text-muted">Poziom dostępu</span>
-                                <span class="uk-text-bold uk-text-warning">Pełny (Root)</span>
-                            </li>
-                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
-                                <span class="uk-text-muted">ID Administratora</span>
-                                <span class="uk-text-bold">ADM-0001</span>
-                            </li>
-                            <li class="uk-flex uk-flex-between uk-margin-small-bottom">
-                                <span class="uk-text-muted">Liczba maszyn w bazie</span>
-                                <span class="uk-text-bold">128</span>
-                            </li>
-                            <li class="uk-flex uk-flex-between">
-                                <span class="uk-text-muted">Ostatnie logowanie</span>
-                                <span class="uk-text-bold">Dzisiaj, 08:30</span>
-                            </li>
-                        </ul>
+                <div class="uk-width-1-3@m">
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <p class="account-section-title uk-margin-remove-top">Uprawnienia Administracyjne</p>
+                            <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Poziom dostępu</span>
+                                    <span class="uk-text-bold uk-text-warning">Pełny (Root)</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">ID Administratora</span>
+                                    <span class="uk-text-bold">ADM-0001</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Liczba maszyn w bazie</span>
+                                    <span class="uk-text-bold">128</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Ostatnie logowanie</span>
+                                    <span class="uk-text-bold">Dzisiaj, 08:30</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Dolny pas -->
-    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
-        <div class="uk-container uk-flex uk-flex-middle">
-            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
-                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
-                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+    <div class="konto-klient">
+        <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
+                <div>
+                    <span class="uk-label uk-label-warning uk-margin-small-bottom">Moje konto</span>
+                    <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+                </div>
+                <button class="uk-button cemar-btn-secondary" onclick="window.location.href='client-list.html'">
+                    <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+                </button>
+            </div>
+
+            <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-expand@m">
+
+                    <!-- Dane profilowe -->
+                    <div class="cemar-card uk-margin-medium-bottom">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                                <div class="account-avatar" id="acc-initials">AK</div>
+                                <div>
+                                    <span class="uk-label account-role-badge uk-margin-small-bottom">Klient</span>
+                                    <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Anna Kowalczyk</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top" id="acc-company">Zakłady Piekarnicze "Kowalczyk" Sp. z o.o.</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                        <input class="uk-input" id="acc-first-name" type="text" value="Anna">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                        <input class="uk-input" id="acc-last-name" type="text" value="Kowalczyk">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                        <input class="uk-input" id="acc-email" type="email" value="a.kowalczyk@piekarnia-kowalczyk.pl">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                        <input class="uk-input" id="acc-phone" type="tel" value="+48 601 234 567">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-company-name">Nazwa firmy</label>
+                                        <input class="uk-input" id="acc-company-name" type="text" value="Zakłady Piekarnicze &quot;Kowalczyk&quot; Sp. z o.o.">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-address">Adres</label>
+                                        <input class="uk-input" id="acc-address" type="text" value="ul. Piekarska 12, 58-260 Bielawa">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Zmiana hasła -->
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <h4 class="uk-margin-remove-top">Zmiana hasła</h4>
+                            <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe hasło do swojego konta.</p>
+
+                            <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                        <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Panel boczny -->
+                <div class="uk-width-1-3@m">
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <p class="account-section-title uk-margin-remove-top">Podsumowanie konta</p>
+                            <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Typ konta</span>
+                                    <span class="uk-text-bold">Klient</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Numer klienta</span>
+                                    <span class="uk-text-bold">KL-00842</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Przypisane maszyny</span>
+                                    <span class="uk-text-bold">6</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Konto od</span>
+                                    <span class="uk-text-bold">03.2022</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
-    <script src="java.js"></script>
-    
+    <div class="konto-serwis">
+        <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
+                <div>
+                    <span class="uk-label uk-label-warning uk-margin-small-bottom">Moje konto</span>
+                    <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+                </div>
+                <button class="uk-button cemar-btn-secondary" onclick="window.location.href='staff-list.html'">
+                    <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót
+                </button>
+            </div>
+
+            <div class="uk-grid-medium" uk-grid>
+                <div class="uk-width-expand@m">
+
+                    <!-- Dane profilowe -->
+                    <div class="cemar-card uk-margin-medium-bottom">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                                <div class="account-avatar" id="acc-initials">PN</div>
+                                <div>
+                                    <span class="uk-label account-role-badge uk-margin-small-bottom">Serwisant</span>
+                                    <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Piotr Nowak</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top" id="acc-company">Dział Serwisu Technicznego</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                        <input class="uk-input" id="acc-first-name" type="text" value="Piotr">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                        <input class="uk-input" id="acc-last-name" type="text" value="Nowak">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                        <input class="uk-input" id="acc-email" type="email" value="p.nowak@cemar-serwis.pl">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                        <input class="uk-input" id="acc-phone" type="tel" value="+48 512 987 654">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-company-name">Dział / Zespół</label>
+                                        <input class="uk-input" id="acc-company-name" type="text" value="Dział Serwisu Technicznego">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-region">Obsługiwany region</label>
+                                        <input class="uk-input" id="acc-region" type="text" value="Dolny Śląsk">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Zmiana hasła -->
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <h4 class="uk-margin-remove-top">Zmiana hasła</h4>
+                            <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe hasło do swojego konta.</p>
+
+                            <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                        <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Panel boczny -->
+                <div class="uk-width-1-3@m">
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <p class="account-section-title uk-margin-remove-top">Podsumowanie konta</p>
+                            <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Typ konta</span>
+                                    <span class="uk-text-bold">Serwisant</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Numer pracownika</span>
+                                    <span class="uk-text-bold">SW-0117</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Zrealizowane serwisy</span>
+                                    <span class="uk-text-bold">128</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Konto od</span>
+                                    <span class="uk-text-bold">09.2021</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="konto-dystr">
+        <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
+                <div>
+                    <span class="uk-label uk-label-warning uk-margin-small-bottom">Panel Dystrybutora</span>
+                    <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+                </div>
+                <button class="uk-button cemar-btn-secondary" onclick="goBackMenu()">
+                    <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do spisu maszyn
+                </button>
+            </div>
+
+            <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-expand@m">
+
+                    <!-- Dane profilowe dystrybutora -->
+
+                    <div class="cemar-card uk-margin-medium-bottom">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                                <div class="account-avatar" id="acc-initials">AD</div>
+                                <div>
+                                    <span class="uk-label account-role-badge uk-margin-small-bottom" style="background-color: #fef3c7; color: #b45309;">Dystrybutor</span>
+                                    <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Dystrybutor Główny</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top" id="acc-company">CEMAR Sp. z o.o. Centrala</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                        <input class="uk-input" id="acc-first-name" type="text" value="Dystrybutor">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                        <input class="uk-input" id="acc-last-name" type="text" value="Główny">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                        <input class="uk-input" id="acc-email" type="email" value="dystrybutor@cemar.pro">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                        <input class="uk-input" id="acc-phone" type="tel" value="+48 123 456 789">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-company-name">Nazwa Podmiotu / Działu</label>
+                                        <input class="uk-input" id="acc-company-name" type="text" value="CEMAR Sp. z o.o. - Dział Dystrybucji">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-address">Adres Centrali</label>
+                                        <input class="uk-input" id="acc-address" type="text" value="ul. Przemysłowa 10, 50-001 Wrocław">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <!-- Zmiana hasła -->
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <h4 class="uk-margin-remove-top">Zmiana hasła dystrybutora</h4>
+                            <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe bezpieczne hasło dostępowe do konta dystrybutora.</p>
+
+                            <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                        <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Panel boczny -->
+
+                <div class="uk-width-1-3@m">
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <p class="account-section-title uk-margin-remove-top">Uprawnienia Dystrybutora</p>
+                            <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Poziom dostępu</span>
+                                    <span class="uk-text-bold uk-text-warning">Pełny (Root)</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">ID Dystrybutora</span>
+                                    <span class="uk-text-bold">DYS-0001</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Liczba maszyn w bazie</span>
+                                    <span class="uk-text-bold">128</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Ostatnie logowanie</span>
+                                    <span class="uk-text-bold">Dzisiaj, 08:30</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+ 
+
+    <div class="konto-care">
+        <div class="uk-container uk-margin-medium-top uk-margin-large-bottom">
+            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin-small-bottom uk-flex-wrap" style="gap: 12px;">
+                <div>
+                    <span class="uk-label uk-label-warning uk-margin-small-bottom">Panel Opiekuna</span>
+                    <h2 class="uk-margin-remove-top uk-text-bold">Dane profilowe</h2>
+                </div>
+                <button class="uk-button cemar-btn-secondary" onclick="goBackMenu()">
+                    <span uk-icon="arrow-left" class="uk-margin-small-right"></span> Powrót do spisu maszyn
+                </button>
+            </div>
+
+            <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-expand@m">
+
+                    <!-- Dane profilowe opiekuna -->
+
+                    <div class="cemar-card uk-margin-medium-bottom">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <div class="uk-flex uk-flex-middle uk-margin-medium-bottom" style="gap: 18px;">
+                                <div class="account-avatar" id="acc-initials">AD</div>
+                                <div>
+                                    <span class="uk-label account-role-badge uk-margin-small-bottom" style="background-color: #fef3c7; color: #b45309;">Opiekun</span>
+                                    <h3 class="uk-margin-remove-top uk-margin-remove-bottom" id="acc-fullname">Opiekun Systemu</h3>
+                                    <p class="uk-text-meta uk-margin-remove-top" id="acc-company">CEMAR Sp. z o.o. Centrala</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <form class="uk-form-stacked uk-margin-medium-top" onsubmit="return saveAccountProfile(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-first-name">Imię</label>
+                                        <input class="uk-input" id="acc-first-name" type="text" value="Opiekun">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-last-name">Nazwisko</label>
+                                        <input class="uk-input" id="acc-last-name" type="text" value="Systemu">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-email">Adres e-mail</label>
+                                        <input class="uk-input" id="acc-email" type="email" value="opiekun@cemar.pro">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-phone">Numer telefonu</label>
+                                        <input class="uk-input" id="acc-phone" type="tel" value="+48 123 456 789">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-company-name">Nazwa Podmiotu / Działu</label>
+                                        <input class="uk-input" id="acc-company-name" type="text" value="CEMAR Sp. z o.o. - Dział Administracji i Serwisu">
+                                    </div>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-address">Adres Centrali</label>
+                                        <input class="uk-input" id="acc-address" type="text" value="ul. Przemysłowa 10, 50-001 Wrocław">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zapisz zmiany</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <!-- Zmiana hasła -->
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <h4 class="uk-margin-remove-top">Zmiana hasła opiekuna</h4>
+                            <p class="uk-text-meta uk-margin-small-top uk-margin-medium-bottom">Ustaw nowe bezpieczne hasło dostępowe do konta administracyjnego.</p>
+
+                            <form class="uk-form-stacked" onsubmit="return changeAccountPassword(event)">
+                                <div class="uk-grid-small" uk-grid>
+                                    <div class="uk-width-1-1">
+                                        <label class="uk-form-label" for="acc-pass-current">Obecne hasło</label>
+                                        <input class="uk-input" id="acc-pass-current" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-new">Nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-new" type="password" placeholder="••••••••">
+                                    </div>
+                                    <div class="uk-width-1-2@s">
+                                        <label class="uk-form-label" for="acc-pass-repeat">Powtórz nowe hasło</label>
+                                        <input class="uk-input" id="acc-pass-repeat" type="password" placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <div class="uk-margin-medium-top uk-text-right">
+                                    <button type="submit" class="uk-button cemar-btn-primary">Zmień hasło</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Panel boczny -->
+
+                <div class="uk-width-1-3@m">
+                    <div class="cemar-card">
+                        <div class="yellow-accent-bar"></div>
+                        <div class="uk-padding">
+                            <p class="account-section-title uk-margin-remove-top">Uprawnienia Administracyjne</p>
+                            <ul class="uk-list uk-margin-remove-top" style="font-size: 14px;">
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Poziom dostępu</span>
+                                    <span class="uk-text-bold uk-text-warning">Pełny (Root)</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">ID Opiekuna</span>
+                                    <span class="uk-text-bold">OP-0001</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between uk-margin-small-bottom">
+                                    <span class="uk-text-muted">Liczba maszyn w bazie</span>
+                                    <span class="uk-text-bold">128</span>
+                                </li>
+                                <li class="uk-flex uk-flex-between">
+                                    <span class="uk-text-muted">Ostatnie logowanie</span>
+                                    <span class="uk-text-bold">Dzisiaj, 08:30</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <!-- Dolny pas -->
+            <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+                <div class="uk-container uk-flex uk-flex-middle">
+                    <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                        <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                        <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UIkit JS -->
+            <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+            <script src="java.js"></script>
+
 </body>
 </html>
