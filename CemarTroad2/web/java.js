@@ -217,9 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
     safeSetHref('nav-logo', homeUrl);
     safeSetHref('nav-home', homeUrl);
     safeSetHref('nav-konto', kontoUrl);
-
-
-    // Jeśli używasz detailsUrl w jakimś przycisku w HTML, możesz też ustawić go tak:
     safeSetHref('nav-details', detailsUrl);
 
     // AUTOMATYCZNE WYWOŁANIE RENDEROWANIA DANYCH RAPORTU (SERWIS ZAKOŃCZONY)
