@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             kontoUrl = 'konto-kilent.html'; 
             safeHide('.serwis');
             safeHide('.wycena');
-            safeHide('.przypisania');
+            safeHide('.przypisanie');
             break;
 
         case 'staff':
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
-            safeHide('.przypisania');
+            safeHide('.przypisanie');
             safeHide('.admincard');
             break;
 
@@ -159,7 +159,9 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.rental');
-            safeHide('.przypisania');
+            safeHide('.przypisanie');
+            safeHide('.admincard');
+            safeHide('.wycena');
             break;
 
         case 'caregiver':
@@ -176,14 +178,18 @@ document.addEventListener('DOMContentLoaded', function () {
             break;
 
         case 'distributor':
-            detailsUrl = 'distributor-details.html';
-            homeUrl = 'distributor-list.html';
-            kontoUrl = 'konto-distributor.html';
+            detailsUrl = 'staff-details.html';
+            homeUrl = 'distributor-menu.html';
+            kontoUrl = 'Konto.html';
             safeHide('.ai');
             safeHide('.instrukcja');
             safeHide('.pomoc');
             safeHide('.serwis');
             safeHide('.wycena');
+            safeHide('.rental');
+            safeHide('.zglos-serwis');
+            safeHide('.nowe-zlecenie');
+            safeHide('.userNrole');
             break;
 
         case 'admin':

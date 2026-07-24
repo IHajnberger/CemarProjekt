@@ -38,7 +38,7 @@
                 <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
             </a>
         </div>
-        
+
         <div class="uk-navbar-right uk-margin-right w-lewo">
             <ul class="uk-navbar-nav">
                 <li>
@@ -77,8 +77,18 @@
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
-                <h4 class="uk-text-bold uk-margin-medium-bottom">Twoje aktywne maszyny</h4>
-
+                <!-- popup pod rental-->
+                <div class="uk-position-relative">
+                    <h4 class="uk-text-bold uk-margin-medium-bottom">
+                        Twoje aktywne maszyny
+                    </h4>
+                    <button class="uk-button cemar-btn-secondary uk-position-top-right uk-margin-small-top uk-margin-small-right"
+                            style="z-index: 1000; background-color: #ef4444; color: white; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.3); float:right"
+                            uk-toggle="target: #map-info-modal"
+                            title="Informacje o możliwości wypożyczenia maszyny" uk-tooltip>
+                        Rental
+                    </button>
+                </div>
                 <!-- Wyszukiwany / Rozwijany Panel Sortowania nad Tabelą -->
                 <div id="sort-panel" class="uk-margin-bottom">
                     <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap gap-2">
@@ -163,6 +173,24 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL / POPUP INFORMACYJNY -->
+    <div id="map-info-modal" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="border-radius: 8px; border-top: 5px solid #E59008;">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+
+            <h3 class="uk-modal-title uk-text-bold" style="font-size: 18px; color: #1e293b;">
+                <span></span>
+                Zainteresowany wypożyczeniem maszyny?
+            </h3>
+
+            <div class="uk-margin-top uk-text-small" style="line-height: 1.6; color: #475569;">
+                <p class="uk-margin-small-bottom">
+                    Więcej informacji znajdziesz na stronie <a href="rental.html" target="_blank" rel="noopener" style="color: #E59008; font-weight: 600;">Rental</a>.
+                </p>
             </div>
         </div>
     </div>
