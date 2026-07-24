@@ -162,6 +162,9 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.przypisanie');
             safeHide('.admincard');
             safeHide('.wycena');
+            safeHide('.serwis');
+            safeHide('.zglos-serwis');
+            safeHide('.nowe-zlecenie');
             break;
 
         case 'caregiver':
@@ -202,6 +205,10 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.serwis');
             safeHide('.wycena');
             safeHide('.rental');
+            break;
+
+        case 'n1':
+            homeUrl = 'n-menu.html';
             break;
 
         default:
@@ -798,16 +805,22 @@ window.calculateValuation = function () {
     let checkedPartsCount = 0;
 
     document.querySelectorAll('.part-checkbox').forEach(checkbox => {
-        if (checkbox.checked) {
-            const parent = checkbox.closest('[id^="part-diffuser-"]');
-            if (parent && parent.style.display === 'none') return;
+        const parent = checkbox.closest('[id^="part-diffuser-"]');
+        if (parent && parent.style.display === 'none') return;
 
+        const optionSelect = checkbox.closest('.part-item')?.querySelector('.part-option');
+        const optionVal = optionSelect ? optionSelect.value : '';
+
+        // AUTO-CHECK: Jeśli wybrano 'W' lub 'O', automatycznie zaznacz checkbox
+        if (optionVal === 'W' || optionVal === 'O') {
+            checkbox.checked = true;
+        }
+
+        // Teraz sprawdzamy stan checkboxa (zaznaczonego ręcznie lub automatycznie)
+        if (checkbox.checked) {
             checkedPartsCount++;
             const code = checkbox.getAttribute('data-code');
             const name = checkbox.getAttribute('data-name');
-
-            const optionSelect = checkbox.closest('.part-item')?.querySelector('.part-option');
-            const optionVal = optionSelect ? optionSelect.value : 'W';
 
             let statusLabel = '';
             if (optionVal === 'W') statusLabel = '<span class="text-red-400 font-bold ml-1">[Wymagane]</span>';
@@ -1862,6 +1875,7 @@ window.generateReportText = function () {
     }
 
     const machineNum = document.getElementById('form-machine-num')?.value || '---';
+    const prog = document.getElementById('form-prog')?.value || '---';
     const client = document.getElementById('form-client')?.value || '---';
     const hours = document.getElementById('form-hours')?.value || '---';
     const technician = document.getElementById('form-technician')?.value || '---';
@@ -1888,6 +1902,7 @@ window.generateReportText = function () {
         `=== KARTA PRACY SERWISOWEJ ===
 Model: ${modelName}
 Nr maszyny: ${machineNum}
+Aktualny program: ${prog}
 Klient: ${client}
 MTH: ${hours} mth
 Serwisant: ${technician}
