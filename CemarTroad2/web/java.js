@@ -2244,3 +2244,30 @@ function changeAccountPassword(e) {
     UIkit.notification({ message: "<span uk-icon='check'></span> Hasło zostało zmienione pomyślnie.", status: 'success', pos: 'top-center' });
     return false;
 }
+
+// ==========================================
+// ELEMNET: FILTROWANIE NUMERÓW MASZYN W TABELI
+// ==========================================
+function filterMachines() {
+    const input = document.getElementById('machine-search-input');
+    if (!input) return;
+
+    // Pobranie wpisanej wartości, usunięcie zbędnych spacji i zmiana na małe litery
+    const query = input.value.trim().toLowerCase();
+    
+    // Pobranie wszystkich wierszy tabeli urządzeń
+    const rows = document.querySelectorAll('#devices-table tbody tr');
+
+    rows.forEach(row => {
+        // Czytamy numer maszyny z atrybutu data-machine lub z całej zawartości wiersza
+        const machineNum = (row.getAttribute('data-machine') || '').toLowerCase();
+        const rowText = row.innerText.toLowerCase();
+
+        // Jeśli pole wyszukiwania jest puste LUB wiersz zawiera szukaną frazę
+        if (!query || machineNum.includes(query) || rowText.includes(query)) {
+            row.style.display = ''; // Pokaż wiersz
+        } else {
+            row.style.display = 'none'; // Ukryj wiersz
+        }
+    });
+}
