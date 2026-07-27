@@ -34,7 +34,7 @@ Serwisant z poziomu tego widoku ma dostęp do:
     - *Uwag i zaleceń serwisanta* - z funkcją Speech to Text
     - *Dokumentacja Fotograficzna* -  z możliwością dodania zdjęcia z galerii lub zrobienia zdjęcia na bieżąco; dodane zdjęcie można w każdej chwili usunąć. 
   
-  &nbsp; &nbsp; &nbsp; &nbsp; Wycena została przystosowana do urządzeń mobilnych w ramach płynniejszego użytkowania przez serwisanta.
+  &nbsp; &nbsp; &nbsp; &nbsp; Wycena została przystosowana do urządzeń mobilnych (pokroju tabletów) w ramach płynniejszego użytkowania przez serwisanta.
   - **Serwis** - strona umożliwiająca edytowanie istniejących wycen
   - **Konto użytkownika** - dostęp do dane personalnych oraz możliwość zmiany hasła
 
@@ -50,20 +50,34 @@ Serwisant z poziomu tego widoku ma dostęp do:
 * ***Dla Opiekuna klienta:***
   - **Baza maszyn klientów** - z możliwością sortowania oraz wyszukiwania poszczególnych danych. Każdy wpis posiada możliwość Przejścia do karty maszyny
   - **Karta ze szczegółami maszyny** - strona zawiera podstawowe dane, a także pełne logi operacyjne urządzenia podzielone na: <br>
+SERWIS, ZGŁOSZENIA, ERROR CODE oraz ODPALENIA REFERENCYJNE. <br> <br>
+Serwisant z poziomu tego widoku ma dostęp do:
+    - *Szczegółowych logów maszyny* (parametrów pobieranych podczas pracy urządzenia) 
+    - *Dokładny wgląd w poszczególne logi operacyjne* - złożone zgłoszenia, odbyte serwisy, a także dane szczegółów odpalenia referencyjnego 
+  - **Rental** - podgląd w opcje rentowania maszyn, na tą chwilę pusty
+  - **Wycena** - zawierająca pełny formularz dla serwisanta (podgląd)
+  - **Zarządzanie Kartami Maszyn** - strona czysto administracyjna, pozwala na tworzenie nowych kart oraz edycję starych 
+  - **Przypisanie Dystrybutora, Klienta i Serwisanta** - udostępnia formularz powiązań pozwalający na dodanie maszyny do klienta, a także na wgląd do wszystkich statusów powiązań maszyn oraz serwisantów (również z opcją przypisania i edytowania)
+  - **Konto użytkownika** - dostęp do dane personalnych oraz możliwość zmiany hasła
+  
+* ***Dla Dystrybutora:***
+  - **Baza maszyn klientów** - z możliwością sortowania oraz wyszukiwania poszczególnych danych. Każdy wpis posiada możliwość Przejścia do karty maszyny
+  - **Karta ze szczegółami maszyny** - strona zawiera podstawowe dane, a także pełne logi operacyjne urządzenia podzielone na: <br>
 SERWIS, ZGŁOSZENIA, ERROR CODE oraz ODPALENIA REFERENCYJNE. <br>
 Serwisant z poziomu tego widoku ma dostęp do:
     - *Szczegółowych logów maszyny* (parametrów pobieranych podczas pracy urządzenia) 
     - *Dokładny wgląd w poszczególne logi operacyjne* - złożone zgłoszenia, odbyte serwisy, a także dane szczegółów odpalenia referencyjnego 
-  - **Rental**
-  - **Wycena** - zawierająca pełny formularz dla serwisanta (podgląd)
-  - **Zarządzanie Kartami Maszyn**
-  - **Przypisanie Dystrybutora, Klienta i Serwisanta**
-
-* ***Dla Dystrybutora:***
-
+  - **Zarządzanie Kartami Maszyn** - strona czysto administracyjna, pozwala na tworzenie nowych kart oraz edycję starych 
+  - **Przypisanie Dystrybutora, Klienta i Serwisanta** - udostępnia formularz powiązań pozwalający na dodanie maszyny do klienta, a także na wgląd do wszystkich statusów powiązań maszyn oraz serwisantów (również z opcją przypisania i edytowania)
+  - **Konto użytkownika** - dostęp do dane personalnych oraz możliwość zmiany hasła
+  
 * ***Dla Administratora:***
+  - **Spis wszystkich maszyn w systemie** - z opcją edytowania oraz wyszukiwania i sortowania
+  - **Zarządzanie Kartami Maszyn** - strona czysto administracyjna, pozwala na tworzenie nowych kart oraz edycję starych 
+  - **Przypisanie Dystrybutora, Klienta i Serwisanta** - udostępnia formularz powiązań pozwalający na dodanie maszyny do klienta, a także na wgląd do wszystkich statusów powiązań maszyn oraz serwisantów (również z opcją przypisania i edytowania)
+  - **Edycja i Tworzenie Kont Użytkowników** 
+  - **Konto użytkownika** - dostęp do dane personalnych oraz możliwość zmiany hasła
 </details>
-
 
 ## Budowa projektu:
 <details>
@@ -88,7 +102,8 @@ stan z dnia: 27.07.2026 godzina: 8:30
 https://cemartroad2.netlify.app/
 
 Znowu padło continuous deployment. Nienawidzę chciwych wielkich korporacji z debilną polityką.
-## Pierwszy model - Figma:
+
+## Pierwszy model strony - Figma:
 ### Model UI:
 https://www.figma.com/design/UVaKYIwzOtoJYkFxFBSIW0/Cemar?node-id=0-1&t=WUInL01daNpfY4rf-1
 
