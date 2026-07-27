@@ -110,6 +110,7 @@ https://www.figma.com/design/UVaKYIwzOtoJYkFxFBSIW0/Cemar?node-id=0-1&t=WUInL01d
 
 ## Raporty:
 <details>
-<summary> tba </summary>
+<summary> wip </summary>
+https://www.overleaf.com/7428683916sfmnmwbkwghn#c93bdb
 </details>
 
