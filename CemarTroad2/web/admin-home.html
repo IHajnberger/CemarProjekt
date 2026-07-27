@@ -84,20 +84,70 @@
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-small-bottom">Spis Wszystkich Maszyn</h4>
+
+                <!-- Wyszukiwany / Rozwijany Panel Sortowania nad Tabelą -->
+                <div id="sort-panel" class="uk-margin-bottom" style="display: none;">
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap gap-2">
+                        <div>
+                            <span class="uk-text-meta uk-text-uppercase uk-text-bold">Opcje Sortowania:</span>
+                            <span id="sort-column-label" class="uk-badge uk-margin-small-left" style="background:#E59008;">---</span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle gap-2">
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('asc')">
+                                <span uk-icon="icon: arrow-up; ratio: 0.8"></span> Rosnąco (A-Z / 0-9)
+                            </button>
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('desc')">
+                                <span uk-icon="icon: arrow-down; ratio: 0.8"></span> Malejąco (Z-A / 9-0)
+                            </button>
+                            <button class="uk-close-small uk-margin-small-left" type="button" uk-close onclick="closeSortPanel()"></button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-divider uk-table-hover cemar-table">
+                    <table id="devices-table" class="uk-table uk-table-divider uk-table-hover cemar-table">
                         <thead>
                             <tr>
-                                <th>Numer Maszyny</th>
-                                <th>Model</th>
-                                <th>Nr Karty</th>
-                                <th>Nr Telefonu Klienta</th>
-                                <th>Przypisany Klient</th>
+                                <th class="sort-th" onclick="openSortPanel('machineNum', 'Numer Maszyny')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Numer Maszyny</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+                                <th class="sort-th" onclick="openSortPanel('model', 'Model')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Model</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+                                <th class="sort-th" onclick="openSortPanel('cardNum', 'Nr Karty')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Nr Karty</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+                                <th class="sort-th" onclick="openSortPanel('phone', 'Nr Telefonu Klienta')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Nr Telefonu Klienta</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+                                <th class="sort-th" onclick="openSortPanel('client', 'Przypisany Klient')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Przypisany Klient</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+                                <!-- Kolumna Akcje pozostawiona bez możliwości sortowania -->
                                 <th class="uk-text-center">Akcje</th>
                             </tr>
                         </thead>
                         <tbody id="all-machines-tbody">
-                            <tr>
+                            <tr data-machineNum="E59008"
+                                data-model="City"
+                                data-cardNum="8842-X"
+                                data-phone="+48 600 111 222"
+                                data-client="P.H.U. Bud-Max">
                                 <td><span class="uk-text-bold">E59008</span></td>
                                 <td>City</td>
                                 <td><span class="uk-label uk-label-warning">8842-X</span></td>
@@ -107,7 +157,11 @@
                                     <button class="uk-button cemar-btn-secondary uk-button-small" onclick="window.location.href='admin-maszyny.html?id=E59008'">Edytuj</button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr data-machineNum="E62441"
+                                data-model="T-35"
+                                data-cardNum="9912-A"
+                                data-phone="+48 600 333 444"
+                                data-client="Trans-Met Sp. z o.o.">
                                 <td><span class="uk-text-bold">E62441</span></td>
                                 <td>T-35</td>
                                 <td><span class="uk-label uk-label-warning">9912-A</span></td>
@@ -117,7 +171,11 @@
                                     <button class="uk-button cemar-btn-secondary uk-button-small" onclick="window.location.href='admin-maszyny.html?id=E62441'">Edytuj</button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr data-machineNum="C77212"
+                                data-model="City"
+                                data-cardNum="1043-B"
+                                data-phone="+48 600 555 666"
+                                data-client="Kowalski Transport S.A.">
                                 <td><span class="uk-text-bold">C77212</span></td>
                                 <td>City</td>
                                 <td><span class="uk-label uk-label-warning">1043-B</span></td>
