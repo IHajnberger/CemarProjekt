@@ -234,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.pomoc');
             safeHide('.serwis');
             safeHide('.wycena');
+            safeHide('.pomoc');
             safeHide('.rental');
             safeHide('.konto-klient');
             safeHide('.konto-serwis');
@@ -330,24 +331,36 @@ const activeFilters = {
     blad: true
 };
 
+
 function sortData(order) {
     if (!currentSortColumn) return;
 
-    const tbody = document.querySelector('#devices-table tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));
+    // Szukamy tabeli z ID #devices-table lub domyślnego tbody logów
+    const tbody = document.querySelector('#devices-table tbody') || document.getElementById('p5-logs-tbody');
+    if (!tbody) return;
 
-    rows.sort((a, b) => {
-        let valA = a.getAttribute(`data-${currentSortColumn}`) || '';
-        let valB = b.getAttribute(`data-${currentSortColumn}`) || '';
+    // 1. Pobieramy tylko główne wiersze (pomijamy rozwijane szczegóły przy sortowaniu)
+    const allRows = Array.from(tbody.querySelectorAll('tr'));
+    const mainRows = allRows.filter(r => !r.classList.contains('log-details-row'));
 
-        // 1. Obsługa sortowania dat (format YYYY-MM-DD)
+    // 2. Parujemy każdy wiersz główny z jego wierszem szczegółów (jeśli istnieje)
+    const rowPairs = mainRows.map(row => {
+        const next = row.nextElementSibling;
+        const details = (next && next.classList.contains('log-details-row')) ? next : null;
+        return { row, details };
+    });
+
+    // 3. Sortowanie według Twojej dotychczasowej logiki
+    rowPairs.sort((pairA, pairB) => {
+        let valA = pairA.row.getAttribute(`data-${currentSortColumn}`) || '';
+        let valB = pairB.row.getAttribute(`data-${currentSortColumn}`) || '';
+
         if (currentSortColumn === 'date') {
             let dateA = new Date(valA).getTime() || 0;
             let dateB = new Date(valB).getTime() || 0;
             return order === 'asc' ? dateA - dateB : dateB - dateA;
         }
 
-        // 2. Walidacja czy pełna wartość jest liczbą (zapobiega ucinaniu tekstów przez parseFloat)
         let cleanA = valA.replace(/\s+/g, '');
         let cleanB = valB.replace(/\s+/g, '');
         let isNumA = /^-?\d+(\.\d+)?$/.test(cleanA);
@@ -364,8 +377,13 @@ function sortData(order) {
         }
     });
 
-    // Ponowne wstawienie posortowanych wierszy do tabeli
-    rows.forEach(row => tbody.appendChild(row));
+    // 4. Ponowne wstawienie posortowanych par do tabeli
+    rowPairs.forEach(pair => {
+        tbody.appendChild(pair.row);
+        if (pair.details) {
+            tbody.appendChild(pair.details);
+        }
+    });
 }
 // SPEECH-TO-TEXT (DYKTOWANIE NOTATKI)
 let speechRecognition = null;

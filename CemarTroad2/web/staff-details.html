@@ -133,29 +133,79 @@
             <div class="uk-padding">
                 <h4 class="uk-text-bold uk-margin-medium-bottom">Pełne logi operacyjne maszyny</h4>
 
+                <!-- Wyszukiwany / Rozwijany Panel Sortowania nad Tabelą -->
+                <div id="sort-panel" class="uk-margin-bottom" style="display: none;">
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-flex-wrap gap-2">
+                        <div>
+                            <span class="uk-text-meta uk-text-uppercase uk-text-bold">Opcje Sortowania:</span>
+                            <span id="sort-column-label" class="uk-badge uk-margin-small-left" style="background:#E59008;">---</span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle gap-2">
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('asc')">
+                                <span uk-icon="icon: arrow-up; ratio: 0.8"></span> Rosnąco (A-Z / 0-9)
+                            </button>
+                            <button class="uk-button uk-button-default uk-button-small" onclick="sortData('desc')">
+                                <span uk-icon="icon: arrow-down; ratio: 0.8"></span> Malejąco (Z-A / 9-0)
+                            </button>
+                            <button class="uk-close-small uk-margin-small-left" type="button" uk-close onclick="closeSortPanel()"></button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="uk-overflow-auto">
-                    <table class="uk-table uk-table-hover uk-table-divider cemar-table">
+                    <table id="devices-table" class="uk-table uk-table-hover uk-table-divider cemar-table">
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Typ zdarzenia</th>
-                                <th>Użytkownik</th>
-                                <th>Czas całkowity działania</th>
-                                <th>Czas od serwisu</th>
+                                <th class="sort-th" onclick="openSortPanel('date', 'Data')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Data</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <th class="uk-text-center" style="width: 280px;">Typ zdarzenia</th>
+
+                                <th class="sort-th" onclick="openSortPanel('user', 'Użytkownik')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Użytkownik</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <th class="sort-th" onclick="openSortPanel('totalTime', 'Całkowity czas działania')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Całkowity czas działania</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
+
+                                <th class="sort-th" onclick="openSortPanel('timeService', 'Całkowity od serwisu')">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <span class="sort-txt">Całkowity od serwisu</span>
+                                        <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody id="p5-logs-tbody">
 
                             <!-- ERROR -->
-                            <tr class="log-row" data-type="blad" data-ref="ERR-0x43" onclick="toggleLogDetails(this)">
-                                <td>10.07.2026 14:22</td>
+                            <tr class="log-row"
+                                data-type="blad"
+                                data-ref="ERR-0x43"
+                                data-date="2026-07-10T14:22"
+                                data-user="Jan Kowalski"
+                                data-totalTime="1245"
+                                data-timeService="82"
+                                onclick="toggleLogDetails(this)">
+                                <td class="date">10.07.2026</td>
                                 <td>
                                     <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-danger">Error Code</span>
                                 </td>
-                                <td>Jan Kowalski</td>
-                                <td>1 245 mth</td>
-                                <td>82 mth</td>
+                                <td class="user">Jan Kowalski</td> 
+                                <td class="totalTime uk-text-center">1 245 mth</td>
+                                <td class="timeService uk-text-center">82 mth</td>
                             </tr>
                             <tr class="log-details-row" style="display:none;">
                                 <td colspan="5">
@@ -186,20 +236,26 @@
                             </tr>
 
                             <!-- ZGŁOSZENIE -->
-                            <tr class="log-row" data-type="zgloszenie" data-ref="SRV-2026-071" onclick="toggleLogDetails(this)">
-                                <td>01.07.2026 10:00</td>
+                            <tr class="log-row"
+                                data-type="zgloszenie"
+                                data-ref="SRV-2026-071"
+                                data-date="2026-07-01T10:00"
+                                data-user="Jan Kowalski"
+                                data-totalTime="1100"
+                                data-timeService="19"
+                                onclick="toggleLogDetails(this)">
+                                <td class="date">01.07.2026</td>
                                 <td>
                                     <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-primary">Zgłoszenie serwisowe</span>
                                 </td>
-                                <td>Jan Kowalski</td>
-                                <td>1 100 mth</td>
-                                <td>19 mth</td>
+                                <td class="user">Jan Kowalski</td>
+                                <td class="totalTime uk-text-center">1 100 mth</td>
+                                <td class="timeService uk-text-center">19 mth</td>
                             </tr>
                             <tr class="log-details-row" style="display:none;">
                                 <td colspan="5">
                                     <div class="log-details-content">
                                         <h5 class="uk-margin-small-bottom">Zgłoszenie operatora</h5>
-
                                         <p>
                                             Operator zgłosił zauważalny spadek ciśnienia
                                             na zaworze głównym podczas pracy pod obciążeniem.
@@ -228,20 +284,26 @@
                             </tr>
 
                             <!-- SERWIS -->
-                            <tr class="log-row" data-type="serwis" data-ref="SRV-2026-0705" onclick="toggleLogDetails(this)">
-                                <td>05.07.2026 12:00</td>
+                            <tr class="log-row"
+                                data-type="serwis"
+                                data-ref="SRV-2026-0705"
+                                data-date="2026-07-05T12:00"
+                                data-user="Piotr Nowak (Serwisant)"
+                                data-totalTime="1163"
+                                data-timeService="0"
+                                onclick="toggleLogDetails(this)">
+                                <td class="date">05.07.2026</td>
                                 <td>
                                     <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-warning">Serwis</span>
                                 </td>
-                                <td>Piotr Nowak (Serwisant)</td>
-                                <td>1 163 mth</td>
-                                <td>0 mth</td>
+                                <td class="user">Piotr Nowak (Serwisant)</td>
+                                <td class="totalTime uk-text-center">1 163 mth</td>
+                                <td class="timeService uk-text-center">0 mth</td>
                             </tr>
                             <tr class="log-details-row" style="display:none;">
                                 <td colspan="5">
                                     <div class="log-details-content">
                                         <h5 class="uk-margin-small-bottom">Przegląd okresowy</h5>
-
                                         <p>
                                             Wykonano pełny przegląd zgodnie z harmonogramem
                                             producenta.
@@ -267,20 +329,26 @@
                             </tr>
 
                             <!-- ODPALENIE -->
-                            <tr class="log-row" data-type="odpalenie" data-ref="ODP-2026-0709" onclick="toggleLogDetails(this)">
-                                <td>09.07.2026 08:15</td>
+                            <tr class="log-row"
+                                data-type="odpalenie"
+                                data-ref="ODP-2026-0709"
+                                data-date="2026-07-09T08:15"
+                                data-user="Jan Kowalski"
+                                data-totalTime="1237"
+                                data-timeService="74"
+                                onclick="toggleLogDetails(this)">
+                                <td class="date">09.07.2026</td>
                                 <td>
                                     <span uk-icon="chevron-down" class="chevron-icon"></span><span class="uk-label uk-label-success">Odpalenie referencyjne</span>
                                 </td>
-                                <td>Jan Kowalski</td>
-                                <td>1 237 mth</td>
-                                <td>74 mth</td>
+                                <td class="user">Jan Kowalski</td>
+                                <td class="totalTime uk-text-center">1 237 mth</td>
+                                <td class="timeService uk-text-center">74 mth</td>
                             </tr>
                             <tr class="log-details-row" style="display:none;">
                                 <td colspan="5">
                                     <div class="log-details-content">
                                         <h5 class="uk-margin-small-bottom">Referencyjny rozruch pompy wtryskowej</h5>
-
                                         <p>
                                             Procedura rozruchu została wykonana poprawnie.
                                             Wszystkie parametry pracy silnika mieściły się
@@ -303,7 +371,7 @@
                                         </div>
 
                                         <button class="uk-button uk-button-small cemar-btn-outline-accent goto-page-btn" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;" onclick="event.stopPropagation(); goToEventPage('odpalenie', 'SRV-2026-0705')">
-                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right" ></span> Przejdź do szczegółów odpalenia
+                                            <span uk-icon="icon: link; ratio: 0.9" class="uk-margin-small-right"></span> Przejdź do szczegółów odpalenia
                                         </button>
                                     </div>
                                 </td>
@@ -314,21 +382,20 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Dolny pas -->
-    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
-        <div class="uk-container uk-flex uk-flex-middle">
-            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
-                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
-                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+        <!-- Dolny pas -->
+        <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+            <div class="uk-container uk-flex uk-flex-middle">
+                <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                    <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                    <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
-    <script src="java.js"></script>
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+        <script src="java.js"></script>
 </body>
 </html>
