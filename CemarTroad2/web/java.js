@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-klient');
             safeHide('.konto-care');
             safeHide('.konto-dystr');
+            safeHide('.powiadomienia');
             break;
 
         case 'staff0':
@@ -180,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.userNrole');
             safeHide('.zglos-serwis');
             safeHide('.nowe-zlecenie');
-
+            safeHide('.powiadomienia');
             safeHide('.konto-admin');
             safeHide('.konto-klient');
             safeHide('.konto-care');
@@ -202,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-klient');
             safeHide('.konto-serwis');
             safeHide('.konto-dystr');
+            safeHide('.powiadomienia');
             break;
 
         case 'distributor':
@@ -221,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-klient');
             safeHide('.konto-serwis');
             safeHide('.konto-care');
+            safeHide('.powiadomienia');
             break;
 
         case 'admin':
@@ -236,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-serwis');
             safeHide('.konto-care');
             safeHide('.konto-dystr');
+            safeHide('.powiadomienia');
             break;
 
         case 'n1':

@@ -46,10 +46,51 @@
                         <span class="uk-text-bold" style="color: var(--primary-yellow-hover);" uk-icon="icon: home; ratio: 1.1;"></span>
                     </a>
                 </li>
-
                 <li><a href="instrukcje.html">Instrukcje</a></li>
                 <li><a href="asystent-ai.html">Asystent AI</a></li>
                 <li><a href="konto.html">Konto</a></li>
+                <!-- Powiadomienia w menu z dropdownem -->
+                <li>
+                    <a href="#notifications-section" title="Powiadomienia" uk-tooltip>
+                        <div class="uk-inline">
+                            <span uk-icon="icon: bell; ratio: 1.1"></span>
+                            <span class="uk-badge" style="background-color: #ef4444; font-size: 10px; position: absolute; top: -5px; right: -10px; padding: 2px 5px;">3</span>
+                        </div>
+                    </a>
+                    <!-- Rozwijana lista szybkich powiadomień -->
+                    <div uk-dropdown="mode: click; pos: bottom-right; animation: uk-animation-slide-top-small" class="uk-card uk-card-body uk-card-default custom-scroll" style="width: 320px; padding: 15px; border-top: 3px solid #E59008; max-height: 380px; overflow-y: auto;">
+                        <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                            <h5 class="uk-margin-remove uk-text-bold" style="font-size: 14px;">Powiadomienia</h5>
+                            <span class="uk-badge" style="background:#E59008; font-size: 10px;">3 nowe</span>
+                        </div>
+                        <ul class="uk-list uk-list-divider uk-text-small uk-margin-remove-bottom">
+                            <li class="uk-padding-small uk-padding-remove-horizontal">
+                                <div class="uk-flex uk-flex-between">
+                                    <span class="uk-text-bold uk-text-warning">Zbliża się serwis</span>
+                                    <span class="uk-text-meta" style="font-size: 10px;">Dziś, 10:15</span>
+                                </div>
+                                <p class="uk-margin-remove-top uk-margin-remove-bottom uk-text-muted" style="font-size: 12px;">Maszyna E59008 wymaga serwisu za 10h pracy.</p>
+                            </li>
+                            <li class="uk-padding-small uk-padding-remove-horizontal">
+                                <div class="uk-flex uk-flex-between">
+                                    <span class="uk-text-bold uk-text-danger">Wykryto błąd</span>
+                                    <span class="uk-text-meta" style="font-size: 10px;">Wczoraj</span>
+                                </div>
+                                <p class="uk-margin-remove-top uk-margin-remove-bottom uk-text-muted" style="font-size: 12px;">Niskie ciśnienie oleju na urządzeniu E62441.</p>
+                            </li>
+                            <li class="uk-padding-small uk-padding-remove-horizontal">
+                                <div class="uk-flex uk-flex-between">
+                                    <span class="uk-text-bold uk-text-success">Nowy raport</span>
+                                    <span class="uk-text-meta" style="font-size: 10px;">2 dni temu</span>
+                                </div>
+                                <p class="uk-margin-remove-top uk-margin-remove-bottom uk-text-muted" style="font-size: 12px;">Dodano raport z przeglądu okresowego.</p>
+                            </li>
+                        </ul>
+                        <div class="uk-margin-small-top uk-text-center">
+                            <a href="#" class="uk-button uk-button-link uk-text-meta" style="color: #E59008; font-weight: 600;">Zobacz wszystkie powiadomienia</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
 
             <div class="uk-navbar-item w-lewo">
@@ -59,6 +100,7 @@
     </nav>
 
     <div class="uk-container uk-margin-large-top main-container">
+        <!-- Wizytówka Klienta -->
         <div class="cemar-card uk-margin-bottom">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
@@ -74,6 +116,7 @@
             </div>
         </div>
 
+        <!-- Tabela Maszyn -->
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">
@@ -112,7 +155,6 @@
                     <table class="uk-table uk-table-divider uk-table-hover cemar-table" id="devices-table">
                         <thead>
                             <tr>
-                                <!-- Nagłówek z sortowaniem: Data Dodania -->
                                 <th class="sort-th" onclick="openSortPanel('date', 'Data Dodania')">
                                     <div class="uk-flex uk-flex-between uk-flex-middle">
                                         <span class="sort-txt">Data Dodania</span>
@@ -120,7 +162,6 @@
                                     </div>
                                 </th>
 
-                                <!-- Nagłówek z sortowaniem: Numer Maszyny -->
                                 <th class="sort-th uk-text-center" onclick="openSortPanel('machine', 'Numer Maszyny')">
                                     <div class="uk-flex uk-flex-between uk-flex-middle">
                                         <span class="sort-txt">Numer Maszyny</span>
@@ -128,7 +169,6 @@
                                     </div>
                                 </th>
 
-                                <!-- Nagłówek z sortowaniem: Typ Maszyny -->
                                 <th class="sort-th uk-text-center" onclick="openSortPanel('type', 'Typ Maszyny')">
                                     <div class="uk-flex uk-flex-between uk-flex-middle">
                                         <span class="sort-txt">Typ Maszyny</span>
@@ -136,7 +176,6 @@
                                     </div>
                                 </th>
 
-                                <!-- Nagłówek z sortowaniem: Czas od ostatniego serwisu -->
                                 <th class="sort-th uk-text-center" onclick="openSortPanel('service', 'Czas od ostatniego serwisu')">
                                     <div class="uk-flex uk-flex-between uk-flex-middle">
                                         <span class="sort-txt">Czas od ostatniego serwisu</span>
@@ -144,12 +183,10 @@
                                     </div>
                                 </th>
 
-                                <!-- Akcje (bez możliwości sortowania) -->
                                 <th class="uk-text-center">Akcje</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dane w atrybutach data-* pozwalają na dokładne i szybkie sortowanie -->
                             <tr data-date="2026-04-12" data-machine="E59008" data-type="City" data-service="30">
                                 <td>12.04.2026</td>
                                 <td class="uk-text-center"><span class="uk-text-bold">E59008</span></td>
@@ -183,7 +220,6 @@
             <button class="uk-modal-close-default" type="button" uk-close></button>
 
             <h3 class="uk-modal-title uk-text-bold" style="font-size: 18px; color: #1e293b;">
-                <span></span>
                 Zainteresowany wypożyczeniem maszyny?
             </h3>
 
