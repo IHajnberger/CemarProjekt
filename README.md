@@ -77,6 +77,7 @@ Serwisant z poziomu tego widoku ma dostęp do:
   - **Przypisanie Dystrybutora, Klienta i Serwisanta** - udostępnia formularz powiązań pozwalający na dodanie maszyny do klienta, a także na wgląd do wszystkich statusów powiązań maszyn oraz serwisantów (również z opcją przypisania i edytowania)
   - **Edycja i Tworzenie Kont Użytkowników** 
   - **Konto użytkownika** - dostęp do dane personalnych oraz możliwość zmiany hasła
+  - **Ma dostęp do wszystkich funkcji reszty klas**
 </details>
 
 ## Budowa projektu:
