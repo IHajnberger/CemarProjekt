@@ -2289,3 +2289,29 @@ function filterMachines() {
         }
     });
 }
+
+// ==========================================
+// OBSŁUGA PRZEDŁUŻENIA WAŻNOŚCI KARTY MASZYNY
+// ==========================================
+
+// Placeholder akcji przedłużenia
+window.extendCardPlaceholder = function() {
+    if (typeof UIkit !== 'undefined') {
+        UIkit.notification({
+            message: "<span uk-icon='icon: info'></span> Moduł płatności i przedłużenia subskrypcji będzie dostępny wkrótce.",
+            status: 'primary',
+            pos: 'top-center',
+            timeout: 3500
+        });
+    } else {
+        alert("Moduł przedłużenia subskrypcji będzie dostępny wkrótce.");
+    }
+};
+
+// Funkcja pomocnicza, byś w przyszłości mógł dynamicznie wstrzykiwać właściwą datę z bazy
+window.setDeactivationDate = function(dateString) {
+    // Korzystamy z istniejącej bezpiecznej funkcji z Twojego kodu
+    if (typeof safeSetText === 'function') {
+        safeSetText('machine-deactivation-date', dateString);
+    }
+};

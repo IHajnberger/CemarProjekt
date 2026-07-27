@@ -152,6 +152,25 @@
             </div>
         </div>
 
+        <!-- PASEK DEZAKTYWACJI KARTY -->
+        <div class="cemar-card uk-margin-top uk-margin-bottom uk-flex uk-flex-middle uk-flex-between" style="padding: 15px 20px; border-left: 4px solid #ef4444; background-color: #fffcfc;">
+            <div class="uk-flex uk-flex-column">
+                <span class="uk-text-uppercase uk-text-bold uk-text-muted" style="font-size: 11px; letter-spacing: 0.5px;">
+                    Ważność karty maszyny
+                </span>
+                <div class="uk-text-bold uk-flex uk-flex-middle uk-margin-small-top" style="color: #991b1b; font-size: 14px;">
+                    <span uk-icon="icon: warning; ratio: 0.9" class="uk-margin-small-right"></span>
+                    Dezaktywacja zaplanowana na:
+                    <span id="machine-deactivation-date" class="uk-margin-small-left text-red-600 font-mono">31.08.2026</span>
+                </div>
+            </div>
+            <div>
+                <button onclick="extendCardPlaceholder()" class="cemar-btn-primary uk-button uk-button-small" style="background-color: #ef4444; color: #fff; border: none; border-radius: 6px;">
+                    <span uk-icon="icon: refresh; ratio: 0.8" class="uk-margin-small-right"></span> Przedłuż ważność
+                </button>
+            </div>
+        </div>
+
         <!-- Sekcja Historii Serwisów z Error Codes oraz Wydrukami z Serwisu -->
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>

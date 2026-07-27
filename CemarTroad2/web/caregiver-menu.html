@@ -69,6 +69,80 @@
             </div>
         </div>
 
+        <!-- PANEL POWIADOMIEŃ OD SERWISANTÓW -->
+        <div class="cemar-card uk-margin-medium-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-medium-bottom">
+                    <div class="uk-flex uk-flex-middle">
+                        <span uk-icon="icon: bell; ratio: 1.2" class="uk-margin-small-right" style="color: #E59008;"></span>
+                        <h4 class="uk-text-bold uk-margin-remove">Aktywność Serwisantów</h4>
+                    </div>
+                    <span class="uk-badge" style="background-color: #ef4444; border-radius: 20px; padding: 4px 10px;">3 nowe powiadomienia</span>
+                </div>
+
+                <!-- Lista powiadomień (UIkit) -->
+                <ul class="uk-list uk-list-divider uk-margin-remove-bottom">
+
+                    <!-- Powiadomienie 1: Zakończenie pracy -->
+                    <li class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal hover:bg-gray-50 transition rounded">
+                        <div class="uk-margin-right">
+                            <span uk-icon="icon: check; ratio: 1.2" style="color: #10b981;"></span>
+                        </div>
+                        <div class="uk-width-expand">
+                            <p class="uk-margin-remove uk-text-small">
+                                <strong class="uk-text-emphasis">Michał Serwisowy</strong> zakończył przegląd maszyny <a href="#" class="uk-link-text uk-text-bold" style="color: #E59008;">167</a>. Sprzęt jest w pełni sprawny.
+                            </p>
+                            <span class="uk-text-meta" style="font-size: 11px;">Dzisiaj, 10:15</span>
+                        </div>
+                        <div class="uk-margin-left">
+                            <span class="uk-label" style="background-color: #10b981; border-radius: 20px; font-size: 10px;">Zrealizowano</span>
+                        </div>
+                    </li>
+
+                    <!-- Powiadomienie 2: Wymagana akcja (np. wycena) -->
+                    <li class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal hover:bg-gray-50 transition rounded">
+                        <div class="uk-margin-right">
+                            <span uk-icon="icon: warning; ratio: 1.2" style="color: #f59e0b;"></span>
+                        </div>
+                        <div class="uk-width-expand">
+                            <p class="uk-margin-remove uk-text-small">
+                                <strong class="uk-text-emphasis">Tomasz Naprawczy</strong> zdiagnozował usterkę maszyny <a href="#" class="uk-link-text uk-text-bold" style="color: #E59008;">521</a>. Wymagana akceptacja kosztorysu.
+                            </p>
+                            <span class="uk-text-meta" style="font-size: 11px;">Dzisiaj, 09:30</span>
+                        </div>
+                        <div class="uk-margin-left">
+                            <span class="uk-label" style="background-color: #f59e0b; border-radius: 20px; font-size: 10px;">Wymaga akcji</span>
+                        </div>
+                    </li>
+
+                    <!-- Powiadomienie 3: Informacja ogólna -->
+                    <li class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal hover:bg-gray-50 transition rounded">
+                        <div class="uk-margin-right">
+                            <span uk-icon="icon: clock; ratio: 1.2" class="uk-text-muted"></span>
+                        </div>
+                        <div class="uk-width-expand">
+                            <p class="uk-margin-remove uk-text-small">
+                                <strong class="uk-text-emphasis">Jan Kowalski</strong> przyjął zgłoszenie serwisowe dla nowej maszyny w systemie.
+                            </p>
+                            <span class="uk-text-meta" style="font-size: 11px;">Wczoraj, 15:45</span>
+                        </div>
+                        <div class="uk-margin-left">
+                            <span class="uk-label" style="background-color: #6b7280; border-radius: 20px; font-size: 10px;">Informacja</span>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <!-- Przycisk rozwijający starsze powiadomienia -->
+                <div class="uk-text-center uk-margin-small-top">
+                    <button class="uk-button uk-button-text" style="color: #E59008; font-size: 12px; font-weight: 600;">
+                        Zobacz pełną historię pracy serwisu (12)
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">

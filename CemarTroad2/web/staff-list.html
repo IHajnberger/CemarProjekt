@@ -131,16 +131,17 @@
                                     </div>
                                 </th>
 
-                                <th class="sort-th" onclick="openSortPanel('client', 'Użytkownik (klient)')">
+                                <!-- Zmieniony nagłówek, by odzwierciedlał nową zawartość -->
+                                <th class="sort-th" onclick="openSortPanel('client', 'Klient / Dystrybutor / Opiekun')">
                                     <div class="uk-flex uk-flex-between uk-flex-middle">
-                                        <span class="sort-txt">Użytkownik (klient)</span>
+                                        <span class="sort-txt">Klient / Dystrybutor / Opiekun</span>
                                         <span class="sort-badge" uk-icon="icon: more-vertical; ratio: 1"></span>
                                     </div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dane w atrybutach data-* pozwalają na dokładne i szybkie sortowanie -->
+                            <!-- Wiersz 1 -->
                             <tr data-machine="167" data-card="52616" data-phone="532211310" data-client="Firma 1 (Jan Kowalski)">
                                 <td class="uk-text-center">
                                     <span class="uk-label" style="background-color: #10b981; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 12px; display: inline-block; min-width: 140px; text-align: center;">Sprawna</span>
@@ -164,8 +165,23 @@
                                 </td>
                                 <td> 52616 </td>
                                 <td> 532 211 310 </td>
-                                <td>Firma 1 (Jan Kowalski)</td>
+                                <!-- Zaktualizowana komórka z podinformacjami -->
+                                <td>
+                                    <div class="uk-text-emphasis uk-text-bold" style="font-size: 15px;">Firma 1 (Jan Kowalski)</div>
+                                    <div class="uk-text-meta uk-margin-small-top" style="font-size: 12px; line-height: 1.4;">
+                                        <div class="uk-flex uk-flex-middle">
+                                            <span uk-icon="icon: cart; ratio: 0.7" class="uk-margin-small-right"></span>
+                                            <span>Dystrybutor: <strong class="uk-text-emphasis">TechBud Sp. z o.o.</strong></span>
+                                        </div>
+                                        <div class="uk-flex uk-flex-middle uk-margin-small-top" style="margin-top: 4px !important;">
+                                            <span uk-icon="icon: user; ratio: 0.7" class="uk-margin-small-right"></span>
+                                            <span>Opiekun: <strong class="uk-text-emphasis">Piotr Wiśniewski</strong></span>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
+
+                            <!-- Wiersz 2 -->
                             <tr data-machine="521" data-card="52356" data-phone="532211310" data-client="Firma 2 (Marek Nowak)">
                                 <td class="uk-text-center">
                                     <span class="uk-label" style="background-color: #f59e0b; color: #fff; font-weight: 700; padding: 6px 18px; border-radius: 30px; text-transform: uppercase; font-size: 12px; display: inline-block; min-width: 140px; text-align: center;">Wymaga przeglądu</span>
@@ -189,7 +205,20 @@
                                 </td>
                                 <td> 52356 </td>
                                 <td> 695 166 503 </td>
-                                <td>Firma 2 (Marek Nowak)</td>
+                                <!-- Zaktualizowana komórka z podinformacjami -->
+                                <td>
+                                    <div class="uk-text-emphasis uk-text-bold" style="font-size: 15px;">Firma 2 (Marek Nowak)</div>
+                                    <div class="uk-text-meta uk-margin-small-top" style="font-size: 12px; line-height: 1.4;">
+                                        <div class="uk-flex uk-flex-middle">
+                                            <span uk-icon="icon: cart; ratio: 0.7" class="uk-margin-small-right"></span>
+                                            <span>Dystrybutor: <strong class="uk-text-emphasis">Cemar Direct</strong></span>
+                                        </div>
+                                        <div class="uk-flex uk-flex-middle uk-margin-small-top" style="margin-top: 4px !important;">
+                                            <span uk-icon="icon: user; ratio: 0.7" class="uk-margin-small-right"></span>
+                                            <span>Opiekun: <strong class="uk-text-emphasis">Anna Nowak</strong></span>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

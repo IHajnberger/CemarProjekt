@@ -764,6 +764,282 @@
                         </div>
                     </div>
                 </div>
+                <!-- AKCJA SERWISOWA (ZWIJANE OKIENKO) -->
+                <div class="cemar-card flex-1 mt-4">
+                    <div class="p-4">
+                        <!-- Inicjalizacja akordeonu UIkit, domyślnie zwinięty -->
+                        <ul uk-accordion>
+                            <li>
+                                <a class="uk-accordion-title text-sm font-bold text-gray-700 bg-gray-100 px-3 py-2 rounded border-l-4 border-amber-500 uppercase tracking-wide flex items-center justify-between transition hover:bg-gray-200" href="#">
+                                    Akcja Serwisowa
+                                </a>
+                                <div class="uk-accordion-content mt-4">
+
+                                    <!-- Kontener na pozycje akcji serwisowej -->
+                                    <div class="space-y-2.5">
+                                        <span class="text-sm text-gray-500">Wybierz dołączane podzespoły</span>
+                                    </div>
+                                    <!-- WYSZUKIWARKA CZĘŚCI -->
+                                    <div class="relative w-full md:w-48">
+                                        <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-400">
+                                            <span uk-icon="icon: search; ratio: 0.85"></span>
+                                        </span>
+                                        <input id="parts-search" type="text" class="w-full text-sm border border-gray-300 rounded pl-8 pr-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-amber-500" placeholder="Szukaj części..." oninput="filterParts()">
+                                    </div>
+
+
+                                    <!-- Lista części do wyboru -->
+                                    <div id="parts-container" class="space-y-4 custom-scroll overflow-y-auto max-h-[10000px] pr-2">
+
+                                        <!-- Podzespoły Główne i Złącza -->
+                                        <div class="part-section">
+                                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Elementy Konstrukcyjne i Elektryka</span>
+                                            <div class="space-y-2">
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="8250" data-name="Hermetyczne złącze" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">8250</span>
+                                                        <span class="part-name text-gray-700">Złącze hermetyczne</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7901" data-name="Zapięcie płaskie" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7901</span>
+                                                        <span class="part-name text-gray-700">Zapięcie płaskie</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7601" data-name="Wkład filtra" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7601</span>
+                                                        <span class="part-name text-gray-700">Wkład filtra paliwa</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="8103" data-name="Płytka main" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">8103</span>
+                                                        <span class="part-name text-gray-700">Płytka main sterownik</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="2208" data-name="Zaślepka małego filtra" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">2208</span>
+                                                        <span class="part-name text-gray-700">Zaślepka filtra</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7604" data-name="Filtr powietrza" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7604</span>
+                                                        <span class="part-name text-gray-700">Filtr powietrza</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Podzespoły Turbiny -->
+                                        <div class="part-section">
+                                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Komponenty Turbiny</span>
+                                            <div class="space-y-2">
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4511" data-name="Oś turbiny (4511/4511-C)" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4511</span>
+                                                        <span class="part-name text-gray-700">Oś turbiny</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4512" data-name="Wirnik gorący" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4512</span>
+                                                        <span class="part-name text-gray-700">Wirnik gorący</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4513" data-name="Kierownica turbiny" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4513</span>
+                                                        <span class="part-name text-gray-700">Kierownica turbiny</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4521" data-name="Koło kompresora" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4521</span>
+                                                        <span class="part-name text-gray-700">Koło kompresora</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4531" data-name="Łożyska" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4531</span>
+                                                        <span class="part-name text-gray-700">Łożyska</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Dynamiczne części Dyfuzora zależne od modelu -->
+                                        <div class="part-section">
+                                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Dyfuzory (Dostosowane do Modelu)</span>
+                                            <div class="space-y-2">
+                                                <!-- Dyfuzor T35 -->
+                                                <div id="part-diffuser-t35" class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1210" data-name="Dyfuzor T35" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1210</span>
+                                                        <span class="part-name text-gray-700">Dyfuzor T35</span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Dyfuzory City -->
+                                                <div id="part-diffuser-city-24" class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1240" data-name="Dyfuzor City 24cm" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1240</span>
+                                                        <span class="part-name text-gray-700">Dyfuzor City 24cm</span>
+                                                    </div>
+                                                </div>
+
+                                                <div id="part-diffuser-city-30" class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1250" data-name="Dyfuzor City 30cm" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1250</span>
+                                                        <span class="part-name text-gray-700">Dyfuzor City 30cm</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1220" data-name="Dyfuzor proF" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1220</span>
+                                                        <span class="part-name text-gray-700">Dyfuzor proF</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1160" data-name="Przedłużki osłona dyfuzora" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1160</span>
+                                                        <span class="part-name text-gray-700">Przedłużki osłona dyfuzora</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1102" data-name="Pierścień dyfuzora do ramy" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1102</span>
+                                                        <span class="part-name text-gray-700">Pierścień dyfuzora do ramy</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Pozostałe komponenty i akcesoria -->
+                                        <div class="part-section">
+                                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Starter i Akcesoria</span>
+                                            <div class="space-y-2">
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4110" data-name="Starter MOD" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4110</span>
+                                                        <span class="part-name text-gray-700">Starter MOD</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4110-1" data-name="Zestaw naprawczy startera" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4110-1</span>
+                                                        <span class="part-name text-gray-700">Zestaw naprawczy startera</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4132" data-name="Wyrzutnik na oś startera" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4132</span>
+                                                        <span class="part-name text-gray-700">Wyrzutnik na oś startera</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="4131" data-name="Wyrzutnik startera" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">4131</span>
+                                                        <span class="part-name text-gray-700">Wyrzutnik startera</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="1512" data-name="Blokada kierownicy" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">1512</span>
+                                                        <span class="part-name text-gray-700">Blokada kierownicy</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7851" data-name="Uchwyty rączki" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7851</span>
+                                                        <span class="part-name text-gray-700">Uchwyty rączki</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7752" data-name="Koła tylne obrotowe" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7752</span>
+                                                        <span class="part-name text-gray-700">Koła tylne obrotowe</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7124" data-name="MOD pompka paliwo" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7124</span>
+                                                        <span class="part-name text-gray-700">MOD pompka paliwo</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="7105" data-name="Pompka paliwo" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">7105</span>
+                                                        <span class="part-name text-gray-700">Pompka paliwa standard</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="part-item flex items-center justify-between p-2 rounded hover:bg-gray-50 border border-gray-100 text-base">
+                                                    <div class="flex items-center gap-2">
+                                                        <input type="checkbox" class="part-checkbox uk-checkbox" data-code="5104" data-name="Świeca żarowa" onchange="calculateValuation()">
+                                                        <span class="part-code font-mono text-xs bg-gray-100 px-1 py-0.5 rounded text-gray-600">5104</span>
+                                                        <span class="part-name text-gray-700">Świeca żarowa</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
 
