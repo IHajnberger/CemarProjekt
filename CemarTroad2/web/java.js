@@ -234,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.pomoc');
             safeHide('.serwis');
             safeHide('.wycena');
+            safeHide('.pomoc');
             safeHide('.rental');
             safeHide('.konto-klient');
             safeHide('.konto-serwis');
