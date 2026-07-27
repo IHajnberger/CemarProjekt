@@ -75,11 +75,11 @@
                         <label class="uk-form-label">Wyszukaj numer maszyny:</label>
                         <div class="uk-inline uk-width-1-1">
                             <span class="uk-form-icon" uk-icon="icon: search"></span>
-                            <input class="uk-input" type="text" placeholder="wprowadź numer maszyny (np. 235)">
+                            <input id="machine-search-input" class="uk-input" type="text" placeholder="wprowadź numer maszyny (np. 235)" oninput="filterMachines()">
                         </div>
                     </div>
                     <div class="uk-width-auto@s uk-flex uk-flex-bottom">
-                        <button class="uk-button cemar-btn-primary">Szukaj</button>
+                        <button class="uk-button cemar-btn-primary" onclick="filterMachines()">Szukaj</button>
                     </div>
                 </div>
 
