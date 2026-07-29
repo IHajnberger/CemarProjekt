@@ -98,19 +98,16 @@ Serwisant z poziomu tego widoku ma dostęp do:
 </details>
 
 ## Podgląd strony:
-stan z dnia: 27.07.2026 godzina: 8:30
+stan z dnia: 29.07.2026 godzina: 8:16
 
 https://cemartroad2.netlify.app/
-
-Znowu padło continuous deployment. Nienawidzę chciwych wielkich korporacji z debilną polityką.
 
 ## Pierwszy model strony - Figma:
 ### Model UI:
 https://www.figma.com/design/UVaKYIwzOtoJYkFxFBSIW0/Cemar?node-id=0-1&t=WUInL01daNpfY4rf-1
 
 ## Raporty:
-<details>
-<summary> wip </summary>
-https://www.overleaf.com/7428683916sfmnmwbkwghn#c93bdb
-</details>
+### Raport 1
+https://www.overleaf.com/read/xvwthmdjvvbb#706416
+
 
