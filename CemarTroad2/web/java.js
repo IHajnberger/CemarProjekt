@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-dystr');
             safeHide('.powiadomienia');
             break;
-
+        
         case 'n1':
             homeUrl = 'n-menu.html';
             break;
