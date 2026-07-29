@@ -98,11 +98,9 @@ Serwisant z poziomu tego widoku ma dostęp do:
 </details>
 
 ## Podgląd strony:
-stan z dnia: 27.07.2026 godzina: 8:30
+stan z dnia: 29.07.2026 godzina: 8:16
 
 https://cemartroad2.netlify.app/
-
-Znowu padło continuous deployment. Nienawidzę chciwych wielkich korporacji z debilną polityką.
 
 ## Pierwszy model strony - Figma:
 ### Model UI:
