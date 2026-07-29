@@ -224,6 +224,20 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-serwis');
             safeHide('.konto-care');
             safeHide('.powiadomienia');
+
+            // --- NOWY KOD: Ukrywanie przypisań Dystrybutora, Serwisanta i Opiekuna ---
+            safeHide('#wrapper-distributor');
+            safeHide('#wrapper-tech');
+            safeHide('#wrapper-caregiver');
+
+            // Usuwamy atrybut "required", aby przeglądarka pozwoliła Dystrybutorowi wysłać formularz bez ich wypełniania
+            const distSelect = document.getElementById('assign-distributor-id');
+            const techSelect = document.getElementById('assign-tech-id');
+            const caregiverSelect = document.getElementById('assign-caregiver-id');
+            
+            if (distSelect) distSelect.removeAttribute('required');
+            if (techSelect) techSelect.removeAttribute('required');
+            if (caregiverSelect) caregiverSelect.removeAttribute('required');
             break;
 
         case 'admin':
