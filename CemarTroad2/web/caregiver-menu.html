@@ -46,6 +46,48 @@
                 <li><a href="admin-maszyny.html">Karty Maszyn</a></li>
                 <li><a href="admin-przypisania.html">Przypisanie</a></li>
                 <li><a href="konto.html">Konto</a></li>
+                <!-- Powiadomienia w menu z dropdownem -->
+                <li class="powiadomienia">
+                    <a href="#notifications-section" title="Powiadomienia" uk-tooltip>
+                        <div class="uk-inline">
+                            <span uk-icon="icon: bell; ratio: 1.1"></span>
+                            <span class="uk-badge" style="background-color: #ef4444; font-size: 10px; position: absolute; top: -5px; right: -10px; padding: 2px 5px;">3</span>
+                        </div>
+                    </a>
+                    <!-- Rozwijana lista szybkich powiadomień -->
+                    <div uk-dropdown="mode: click; pos: bottom-right; animation: uk-animation-slide-top-small" class="uk-card uk-card-body uk-card-default custom-scroll" style="width: 320px; padding: 15px; border-top: 3px solid #E59008; max-height: 380px; overflow-y: auto;">
+                        <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                            <h5 class="uk-margin-remove uk-text-bold" style="font-size: 14px;">Powiadomienia</h5>
+                            <span class="uk-badge" style="background:#E59008; font-size: 10px;">3 nowe</span>
+                        </div>
+                        <ul class="uk-list uk-list-divider uk-text-small uk-margin-remove-bottom">
+                            <li class="uk-padding-small uk-padding-remove-horizontal">
+                                <div class="uk-flex uk-flex-between">
+                                    <span class="uk-text-bold uk-text-warning">Zbliża się serwis</span>
+                                    <span class="uk-text-meta" style="font-size: 10px;">Dziś, 10:15</span>
+                                </div>
+                                <p class="uk-margin-remove-top uk-margin-remove-bottom uk-text-muted" style="font-size: 12px;">Maszyna E59008 wymaga serwisu za 10h pracy.</p>
+                            </li>
+                            <li class="uk-padding-small uk-padding-remove-horizontal">
+                                <div class="uk-flex uk-flex-between">
+                                    <span class="uk-text-bold uk-text-danger">Wykryto błąd</span>
+                                    <span class="uk-text-meta" style="font-size: 10px;">Wczoraj</span>
+                                </div>
+                                <p class="uk-margin-remove-top uk-margin-remove-bottom uk-text-muted" style="font-size: 12px;">Niskie ciśnienie oleju na urządzeniu E62441.</p>
+                            </li>
+                            <li class="uk-padding-small uk-padding-remove-horizontal">
+                                <div class="uk-flex uk-flex-between">
+                                    <span class="uk-text-bold uk-text-success">Nowy raport</span>
+                                    <span class="uk-text-meta" style="font-size: 10px;">2 dni temu</span>
+                                </div>
+                                <p class="uk-margin-remove-top uk-margin-remove-bottom uk-text-muted" style="font-size: 12px;">Dodano raport z przeglądu okresowego.</p>
+                            </li>
+                        </ul>
+                        <div class="uk-margin-small-top uk-text-center">
+                            <a href="#" class="uk-button uk-button-link uk-text-meta" style="color: #E59008; font-weight: 600;">Zobacz wszystkie powiadomienia</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <div class="uk-navbar-item w-lewo">
                 <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
@@ -69,80 +111,7 @@
             </div>
         </div>
 
-        <!-- PANEL POWIADOMIEŃ OD SERWISANTÓW -->
-        <div class="cemar-card uk-margin-medium-bottom">
-            <div class="yellow-accent-bar"></div>
-            <div class="uk-padding">
-                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-medium-bottom">
-                    <div class="uk-flex uk-flex-middle">
-                        <span uk-icon="icon: bell; ratio: 1.2" class="uk-margin-small-right" style="color: #E59008;"></span>
-                        <h4 class="uk-text-bold uk-margin-remove">Aktywność Serwisantów</h4>
-                    </div>
-                    <span class="uk-badge" style="background-color: #ef4444; border-radius: 20px; padding: 4px 10px;">3 nowe powiadomienia</span>
-                </div>
-
-                <!-- Lista powiadomień (UIkit) -->
-                <ul class="uk-list uk-list-divider uk-margin-remove-bottom">
-
-                    <!-- Powiadomienie 1: Zakończenie pracy -->
-                    <li class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal hover:bg-gray-50 transition rounded">
-                        <div class="uk-margin-right">
-                            <span uk-icon="icon: check; ratio: 1.2" style="color: #10b981;"></span>
-                        </div>
-                        <div class="uk-width-expand">
-                            <p class="uk-margin-remove uk-text-small">
-                                <strong class="uk-text-emphasis">Michał Serwisowy</strong> zakończył przegląd maszyny <a href="#" class="uk-link-text uk-text-bold" style="color: #E59008;">167</a>. Sprzęt jest w pełni sprawny.
-                            </p>
-                            <span class="uk-text-meta" style="font-size: 11px;">Dzisiaj, 10:15</span>
-                        </div>
-                        <div class="uk-margin-left">
-                            <span class="uk-label" style="background-color: #10b981; border-radius: 20px; font-size: 10px;">Zrealizowano</span>
-                        </div>
-                    </li>
-
-                    <!-- Powiadomienie 2: Wymagana akcja (np. wycena) -->
-                    <li class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal hover:bg-gray-50 transition rounded">
-                        <div class="uk-margin-right">
-                            <span uk-icon="icon: warning; ratio: 1.2" style="color: #f59e0b;"></span>
-                        </div>
-                        <div class="uk-width-expand">
-                            <p class="uk-margin-remove uk-text-small">
-                                <strong class="uk-text-emphasis">Tomasz Naprawczy</strong> zdiagnozował usterkę maszyny <a href="#" class="uk-link-text uk-text-bold" style="color: #E59008;">521</a>. Wymagana akceptacja kosztorysu.
-                            </p>
-                            <span class="uk-text-meta" style="font-size: 11px;">Dzisiaj, 09:30</span>
-                        </div>
-                        <div class="uk-margin-left">
-                            <span class="uk-label" style="background-color: #f59e0b; border-radius: 20px; font-size: 10px;">Wymaga akcji</span>
-                        </div>
-                    </li>
-
-                    <!-- Powiadomienie 3: Informacja ogólna -->
-                    <li class="uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal hover:bg-gray-50 transition rounded">
-                        <div class="uk-margin-right">
-                            <span uk-icon="icon: clock; ratio: 1.2" class="uk-text-muted"></span>
-                        </div>
-                        <div class="uk-width-expand">
-                            <p class="uk-margin-remove uk-text-small">
-                                <strong class="uk-text-emphasis">Jan Kowalski</strong> przyjął zgłoszenie serwisowe dla nowej maszyny w systemie.
-                            </p>
-                            <span class="uk-text-meta" style="font-size: 11px;">Wczoraj, 15:45</span>
-                        </div>
-                        <div class="uk-margin-left">
-                            <span class="uk-label" style="background-color: #6b7280; border-radius: 20px; font-size: 10px;">Informacja</span>
-                        </div>
-                    </li>
-
-                </ul>
-
-                <!-- Przycisk rozwijający starsze powiadomienia -->
-                <div class="uk-text-center uk-margin-small-top">
-                    <button class="uk-button uk-button-text" style="color: #E59008; font-size: 12px; font-weight: 600;">
-                        Zobacz pełną historię pracy serwisu (12)
-                    </button>
-                </div>
-            </div>
-        </div>
-
+        
         <div class="cemar-card">
             <div class="yellow-accent-bar"></div>
             <div class="uk-padding">

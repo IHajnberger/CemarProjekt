@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-klient');
             safeHide('.konto-care');
             safeHide('.konto-dystr');
-            safeHide('.powiadomienia');
+            
             break;
 
         case 'staff0':
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
             safeHide('.konto-klient');
             safeHide('.konto-serwis');
             safeHide('.konto-dystr');
-            safeHide('.powiadomienia');
+            
             break;
 
         case 'distributor':
