@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEMAR - Szczegóły Maszyny</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styl.css">
+
+</head>
+<body>
+
+    <div class="nav-lang-bar uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+            <div>
+                <a href="#" class="active uk-margin-right">Polski</a>
+                <a href="#" class="uk-margin-right">English</a>
+                <a href="#" class="uk-margin-right">Deutsch</a>
+            </div>
+            <div>
+                <a href="kontakt-pomoc.html" class="uk-text-bold pomoc">Kontakt pomoc</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Nagłówek -->
+    <nav class="uk-navbar-container cemar-navbar" uk-navbar>
+        <div class="uk-navbar-left uk-margin-left">
+            <div class="cemar-decor-blocks">
+                <span class="decor-1"></span>
+                <span class="decor-2"></span>
+                <span class="decor-3"></span>
+                <span class="decor-4"></span>
+            </div>
+            <a class="uk-navbar-item uk-logo py-0 flex items-center" href="analiza-menu.html">
+                <img src="Logo.jpg" alt="Logo" style="max-height: 75px; width: auto; overflow: hidden;">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-margin-right w-lewo">
+            <ul class="uk-navbar-nav">
+                <!-- Identyfikator nav-home dla dynamicznego przekierowania domkiem -->
+                <li><a href="analiza-menu.html" title="Strona główna" uk-tooltip><span uk-icon="icon: home; ratio: 1.1"></span></a></li>
+
+            </ul>
+            <div class="uk-navbar-item w-lewo">
+                <a href="index.html" class="uk-button uk-button-small" style="background-color: #E59008; border-color: #E59008; color: white; border-radius: 4px;"> Wyloguj </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-margin-large-top main-container">
+
+        <div class="cemar-card uk-margin-bottom">
+            <div class="yellow-accent-bar"></div>
+            <div class="uk-padding">
+
+                <!-- Nagłówek modułu -->
+                <div class="uk-grid-medium uk-flex-middle uk-margin-medium-bottom" uk-grid>
+                    <div class="uk-width-auto">
+                        <span uk-icon="icon: file-text; ratio: 2.5" class="uk-text-warning" style="color: #E59008 !important;"></span>
+                    </div>
+                    <div class="uk-width-expand">
+                        <h3 class="uk-margin-remove-bottom uk-text-bold">Analiza danych i autodetekcja nieprawidłowości</h3>
+                        <p class="uk-text-meta uk-margin-remove-top">Automatyczny system generowania analiz oraz wykrywania anomalii operacyjnych</p>
+                    </div>
+                </div>
+
+                <!-- Siatka kafelków (3 kolumny na desktopie, 2 na tabletach) -->
+                <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2@s uk-grid-match" uk-grid>
+
+                    <!-- KAFELEK 1: Temperatura gazów -->
+                    <div>
+                        <a href="analiza-temperatura.html" class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; color: inherit;">
+                            <div>
+                                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                                    <span uk-icon="icon: warning; ratio: 1.2" style="color: #E59008;"></span>
+                                </div>
+                                <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Temperatura gazów wylotowych</h5>
+                                <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;">Analiza wzrostu temperatury informująca o postępującym zużyciu łożysk.</p>
+                            </div>
+                            <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                <span style="font-size: 11px; font-weight: bold; color: #E59008;">Otwórz analizę</span>
+                                <span uk-icon="icon: arrow-right; ratio: 0.8" style="color: #E59008;"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- KAFELEK 2: Zatrzymanie turbiny -->
+                    <div>
+                        <a href="analiza-turbina.html" class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; color: inherit;">
+                            <div>
+                                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                                    <span uk-icon="icon: history; ratio: 1.2" style="color: #E59008;"></span>
+                                </div>
+                                <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Zatrzymanie turbiny</h5>
+                                <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;">Analiza zachowania i cyklu zatrzymania turbiny po wyłączeniu etapu 14.</p>
+                            </div>
+                            <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                <span style="font-size: 11px; font-weight: bold; color: #E59008;">Otwórz analizę</span>
+                                <span uk-icon="icon: arrow-right; ratio: 0.8" style="color: #E59008;"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- KAFELEK 3: Wydajność pompki -->
+                    <div>
+                        <a href="analiza-pompka.html" class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; color: inherit;">
+                            <div>
+                                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                                    <span uk-icon="icon: refresh; ratio: 1.2" style="color: #E59008;"></span>
+                                </div>
+                                <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Wydajność pompki</h5>
+                                <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;">Trend zmian wydajności układu pompującego w pełnym cyklu użytkowania.</p>
+                            </div>
+                            <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                <span style="font-size: 11px; font-weight: bold; color: #E59008;">Otwórz analizę</span>
+                                <span uk-icon="icon: arrow-right; ratio: 0.8" style="color: #E59008;"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- KAFELEK 4: Detekcja zdarzeń nietypowych -->
+                    <div>
+                        <a href="analiza-anomalie.html" class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; color: inherit;">
+                            <div>
+                                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                                    <span uk-icon="icon: search; ratio: 1.2" style="color: #E59008;"></span>
+                                </div>
+                                <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Zdarzenia nietypowe</h5>
+                                <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;">Automatyczne wykrywanie odchyleń od normy i incydentów operacyjnych.</p>
+                            </div>
+                            <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                <span style="font-size: 11px; font-weight: bold; color: #E59008;">Otwórz analizę</span>
+                                <span uk-icon="icon: arrow-right; ratio: 0.8" style="color: #E59008;"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- KAFELEK 5: Dane akustyczne -->
+                    <div>
+                        <a href="analiza-akustyka.html" class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; color: inherit;">
+                            <div>
+                                <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-small-bottom">
+                                    <span uk-icon="icon: microphone; ratio: 1.2" style="color: #E59008;"></span>
+                               </div>
+                                <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Dane akustyczne</h5>
+                                <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;">Analiza widma hałasu i wibracji pod kątem uszkodzeń mechanicznych.</p>
+                            </div>
+                            <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                <span style="font-size: 11px; font-weight: bold; color: #E59008;">Otwórz analizę</span>
+                                <span uk-icon="icon: arrow-right; ratio: 0.8" style="color: #E59008;"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Dolny pas -->
+    <div class="nav-lang-bar nav-lang-bar--fixed uk-light uk-padding-small uk-padding-remove-vertical">
+        <div class="uk-container uk-flex uk-flex-middle">
+            <div class="uk-container uk-flex uk-flex-between uk-flex-middle">
+                <a href="privacy-policy.html" class="uk-margin-right">Privacy policy</a>
+                <a href="https://cemar.pro/pl/" class="uk-margin-right">Cemar 2026</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.17.11/dist/js/uikit-icons.min.js"></script>
+    <script src="java.js"></script>
+</body>
+</html>

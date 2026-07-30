@@ -114,19 +114,24 @@
                     <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Dystrybutor</h4>
                 </div>
             </div>
+            <div style="padding-top:20px; width:900px">
+                <p class="uk-text-meta uk-text-bold" style="position: center; font-size:15px; color: var(--primary-yellow)">Moduły dodatkowe</p>
+            </div>
+
             <div>
                 <div id="select-raport" class="role-selector-btn" onclick="selectRole('raport') & proceedLogin()">
                     <span uk-icon="icon: folder; ratio: 2" class="uk-text-muted"></span>
-                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Raporty</h4>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Raport</h4>
                 </div>
             </div>
+                
             <div>
-                <div id="select-n2" class="role-selector-btn" onclick="selectRole('n2') & proceedLogin()">
-                    <span uk-icon="icon: happy; ratio: 2" class="uk-text-muted"></span>
-                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Niespodzianka 2</h4>
+                <div id="select-analiza" class="role-selector-btn" onclick="selectRole('analiza') & proceedLogin()">
+                    <span uk-icon="icon:  search; ratio: 2" class="uk-text-muted"></span>
+                    <h4 class="uk-margin-small-top uk-margin-remove-bottom uk-text-bold">Analiza (automatyczna)</h4>
                 </div>
             </div>
-
+            
         </div>
     </div>
 
@@ -146,7 +151,7 @@
             'caregiver': { id: 'select-caregiver', page: 'caregiver-menu.html' },
             'distributor': { id: 'select-distributor', page: 'distributor-menu.html' },
             'raport': { id: 'select-raport', page: 'raport-menu.html' },
-            'n2': { id: 'select-n2', page: 'n-menu.html' }
+            'analiza': { id: 'select-analiza', page: 'analiza-menu.html' }
         };
 
         function selectRole(role) {
