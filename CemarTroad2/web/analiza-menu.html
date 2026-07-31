@@ -218,7 +218,7 @@
 
     <!-- MODAL 2: ZATRZYMANIE TURBINY -->
     <div id="modal-analiza-2" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="max-width: 900px; border-radius: 8px; padding: 0; overflow: hidden;">
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="width: 900px; height: 600px; border-radius: 8px; padding: 0; overflow: hidden;">
 
             <div style="height: 5px; background: #E59008; width: 100%;"></div>
             <button class="uk-modal-close-default" type="button" uk-close style="top: 15px; right: 15px;"></button>
@@ -227,8 +227,8 @@
                 <!-- Nagłówek popupa -->
                 <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-bottom">
                     <div>
-                        <h3 class="uk-text-bold uk-margin-remove-top uk-margin-xsmall-bottom" style="color: #222;">Analiza wzrostu temperatury gazów wylotowych</h3>
-                        <p class="uk-text-meta uk-margin-remove">Detekcja zużycia łożysk na podstawie wahań i skoków temperatur</p>
+                        <h3 class="uk-text-bold uk-margin-remove-top uk-margin-xsmall-bottom" style="color: #222;">Analiza zatrzymania turbiny po wyłączeniu etapu 14 :</h3>
+                        <p class="uk-text-meta uk-margin-remove"></p>
                     </div>
                 </div>
 
@@ -239,7 +239,7 @@
                         <div class="uk-width-1-2@m uk-card uk-card-default" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; box-shadow: none; padding-left:20px; width:820px; padding-bottom:10px">
                             <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 14px; padding-top:10px; ">Wnioski z analizy telemetrycznej:</h5>
                             <p style="font-size: 13px; color: #444; line-height: 1.5;" class="uk-margin-small-bottom">
-                                Obecny program do analizy danych wyraźnie pokazuje że wraz z zużyciem turbiny wzrasta temperatura gazów wylotowych. Chcemy aby system wykrywał i ostrzegał przed awarią w przypadku zadanego wzrostu, np. 10%
+                                Podczas jednego cyklu pracy maszyna dwukrotnie mierzy czas swobodnego wyhamowania turbiny od 3000 do 1000 RPM, podczas odpalania oraz po zakończeniu pracy. Bardziej miarodajny jest pomiar po zakończonej pracy ponieważ łożyska są wtedy dobrze nasmarowane. Wyraźnie szybsze wyhamowanie turbiny powinny pokazać nam zużycie łożysk.
                             </p>
                         </div>
                     </div>
@@ -249,17 +249,12 @@
 
                         <div class="uk-grid-small uk-child-width-1-2" uk-grid uk-lightbox="animation: slide">
                             <div>
-                                <a class="uk-inline uk-link-toggle uk-width-1-1" href="at1.jpg" data-caption="Wykres zmian temperatury gazów wylotowych">
-                                    <img src="at1.jpg" alt="Wykres" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 190px; width:220px">
-                                    <span class="uk-text-meta uk-display-block uk-margin-xsmall-top" style="font-size: 11px; text-align: center;">Wykres trendu (°C)</span>
+                                <a class="uk-inline uk-link-toggle uk-width-1-1" href="a14.jpg" data-caption="Wykres pracy turbiny">
+                                    <img src="a14.jpg" alt="Wykres" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 190px; width:220px">
+                                    <span class="uk-text-meta uk-display-block uk-margin-xsmall-top" style="font-size: 11px; text-align: center;">Wykres trendu</span>
                                 </a>
                             </div>
-                            <div>
-                                <a class="uk-inline uk-link-toggle uk-width-1-1" href="at2.jpg" data-caption="Odczyt termowizyjny układu łożysk">
-                                    <img src="at2.jpg" alt="Termowizja" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 190px; width: 220px">
-                                    <span class="uk-text-meta uk-display-block uk-margin-xsmall-top" style="font-size: 11px; text-align: center;">Odczyt termowizyjny</span>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -270,8 +265,8 @@
     </div>
 
     <!-- MODAL 3: -->
-    <div id="modal-analiza-2" class="uk-flex-top" uk-modal>
-        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="max-width: 900px; border-radius: 8px; padding: 0; overflow: hidden;">
+    <div id="modal-analiza-3" class="uk-flex-top" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="width: 900px; height: 600px; border-radius: 8px; padding: 0; overflow: hidden;">
 
             <div style="height: 5px; background: #E59008; width: 100%;"></div>
             <button class="uk-modal-close-default" type="button" uk-close style="top: 15px; right: 15px;"></button>
@@ -280,8 +275,8 @@
                 <!-- Nagłówek popupa -->
                 <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-bottom">
                     <div>
-                        <h3 class="uk-text-bold uk-margin-remove-top uk-margin-xsmall-bottom" style="color: #222;">Analiza wzrostu temperatury gazów wylotowych</h3>
-                        <p class="uk-text-meta uk-margin-remove">Detekcja zużycia łożysk na podstawie wahań i skoków temperatur</p>
+                        <h3 class="uk-text-bold uk-margin-remove-top uk-margin-xsmall-bottom" style="color: #222;">Analiza zmian wydajności pompki w czasie użytkowania maszyny</h3>
+                        <p class="uk-text-meta uk-margin-remove"></p>
                     </div>
                 </div>
 
@@ -292,7 +287,7 @@
                         <div class="uk-width-1-2@m uk-card uk-card-default" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; box-shadow: none; padding-left:20px; width:820px; padding-bottom:10px">
                             <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 14px; padding-top:10px; ">Wnioski z analizy telemetrycznej:</h5>
                             <p style="font-size: 13px; color: #444; line-height: 1.5;" class="uk-margin-small-bottom">
-                                Obecny program do analizy danych wyraźnie pokazuje że wraz z zużyciem turbiny wzrasta temperatura gazów wylotowych. Chcemy aby system wykrywał i ostrzegał przed awarią w przypadku zadanego wzrostu, np. 10%
+                                System suszarki Torgos samoczynnie reguluje pracą pompki paliwa tak, żeby osiągnąć zadane obroty turbiny. W przypadku zużycia łożysk, złej jakości paliwa, przytkania układu paliwowego pompka będzie działała z większą mocą żeby osiągnąć ten sam efekt.
                             </p>
                         </div>
                     </div>
@@ -302,17 +297,12 @@
 
                         <div class="uk-grid-small uk-child-width-1-2" uk-grid uk-lightbox="animation: slide">
                             <div>
-                                <a class="uk-inline uk-link-toggle uk-width-1-1" href="at1.jpg" data-caption="Wykres zmian temperatury gazów wylotowych">
-                                    <img src="at1.jpg" alt="Wykres" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 190px; width:220px">
-                                    <span class="uk-text-meta uk-display-block uk-margin-xsmall-top" style="font-size: 11px; text-align: center;">Wykres trendu (°C)</span>
+                                <a class="uk-inline uk-link-toggle uk-width-1-1" href="ap.jpg" data-caption="Wykres zmian temperatury gazów wylotowych">
+                                    <img src="ap.jpg" alt="Wykres" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 190px; width:220px">
+                                    <span class="uk-text-meta uk-display-block uk-margin-xsmall-top" style="font-size: 11px; text-align: center;">Wykres trendu </span>
                                 </a>
                             </div>
-                            <div>
-                                <a class="uk-inline uk-link-toggle uk-width-1-1" href="at2.jpg" data-caption="Odczyt termowizyjny układu łożysk">
-                                    <img src="at2.jpg" alt="Termowizja" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 190px; width: 220px">
-                                    <span class="uk-text-meta uk-display-block uk-margin-xsmall-top" style="font-size: 11px; text-align: center;">Odczyt termowizyjny</span>
-                                </a>
-                            </div>
+                           
                         </div>
                     </div>
 
