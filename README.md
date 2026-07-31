@@ -78,6 +78,11 @@ Serwisant z poziomu tego widoku ma dostęp do:
   - **Edycja i Tworzenie Kont Użytkowników** 
   - **Konto użytkownika** - dostęp do dane personalnych oraz możliwość zmiany hasła
   - **Ma dostęp do wszystkich funkcji reszty klas**
+
+* ***Raporty*** - placeholder, stanowi wygodny i przejrzysty podgląd do zbieranych informacji
+
+* ***Analiza (automatyczna)*** - placeholder, stanowi dane automatycznie generowane przez system
+
 </details>
 
 ## Budowa projektu:
@@ -93,7 +98,8 @@ Serwisant z poziomu tego widoku ma dostęp do:
     * Opiekun klienta
     * Dystrybutor
     * Admin
-    * oraz dwa dodatkowe role nieprzypisane na tą chwilę
+    * Raporty
+    * Analiza (automatyczna)
 
 </details>
 
