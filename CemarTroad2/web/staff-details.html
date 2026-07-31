@@ -144,9 +144,13 @@
                                     <span class="uk-text-meta" style="font-size: 14px; display: block;">Dystrybutor:</span>
                                     <p class="uk-text-bold uk-margin-remove" id="p5-assigned-distributor" style="font-size: 15px;">CEMAR</p>
                                 </div>
-                                <div>
+                                <div class="uk-margin-small-bottom">
                                     <span class="uk-text-meta" style="font-size: 12px; display: block;">Kraj:</span>
                                     <p class="uk-text-bold uk-margin-remove" id="p5-assigned-country" style="font-size: 15px;">Polska</p>
+                                </div>
+                                <div>
+                                    <span class="uk-text-meta" style="font-size: 12px; display: block;">Rodzaj paliwa:</span>
+                                    <p class="uk-text-bold uk-margin-remove" id="p5-assigned-fuel-type" style="font-size: 15px;">Paliwo</p>
                                 </div>
                             </div>
                         </div>
@@ -154,10 +158,161 @@
                         <!-- Linia rozdzielająca i przycisk popupa -->
                         <hr class="uk-margin-small-top uk-margin-small-bottom" style="border-color: #f3f4f6;">
 
+                        <div class="uk-grid-small uk-child-width-1-3@m uk-child-width-1-2@s uk-grid-match" uk-grid>
+                            <!-- KAFELEK 1: -->
+                            <div>
+                                <a href="#modal-analiza-1" uk-toggle class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; background-color:#f0f0f0">
+                                    <div>
+
+                                        <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Części dodatkowe</h5>
+                                        <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;"></p>
+                                    </div>
+                                    <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                        <span style="font-size: 11px; font-weight: bold; color: #E59008;">Pokaż szczegóły</span>
+                                        <span uk-icon="icon: expand; ratio: 0.8" style="color: #E59008;"></span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- KAFELEK 2: -->
+                            <div>
+                                <a href="#modal-analiza-2" uk-toggle class="uk-card uk-card-default uk-card-hover uk-card-body uk-padding-small analysis-tile" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: 8px; border: 1px solid #e5e7eb; text-decoration: none; background-color: #f0f0f0">
+                                    <div>
+
+                                        <h5 class="uk-text-bold uk-margin-remove-top uk-margin-small-bottom" style="font-size: 14px; color: #222;">Notatka</h5>
+                                        <p class="uk-text-meta uk-margin-remove" style="font-size: 12px; line-height: 1.4;"></p>
+                                    </div>
+                                    <div class="uk-margin-small-top uk-flex uk-flex-between uk-flex-middle" style="border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                        <span style="font-size: 11px; font-weight: bold; color: #E59008;">Pokaż szczegóły</span>
+                                        <span uk-icon="icon: expand; ratio: 0.8" style="color: #E59008;"></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                         <div class="uk-flex uk-flex-right">
                             <button type="button" class="uk-button uk-button-text uk-text-bold" style="color: #E59008; font-size: 13px; text-transform: none; text-decoration: none;" uk-toggle="target: #modal-info-dodatkowe">
                                 <span uk-icon="icon: info; ratio: 0.8" class="uk-margin-xsmall-right"></span> Więcej informacji
                             </button>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 1: Elementy przypisane -->
+                    <div id="modal-analiza-1" class="uk-flex-top" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="width: 900px; height: 600px; border-radius: 8px; padding: 0; overflow: hidden; position: relative;">
+
+                            <!-- Żółty akcent górny -->
+                            <div style="height: 5px; background: #E59008; width: 100%;"></div>
+                            <button class="uk-modal-close-default" type="button" uk-close style="top: 15px; right: 15px;"></button>
+
+                            <div class="uk-padding" style="height: calc(100% - 5px); box-sizing: border-box;">
+                                <!-- Nagłówek popupa -->
+                                <div class="uk-margin-bottom">
+                                    <h3 class="uk-text-bold uk-margin-remove-top uk-margin-xsmall-bottom editable-content" style="color: #222;">Dodatkowe elementy przypisane do maszyny:</h3>
+                                </div>
+
+                                <!-- Treść: Karta z elementami -->
+                                <div class="uk-card uk-card-default uk-padding-small" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; box-shadow: none;">
+                                    <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 14px;">Wybrane elementy:</h5>
+                                    <div class="editable-content" style="outline: none;">
+                                        <p style="font-size: 13px; color: #444; line-height: 1.5;" class="uk-margin-small-bottom">- Rama do wózka</p>
+                                        <p style="font-size: 13px; color: #444; line-height: 1.5;" class="uk-margin-remove-bottom">- Dyfuzor 60’cm</p>
+                                    </div>
+                                </div>
+
+                                <!-- Przycisk Edytuj przypięty w prawym dolnym rogu -->
+                                <button class="uk-button cemar-btn-edit"
+                                        style="position: absolute; bottom: 25px; right: 25px; background-color: #E59008; border-color: #E59008; color: white; border-radius: 6px; box-shadow: none;"
+                                        onclick="goToEdit('modal-analiza-1', this)">
+
+                                    <span class="btn-text">Edytuj</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- MODAL 2: Dodatkowe informacje z edytowalną galerią -->
+                    <div id="modal-analiza-2" class="uk-flex-top" uk-modal>
+                        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical" style="width: 900px; min-height: 600px; border-radius: 8px; padding: 0; overflow: hidden; position: relative;">
+
+                            <!-- Żółty akcent górny -->
+                            <div style="height: 5px; background: #E59008; width: 100%;"></div>
+                            <button class="uk-modal-close-default" type="button" uk-close style="top: 15px; right: 15px;"></button>
+
+                            <div class="uk-padding" style="height: calc(100% - 5px); box-sizing: border-box;">
+                                <!-- Nagłówek popupa -->
+                                <div class="uk-margin-bottom">
+                                    <h3 class="uk-text-bold uk-margin-remove-top uk-margin-xsmall-bottom editable-content" style="color: #222;">Dodatkowe informacje:</h3>
+                                </div>
+
+                                <!-- Treść w 2 kolumnach: Opis + Galeria -->
+                                <div class="uk-grid-medium" uk-grid>
+                                    <!-- Kolumna Lewa: Opis -->
+                                    <div class="uk-width-1-2@m">
+                                        <div class="uk-card uk-card-default uk-padding-small" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; box-shadow: none;">
+                                            <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 14px;">Opis:</h5>
+                                            <div class="editable-content" style="outline: none;">
+                                                <p style="font-size: 13px; color: #444; line-height: 1.5;" class="uk-margin-remove-bottom">Opis szczegółowy urządzenia oraz uwag eksploatacyjnych.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Kolumna Prawa: Edytowalna Galeria Zdjęć -->
+                                    <div class="uk-width-1-2@m">
+                                        <h5 class="uk-text-bold uk-margin-small-bottom" style="font-size: 14px;">Zdjęcia i filmy:</h5>
+
+                                        <div id="gallery-grid" class="uk-grid-small uk-child-width-1-2" uk-grid uk-lightbox="animation: slide">
+
+                                            <!-- ZDJĘCIE 1 -->
+                                            <div class="gallery-tile">
+                                                <div class="gallery-item-wrapper" style="position: relative;">
+                                                    <a class="uk-inline uk-link-toggle uk-width-1-1 gallery-link" href="at1.jpg" data-caption="Wykres zmian temperatury gazów wylotowych">
+                                                        <img src="at1.jpg" alt="Wykres" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 160px;">
+                                                        <span class="uk-text-meta uk-display-block uk-margin-xsmall-top img-title" style="font-size: 11px; text-align: center;">Wykres trendu (°C)</span>
+                                                    </a>
+                                                    <!-- Przycisk usuwania (niewidoczny domyślnie) -->
+                                                    <button type="button" class="delete-img-btn" onclick="deleteImage(this)" style="display: none; position: absolute; top: 6px; right: 6px; background: #dc2626; color: white; border: none; border-radius: 50%; width: 26px; height: 26px; cursor: pointer; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" title="Usuń zdjęcie">
+                                                        <span uk-icon="icon: close; ratio: 0.7"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- ZDJĘCIE 2 -->
+                                            <div class="gallery-tile">
+                                                <div class="gallery-item-wrapper" style="position: relative;">
+                                                    <a class="uk-inline uk-link-toggle uk-width-1-1 gallery-link" href="at2.jpg" data-caption="Odczyt termowizyjny układu łożysk">
+                                                        <img src="at2.jpg" alt="Termowizja" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 160px;">
+                                                        <span class="uk-text-meta uk-display-block uk-margin-xsmall-top img-title" style="font-size: 11px; text-align: center;">Odczyt termowizyjny</span>
+                                                    </a>
+                                                    <!-- Przycisk usuwania (niewidoczny domyślnie) -->
+                                                    <button type="button" class="delete-img-btn" onclick="deleteImage(this)" style="display: none; position: absolute; top: 6px; right: 6px; background: #dc2626; color: white; border: none; border-radius: 50%; width: 26px; height: 26px; cursor: pointer; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" title="Usuń zdjęcie">
+                                                        <span uk-icon="icon: close; ratio: 0.7"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- KAFELEK DODAWANIA NOWEGO ZDJĘCIA (widoczny tylko w trybie edycji) -->
+                                            <div id="add-image-tile" style="display: none;">
+                                                <label style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 160px; border: 2px dashed #E59008; border-radius: 6px; cursor: pointer; background: #fffbe3; transition: 0.2s;" class="uk-link-muted">
+                                                    <span uk-icon="icon: plus-circle; ratio: 1.4" style="color: #E59008;"></span>
+                                                    <span style="font-size: 11px; font-weight: bold; color: #E59008; margin-top: 6px;">Dodaj zdjęcie</span>
+                                                    <input type="file" accept="image/*" style="display: none;" onchange="handleImageUpload(this)">
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Przycisk Edytuj przypięty w prawym dolnym rogu -->
+                                <button class="uk-button cemar-btn-edit"
+                                        style="position: absolute; bottom: 25px; right: 25px; background-color: #E59008; border-color: #E59008; color: white; border-radius: 6px; box-shadow: none;"
+                                        onclick="goToEdit('modal-analiza-2', this)">
+                                    
+                                    <span class="btn-text">Edytuj</span>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
 
@@ -189,7 +344,7 @@
                                     </div>
                                 </div>
 
-      
+
                             </div>
 
                         </div>

@@ -2329,3 +2329,152 @@ window.setDeactivationDate = function(dateString) {
         safeSetText('machine-deactivation-date', dateString);
     }
 };
+// do edytowania info staff-details
+function goToEdit(modalId, btnElement) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const editableElements = modal.querySelectorAll('.editable-content');
+    const deleteButtons = modal.querySelectorAll('.delete-img-btn');
+    const addImageTile = modal.querySelector('#add-image-tile');
+    const galleryLinks = modal.querySelectorAll('.gallery-link');
+    const imgTitles = modal.querySelectorAll('.img-title');
+
+    const btnText = btnElement.querySelector('.btn-text');
+    const isEditing = modal.classList.contains('is-editing');
+
+    if (!isEditing) {
+        // === WŁĄCZENIE TRYBU EDYCJI ===
+        modal.classList.add('is-editing');
+
+        // 1. Edycja tekstów
+        editableElements.forEach(el => {
+            el.setAttribute('contenteditable', 'true');
+            el.style.border = '1px dashed #E59008';
+            el.style.padding = '4px 8px';
+            el.style.borderRadius = '4px';
+            el.style.backgroundColor = '#ffffff';
+        });
+
+        // 2. Włączenie edycji podpisów zdjęć
+        imgTitles.forEach(title => {
+            title.setAttribute('contenteditable', 'true');
+            title.style.border = '1px dashed #ccc';
+            title.style.borderRadius = '3px';
+            title.style.background = '#fff';
+        });
+
+        // 3. Pokazanie przycisków usuwania i dodawania zdjęć
+        deleteButtons.forEach(btn => btn.style.display = 'flex');
+        if (addImageTile) addImageTile.style.display = 'block';
+
+        // 4. Blokada wywoływania podglądu (Lightbox) podczas edycji
+        galleryLinks.forEach(link => link.style.pointerEvents = 'none');
+
+        // 5. Zmiana stylu przycisku na zielony "Zapisz"
+        btnElement.style.backgroundColor = '#16a34a';
+        btnElement.style.borderColor = '#16a34a';
+        if (btnText) btnText.innerText = 'Zapisz';
+
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({
+                message: 'Tryb edycji: Możesz zmieniać teksty, dodawać i usuwać zdjęcia.',
+                status: 'warning',
+                pos: 'top-center',
+                timeout: 2500
+            });
+        }
+    } else {
+        // === ZAPISANIE ZMIAN I WYŁĄCZENIE EDYCJI ===
+        modal.classList.remove('is-editing');
+
+        // 1. Wyłączenie edycji tekstów
+        editableElements.forEach(el => {
+            el.removeAttribute('contenteditable');
+            el.style.border = 'none';
+            el.style.padding = '0';
+            el.style.backgroundColor = 'transparent';
+        });
+
+        // 2. Wyłączenie edycji podpisów zdjęć
+        imgTitles.forEach(title => {
+            title.removeAttribute('contenteditable');
+            title.style.border = 'none';
+            title.style.background = 'transparent';
+        });
+
+        // 3. Ukrycie elementów edycyjnych galerii
+        deleteButtons.forEach(btn => btn.style.display = 'none');
+        if (addImageTile) addImageTile.style.display = 'none';
+
+        // 4. Odblokowanie Lightboxa
+        galleryLinks.forEach(link => link.style.pointerEvents = 'auto');
+
+        // 5. Przywrócenie żółtego przycisku "Edytuj"
+        btnElement.style.backgroundColor = '#E59008';
+        btnElement.style.borderColor = '#E59008';
+        if (btnText) btnText.innerText = 'Edytuj';
+
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({
+                message: 'Zmiany oraz zdjęcia zostały pomyślnie zapisane!',
+                status: 'success',
+                pos: 'top-center',
+                timeout: 2500
+            });
+        }
+    }
+}
+
+// --- FUNKCJA USUWANIA ZDJĘCIA ---
+function deleteImage(btn) {
+    const tile = btn.closest('.gallery-tile');
+    if (tile) {
+        tile.remove();
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({
+                message: 'Zdjęcie zostało usunięte',
+                status: 'danger',
+                pos: 'bottom-right',
+                timeout: 2000
+            });
+        }
+    }
+}
+
+// --- FUNKCJA DODAWANIA NOWEGO ZDJĘCIA ---
+function handleImageUpload(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const imageSrc = e.target.result;
+            const grid = document.getElementById('gallery-grid');
+            const addTile = document.getElementById('add-image-tile');
+
+            // Tworzenie nowego kafelka ze zdjęciem
+            const newTile = document.createElement('div');
+            newTile.className = 'gallery-tile';
+            newTile.innerHTML = `
+                <div class="gallery-item-wrapper" style="position: relative;">
+                    <a class="uk-inline uk-link-toggle uk-width-1-1 gallery-link" href="${imageSrc}" data-caption="Nowe zdjęcie" style="pointer-events: none;">
+                        <img src="${imageSrc}" alt="Nowe zdjęcie" style="border-radius: 6px; border: 1px solid #e5e7eb; width: 100%; object-fit: cover; height: 160px;">
+                        <span class="uk-text-meta uk-display-block uk-margin-xsmall-top img-title" contenteditable="true" style="font-size: 11px; text-align: center; border: 1px dashed #ccc; border-radius: 3px; background: #fff;">Nowe zdjęcie</span>
+                    </a>
+                    <button type="button" class="delete-img-btn" onclick="deleteImage(this)" style="display: flex; position: absolute; top: 6px; right: 6px; background: #dc2626; color: white; border: none; border-radius: 50%; width: 26px; height: 26px; cursor: pointer; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.2);" title="Usuń zdjęcie">
+                        <span uk-icon="icon: close; ratio: 0.7"></span>
+                    </button>
+                </div>
+            `;
+
+            // Wstawienie przed kafelkiem "Dodaj zdjęcie"
+            grid.insertBefore(newTile, addTile);
+
+            // Reset pola plików, żeby można było dodać to samo zdjęcie ponownie w razie potrzeby
+            input.value = '';
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
