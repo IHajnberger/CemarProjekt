@@ -104,7 +104,7 @@ Serwisant z poziomu tego widoku ma dostęp do:
 </details>
 
 ## Podgląd strony:
-stan z dnia: 29.07.2026 godzina: 8:16
+stan z dnia: 31.07.2026 godzina: 8:35
 
 https://cemartroad2.netlify.app/
 
